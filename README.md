@@ -14,9 +14,3 @@ Além de manter funcionalidades já existentes, como o lançamento de notas, o r
 
 Com essas melhorias, o Conecta-Cesar visa oferecer uma plataforma que atenda de forma ideal tanto às necessidades do corpo docente quanto às dos discentes, promovendo uma experiência de ensino/aprendizagem mais eficiente e satisfatória para todos os envolvidos.
 
-
-## Time de Desenvolvedores
-
-[![Maria Fernanda Suruagy]()](https://github.com/nandaord)  | [![Quandl.com](https://github.com/iharsh234/WebApp/blob/master/images/quandl.jpg)](https://www.quandl.com/)
----|---
-Maria Fernanda Suruagy |[Quandl](https://www.quandl.com)
