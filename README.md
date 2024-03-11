@@ -14,3 +14,5 @@ Além de manter funcionalidades já existentes, como o lançamento de notas, o r
 
 Com essas melhorias, o Conecta-Cesar visa oferecer uma plataforma que atenda de forma ideal tanto às necessidades do corpo docente quanto às dos discentes, promovendo uma experiência de ensino/aprendizagem mais eficiente e satisfatória para todos os envolvidos.
 
+![Imagem do backlog no Jira](https://github.com/ticogafa/CONECTA-CESAR/blob/main/backlog.jpg)
+
