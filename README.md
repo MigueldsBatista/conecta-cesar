@@ -16,3 +16,4 @@ Com essas melhorias, o Conecta-Cesar visa oferecer uma plataforma que atenda de 
 
 ![Imagem do backlog no Jira](https://github.com/ticogafa/CONECTA-CESAR/blob/main/backlog.jpg)
 
+![Imagem do quadro do Jira](https://github.com/ticogafa/CONECTA-CESAR/blob/main/quadro.jpg)
