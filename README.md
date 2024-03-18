@@ -16,12 +16,12 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 <ul>
   <li>
-    <a  href="https://conecta-cesar.azurewebsites.net"
+    <a  href="https://conecta-cesar.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiZDJlOTY0YzQ0MjY0NGVhMmExYjE3YzE5YzJjYThlODIiLCJwIjoiaiJ9"
       >Link do Jira</a
     >
   </li>
     <li>
-    <a  href="https://pentes.atlassian.net/jira/software/projects/KLK/boards/4](https://www.figma.com/file/CEa0midahlPfP5v0SYbaFC/FDS?type=design&node-id=0%3A1&mode=design&t=lfxOouDFxRnsDoqm-1)"
+    <a  href="https://www.figma.com/file/1bqw5G2PKniOytyCujdKn5/FDS1?type=design&node-id=0%3A1&mode=design&t=68hMQEzQnMPQzem2-1"
       >Protótipo  de Baixa Fidelidade no Figma</a
     >
   </li>
@@ -40,13 +40,13 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
     <a href="https://github.com/nandaord">Maria Fernanda Suruagy</a> - mfso@cesar.school 📩
   </li>
    <li>
-    <a href="">Miguel Batista</a> - msb2@cesar.school 📩
+    <a href="https://github.com/MigueldsBatista">Miguel Batista</a> - msb2@cesar.school 📩
   </li>
   <li>
     <a href="https://github.com/raf7525">Rafael Barros</a> -ralb@cesar.school 📩
   </li>
   <li>
-    <a href="">Tiago Gurgel</a> - tgafa@cesar.school 📩
+    <a href="https://github.com/ticogafa">Tiago Gurgel</a> - tgafa@cesar.school 📩
   </li>
   <li>
     <a href="https://github.com/xTvini">Vinícius Diniz</a> - vdas@cesar.school 📩
