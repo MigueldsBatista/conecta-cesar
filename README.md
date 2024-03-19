@@ -25,6 +25,11 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
       >Protótipo  de Baixa Fidelidade no Figma</a
     >
   </li>
+  <li>
+    <a  href="https://youtu.be/zFNmWAJjifI"
+      >Protótipo  de Baixa Fidelidade - Screencast</a
+    >
+  </li>
 
 ![Imagem do backlog no Jira](https://github.com/ticogafa/CONECTA-CESAR/blob/main/Mídia/backlog.jpg)
 
