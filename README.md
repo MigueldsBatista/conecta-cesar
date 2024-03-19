@@ -26,7 +26,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
     >
   </li>
 
-![Imagem do backlog no Jira](https://github.com/ticogafa/CONECTA-CESAR/blob/main/backlog.jpg)
+![Imagem do backlog no Jira](https://github.com/ticogafa/CONECTA-CESAR/blob/main/Mídia/backlog.jpg)
 
 ![Imagem do quadro do Jira](https://github.com/ticogafa/CONECTA-CESAR/blob/main/quadro.jpg)
 
