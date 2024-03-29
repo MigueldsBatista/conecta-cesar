@@ -14,15 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import path
+from . import views
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('app_cc.urls')),
-    path('avisos.html', include('app_cc.urls')),
-    path('disciplina.html', include('app_cc.urls'))
-
-    #path("arquivo.html", include('app_cc.urls)) para toda nova página do html
+    path('', views.index),
+    path('index.html', views.index),
+    path('avisos.html', views.aviso),
+    path('disciplina.html', views.disciplina)
+    
 
 ]
+"""Todos os arquivos html é preciso definir o path aqui"""
