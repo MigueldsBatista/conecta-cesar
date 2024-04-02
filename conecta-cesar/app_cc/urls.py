@@ -20,7 +20,19 @@ urlpatterns = [
     path('', views.index),
     path('index.html', views.index),
     path('avisos.html', views.aviso),
-    path('disciplina.html', views.disciplina)
+    path('disciplina.html', views.disciplina),
+
+    #professor paths
+    path('turmas.html', views.turmas),
+    path('avisosp.html', views.avisosp),
+    path('calendariop.html', views.calendariop),
+    path('frequenciap.html', views.frequenciap),
+    path('perfilp.html', views.perfilp),
+
+
+
+
+
     
 
 ]

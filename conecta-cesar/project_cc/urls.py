@@ -21,7 +21,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_cc.urls')),
     path('avisos.html', include('app_cc.urls')),
-    path('disciplina.html', include('app_cc.urls'))
+    path('disciplina.html', include('app_cc.urls')),
+
+    #Professor patterns
+    path('turmas.html', include('app_cc.urls')),
+    path('calendariop.html', include('app_cc.urls')),
+    path('avisosp.html', include('app_cc.urls')),
+    path('perfilp', include('app_cc.urls')),
+    path('frequenciap.html', include('app_cc.urls'))
 
     #path("arquivo.html", include('app_cc.urls)) para toda nova página do html
 
