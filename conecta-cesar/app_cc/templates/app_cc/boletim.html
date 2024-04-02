@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -25,17 +25,81 @@
       background-color: orange;
     }
 
-    .rounded-5 {
+    .custom-card {
+      background-color: white;
+      border: none;
       border-radius: 5%;
+      color: black;
+      padding: 20px;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+    }
+
+    .custom-card:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-5px);
+    }
+
+    .custom-card h5 {
+      margin: 0;
+    }
+
+    .overall-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f0f0f0;
+      width: 80%;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .overall-grade {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .button-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .orange-button {
+      background-color: orange;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .grade-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #f0f0f0;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .grade-text {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .discipline-title {
+      font-size: 24px;
+      font-weight: bold;
     }
   </style>
 </head>
 
 <body class="p-3 m-0 border-0 bd-example m-0 border-0 custom-bg">
 
-  <!-- Example Code -->
-
-
+  <!-- Navbar -->
   <nav class="navbar bg-body-tertiary fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Conecta Cesar</a>
@@ -74,7 +138,7 @@
               <a class="nav-link" href="cadastro.html">Cadastro</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="boletos.html">Financeiro</a>
+              <a class="nav-link" href="boleto.html">Financeiro</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="index.html">Sair</a>
@@ -85,23 +149,41 @@
     </div>
   </nav>
 
+  <!-- Content -->
+  <div class="container">
+    <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
+    <div class="grade-container">
+      <h5>DISCIPLINA 1</h5>
+      <p class="grade-text">8.5</p>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 2</h5>
+      <p class="grade-text">7.8</p>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 3</h5>
+      <p class="grade-text">9.2</p>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 4</h5>
+      <p class="grade-text">6.5</p>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 5</h5>
+      <p class="grade-text">8.0</p>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 6</h5>
+      <p class="grade-text">9.5</p>
+    </div>
+  </div>
 
-  <!-- Retângulo escuro para os avisos -->
-  <div class="bg-dark text-light p-5 rounded-5">
-    <h3>Aviso x</h3>
-    <p></p>
-  </div>
-  <br>
-  <div class="bg-dark text-light p-5 rounded-5">
-    <h3>Aviso x</h3>
-    <p></p>
-  </div>
-  <br>
-  <div class="bg-dark text-light p-5 rounded-5">
-    <h3>Aviso x</h3>
-    <p></p>
+  <!-- Button -->
+  <div class="text-end mt-3">
+    <button class="orange-button" onclick="window.location.href='mediag.html'">></button>
   </div>
 
 </body>
 
 </html>
+
