@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,13 +9,101 @@
   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
   <title>Bootstrap Example</title>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .navbar-brand,
+    .nav-link {
+      color: black !important;
+    }
+
+    .navbar-toggler-icon,
+    .bg-dark.text-light {
+      background-color: white !important;
+      color: black !important;
+    }
+
+    body {
+      background-color: orange;
+    }
+
+    .custom-card {
+      background-color: white;
+      border: none;
+      border-radius: 5%;
+      color: black;
+      padding: 20px;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+    }
+
+    .custom-card:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-5px);
+    }
+
+    .custom-card h5 {
+      margin: 0;
+    }
+
+    .overall-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f0f0f0;
+      width: 80%;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .overall-grade {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .button-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .orange-button {
+      background-color: orange;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .grade-container {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Centraliza horizontalmente */
+      background-color: #f0f0f0;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .grade-container h5 {
+      margin: 0; /* Remove a margem do título */
+    }
+
+    .grade-text {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .discipline-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body class="p-3 m-0 border-0 bd-example m-0 border-0 custom-bg">
 
-  <!-- Example Code -->
-
-
+  <!-- Navbar -->
   <nav class="navbar bg-body-tertiary fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Conecta Cesar</a>
@@ -43,19 +131,18 @@
                 Avaliação
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Boletim</a></li>
-                <li><a class="dropdown-item" href="#">Frequência</a></li>
+                <li><a class="dropdown-item" href="boletim.html">Boletim</a></li>
+                <li><a class="dropdown-item" href="frequencia.html">Frequência</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="disciplina.html">Disciplina</a>
-              
             </li>
             <li class="nav-item">
               <a class="nav-link" href="cadastro.html">Cadastro</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="boletos.html">Financeiro</a>
+              <a class="nav-link" href="boleto.html">Financeiro</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="index.html">Sair</a>
@@ -66,37 +153,26 @@
     </div>
   </nav>
 
-  <!-- Retângulo escuro para os avisos -->
-  <div class="bg-dark text-light p-5">
-    <h3>Disciplina I</h3>
-    <p>Faltas:</p>
-    <p>Frequência:</p>
+  <!-- Content -->
+  <div class="container">
+    <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
+    <div class="grade-container">
+      <h5>DISCIPLINA 1</h5>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 2</h5>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 3</h5>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 4</h5>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 5</h5>
+    </div>
+    <div class="grade-container">
+      <h5>DISCIPLINA 6</h5>
+    </div>
   </div>
-  <br>
-  <div class="bg-dark text-light p-5">
-    <h3>Disciplina II</h3>
-    <p>Faltas:</p>
-    <p>Frequência:</p>
-  </div>
-  <br>
-  <div class="bg-dark text-light p-5">
-    <h3>Disciplinas III</h3>
-    <p>Faltas:</p>
-    <p>Frequência:</p>
-  </div>
-  <br>
-  <div class="bg-dark text-light p-5">
-    <h3>Disciplinas IV</h3>
-    <p>Faltas:</p>
-    <p>Frequência:</p>
-  </div>
-  <br>
-  <div class="bg-dark text-light p-5">
-    <h3>Disciplinas V</h3>
-    <p>Faltas:</p>
-    <p>Frequência:</p>
-  </div>
-
 </body>
-
-</html>
