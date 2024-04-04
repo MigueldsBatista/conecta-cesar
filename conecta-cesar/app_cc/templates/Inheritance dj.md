@@ -4,6 +4,15 @@ Observações: herança não funciona quando você usa o preview do vs code, é 
 
 *pra iniciar o servidor django é muito fácil, pras etapas funcionarem é necessário que o repositório local seja idêntico ao do git que é oq eu to usando, caso contrário é so mudar o nome dos caminhos
 
+* Recomendo que baixem a extensão de django pra vizualizar melhor os blocks e os códigos em python
+
+Name: Django
+Id: batisteo.vscode-django
+Description: Beautiful syntax and scoped snippets for perfectionists with deadlines
+Version: 1.15.0
+Publisher: Baptiste Darthenay
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=batisteo.vscode-django
+
 1- dentro da pasta CONECTA-CESAR clique com o botão direito no explorador de arquivos e selecione abrir no terminal
 
 2- cd conecta-cesar
@@ -32,7 +41,7 @@ voltando...ainda no arquivo pai você abre um
 
 (lembrando que content é uma variável, então pode assumir qualquer valor).
 
-NO ARQUIVO FILHO
+NO ARQUIVO FILHO 
 
 no topo da página você vai indicar de qual página o filho está herdando o html escrevendo
 {% extends "app_cc/main.html"} --> no caso do nosso site esse é o endereço
@@ -47,3 +56,4 @@ aqui no arquivo FILHO é onde você coloca o conteúdo específico da página fi
  {% endblock content %}
 
 Aqui no repositório tem vários exemplos, tentem dar uma olhada pra entenderem na prática 
+
