@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf import settings #Para css e imagens
+from django.conf.urls.static import static
+from django.conf import settings
+from app_cc import views
 urlpatterns = [
     #Aluno patterns
     path('admin/', admin.site.urls),
@@ -25,6 +28,8 @@ urlpatterns = [
     path('disciplina.html', include('app_cc.urls')),
     path('boletim.html', include('app_cc.urls')),
     path('frequencia.html', include('app_cc.urls')),
+    path('perfil', include('app_cc.urls')),
+
 
     #Professor patterns
     path('turmas.html', include('app_cc.urls')),
@@ -35,4 +40,8 @@ urlpatterns = [
 
     #path("arquivo.html", include('app_cc.urls)) para toda nova página do html
 
+
+    #static path
+
+    
 ]

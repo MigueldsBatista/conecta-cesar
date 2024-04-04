@@ -1,4 +1,9 @@
 from django.shortcuts import render
+from .models import Disciplina, Nota
+
+#static
+
+
 
 # Create your views here.
 def index(request):
@@ -11,11 +16,17 @@ def index(request):
 def aviso(request):
     return render(request, 'app_cc/avisos.html')
 
-def disciplina(request):
-    return render(request, 'app_cc/disciplina.html')
 
 def boletim(request):
-    return render(request, 'app_cc/boletim.html')
+    disciplinas_com_notas = []
+
+    disciplinas = Disciplina.objects.all()
+    for disciplina in disciplinas:
+        notas = Nota.objects.filter(disciplina=disciplina)
+        disciplinas_com_notas.append((disciplina, notas))
+
+    return render(request, 'app_cc/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
+
 
 def frequencia(request):
     return render(request, 'app_cc/frequencia.html')
@@ -40,4 +51,19 @@ def avisosp(request):
 def frequenciap(request):
     return render(request, 'app_cc/frequenciap.html')
 
+def disciplinas_e_notas(request):
+    disciplinas_com_notas = []
+
+    disciplinas = Disciplina.objects.all()
+    for disciplina in disciplinas:
+        notas = Nota.objects.filter(disciplina=disciplina)
+        disciplinas_com_notas.append((disciplina, notas))
+
+    return render(request, 'app_cc/disciplina.html', {'disciplinas_com_notas': disciplinas_com_notas})
+
+def teste(request):
+    return render(request, 'app/teste.html')
+
+def perfil(request):
+    return render(request, 'app_cc/perfil.html')
 """Para cada arquivo html é preciso fazer uma def de request do caminho do arquivo para o app"""

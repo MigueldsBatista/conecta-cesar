@@ -22,3 +22,28 @@ class Entry(models.Model):
         return self.text
     class Meta:
         verbose_name_plural='Entries'
+
+
+class Disciplina(models.Model):
+    disciplina = models.CharField(max_length=20, null=False)
+    use_in_migrations = True
+    
+
+    def __str__(self):
+        return self.disciplina
+    class Meta:
+        verbose_name_plural='Disciplinas'
+        
+
+class Nota(models.Model):
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
+    nota = models.DecimalField(max_digits=5, decimal_places=2) # Adapte os campos conforme necessário
+    use_in_migrations = True
+    def __str__(self):
+        return f"{self.disciplina} : {self.nota}"
+    class Meta:
+        verbose_name_plural='Notas'
+
+
+
+
