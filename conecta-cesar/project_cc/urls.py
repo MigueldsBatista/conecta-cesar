@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    #Aluno patterns
     path('admin/', admin.site.urls),
     path('', include('app_cc.urls')),
     path('avisos.html', include('app_cc.urls')),
     path('disciplina.html', include('app_cc.urls')),
+    path('boletim.html', include('app_cc.urls')),
+    path('frequencia.html', include('app_cc.urls')),
 
     #Professor patterns
     path('turmas.html', include('app_cc.urls')),

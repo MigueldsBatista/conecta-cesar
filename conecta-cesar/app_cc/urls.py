@@ -17,10 +17,13 @@ Including another URLconf
 from django.urls import path
 from . import views
 urlpatterns = [
+    #aluno paths
     path('', views.index),
     path('index.html', views.index),
     path('avisos.html', views.aviso),
     path('disciplina.html', views.disciplina),
+    path('boletim.html', views.boletim),
+    path('frequencia.html', views.frequencia),
 
     #professor paths
     path('turmas.html', views.turmas),
@@ -28,12 +31,6 @@ urlpatterns = [
     path('calendariop.html', views.calendariop),
     path('frequenciap.html', views.frequenciap),
     path('perfilp.html', views.perfilp),
-
-
-
-
-
-    
 
 ]
 """Todos os arquivos html é preciso definir o path aqui"""

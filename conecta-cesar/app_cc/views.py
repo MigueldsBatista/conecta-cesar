@@ -14,6 +14,12 @@ def aviso(request):
 def disciplina(request):
     return render(request, 'app_cc/disciplina.html')
 
+def boletim(request):
+    return render(request, 'app_cc/boletim.html')
+
+def frequencia(request):
+    return render(request, 'app_cc/frequencia.html')
+
 
 #Professor Links
 def turmas(request):
@@ -30,4 +36,8 @@ def calendariop(request):
 
 def avisosp(request):
     return render(request, 'app_cc/avisosp.html')
+
+def frequenciap(request):
+    return render(request, 'app_cc/frequenciap.html')
+
 """Para cada arquivo html é preciso fazer uma def de request do caminho do arquivo para o app"""
