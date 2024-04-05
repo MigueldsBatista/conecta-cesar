@@ -28,20 +28,27 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r conecta-cesar/requirements.txt
+
+      - name: Cleaning testing files
+        run: |
+          cd SEUPROJETODJANGO/
+          rm db.sqlite3
+          rm .env
+          cd ..
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
-      - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v3
-        with:
-          name: python-app
-          path: |
-            release.zip
-            !venv/
+      - name: Upload artifact for deployment
+        run: |
+          cd SEUPROJETODJANGO/
+          zip release.zip ./* -r
+          cd ..
+          mv SEUPROJETODJANGO/release.zip .
+        
 
   deploy:
     runs-on: ubuntu-latest
