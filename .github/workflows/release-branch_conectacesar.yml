@@ -32,7 +32,7 @@ jobs:
 
       - name: Cleaning testing files
         run: |
-          cd SEUPROJETODJANGO/
+          cd conecta-cesar/
           rm db.sqlite3
           rm .env
           cd ..
@@ -44,10 +44,10 @@ jobs:
 
       - name: Upload artifact for deployment
         run: |
-          cd SEUPROJETODJANGO/
+          cd conecta-cesar/
           zip release.zip ./* -r
           cd ..
-          mv SEUPROJETODJANGO/release.zip .
+          mv conecta-cesar/release.zip .
         
 
   deploy:
