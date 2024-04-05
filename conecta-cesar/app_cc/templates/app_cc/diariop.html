@@ -1,0 +1,63 @@
+{%extends 'app_cc/mainp.html'%}
+{%block content%}
+<h1 class="titulo">DISCIPLINAS</h1>
+<br>
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Disciplina 1
+      </button>
+    </h2>
+    <textarea class="mensagem"></textarea>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+    </div>
+    </div>
+  </div>
+  <br>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Disciplina 2
+      </button>
+    </h2>
+    <textarea class="mensagem"></textarea>
+    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong></strong>  
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <div class="nome">Disciplina 3</div> 
+      </button>
+    </h2>
+    <textarea class="mensagem"></textarea>
+    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong></strong>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function data() {
+    var agora = new Date();
+    var dia = agora.getDate();
+    var mes = agora.getMonth() + 1; // Adiciona 1 para obter o mês correto
+    var ano = agora.getFullYear();
+    var hora = agora.getHours();
+    var minuto = agora.getMinutes();
+    var segundo = agora.getSeconds();
+    var mensagem = `${dia}/${mes}/${ano}.`;
+    document.getElementById("data").innerText = mensagem;
+}
+
+data(); 
+
+</script>
+{%andblock content%}
