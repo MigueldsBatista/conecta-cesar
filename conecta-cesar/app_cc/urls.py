@@ -33,6 +33,8 @@ urlpatterns = [
     path('frequenciap.html', views.frequenciap),
     path('perfilp.html', views.perfilp),
     path('perfil.html', views.perfil),
+    path('diario.html', views.diario),
+    path('diariop.html',views.diariop),
 
 ]
 """Todos os arquivos html é preciso definir o path aqui"""
