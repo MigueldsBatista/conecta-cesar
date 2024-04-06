@@ -20,7 +20,8 @@ def aviso(request):
 def boletim(request):
     disciplinas_com_notas = []
 
-    disciplinas = Disciplina.objects.all()
+    disciplinas = Disciplina.objects.all()#codigo que faz o cadastro de notas 
+
     for disciplina in disciplinas:
         notas = Nota.objects.filter(disciplina=disciplina)
         disciplinas_com_notas.append((disciplina, notas))
@@ -66,4 +67,10 @@ def teste(request):
 
 def perfil(request):
     return render(request, 'app_cc/perfil.html')
+
+def perfil(request):
+    return render(request, 'app_cc/diariop.html')
+
+def perfil(request):
+    return render(request, 'app_cc/diario.html')
 """Para cada arquivo html é preciso fazer uma def de request do caminho do arquivo para o app"""
