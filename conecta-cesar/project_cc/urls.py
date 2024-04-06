@@ -29,6 +29,7 @@ urlpatterns = [
     path('boletim.html', include('app_cc.urls')),
     path('frequencia.html', include('app_cc.urls')),
     path('perfil', include('app_cc.urls')),
+    path('diario.html', include('app_cc.urls')),
 
 
     #Professor patterns
@@ -36,7 +37,10 @@ urlpatterns = [
     path('calendariop.html', include('app_cc.urls')),
     path('avisosp.html', include('app_cc.urls')),
     path('perfilp', include('app_cc.urls')),
-    path('frequenciap.html', include('app_cc.urls'))
+    path('frequenciap.html', include('app_cc.urls')),
+    path('diariop.html', include('app_cc.urls')),
+
+    
 
     #path("arquivo.html", include('app_cc.urls)) para toda nova página do html
 
