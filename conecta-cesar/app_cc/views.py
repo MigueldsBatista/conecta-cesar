@@ -62,9 +62,6 @@ def disciplinas_e_notas(request):
 
     return render(request, 'app_cc/disciplina.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
-def teste(request):
-    return render(request, 'app/teste.html')
-
 def perfil(request):
     return render(request, 'app_cc/perfil.html')
 
