@@ -1,63 +1,124 @@
-{%extends 'app_cc/mainp.html'%}
-{%block content%}
+{% extends 'app_cc/mainp.html' %}
+{% block content %}
 <h1 class="titulo">DISCIPLINAS</h1>
-<br>
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Disciplina 1
-      </button>
-    </h2>
-    <textarea class="mensagem"></textarea>
-    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-    </div>
-    </div>
-  </div>
-  <br>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Disciplina 2
-      </button>
-    </h2>
-    <textarea class="mensagem"></textarea>
-    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong></strong>  
-      </div>
-    </div>
-  </div>
-  <br>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        <div class="nome">Disciplina 3</div> 
-      </button>
-    </h2>
-    <textarea class="mensagem"></textarea>
-    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong></strong>
-      </div>
-    </div>
-  </div>
+<div class="container">
+    <p id="data" class="text-end mt-3"></p> <!-- Adiciona um parágrafo para exibir a data atual -->
+    <form id="diarioForm">
+        <div class="mb-3">
+            <label for="dataDiario" class="form-label">Data do Diário:</label>
+            <input type="date" class="form-control" id="dataDiario" required>
+        </div>
+
+        <!-- Select para escolher a disciplina -->
+        <div class="mb-3">
+            <label for="disciplina" class="form-label">Disciplina:</label>
+            <select class="form-select" id="disciplina">
+                <option value="Matemática">Matemática</option>
+                <option value="Português">Português</option>
+                <option value="História">História</option>
+                <!-- Adicione outras disciplinas conforme necessário -->
+            </select>
+        </div>
+
+        <!-- Campo de texto para inserir o título do diário -->
+        <div class="mb-3">
+            <label for="tituloDiario" class="form-label">Título do Diário:</label>
+            <input type="text" class="form-control" id="tituloDiario" placeholder="Insira o título do diário" required>
+        </div>
+
+        <!-- Campo de texto para inserir o texto do diário -->
+        <div class="mb-3">
+            <label for="textoDiario" class="form-label">Texto do Diário:</label>
+            <textarea class="form-control" id="textoDiario" rows="5" placeholder="Digite o texto do diário" required></textarea>
+        </div>
+
+        <!-- Adiciona um botão para limpar todos os textos -->
+        <button type="button" class="btn btn-danger mt-3" onclick="limparTextos()">Limpar Textos</button>
+
+        <!-- Adiciona um botão de enviar diário -->
+        <button type="button" class="btn btn-primary mt-3" onclick="adicionarDiario()">Enviar Diário</button>
+
+        <!-- Div para exibir os diários -->
+        <div id="diarios" class="mt-3"></div>
+    </form>
 </div>
+
 <script>
-  function data() {
-    var agora = new Date();
-    var dia = agora.getDate();
-    var mes = agora.getMonth() + 1; // Adiciona 1 para obter o mês correto
-    var ano = agora.getFullYear();
-    var hora = agora.getHours();
-    var minuto = agora.getMinutes();
-    var segundo = agora.getSeconds();
-    var mensagem = `${dia}/${mes}/${ano}.`;
-    document.getElementById("data").innerText = mensagem;
-}
+    // Estrutura para armazenar os diários, separados por disciplina
+    var diarios = {};
 
-data(); 
+    function data() {
+        var agora = new Date();
+        var dia = agora.getDate();
+        var mes = agora.getMonth() + 1; // Adiciona 1 para obter o mês correto
+        var ano = agora.getFullYear();
+        var mensagem = `${dia}/${mes}/${ano}`;
+        document.getElementById("data").innerText = mensagem;
+    }
 
+    function adicionarDiario() {
+        var tituloDiario = document.getElementById("tituloDiario").value;
+        var disciplina = document.getElementById("disciplina").value;
+        var texto = document.getElementById("textoDiario").value;
+        
+        // Obtém a data atual
+        var agora = new Date();
+        var dia = agora.getDate();
+        var mes = agora.getMonth() + 1; // Adiciona 1 para obter o mês correto
+        var ano = agora.getFullYear();
+        var dataAtual = `${dia}/${mes}/${ano}`;
+
+        if (!diarios.hasOwnProperty(disciplina)) {
+            diarios[disciplina] = [];
+        }
+
+        diarios[disciplina].push({ titulo: tituloDiario, texto: texto, data: dataAtual }); // Adiciona a data ao diário
+        exibirDiarios();
+    }
+
+    function exibirDiarios() {
+        var diariosHtml = "";
+
+        for (var disciplina in diarios) {
+            diariosHtml += `<h2>${disciplina}</h2>`;
+            diarios[disciplina].forEach(function(item, index) {
+                diariosHtml += `<div class="card mb-3">
+                                    <div class="card-header">${item.titulo} - ${item.data}</div> <!-- Adiciona a data ao cabeçalho do card -->
+                                    <div class="card-body">
+                                        <p class="card-text">${item.texto}</p>
+                                        <button type="button" class="btn btn-primary" onclick="editarDiario('${disciplina}', ${index})">Editar</button>
+                                        <button type="button" class="btn btn-danger" onclick="excluirDiario('${disciplina}', ${index})">Excluir</button>
+                                    </div>
+                                </div>`;
+            });
+        }
+
+        document.getElementById("diarios").innerHTML = diariosHtml;
+    }
+
+    function editarDiario(disciplina, index) {
+        var novoTexto = prompt("Digite o novo texto:", diarios[disciplina][index].texto);
+
+        if (novoTexto !== null) {
+            diarios[disciplina][index].texto = novoTexto;
+            exibirDiarios(); // Atualiza a exibição dos diários após a edição
+        }
+    }
+
+    function excluirDiario(disciplina, index) {
+        if (confirm("Tem certeza de que deseja excluir este diário?")) {
+            diarios[disciplina].splice(index, 1);
+            exibirDiarios(); // Atualiza a exibição dos diários após a exclusão
+        }
+    }
+
+    function limparTextos() {
+        if (confirm("Tem certeza de que deseja limpar todos os diários?")) {
+            diarios = {};
+            document.getElementById("diarios").innerHTML = ""; // Limpa a área de diários
+        }
+    }
+
+    data();
 </script>
-{%endblock content%}
+{% endblock content %}

@@ -1,30 +1,64 @@
 {% extends "app_cc/main.html" %}
 
-
 {% block content %}
 
-  
   <!-- Content -->
   <div class="container">
     <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
- {% for disciplina, notas in disciplinas_com_notas %}
+    {% for disciplina, notas in disciplinas_com_notas %}
     <div class="grade-container">
         <h5>{{ disciplina }}</h5>
         {% for nota in notas %}
-        <p class="grade-text">{{ nota.nota }}</p>
+        <div class="nota-container">
+          <p class="grade-text" id="nota-{{ disciplina }}">{{ nota.nota }}</p>
+          <input type="text" class="edit-nota" style="display: none;" id="edit-{{ disciplina }}" value="{{ nota.nota }}">
+          <button class="btn-edit" onclick="editNota('{{ disciplina }}')">Editar</button>
+          <button class="btn-custom btn-save" style="display: none;" onclick="saveNota('{{ disciplina }}')"><b>Salvar</b></button>
+        </div>
         {% empty %}
-        Nenhuma nota encontrada para esta disciplina.
+        <p>Nenhuma nota encontrada para esta disciplina.</p>
         {% endfor %}
     </div>
     {% empty %}
     <p>Nenhum registro encontrado.</p>
     {% endfor %}
-    </div>
+  </div>
 
   <!-- Button -->
   <div class="text-end mt-3">
     <button class="orange-button" onclick="window.location.href='mediag.html'">></button>
+    
   </div>
 
-{% endblock content %}
+  <script>
+    function editNota(disciplina) {
+      var notaContainer = document.getElementById('nota-' + disciplina);
+      var editInput = document.getElementById('edit-' + disciplina);
+      var btnEdit = notaContainer.parentElement.querySelector('.btn-edit');
+      var btnSave = notaContainer.parentElement.querySelector('.btn-save');
+      
+      notaContainer.style.display = 'none';
+      editInput.style.display = 'inline-block';
+      btnEdit.style.display = 'none';
+      btnSave.style.display = 'inline-block';
+    }
 
+    function saveNota(disciplina) {
+      var notaContainer = document.getElementById('nota-' + disciplina);
+      var editInput = document.getElementById('edit-' + disciplina);
+      var btnEdit = notaContainer.parentElement.querySelector('.btn-edit');
+      var btnSave = notaContainer.parentElement.querySelector('.btn-save');
+
+      notaContainer.textContent = editInput.value;
+      notaContainer.style.display = 'inline-block';
+      editInput.style.display = 'none';
+      btnEdit.style.display = 'inline-block';
+      btnSave.style.display = 'none';
+
+      // Aqui você pode enviar a nova nota para o servidor usando AJAX ou outra técnica.
+      // Por exemplo:
+      // enviarNotaParaServidor(disciplina, editInput.value);
+    }
+  </script>
+
+{% endblock content %}

@@ -29,7 +29,7 @@ def boletim(request):
     return render(request, 'app_cc/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
 def diariop(request):
-    return render(request, 'app_cc/diario.html')
+    return render(request, 'app_cc/diario.html', name='diario')
 
 
 def frequencia(request):
@@ -69,7 +69,7 @@ def perfil(request):
     return render(request, 'app_cc/perfil.html')
 
 def diario(request):
-    return render(request, 'app_cc/diariop.html')
+    return render(request, 'app_cc/diario.html')
 
 
 """Para cada arquivo html é preciso fazer uma def de request do caminho do arquivo para o app"""
