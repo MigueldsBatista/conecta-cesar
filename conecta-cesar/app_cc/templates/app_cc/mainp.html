@@ -1,4 +1,4 @@
-﻿{% load static %}
+{% load static %}
 
 <!doctype html>
 <html lang="PT-BR">
@@ -39,10 +39,16 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="avisosp.html">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="turmas.html">Turmas</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Turmas
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="turmas.html">Todas as turmas</a></li>
+                  <li><a class="dropdown-item" href="frequenciap.html">Frequência</a></li>
+                </ul>
               </li>
-              <li class="nav-item">
                 <a class="nav-link" href="calendariop.html">Calendário</a>
               </li>
               <li class="nav-item">
