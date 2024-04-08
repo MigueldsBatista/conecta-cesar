@@ -145,3 +145,17 @@ a,
   font-weight: bold;
 }
 
+.btn-custom {
+  background-color: green;
+  border-color: #f0f0f0;
+  /* Outros estilos personalizados */
+  border-radius: 7px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+    
+.edit-nota {
+  border-radius: 5px;
+}
+.titulo{
+  text-align: center;
+}
