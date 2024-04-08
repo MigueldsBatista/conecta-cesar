@@ -23,7 +23,7 @@ urlpatterns = [
     path('index.html', views.index),
     path('avisos.html', views.aviso),
     path('disciplina.html', views.disciplinas_e_notas),
-    path('boletim.html', views.boletim),
+    path('boletim', views.boletim),
     path('frequencia.html', views.frequencia),
     path('diario.html', views.diario),
 

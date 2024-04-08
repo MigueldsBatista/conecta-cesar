@@ -18,6 +18,19 @@ def aviso(request):
 
 
 def boletim(request):
+    if(request.method == "POST"):
+        nota = request.POST.get("nota")
+        disciplina = request.POST.get("disciplina")
+        currentD = Disciplina.objects.filter(disciplina=disciplina).first()
+        
+        newNota = Nota.objects.filter(disciplina=currentD).first()
+
+        newNota.nota = float(nota)
+        newNota.save()
+
+        # Nota.
+
+
     disciplinas_com_notas = []
 
     disciplinas = Disciplina.objects.all()#codigo que faz o cadastro de notas 
@@ -28,8 +41,9 @@ def boletim(request):
 
     return render(request, 'app_cc/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
+
 def diariop(request):
-    return render(request, 'app_cc/diario.html', name='diario')
+    return render(request, 'app_cc/diariop.html')
 
 
 def frequencia(request):

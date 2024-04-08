@@ -1,9 +1,9 @@
-﻿asgiref==3.8.1
+asgiref
 Django
-gunicorn==21.2.0
-packaging==24.0
-psycopg2-binary==2.9.9
-python-dotenv==1.0.1
-sqlparse==0.4.4
-tzdata==2024.1
-whitenoise==6.6.0
+gunicorn
+packaging
+psycopg2-binary
+python-dotenv
+sqlparse
+tzdata
+whitenoise
