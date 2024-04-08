@@ -29,23 +29,11 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Cleaning testing files
-        run: |
-          cd conecta-cesar/
-          rm db.sqlite3
-          rm .env
-          cd ..
-        
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
-        run: |
-          cd conecta-cesar/
-          zip release.zip ./* -r
-          cd ..
-          mv conecta-cesar/release.zip .
+        run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
@@ -77,9 +65,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4B6EFF902BA046B98E8DE4D33DCDB2ED }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4E71BA63AB844E1690F59179482AA893 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5286823A1AEC47A7A496F810793F5AB5 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4BA710C9A59446F8B72BF6D466D50673 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3372255AC9874A2FB3884D04A539BDD4 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1E4588C880FE4414B9F0BE2DFF7ECA1A }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
