@@ -1,5 +1,5 @@
 asgiref
-Django
+django
 gunicorn
 packaging
 psycopg2-binary
