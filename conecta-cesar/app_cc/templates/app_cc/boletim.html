@@ -11,9 +11,13 @@
         {% for nota in notas %}
         <div class="nota-container">
           <p class="grade-text" id="nota-{{ disciplina }}">{{ nota.nota }}</p>
-          <input type="text" class="edit-nota" style="display: none;" id="edit-{{ disciplina }}" value="{{ nota.nota }}">
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="disciplina" value="{{ disciplina }}">
+            <input type="text" class="edit-nota" style="display: none;" id="edit-{{ disciplina }}" name="nota" value="{{ nota.nota }}">
+            <button class="btn-custom btn-save" style="display: none;" onclick="saveNota('{{ disciplina }}')"><b>Salvar</b></button>
+          </form>
           <button class="btn-edit" onclick="editNota('{{ disciplina }}')">Editar</button>
-          <button class="btn-custom btn-save" style="display: none;" onclick="saveNota('{{ disciplina }}')"><b>Salvar</b></button>
         </div>
         {% empty %}
         <p>Nenhuma nota encontrada para esta disciplina.</p>
