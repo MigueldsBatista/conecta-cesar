@@ -35,7 +35,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 ![Imagem do quadro do Jira](https://github.com/ticogafa/CONECTA-CESAR/blob/main/Mídia/quadro.jpg)
 
-![Imagem do diagrama de trabalaho](https://github.com/ticogafa/CONECTA-CESAR/blob/main/Mídia/diagrama.jpg)
+![Imagem do diagrama de trabalaho](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/diagrama.jpg)
 
 
 ## 👩‍💻 Membros
