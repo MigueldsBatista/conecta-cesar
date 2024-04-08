@@ -1,9 +1,0 @@
-asgiref
-Django
-gunicorn
-packaging
-psycopg2-binary
-python-dotenv
-sqlparse
-tzdata
-whitenoise
