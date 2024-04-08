@@ -30,13 +30,18 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
       >Protótipo  de Baixa Fidelidade - Screencast</a
     >
   </li>
+</ul>
+<h1>Entrega 01</h1>
 
 ![Imagem do backlog no Jira](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/backlog.jpg)
 
 ![Imagem do quadro do Jira](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/quadro.jpg)
 
+<h1>Entrega 02</h1>
+
 ![Imagem do diagrama de trabalaho](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/diagrama.jpg)
 
+![Imagem do Painel Do jira com a sprint 1 iniciada](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/paineljira2.jpeg)
 
 ## 👩‍💻 Membros
 
