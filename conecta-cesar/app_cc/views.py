@@ -1,41 +1,43 @@
 from django.shortcuts import render
+from django.utils import translation
 from .models import Disciplina, Nota
-
-#static
-
-
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
     #main pg
     return render(request, 'app_cc/index.html')
-""" tudo que está sendo trabalhado dentro dessa função """
 
 
 #Student Links
-def aviso(request):
+def avisos(request):
     return render(request, 'app_cc/avisos.html')
 
 
 def boletim(request):
-    if(request.method == "POST"):
-        nota = request.POST.get("nota")
-        disciplina = request.POST.get("disciplina")
-        currentD = Disciplina.objects.filter(disciplina=disciplina).first()
-        
-        newNota = Nota.objects.filter(disciplina=currentD).first()
+    if request.method == "POST":
+        # Processar dados do formulário
+        for disciplina in Disciplina.objects.all():
+            # Recuperar a nota enviada pelo formulário
+            nota_value = request.POST.get(f"notas[{disciplina.disciplina}]")
+            if nota_value is not None:
+                # Substituir vírgulas por pontos e, em seguida, converter para float
+                nota_value = nota_value.replace(',', '.')
+                try:
+                    nota_value = float(nota_value)
+                except ValueError:
+                    return HttpResponse("Erro: Valor da nota inválido")
 
-        newNota.nota = float(nota)
-        newNota.save()
+                # Obter a instância da nota correspondente
+                nota_instance = Nota.objects.filter(disciplina=disciplina).first()
+                if nota_instance:
+                    # Atualizar a nota no banco de dados
+                    nota_instance.nota = nota_value
+                    nota_instance.save()
 
-        # Nota.
-
-
+    # Recuperar disciplinas e notas
     disciplinas_com_notas = []
-
-    disciplinas = Disciplina.objects.all()#codigo que faz o cadastro de notas 
-
-    for disciplina in disciplinas:
+    for disciplina in Disciplina.objects.all():
         notas = Nota.objects.filter(disciplina=disciplina)
         disciplinas_com_notas.append((disciplina, notas))
 
@@ -84,6 +86,3 @@ def perfil(request):
 
 def diario(request):
     return render(request, 'app_cc/diario.html')
-
-
-"""Para cada arquivo html é preciso fazer uma def de request do caminho do arquivo para o app"""

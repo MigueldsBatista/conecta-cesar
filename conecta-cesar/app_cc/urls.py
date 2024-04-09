@@ -17,24 +17,21 @@ Including another URLconf
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
-    #aluno paths
-    path('', views.index),
-    path('index.html', views.index),
-    path('avisos.html', views.aviso),
-    path('disciplina.html', views.disciplinas_e_notas),
-    path('boletim', views.boletim),
-    path('frequencia.html', views.frequencia),
-    path('diario.html', views.diario),
-
-    #professor paths
-    path('turmas.html', views.turmas),
-    path('avisosp.html', views.avisosp),
-    path('calendariop.html', views.calendariop),
-    path('frequenciap.html', views.frequenciap),
-    path('perfilp.html', views.perfilp),
-    path('perfil.html', views.perfil),
-    path('diariop.html',views.diariop),
-
+    path('', views.index, name='index'),
+    path('avisos/', views.avisos, name='aviso'),
+    path('boletim/', views.boletim, name='boletim'),
+    path('diariop/', views.diariop, name='diariop'),
+    path('frequencia/', views.frequencia, name='frequencia'),
+    path('turmas/', views.turmas, name='turmas'),
+    path('perfilp/', views.perfilp, name='perfilp'),
+    path('frequenciap/', views.frequenciap, name='frequenciap'),
+    path('calendariop/', views.calendariop, name='calendariop'),
+    path('avisosp/', views.avisosp, name='avisosp'),
+    path('disciplinas_e_notas/', views.disciplinas_e_notas, name='disciplinas_e_notas'),
+    path('perfil/', views.perfil, name='perfil'),
+    path('diario/', views.diario, name='diario'),
 ]
+
 """Todos os arquivos html é preciso definir o path aqui"""

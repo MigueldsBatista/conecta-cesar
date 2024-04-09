@@ -36,7 +36,7 @@ urlpatterns = [
     path('turmas.html', include('app_cc.urls')),
     path('calendariop.html', include('app_cc.urls')),
     path('avisosp.html', include('app_cc.urls')),
-    path('perfilp', include('app_cc.urls')),
+    path('perfilp.html', include('app_cc.urls')),
     path('frequenciap.html', include('app_cc.urls')),
     path('diariop.html', include('app_cc.urls')),
 
