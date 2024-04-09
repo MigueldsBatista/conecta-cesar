@@ -29,6 +29,7 @@ urlpatterns = [
 
     path('disciplina', include('app_cc.urls')),
     path('boletim', include('app_cc.urls')),
+    path('boletimp', include('app_cc.urls')),
     path('frequencia', include('app_cc.urls')),
     path('perfil', include('app_cc.urls')),
     path('diario', include('app_cc.urls')),

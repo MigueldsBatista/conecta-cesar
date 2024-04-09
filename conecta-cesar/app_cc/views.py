@@ -13,35 +13,36 @@ def index(request):
 def avisos(request):
     return render(request, 'app_cc/avisos.html')
 
-
 def boletim(request):
+    # Recuperar todas as notas
+    notas = Nota.objects.all()
+
+    return render(request, 'app_cc/boletim.html', {'notas': notas})
+
+
+
+def boletimp(request):
     if request.method == "POST":
-        # Processar dados do formulário
         for disciplina in Disciplina.objects.all():
-            # Recuperar a nota enviada pelo formulário
             nota_value = request.POST.get(f"notas[{disciplina.disciplina}]")
             if nota_value is not None:
-                # Substituir vírgulas por pontos e, em seguida, converter para float
                 nota_value = nota_value.replace(',', '.')
                 try:
                     nota_value = float(nota_value)
                 except ValueError:
                     return HttpResponse("Erro: Valor da nota inválido")
 
-                # Obter a instância da nota correspondente
-                nota_instance = Nota.objects.filter(disciplina=disciplina).first()
-                if nota_instance:
-                    # Atualizar a nota no banco de dados
-                    nota_instance.nota = nota_value
-                    nota_instance.save()
+                nota_instance, created = Nota.objects.get_or_create(disciplina=disciplina)
+                nota_instance.nota = nota_value
+                nota_instance.save()
 
-    # Recuperar disciplinas e notas
     disciplinas_com_notas = []
     for disciplina in Disciplina.objects.all():
         notas = Nota.objects.filter(disciplina=disciplina)
         disciplinas_com_notas.append((disciplina, notas))
 
-    return render(request, 'app_cc/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
+    return render(request, 'app_cc/boletimp.html', {'disciplinas_com_notas': disciplinas_com_notas})
+
 
 
 def diariop(request):

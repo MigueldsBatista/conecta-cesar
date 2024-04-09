@@ -1,30 +1,24 @@
-{% extends "app_cc/main.html" %}
+﻿{% extends "app_cc/main.html" %}
 
 {% block content %}
 
   <!-- Content -->
   <div class="container">
     <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
-    <form method="post">
-      {% csrf_token %}
-      {% for disciplina, notas in disciplinas_com_notas %}
-      <div class="grade-container">
-        <h5>{{ disciplina }}</h5>
-        {% for nota in notas %}
-        <div class="nota-container">
-          <p class="grade-text">
-            <input type="text" name="notas[{{ disciplina }}]" value="{{ nota.nota }}">
-          </p>
-        </div>
-        {% empty %}
-        <p>Nenhuma nota encontrada para esta disciplina.</p>
-        {% endfor %}
+    
+    {% for nota in notas %}
+    <div class="grade-container">
+      <h5>{{ nota.disciplina }}</h5>
+      <div class="nota-container">
+        <p class="grade-text">
+          <h5>{{ nota.nota }}</h5>
+        </p>
       </div>
-      {% empty %}
-      <p>Nenhum registro encontrado.</p>
-      {% endfor %}
-      <button type="submit" class="btn-custom btn-save">Salvar</button>
-    </form>
+    </div>
+    {% empty %}
+    <p>Nenhuma nota encontrada.</p>
+    {% endfor %}
+    
   </div>
 
   <!-- Button -->

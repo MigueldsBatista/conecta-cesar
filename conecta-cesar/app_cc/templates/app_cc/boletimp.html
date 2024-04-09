@@ -1,4 +1,4 @@
-﻿{% extends "app_cc/main.html" %}
+{% extends "app_cc/mainp.html" %}
 
 {% block content %}
 
@@ -17,7 +17,11 @@
           </p>
         </div>
         {% empty %}
-        <p>Nenhuma nota encontrada para esta disciplina.</p>
+        <div class="nota-container">
+          <p class="grade-text">
+            <input type="text" name="notas[{{ disciplina }}]" placeholder="Adicionar nota">
+          </p>
+        </div>
         {% endfor %}
       </div>
       {% empty %}
