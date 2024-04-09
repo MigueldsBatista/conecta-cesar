@@ -43,6 +43,10 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 ![Imagem do Painel Do jira com a sprint 1 iniciada](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/painel%20jira.jpeg)
 
+![Imagem da Sprint 1 na aba do backlog](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/print%20sprint%201.jpeg)
+
+![Imagem do Backlog pós-início da sprint 1](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/print%20backlog%20entrega%2002.jpeg)
+
 ## 👩‍💻 Membros
 
 <ul>
