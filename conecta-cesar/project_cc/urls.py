@@ -24,7 +24,9 @@ urlpatterns = [
     #Aluno patterns
     path('admin/', admin.site.urls),
     path('', include('app_cc.urls')),
-    path('avisos', include('app_cc.urls')),
+    path('aviso', include('app_cc.urls')),
+    path('index', include('app_cc.urls')),
+
     path('disciplina', include('app_cc.urls')),
     path('boletim', include('app_cc.urls')),
     path('frequencia', include('app_cc.urls')),
