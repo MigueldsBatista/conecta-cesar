@@ -44,6 +44,12 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 <h1>Entrega 02</h1>
 
+<ul>
+  <li>
+    <a href="https://conecacesar.azurewebsites.net">Link para o Site</a>
+  </li>
+</ul>
+
 ![Imagem do Painel Do jira com a sprint 1 iniciada](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/painel%20jira.jpeg)
 
 ![Imagem da Sprint 1 na aba do backlog](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/print%20sprint%201.jpeg)
