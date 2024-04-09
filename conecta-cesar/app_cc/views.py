@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.utils import translation
 from .models import Disciplina, Nota
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .models import Diario
+from datetime import date
 
 # Create your views here.
 def index(request):
@@ -14,11 +17,24 @@ def avisos(request):
     return render(request, 'app_cc/avisos.html')
 
 def boletim(request):
-    # Recuperar todas as notas
-    notas = Nota.objects.all()
+    # Recuperar todas as disciplinas
+    disciplinas = Disciplina.objects.all()
 
-    return render(request, 'app_cc/boletim.html', {'notas': notas})
+    # Lista para armazenar disciplinas com suas notas
+    disciplinas_com_notas = []
 
+    # Iterar sobre todas as disciplinas
+    for disciplina in disciplinas:
+        # Verificar se há uma nota associada a esta disciplina
+        try:
+            nota_instance = Nota.objects.get(disciplina=disciplina)
+        except Nota.DoesNotExist:
+            nota_instance = None
+
+        # Adicionar a disciplina à lista, juntamente com sua nota (ou None, se não houver nota)
+        disciplinas_com_notas.append((disciplina, nota_instance))
+
+    return render(request, 'app_cc/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
 
 def boletimp(request):
@@ -43,10 +59,27 @@ def boletimp(request):
 
     return render(request, 'app_cc/boletimp.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
-
-
 def diariop(request):
-    return render(request, 'app_cc/diariop.html')
+    if request.method == 'POST':
+        disciplina = request.POST.get('disciplina')
+        titulo = request.POST.get('titulo')
+        texto = request.POST.get('texto')
+        
+        # Salvar o diário no banco de dados
+        Diario.objects.create(disciplina=disciplina, titulo=titulo, texto=texto)
+
+        # Redirecionar para a mesma página para exibir os diários atualizados
+        return redirect('diariop')
+    else:
+        # Obter todos os diários salvos
+        diarios = Diario.objects.all()
+        return render(request, 'app_cc/diariop.html', {'diarios': diarios})
+
+def diario(request):
+    # Obtém todos os diários salvos
+    diarios = Diario.objects.all()
+    # Renderiza o template 'app_cc/diario.html' passando os diários para o contexto
+    return render(request, 'app_cc/diario.html', {'diarios': diarios})
 
 
 def frequencia(request):
@@ -85,5 +118,4 @@ def disciplinas_e_notas(request):
 def perfil(request):
     return render(request, 'app_cc/perfil.html')
 
-def diario(request):
-    return render(request, 'app_cc/diario.html')
+

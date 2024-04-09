@@ -23,7 +23,7 @@ urlpatterns = [
     path('avisos', views.avisos),
     path('boletim', views.boletim),
     path('boletimp', views.boletimp),
-    path('diariop', views.diariop),
+    path('diariop', views.diariop, name="diariop"),
     path('frequencia', views.frequencia),
     path('turmas', views.turmas),
     path('perfilp', views.perfilp),

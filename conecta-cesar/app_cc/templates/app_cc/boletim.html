@@ -6,17 +6,21 @@
   <div class="container">
     <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
     
-    {% for nota in notas %}
+    {% for disciplina, nota_instance in disciplinas_com_notas %}
     <div class="grade-container">
-      <h5>{{ nota.disciplina }}</h5>
+      <h5>{{ disciplina }}</h5>
       <div class="nota-container">
         <p class="grade-text">
-          <h5>{{ nota.nota }}</h5>
+          {% if nota_instance %}
+            <h5>{{ nota_instance.nota }}</h5>
+          {% else %}
+            <h5>Nenhuma nota registrada</h5>
+          {% endif %}
         </p>
       </div>
     </div>
     {% empty %}
-    <p>Nenhuma nota encontrada.</p>
+    <p>Nenhuma disciplina encontrada.</p>
     {% endfor %}
     
   </div>
