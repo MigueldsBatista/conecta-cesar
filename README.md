@@ -58,6 +58,8 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 ![Imagem do diagrama](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/novo%20diagrama1.jpg)
 
+![Imagem do Bugtracker](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/bugtracker.jpeg)
+
 ## 👩‍💻 Membros
 
 <ul>
