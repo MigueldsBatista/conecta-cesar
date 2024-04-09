@@ -26,8 +26,8 @@ class Migration(migrations.Migration):
                 ('data', models.DateField(auto_now_add=True)),
             ],
             options={
-                'verbose_name_plural': 'Diários',
-                'use_in_migrations': True,  # Defina como True ou False conforme necessário
+                'verbose_name_plural': 'Diários'
+                  # Defina como True ou False conforme necessário
             },
         ),
         migrations.CreateModel(
@@ -37,8 +37,8 @@ class Migration(migrations.Migration):
                 ('disciplina', models.CharField(max_length=20)),
             ],
             options={
-                'verbose_name_plural': 'Disciplinas',
-                'use_in_migrations': True,  # Defina como True ou False conforme necessário
+                'verbose_name_plural': 'Disciplinas'
+                  # Defina como True ou False conforme necessário
             },
         ),
         migrations.CreateModel(
@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
                 ('date_added', models.DateTimeField(auto_now_add=True)),
             ],
             options={
-                'use_in_migrations': True,  # Defina como True ou False conforme necessário
+                  # Defina como True ou False conforme necessário
             },
         ),
         migrations.CreateModel(
@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
                 ('created_date', models.DateTimeField(verbose_name='Created on')),
             ],
             options={
-                'use_in_migrations': True,  # Defina como True ou False conforme necessário
+                  # Defina como True ou False conforme necessário
             },
         ),
         migrations.CreateModel(
@@ -73,8 +73,8 @@ class Migration(migrations.Migration):
                 ('disciplina', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_cc.disciplina')),
             ],
             options={
-                'verbose_name_plural': 'Notas',
-                'use_in_migrations': True,  # Defina como True ou False conforme necessário
+                'verbose_name_plural': 'Notas'
+                  # Defina como True ou False conforme necessário
             },
         ),
         migrations.CreateModel(
@@ -85,8 +85,8 @@ class Migration(migrations.Migration):
                 ('topic', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_cc.question')),
             ],
             options={
-                'verbose_name_plural': 'Entries',
-                'use_in_migrations': True,  # Defina como True ou False conforme necessário
+                'verbose_name_plural': 'Entries'
+                # Defina como True ou False conforme necessário
             },
         ),
     ]
