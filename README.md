@@ -30,6 +30,11 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
       >Protótipo  de Baixa Fidelidade - Screencast</a
     >
   </li>
+  <li>
+    <a  href="https://docs.google.com/document/d/10O_WayuQXqjM3a-Ibwi0VkkPwDqrdGoMv61UE1SCnow/edit?usp=sharing"
+      >Relatório de Pair Programming</a
+    >
+  </li>
 </ul>
 <h1>Entrega 01</h1>
 
