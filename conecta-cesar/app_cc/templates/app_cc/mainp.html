@@ -1,7 +1,7 @@
 {% load static %}
 
-<!doctype>
- lang="PT-BR">
+<!doctype html>
+<HTML lang="PT-BR">
 
 <head>
   <meta charset="utf-8">
@@ -37,7 +37,7 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{%url 'avisosp'%}">Home</a>
+                <a class="nav-link active" aria-current="page" href="avisop">Home</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -45,20 +45,20 @@
                   Turmas
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'turmas' %}">Todas as turmas</a></li>
-                  <li><a class="dropdown-item" href="{% url 'frequenciap'%}">Frequência</a></li>
+                  <li><a class="dropdown-item" href="turmas">Todas as turmas</a></li>
+                  <li><a class="dropdown-item" href="frequenciap">Frequência</a></li>
                 </ul>
               </li>
-                <a class="nav-link" href="{% url 'calendariop' %}">Calendário</a>
+                <a class="nav-link" href="calendariop">Calendário</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'perfilp'%}">Perfil</a>
+                <a class="nav-link" href="perfilp">Perfil</a>
               </li>
                <li class="nav-item">
-                <a class="nav-link" href="{%url 'diariop' %}">diario</a>
+                <a class="nav-link" href="diariop">diario</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{%url 'index' %}">Sair</a>
+                <a class="nav-link" href="index">Sair</a>
               </li>
             </ul>
           </div>

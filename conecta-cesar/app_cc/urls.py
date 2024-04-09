@@ -6,10 +6,10 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 Examples:
 Function views
     1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+    2. Add a URL to urlpatterns:  path('', views.home
 Class-based views
     1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+    2. Add a URL to urlpatterns:  path('', Home.as_view()
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
@@ -19,19 +19,19 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('avisos/', views.avisos, name='aviso'),
-    path('boletim/', views.boletim, name='boletim'),
-    path('diariop/', views.diariop, name='diariop'),
-    path('frequencia/', views.frequencia, name='frequencia'),
-    path('turmas/', views.turmas, name='turmas'),
-    path('perfilp/', views.perfilp, name='perfilp'),
-    path('frequenciap/', views.frequenciap, name='frequenciap'),
-    path('calendariop/', views.calendariop, name='calendariop'),
-    path('avisosp/', views.avisosp, name='avisosp'),
-    path('disciplinas_e_notas/', views.disciplinas_e_notas, name='disciplinas_e_notas'),
-    path('perfil/', views.perfil, name='perfil'),
-    path('diario/', views.diario, name='diario'),
+    path('', views.index),
+    path('avisos', views.avisos),
+    path('boletim', views.boletim),
+    path('diariop', views.diariop),
+    path('frequencia', views.frequencia),
+    path('turmas', views.turmas),
+    path('perfilp', views.perfilp),
+    path('frequenciap', views.frequenciap),
+    path('calendariop', views.calendariop),
+    path('avisosp', views.avisosp),
+    path('disciplinas_e_notas', views.disciplinas_e_notas),
+    path('perfil', views.perfil),
+    path('diario', views.diario),
 ]
 
 """Todos os arquivos html é preciso definir o path aqui"""
