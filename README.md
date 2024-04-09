@@ -52,6 +52,8 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 ![Imagem do Backlog pós-início da sprint 1](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/print%20backlog%20entrega%2002.jpeg)
 
+![Imagem do diagrama](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/novo%20diagrama1.jpg)
+
 ## 👩‍💻 Membros
 
 <ul>
