@@ -41,7 +41,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 ![Imagem do diagrama de trabalaho](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/diagrama.jpg)
 
-![Imagem do Painel Do jira com a sprint 1 iniciada](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/paineljira2.jpeg)
+![Imagem do Painel Do jira com a sprint 1 iniciada](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/painel%20jira.jpeg)
 
 ## 👩‍💻 Membros
 
