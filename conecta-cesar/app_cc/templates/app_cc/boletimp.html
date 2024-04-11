@@ -1,0 +1,39 @@
+{% extends "app_cc/mainp.html" %}
+
+{% block content %}
+
+  <!-- Content -->
+  <div class="container">
+    <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for disciplina, notas in disciplinas_com_notas %}
+      <div class="grade-container">
+        <h5>{{ disciplina }}</h5>
+        {% for nota in notas %}
+        <div class="nota-container">
+          <p class="grade-text">
+            <input type="text" name="notas[{{ disciplina }}]" value="{{ nota.nota }}">
+          </p>
+        </div>
+        {% empty %}
+        <div class="nota-container">
+          <p class="grade-text">
+            <input type="text" name="notas[{{ disciplina }}]" placeholder="Adicionar nota">
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+      {% empty %}
+      <p>Nenhum registro encontrado.</p>
+      {% endfor %}
+      <button type="submit" class="btn-custom btn-save">Salvar</button>
+    </form>
+  </div>
+
+  <!-- Button -->
+  <div class="text-end mt-3">
+    <button class="orange-button" onclick="window.location.href='mediag.html'">></button>
+  </div>
+
+{% endblock content %}

@@ -1,49 +1,85 @@
 from django.shortcuts import render
+from django.utils import translation
 from .models import Disciplina, Nota
-
-#static
-
-
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .models import Diario
+from datetime import date
 
 # Create your views here.
 def index(request):
     #main pg
     return render(request, 'app_cc/index.html')
-""" tudo que está sendo trabalhado dentro dessa função """
 
 
 #Student Links
-def aviso(request):
+def avisos(request):
     return render(request, 'app_cc/avisos.html')
 
-
 def boletim(request):
-    if(request.method == "POST"):
-        nota = request.POST.get("nota")
-        disciplina = request.POST.get("disciplina")
-        currentD = Disciplina.objects.filter(disciplina=disciplina).first()
-        
-        newNota = Nota.objects.filter(disciplina=currentD).first()
+    # Recuperar todas as disciplinas
+    disciplinas = Disciplina.objects.all()
 
-        newNota.nota = float(nota)
-        newNota.save()
-
-        # Nota.
-
-
+    # Lista para armazenar disciplinas com suas notas
     disciplinas_com_notas = []
 
-    disciplinas = Disciplina.objects.all()#codigo que faz o cadastro de notas 
-
+    # Iterar sobre todas as disciplinas
     for disciplina in disciplinas:
-        notas = Nota.objects.filter(disciplina=disciplina)
-        disciplinas_com_notas.append((disciplina, notas))
+        # Verificar se há uma nota associada a esta disciplina
+        try:
+            nota_instance = Nota.objects.get(disciplina=disciplina)
+        except Nota.DoesNotExist:
+            nota_instance = None
+
+        # Adicionar a disciplina à lista, juntamente com sua nota (ou None, se não houver nota)
+        disciplinas_com_notas.append((disciplina, nota_instance))
 
     return render(request, 'app_cc/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
 
+def boletimp(request):
+    if request.method == "POST":
+        for disciplina in Disciplina.objects.all():
+            nota_value = request.POST.get(f"notas[{disciplina.disciplina}]")
+            if nota_value is not None:
+                nota_value = nota_value.replace(',', '.')
+                try:
+                    nota_value = float(nota_value)
+                except ValueError:
+                    return HttpResponse("Erro: Valor da nota inválido")
+
+                nota_instance, created = Nota.objects.get_or_create(disciplina=disciplina)
+                nota_instance.nota = nota_value
+                nota_instance.save()
+
+    disciplinas_com_notas = []
+    for disciplina in Disciplina.objects.all():
+        notas = Nota.objects.filter(disciplina=disciplina)
+        disciplinas_com_notas.append((disciplina, notas))
+
+    return render(request, 'app_cc/boletimp.html', {'disciplinas_com_notas': disciplinas_com_notas})
+
 def diariop(request):
-    return render(request, 'app_cc/diariop.html')
+    if request.method == 'POST':
+        disciplina = request.POST.get('disciplina')
+        titulo = request.POST.get('titulo')
+        texto = request.POST.get('texto')
+        
+        # Salvar o diário no banco de dados
+        Diario.objects.create(disciplina=disciplina, titulo=titulo, texto=texto)
+
+        # Redirecionar para a mesma página para exibir os diários atualizados
+        return redirect('diariop')
+    else:
+        # Obter todos os diários salvos
+        diarios = Diario.objects.all()
+        return render(request, 'app_cc/diariop.html', {'diarios': diarios})
+
+def diario(request):
+    # Obtém todos os diários salvos
+    diarios = Diario.objects.all()
+    # Renderiza o template 'app_cc/diario.html' passando os diários para o contexto
+    return render(request, 'app_cc/diario.html', {'diarios': diarios})
 
 
 def frequencia(request):
@@ -82,8 +118,4 @@ def disciplinas_e_notas(request):
 def perfil(request):
     return render(request, 'app_cc/perfil.html')
 
-def diario(request):
-    return render(request, 'app_cc/diario.html')
 
-
-"""Para cada arquivo html é preciso fazer uma def de request do caminho do arquivo para o app"""

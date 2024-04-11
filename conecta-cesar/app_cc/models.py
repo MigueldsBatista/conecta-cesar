@@ -46,4 +46,13 @@ class Nota(models.Model):
 
 
 
+class Diario(models.Model):
+    disciplina = models.CharField(max_length=100)
+    titulo = models.CharField(max_length=100)
+    texto = models.TextField()
+    data = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.disciplina} - {self.titulo}"
+
 

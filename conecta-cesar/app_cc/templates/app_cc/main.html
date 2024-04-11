@@ -1,4 +1,4 @@
-﻿{%load static %}
+﻿{% load static %}
 
 <!doctype html>
 <html lang="PT-BR">
@@ -22,7 +22,7 @@
 
   <nav class="navbar bg-body-tertiary fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Conecta Cesar</a>
+      <a class="navbar-brand" href="index">Conecta Cesar</a><!--Links-->
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -35,11 +35,11 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="avisos.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="avisos">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="avisos.html">Avisos </a>
-              <a class="nav-link" href="calendario.html">Calendário</a>
+              <a class="nav-link" href="avisos">Avisos</a><!--Links-->
+              <a class="nav-link" href="calendariop">Calendário</a><!--Links-->
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -47,24 +47,24 @@
                 Avaliação
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="boletim.html">Boletim</a></li>
-                <li><a class="dropdown-item" href="frequencia.html">Frequência</a></li>
+                <li><a class="dropdown-item" href="boletim">Boletim</a></li><!--Links-->
+                <li><a class="dropdown-item" href="frequencia">Frequência</a></li><!--Links-->
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="disciplina.html">Disciplina</a>
+              <a class="nav-link" href="disciplinas_e_notas">Disciplina</a><!--Links-->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="perfil.html">Cadastro</a>
+              <a class="nav-link" href="perfil">Cadastro</a><!--Links-->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="...">HORA EXTRA</a>
+              <a class="nav-link" href="#">Hora Extra</a><!--Links-->
             </li>
-             <li class="nav-item">
-                <a class="nav-link" href="diario.html">Diário</a>
-              </li>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Sair</a>
+              <a class="nav-link" href="diario">Diário</a><!--Links-->
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">Sair</a><!--Links-->
             </li>
           </ul>
         </div>
@@ -72,7 +72,7 @@
     </div>
   </nav>
 
-{% block content %}{% endblock content %}
+  {% block content %}{% endblock content %}
 
 </body>
 </html>
