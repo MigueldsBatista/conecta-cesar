@@ -20,6 +20,9 @@ from . import views
 
 urlpatterns = [
 
+    path('register/', views.register, name='register'),
+
+
     #aluno
     path('', views.index, name='index'),
     path('avisos', views.avisos, name='avisos'),
@@ -38,6 +41,8 @@ urlpatterns = [
     path('calendariop', views.calendariop, name='calendariop'),
     path('avisosp', views.avisosp, name='avisosp'),
     path('disciplinas_e_notas', views.disciplinas_e_notas, name='disciplinas_e_notas'),
+   
+
    
 ]
 """Todos os arquivos html é preciso definir o path aqui"""

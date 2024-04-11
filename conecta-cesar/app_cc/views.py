@@ -5,11 +5,48 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Diario
 from datetime import date
+from django.contrib.auth import authenticate, login
+from .forms import CustomAuthenticationForm
+from django.contrib import messages
+from .forms import CustomUserCreationForm
 
-# Create your views here.
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')  # Redirecionar para a página de login após o registro
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'app_cc/register.html', {'form': form})
+
+
+#Login 
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from .forms import CustomAuthenticationForm
+from django.contrib import messages
+
 def index(request):
-    #main pg
-    return render(request, 'app_cc/index.html')
+    if request.method == 'POST':
+        form = CustomAuthenticationForm(request, request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('avisos')  # Redirecionar para 'avisos' após o login
+            else:
+                # Adiciona uma mensagem de erro para ser exibida no template
+                messages.error(request, 'Usuário ou senha incorretos.', extra_tags='alert-danger')
+    else:
+        form = CustomAuthenticationForm()
+    return render(request, 'app_cc/index.html', {'form': form})
+
+    
+
+#------------------------------------------------------------------------------------------------------------
 
 
 #Student Links

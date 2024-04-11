@@ -45,8 +45,8 @@ urlpatterns = [
 
     
 
-    #path("arquivo.html", include('app_cc.urls)) para toda nova página do html
-
+#Login
+path("accounts/", include("django.contrib.auth.urls")),  # new
 
 
 
