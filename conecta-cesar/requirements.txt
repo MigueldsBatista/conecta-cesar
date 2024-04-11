@@ -8,14 +8,4 @@ python-dotenv
 sqlparse
 tzdata
 whitenoise
-========
-asgiref
-django
-gunicorn
-packaging
-psycopg2-binary
-python-dotenv
-sqlparse
-tzdata
-whitenoise
 
