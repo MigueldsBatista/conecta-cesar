@@ -1,23 +1,58 @@
 {% extends "app_cc/mainp.html" %}
-
+{% load static %}
 
 {% block content %}
-
-
-
-  <div class="bg-dark text-light p-5 rounded-4" style="margin-left: 150px; margin-right:150px">
-    <h3 style="color: black;">Aviso x</h3>
-    <p></p>
+<!-- Container principal -->
+<div class="container mt-3">
+  <!-- Primeira linha de imagens -->
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="bg-dark text-light p-4 rounded-5">
+        <img src="{% static 'images/aviso1.jpg' %}" class="img-fluid same-size-img" alt="Imagem 1">
+        <h3>Aviso 1</h3>
+        <p>Descrição do aviso 1</p>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="bg-dark text-light p-4 rounded-5">
+        <img src="{% static 'images/aviso2.jpg' %}" class="img-fluid same-size-img" alt="Imagem 2">
+        <h3>Aviso 2</h3>
+        <p>Descrição do aviso 2</p>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="bg-dark text-light p-4 rounded-5">
+        <img src="{% static 'images/aviso3.jpg' %}" class="img-fluid same-size-img" alt="Imagem 3">
+        <h3>Aviso 3</h3>
+        <p>Descrição do aviso 3</p>
+      </div>
+    </div>
   </div>
-  <br>
-  <div class="bg-dark text-light p-5 rounded-4" style="margin-left: 150px; margin-right:150px">
-    <h3 style="color: black;">Aviso x</h3>
-    <p></p>
-  </div>
-  <br>
-  <div class="bg-dark text-light p-5 rounded-4" style="margin-left: 150px; margin-right:150px">
-    <h3 style="color: black;">Aviso x</h3>
-    <p></p>
-  </div>
 
-  {% endblock content %}
+  <!-- Segunda linha de imagens -->
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="bg-dark text-light p-4 rounded-5">
+        <img src="{% static 'images/aviso3.jpg' %}" class="img-fluid same-size-img" alt="Imagem 4">
+        <h3>Aviso 4</h3>
+        <p>Descrição do aviso 4</p>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="bg-dark text-light p-4 rounded-5">
+        <img src="{% static 'images/aviso5.jpg' %}" class="img-fluid same-size-img" alt="Imagem 5">
+        <h3>Aviso 5</h3>
+        <p>Descrição do aviso 5</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<style>
+  .same-size-img {
+    height: 200px; /* Defina a altura desejada */
+    width: 100%; /* Manter a largura 100% para preencher o contêiner */
+    object-fit: cover; /* Garantir que a imagem mantenha suas proporções */
+  }
+</style>

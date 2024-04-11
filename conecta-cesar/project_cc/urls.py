@@ -24,28 +24,31 @@ urlpatterns = [
     #Aluno patterns
     path('admin/', admin.site.urls),
     path('', include('app_cc.urls')),
-    path('avisos.html', include('app_cc.urls')),
-    path('disciplina.html', include('app_cc.urls')),
-    path('boletim.html', include('app_cc.urls')),
-    path('frequencia.html', include('app_cc.urls')),
+    path('aviso', include('app_cc.urls')),
+    
+
+    path('disciplina', include('app_cc.urls')),
+    path('boletim', include('app_cc.urls')),
+    path('boletimp', include('app_cc.urls')),
+    path('frequencia', include('app_cc.urls')),
     path('perfil', include('app_cc.urls')),
-    path('diario.html', include('app_cc.urls')),
+    path('diario', include('app_cc.urls')),
 
 
     #Professor patterns
-    path('turmas.html', include('app_cc.urls')),
-    path('calendariop.html', include('app_cc.urls')),
-    path('avisosp.html', include('app_cc.urls')),
+    path('turmas', include('app_cc.urls')),
+    path('calendariop', include('app_cc.urls')),
+    path('avisosp', include('app_cc.urls')),
     path('perfilp', include('app_cc.urls')),
-    path('frequenciap.html', include('app_cc.urls')),
-    path('diariop.html', include('app_cc.urls')),
+    path('frequenciap', include('app_cc.urls')),
+    path('diariop', include('app_cc.urls')),
 
     
 
     #path("arquivo.html", include('app_cc.urls)) para toda nova página do html
 
 
-    #static path
+
 
     
 ]
