@@ -18,4 +18,4 @@ python-dotenv
 sqlparse
 tzdata
 whitenoise
->>>>>>>> prod:requirements.txt
+
