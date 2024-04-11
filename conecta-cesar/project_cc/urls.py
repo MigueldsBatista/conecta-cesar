@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_cc.urls')),
     path('aviso', include('app_cc.urls')),
-    path('index', include('app_cc.urls')),
+    
 
     path('disciplina', include('app_cc.urls')),
     path('boletim', include('app_cc.urls')),
@@ -48,7 +48,7 @@ urlpatterns = [
     #path("arquivo.html", include('app_cc.urls)) para toda nova página do html
 
 
-    #static path
+
 
     
 ]

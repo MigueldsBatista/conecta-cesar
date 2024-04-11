@@ -19,20 +19,25 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.index),
-    path('avisos', views.avisos),
-    path('boletim', views.boletim),
-    path('boletimp', views.boletimp),
-    path('diariop', views.diariop, name="diariop"),
-    path('frequencia', views.frequencia),
-    path('turmas', views.turmas),
-    path('perfilp', views.perfilp),
-    path('frequenciap', views.frequenciap),
-    path('calendariop', views.calendariop),
-    path('avisosp', views.avisosp),
-    path('disciplinas_e_notas', views.disciplinas_e_notas),
-    path('perfil', views.perfil),
-    path('diario', views.diario),
-]
 
+    #aluno
+    path('', views.index, name='index'),
+    path('avisos', views.avisos, name='avisos'),
+    path('boletim', views.boletim, name='boletim'),
+    path('frequencia', views.frequencia, name='frequencia'),
+    path('perfil', views.perfil, name='perfil'),
+    path('diario', views.diario, name='diario'),
+
+
+    #Professor
+    path('boletimp', views.boletimp, name='boletimp'),
+    path('diariop', views.diariop, name='diariop'),
+    path('turmas', views.turmas, name='turmas'),
+    path('perfilp', views.perfilp, name='perfilp'),
+    path('frequenciap', views.frequenciap, name='frequenciap'),
+    path('calendariop', views.calendariop, name='calendariop'),
+    path('avisosp', views.avisosp, name='avisosp'),
+    path('disciplinas_e_notas', views.disciplinas_e_notas, name='disciplinas_e_notas'),
+   
+]
 """Todos os arquivos html é preciso definir o path aqui"""
