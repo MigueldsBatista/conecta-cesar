@@ -1,4 +1,4 @@
-<<<<<<<< HEAD:conecta-cesar/requirements.txt
+
 asgiref
 Django
 gunicorn
