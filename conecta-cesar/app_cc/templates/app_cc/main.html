@@ -35,11 +35,11 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="avisos">Home</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'avisos' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="avisos">Avisos</a><!--Links-->
-              <a class="nav-link" href="calendariop">Calendário</a><!--Links-->
+              <a class="nav-link" href="{% url 'avisos' %}">Avisos</a><!--Links-->
+              <a class="nav-link" href="{% url 'calendariop' %}">Calendário</a><!--Links-->
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -47,21 +47,21 @@
                 Avaliação
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="boletim">Boletim</a></li><!--Links-->
-                <li><a class="dropdown-item" href="frequencia">Frequência</a></li><!--Links-->
+                <li><a class="dropdown-item" href="{% url 'boletim' %}">Boletim</a></li><!--Links-->
+                <li><a class="dropdown-item" href="{% url 'frequencia' %}">Frequência</a></li><!--Links-->
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="disciplinas_e_notas">Disciplina</a><!--Links-->
+              <a class="nav-link" href="{% url 'disciplinas_e_notas' %}">Disciplina</a><!--Links-->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="perfil">Cadastro</a><!--Links-->
+              <a class="nav-link" href="{% url 'perfil' %}">Cadastro</a><!--Links-->
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Hora Extra</a><!--Links-->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="diario">Diário</a><!--Links-->
+              <a class="nav-link" href="{% url 'diario' %}">Diário</a><!--Links-->
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/">Sair</a><!--Links-->
