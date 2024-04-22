@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as django_login  # Importando a função login do Django para evitar conflito
+from django.contrib.auth import authenticate, login as django_login
+from rolepermissions.roles import assign_role
+from project_cc.roles import Aluno, Professor
+  # Importando a função login do Django para evitar conflito
 
 # Create your views here.
 
@@ -15,6 +18,7 @@ def cadastro(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
+        user_type = request.POST.get('user_type')
 
         # Verifica se já existe um usuário com esse nome
         user_exists = User.objects.filter(username=username).exists()
@@ -24,9 +28,24 @@ def cadastro(request):
         
         # Se não existe, cria o usuário
         user = User.objects.create_user(username=username, email=email, password=senha)
+
         user.save()
+        if user_type=='professor':
+            assign_role(user, Professor)
+            return HttpResponse("Professor cadastrado com sucesso")
         
-        return HttpResponse("Usuário cadastrado com sucesso")
+        elif user_type=='aluno':
+            assign_role(user, Aluno)
+            return HttpResponse("Aluno cadastrado com sucesso")
+        
+        else:
+            return HttpResponse("Papel do usuário não especificado. Selecione 'professor' ou 'aluno'.")
+    # Retornos apropriados conforme a seleção do campo
+       
+            
+        
+      
+
 
 def login(request):  # Renomeado para evitar conflito
     if request.method == 'GET':

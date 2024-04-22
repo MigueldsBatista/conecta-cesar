@@ -4,21 +4,29 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from .models import Disciplina, Nota, Diario
+from rolepermissions.decorators import has_role_decorator
+from rolepermissions.decorators import has_permission_decorator
+from project_cc.roles import Professor, Aluno
 
 # Register
  
 
-# Student Links
+# -----------------------------------------STUDENT VIEWS--------------------------------------------
+@has_role_decorator(Aluno)
 def avisos(request):
-    return render(request, 'app_cc/avisos.html')
+    return render(request, 'app_cc/aluno/avisos.html')
 #----------------------------------------------------------------------------------------------------------------    
+@has_role_decorator(Aluno)
+def disciplinas_e_notas(request):
+    disciplinas_com_notas = []
+    disciplinas = Disciplina.objects.all()
+    for disciplina in disciplinas:
+        notas = Nota.objects.filter(disciplina=disciplina)
+        disciplinas_com_notas.append((disciplina, notas))
+    return render(request, 'app_cc/aluno/disciplina.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
-
-def avisosp(request):
-    
-    return render(request, 'app_cc/avisosp.html')
 #----------------------------------------------------------------------------------------------------------------    
-
+@has_role_decorator(Aluno)
 def boletim(request):
     disciplinas = Disciplina.objects.all()
     disciplinas_com_notas = []
@@ -28,9 +36,73 @@ def boletim(request):
         except Nota.DoesNotExist:
             nota_instance = None
         disciplinas_com_notas.append((disciplina, nota_instance))
-    return render(request, 'app_cc/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
+    return render(request, 'app_cc/aluno/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
+#----------------------------------------------------------------------------------------------------------------   
+@has_role_decorator(Aluno) 
+def frequencia(request):
+    return render(request, 'app_cc/aluno/frequencia.html')
+#---------------------------------------------------------------------------------------------------------------- 
+   
+@has_role_decorator(Aluno)
+def perfil(request):
+    return render(request, 'app_cc/aluno/perfil.html')
+
+#---------------------------------------------------------------------------------------------------------------- 
+
+@has_role_decorator(Aluno)
+def diario(request):
+    # Obtém todos os diários salvos
+    diarios = Diario.objects.all()
+    # Renderiza o template 'app_cc/diario.html' passando os diários para o contexto
+    return render(request, 'app_cc/aluno/diario.html', {'diarios': diarios})
+
+
+@has_role_decorator(Aluno)
+def calendario(request):
+    return render('app/cc/aluno/calendario.html')
+
+#----------------------------------------------------------------------------------------------------------------    
+#----------------------------------------PROFESSOR VIEWS---------------------------------------------------------  
 #----------------------------------------------------------------------------------------------------------------    
 
+@has_role_decorator(Professor)
+def turmas(request):
+    return render(request, 'app_cc/professor/turmas.html')
+#----------------------------------------------------------------------------------------------------------------    
+
+@has_role_decorator(Professor)
+def perfilp(request):
+    return render(request, 'app_cc/professor/perfilp.html')
+#----------------------------------------------------------------------------------------------------------------    
+
+@has_role_decorator(Professor)
+def frequenciap(request):
+    return render(request, 'app_cc/professor/frequenciap.html')
+#----------------------------------------------------------------------------------------------------------------    
+
+@has_role_decorator(Professor)
+def calendariop(request):
+    return render(request, 'app_cc/professor/calendariop.html')
+#----------------------------------------------------------------------------------------------------------------    
+
+@has_role_decorator(Professor)
+def diariop(request):
+    if request.method == 'POST':
+        disciplina = request.POST.get('disciplina')
+        titulo = request.POST.get('titulo')
+        texto = request.POST.get('texto')
+        Diario.objects.create(disciplina=disciplina, titulo=titulo, texto=texto)
+        return redirect('diariop')
+    else:
+        diarios = Diario.objects.all()
+        return render(request, 'app_cc/professor/diariop.html', {'diarios': diarios})
+#----------------------------------------------------------------------------------------------------------------    
+
+@has_role_decorator(Professor)
+def avisosp(request):
+    return render(request, 'app_cc/professor/avisosp.html')
+#----------------------------------------------------------------------------------------------------------------    
+@has_role_decorator(Professor)
 def boletimp(request):
     if request.method == "POST":
         for disciplina in Disciplina.objects.all():
@@ -50,59 +122,8 @@ def boletimp(request):
         notas = Nota.objects.filter(disciplina=disciplina)
         disciplinas_com_notas.append((disciplina, notas))
 
-    return render(request, 'app_cc/boletimp.html', {'disciplinas_com_notas': disciplinas_com_notas})
-#----------------------------------------------------------------------------------------------------------------    
+    return render(request, 'app_cc/professor/boletimp.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
-def diariop(request):
-    if request.method == 'POST':
-        disciplina = request.POST.get('disciplina')
-        titulo = request.POST.get('titulo')
-        texto = request.POST.get('texto')
-        Diario.objects.create(disciplina=disciplina, titulo=titulo, texto=texto)
-        return redirect('diariop')
-    else:
-        diarios = Diario.objects.all()
-        return render(request, 'app_cc/diariop.html', {'diarios': diarios})
-#----------------------------------------------------------------------------------------------------------------    
-
-def frequencia(request):
-    return render(request, 'app_cc/frequencia.html')
-#----------------------------------------------------------------------------------------------------------------    
-
-def perfil(request):
-    return render(request, 'app_cc/perfil.html')
-def diario(request):
-    # Obtém todos os diários salvos
-    diarios = Diario.objects.all()
-    # Renderiza o template 'app_cc/diario.html' passando os diários para o contexto
-    return render(request, 'app_cc/diario.html', {'diarios': diarios})
-
-#----------------------------------------------------------------------------------------------------------------  
-#----------------------------------------PROFESSOR VIEWS---------------------------------------------------------  
-#----------------------------------------------------------------------------------------------------------------    
-
-
-def turmas(request):
-    return render(request, 'app_cc/turmas.html')
-
-def perfilp(request):
-    return render(request, 'app_cc/perfilp.html')
-
-def frequenciap(request):
-    return render(request, 'app_cc/frequenciap.html')
-
-def calendariop(request):
-    return render(request, 'app_cc/calendariop.html')
-
-
-
-def disciplinas_e_notas(request):
-    disciplinas_com_notas = []
-    disciplinas = Disciplina.objects.all()
-    for disciplina in disciplinas:
-        notas = Nota.objects.filter(disciplina=disciplina)
-        disciplinas_com_notas.append((disciplina, notas))
-    return render(request, 'app_cc/disciplina.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
 
 

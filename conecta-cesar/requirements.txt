@@ -7,4 +7,5 @@ python-dotenv
 sqlparse
 tzdata
 whitenoise
+django-role-permissions
 

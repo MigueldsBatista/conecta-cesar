@@ -26,6 +26,8 @@ urlpatterns = [
     path('frequencia', views.frequencia, name='frequencia'),
     path('perfil', views.perfil, name='perfil'),
     path('diario', views.diario, name='diario'),
+    path('calendario', views.calendario, name='calendario'),
+
 
 
     #Professor

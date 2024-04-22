@@ -110,6 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 ROOT_URLCONF = 'project_cc.urls'
 
+ROLEPERMISSIONS_MODULE="rt_project.roles"
+
+
 WSGI_APPLICATION = 'project_cc.wsgi.application'
 
 # STATIC_URL = "static/"
