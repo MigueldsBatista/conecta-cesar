@@ -1,0 +1,25 @@
+﻿<html>
+<head>
+<body>
+<h1>Cadastro<h1>
+<form action="{% url 'cadastro' %}" method="POST">
+    {% csrf_token %}
+<input type="text" placeholder="Username..." name="username">
+<br>
+<input type="email" placeholder="Email..." name="email">
+<br>
+<input type="password" placeholder="Senha..." name="senha">
+
+<!------------------------------------------------------>
+        <label for="user-type">Escolha seu papel:</label>
+        <select id="user-type" name="user_type">
+            <option value="professor">Professor</option>
+            <option value="aluno">Aluno</option>
+        </select>
+<!------------------------------------------------------>
+
+<input type="submit" value="Cadastrar">
+</form>
+</html>
+</head>
+</body>
