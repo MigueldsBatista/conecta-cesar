@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as django_login
 from rolepermissions.roles import assign_role
+from rolepermissions.checkers import has_role
 from project_cc.roles import Aluno, Professor
   # Importando a função login do Django para evitar conflito
 
@@ -47,21 +48,28 @@ def cadastro(request):
       
 
 
-def login(request):  # Renomeado para evitar conflito
+def login(request):
     if request.method == 'GET':
         return render(request, 'login.html')
     else:
-        username = request.POST.get('username')
-        senha = request.POST.get('senha')
+        username = request.POST.get('username')  # Capturando username
+        senha = request.POST.get('senha')  # Capturando senha
 
         user = authenticate(username=username, password=senha)
         if user:
-            django_login(request, user)  # Use o método 'login' do Django
+            django_login(request, user)
+        
+            user = request.user  # Obter o usuário autenticado
+            if has_role(user, Professor):
+                return render(request, 'app_cc/professor/avisosp.html')
             
-            return render(request, 'app_cc/avisos.html')
+            elif has_role(user, Aluno):
+                return render(request, 'app_cc/aluno/avisos.html')
+            else:
+                return HttpResponse("O usuário não tem um papel definido")
         else:
             return HttpResponse('Usuário ou senha inválidos')
-
+        
 def plataforma(request):
     if request.user.is_authenticated:  # Corrigido erro de digitação
         return request('content.html')
