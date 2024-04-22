@@ -16,15 +16,11 @@ Including another URLconf
 """
 from django.urls import path
 from . import views
+from users import views as user_views
 
 
 urlpatterns = [
-
-    path('register/', views.register, name='register'),
-
-
     #aluno
-    path('', views.index, name='index'),
     path('avisos', views.avisos, name='avisos'),
     path('boletim', views.boletim, name='boletim'),
     path('frequencia', views.frequencia, name='frequencia'),

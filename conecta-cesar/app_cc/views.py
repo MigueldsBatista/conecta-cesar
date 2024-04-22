@@ -6,36 +6,18 @@ from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from .models import Disciplina, Nota, Diario
 
 # Register
-def register(request):
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index')  # Redirecionar para a página de login após o registro
-    else:
-        form = CustomUserCreationForm()
-    return render(request, 'app_cc/register.html', {'form': form})
-
-# Login 
-def index(request):
-    if request.method == 'POST':
-        form = CustomAuthenticationForm(request, request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('avisos')  # Redirecionar para 'avisos' após o login
-            else:
-                messages.error(request, 'Usuário ou senha incorretos.', extra_tags='alert-danger')
-    else:
-        form = CustomAuthenticationForm()
-    return render(request, 'app_cc/index.html', {'form': form})
+ 
 
 # Student Links
 def avisos(request):
     return render(request, 'app_cc/avisos.html')
+#----------------------------------------------------------------------------------------------------------------    
+
+
+def avisosp(request):
+    
+    return render(request, 'app_cc/avisosp.html')
+#----------------------------------------------------------------------------------------------------------------    
 
 def boletim(request):
     disciplinas = Disciplina.objects.all()
@@ -47,6 +29,7 @@ def boletim(request):
             nota_instance = None
         disciplinas_com_notas.append((disciplina, nota_instance))
     return render(request, 'app_cc/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
+#----------------------------------------------------------------------------------------------------------------    
 
 def boletimp(request):
     if request.method == "POST":
@@ -68,6 +51,7 @@ def boletimp(request):
         disciplinas_com_notas.append((disciplina, notas))
 
     return render(request, 'app_cc/boletimp.html', {'disciplinas_com_notas': disciplinas_com_notas})
+#----------------------------------------------------------------------------------------------------------------    
 
 def diariop(request):
     if request.method == 'POST':
@@ -79,11 +63,25 @@ def diariop(request):
     else:
         diarios = Diario.objects.all()
         return render(request, 'app_cc/diariop.html', {'diarios': diarios})
+#----------------------------------------------------------------------------------------------------------------    
 
 def frequencia(request):
     return render(request, 'app_cc/frequencia.html')
+#----------------------------------------------------------------------------------------------------------------    
 
-# Professor Links
+def perfil(request):
+    return render(request, 'app_cc/perfil.html')
+def diario(request):
+    # Obtém todos os diários salvos
+    diarios = Diario.objects.all()
+    # Renderiza o template 'app_cc/diario.html' passando os diários para o contexto
+    return render(request, 'app_cc/diario.html', {'diarios': diarios})
+
+#----------------------------------------------------------------------------------------------------------------  
+#----------------------------------------PROFESSOR VIEWS---------------------------------------------------------  
+#----------------------------------------------------------------------------------------------------------------    
+
+
 def turmas(request):
     return render(request, 'app_cc/turmas.html')
 
@@ -96,8 +94,7 @@ def frequenciap(request):
 def calendariop(request):
     return render(request, 'app_cc/calendariop.html')
 
-def avisosp(request):
-    return render(request, 'app_cc/avisosp.html')
+
 
 def disciplinas_e_notas(request):
     disciplinas_com_notas = []
@@ -107,11 +104,5 @@ def disciplinas_e_notas(request):
         disciplinas_com_notas.append((disciplina, notas))
     return render(request, 'app_cc/disciplina.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
-def perfil(request):
-    return render(request, 'app_cc/perfil.html')
-def diario(request):
-    # Obtém todos os diários salvos
-    diarios = Diario.objects.all()
-    # Renderiza o template 'app_cc/diario.html' passando os diários para o contexto
-    return render(request, 'app_cc/diario.html', {'diarios': diarios})
+
 

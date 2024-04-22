@@ -23,32 +23,7 @@ from app_cc import views
 urlpatterns = [
     #Aluno patterns
     path('admin/', admin.site.urls),
+    path('auth/', include("users.urls")),
     path('', include('app_cc.urls')),
-    path('aviso', include('app_cc.urls')),
-    
-
-    path('disciplina', include('app_cc.urls')),
-    path('boletim', include('app_cc.urls')),
-    path('boletimp', include('app_cc.urls')),
-    path('frequencia', include('app_cc.urls')),
-    path('perfil', include('app_cc.urls')),
-    path('diario', include('app_cc.urls')),
-
-
-    #Professor patterns
-    path('turmas', include('app_cc.urls')),
-    path('calendariop', include('app_cc.urls')),
-    path('avisosp', include('app_cc.urls')),
-    path('perfilp', include('app_cc.urls')),
-    path('frequenciap', include('app_cc.urls')),
-    path('diariop', include('app_cc.urls')),
-
-    
-
-#Login
-path("accounts/", include("django.contrib.auth.urls")),  # new
-
-
-
     
 ]
