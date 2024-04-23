@@ -19,29 +19,45 @@ crossorigin="anonymous"></script>
 <!------------------------------------------------------------------------------------------------------------------------>
 
 <body class="custom-bg">
-  <div style="text-align: center; padding-top: 12%;"><img src="{% static 'images/white-cesar.png' %}"  alt="logo cesar"></div>
+  <div style="text-align: center;"><img src="{% static 'images/white-cesar.png' %}"  alt="logo cesar"></div>
+  <br><br>
+  
   <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
     <form method="POST" action="{% url 'login' %}" style="width: 300px; background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px;margin-top: -20%;" >
       {% csrf_token %}
       <div class="mb-3">
         <label class="form-label">Usuário</label>
-        <input type="text" class="form-control" name="username" 
+        <input type="text" class="form-control" name="username" required
           placeholder="Digite o nome de usuário">
         <div class="form-text">Ex. Ricardo Costa</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Senha</label>
-        <input type="password" class="form-control"  name="senha" placeholder="Digite a senha">
+        <input type="password" class="form-control"  name="senha" placeholder="Digite a senha"  required>
       </div>
 
      
       <input type="submit" class="btn btn-primary" value="Entrar">
+      <br>
+        Ainda não tem uma conta? <a href="{% url 'cadastro' %}"> Registrar-se</a>
+        <br>
+        <br>
+        {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'success' %}
+            <div class="alert alert-success" role="alert">{{ message }}</div> <!-- Exibe alerta verde -->
+          {% else %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div> <!-- Exibe alerta vermelho -->
+        
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     </form>
-  </div>
 
+  </div>
   
-    <a href="{% url 'cadastro' %}">Ainda não tem uma conta?Registrar-se</a>
+  
 
 </body>
 
