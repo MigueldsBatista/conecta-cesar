@@ -16,6 +16,7 @@ class Turma(models.Model):
     def obter_disciplinas(self):
         return self.disciplinas.all()  # Retorna todas as disciplinas associadas a esta turma
 
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Modelo para Professores
 class Professor(models.Model):
@@ -28,6 +29,7 @@ class Professor(models.Model):
     def disciplinas(self):
         return Disciplina.objects.filter(professor=self)
 
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Modelo para Disciplinas
 class Disciplina(models.Model):
@@ -38,6 +40,7 @@ class Disciplina(models.Model):
     def __str__(self):
         return self.nome
 
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # Modelo para Alunos
 class Aluno(models.Model):
@@ -50,6 +53,7 @@ class Aluno(models.Model):
     # Filtro para disciplinas da turma deste aluno
     def disciplinas(self):
         return self.turma.obter_disciplinas()  # Obtém as disciplinas associadas à turma do aluno
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 # Modelo para Notas
@@ -60,6 +64,7 @@ class Nota(models.Model):
 
     def __str__(self):
         return f"{self.aluno.usuario.username} - {self.disciplina.nome}: {self.valor}"
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 class Diario(models.Model):
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='diarios', null=True)
@@ -69,3 +74,4 @@ class Diario(models.Model):
 
     def __str__(self):
         return f"{self.disciplina.nome} - {self.titulo}"
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

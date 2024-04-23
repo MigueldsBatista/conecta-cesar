@@ -1,33 +1,34 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as django_login
+from django.contrib.auth import authenticate, login as django_login#para evitar conflito
 from rolepermissions.roles import assign_role
 from rolepermissions.checkers import has_role
 from project_cc.roles import Aluno, Professor
 from django.contrib import messages
-
-  # Importando a função login do Django para evitar conflito
+  
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 def cadastro(request):
     if request.method == 'GET':
         return render(request, 'cadastro.html')
     else:
-        username = request.POST.get('username')
-        email = request.POST.get('email')
+        user_name = request.POST.get('username')
+        user_email = request.POST.get('email')
         senha = request.POST.get('senha')
         user_type = request.POST.get('user_type')
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
         # Verifica se já existe um usuário com esse nome
-        if User.objects.filter(username=username).exists():
+        if User.objects.filter(username=user_name).exists():#username(do django)=user_name(nossa variável)
             messages.error(request, "Já existe um usuário com esse nome")
             return redirect("cadastro")  # Redireciona para a mesma página
 
         # Se não existe, cria o usuário
-        user = User.objects.create_user(username=username, email=email, password=senha)
+        user = User.objects.create_user(username=user_name, email=user_email, password=senha)
 
         if user_type == 'professor':
-            assign_role(user, Professor)
+            assign_role(user, Professor)#delega papel professor e aluno
         elif user_type == 'aluno':
             assign_role(user, Aluno)
         else:
@@ -38,16 +39,17 @@ def cadastro(request):
         messages.success(request, "Usuário cadastrado com sucesso. Agora faça login.")
         return redirect("login")  # Redireciona para a página de login
 
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 # View para o login
 def login(request):
     if request.method == 'GET':
         return render(request, 'login.html')
     else:
-        username = request.POST.get('username')  # Capturando username
+        user_name = request.POST.get('username')  # Capturando username
         senha = request.POST.get('senha')  # Capturando senha
         
-        user = authenticate(username=username, password=senha)
+        user = authenticate(username=user_name, password=senha)#username(do django)=user_name(nossa variável)
         if user:
             django_login(request, user)
         
@@ -62,6 +64,10 @@ def login(request):
         else:
             messages.error(request, "Usuário ou senha incorretos. Por favor, tente novamente.")
             return redirect("login")  # Redireciona para a página de login
+        
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#TESTE
+        
 def plataforma(request):
     if request.user.is_authenticated:  # Corrigido erro de digitação
         return request('content.html')
