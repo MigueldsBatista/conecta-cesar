@@ -8,6 +8,7 @@ from rolepermissions.decorators import has_role_decorator
 from rolepermissions.decorators import has_permission_decorator
 from project_cc.roles import Professor, Aluno
 
+
 # Register
  
 

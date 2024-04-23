@@ -7,7 +7,6 @@ from rolepermissions.checkers import has_role
 from project_cc.roles import Aluno, Professor
   # Importando a função login do Django para evitar conflito
 
-# Create your views here.
 
 def index(request):
     return render(request, 'index.html')
@@ -54,7 +53,7 @@ def login(request):
     else:
         username = request.POST.get('username')  # Capturando username
         senha = request.POST.get('senha')  # Capturando senha
-
+        
         user = authenticate(username=username, password=senha)
         if user:
             django_login(request, user)
@@ -70,6 +69,7 @@ def login(request):
         else:
             return HttpResponse('Usuário ou senha inválidos')
         
+
 def plataforma(request):
     if request.user.is_authenticated:  # Corrigido erro de digitação
         return request('content.html')
