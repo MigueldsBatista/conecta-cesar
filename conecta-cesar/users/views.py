@@ -57,7 +57,7 @@ def login(request):
                 return render(request, "app_cc/professor/avisosp.html")  # URL da página do professor
             
             elif has_role(user, Aluno):
-                return redirect("app_cc/aluno/avisos.html")  # URL da página do aluno
+                return render(request, "app_cc/aluno/avisos.html")  # URL da página do aluno
             else:
                 messages.error(request, "O usuário não tem um papel definido.")
                 return redirect("login")  # Volta para a página de login
