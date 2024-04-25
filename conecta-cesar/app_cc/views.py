@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from django.contrib import messages
-from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from .models import Disciplina, Nota, Diario
 from rolepermissions.decorators import has_role_decorator
 from rolepermissions.decorators import has_permission_decorator
@@ -60,7 +57,7 @@ def diario(request):
 
 @has_role_decorator(Aluno)
 def calendario(request):
-    return render('app/cc/aluno/calendario.html')
+    return render('app_cc/aluno/calendario.html')
 
 #----------------------------------------------------------------------------------------------------------------    
 #----------------------------------------PROFESSOR VIEWS---------------------------------------------------------  
