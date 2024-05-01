@@ -1,10 +1,9 @@
 {% extends "app_cc/professor/mainp.html" %}
 
 {% block content %}
-
 <div class="container">
     <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
-    <form method="post" action="{%url 'boletimp' %}">
+    <form method="post" action="{% url 'boletimp' %}">
         {% csrf_token %}
         <table class="table">
             <thead>
@@ -14,32 +13,33 @@
                     <th>Aluno</th>
                     <th>RA</th>
                     <th>Nota</th>
-                    <th> Editar Nota</th>
+                    <th>Editar Nota</th>
                 </tr>
             </thead>
             <tbody>
-            {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
-            {% for turma in disciplina_info.turmas %}
-            {% for aluno_info in disciplina_info.alunos_com_notas %}
-            {% if aluno_info.turma == turma %}
-                <tr>
-                    <td>{{ disciplina_info.disciplina.nome }}</td>
-                    <td>{{ turma.nome }}</td>
-                    <td>{{ aluno_info.aluno.usuario.username }}</td>
-                    <td>{{ aluno_info.aluno.ra }}</td>
-                    <td>{{ aluno_info.nota }}</td> <!-- Exibir a nota associada -->
-                    <td>
-                        <input type="number" name="notas[{{ aluno_info.aluno.usuario.username }}-{{ turma.id }}]" min="0" max="10" step="0.1" value="{{ aluno_info.nota }}">
-                    </td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}
-{% endfor %}
+                {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
+                    {% for turma in disciplina_info.turmas %}
+                        {% for aluno_info in disciplina_info.alunos_com_notas %}
+                            {% if aluno_info.turma == turma %}
+                                <tr>
+                                    <td>{{ disciplina_info.disciplina.nome }}</td>
+                                    <td>{{ turma.nome }}</td>
+                                    <td>{{ aluno_info.aluno.usuario.username }}</td>
+                                    <td>{{ aluno_info.aluno.ra }}</td>
+                                    <td>{{ aluno_info.nota }}</td> <!-- Exibir a nota associada -->
+                                    <td>
+                                        <!-- Chave única para cada aluno-turma-disciplina -->
+                                        <input type="number" name="notas[{{ aluno_info.aluno.usuario.username }}-{{ turma.id }}-{{ disciplina_info.disciplina.id }}]" 
+                                               min="0" max="10" step="0.1" value="{{ aluno_info.nota }}">
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
             </tbody>
         </table>
         <button type="submit" class="btn-custom btn-save">Salvar</button>
     </form>
 </div>
-<a href='{%url 'boletimp'%}'>
-{% endblock content %}
+{% endblock %}

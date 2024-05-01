@@ -343,12 +343,13 @@ def avisosp(request):
 @has_role_or_redirect(Professor)
 def boletimp(request):
     disciplinas = Disciplina.objects.filter(professor__usuario=request.user)
+
     if request.method == "POST":
         for disciplina in disciplinas:
-            turmas = disciplina.turmas.all()
-            for turma in turmas:
+            for turma in disciplina.turmas.all():
                 for aluno in AlunoModel.objects.filter(turma=turma):
-                    nota_key = f"notas[{aluno.usuario.username}-{turma.id}]"
+                    # Cria a chave de nota única para cada aluno-disciplina-turma
+                    nota_key = f"notas[{aluno.usuario.username}-{turma.id}-{disciplina.id}]"
                     nota_value = request.POST.get(nota_key)
 
                     if nota_value:
@@ -369,20 +370,22 @@ def boletimp(request):
                             messages.error(request, "Valor inválido para nota.")
                             return redirect("boletimp")
 
-    # Aqui, criamos uma estrutura que inclui as notas associadas a cada aluno
+    # Estrutura para disciplinas, turmas e alunos, com notas
     disciplinas_com_turmas_e_alunos = []
+
     for disciplina in disciplinas:
         disciplina_info = {
             'disciplina': disciplina,
             'turmas': disciplina.turmas.all(),
-            'alunos_com_notas': []  # Lista para armazenar alunos e suas notas
+            'alunos_com_notas': []
         }
 
         for turma in disciplina_info['turmas']:
             alunos_na_turma = AlunoModel.objects.filter(turma=turma)
             for aluno in alunos_na_turma:
-                nota = Nota.objects.filter(disciplina=disciplina, aluno=aluno).first()  # Nota associada
-                nota_valor = nota.valor if nota else 0  # Se não houver nota, usar 0
+                nota = Nota.objects.filter(disciplina=disciplina, aluno=aluno).first()
+                nota_valor = nota.valor if nota else 0
+
                 disciplina_info['alunos_com_notas'].append({
                     'aluno': aluno,
                     'turma': turma,
