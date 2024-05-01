@@ -24,23 +24,18 @@ describe('Test Suite for Multiple User Types', () => {
     cy.get(':nth-child(2) > .form-control').type(randomName); // Reutiliza o mesmo nome
     cy.get(':nth-child(3) > .form-control').type('123');
     cy.get('.btn').click();
-    cy.get('.navbar-toggler').click()  
-    cy.get('.navbar-nav > :nth-child(1) > .nav-link').click()
-    cy.get('.navbar-toggler').click() 
-    cy.get('.dropdown > .nav-link').click()
-    cy.get(':nth-child(1) > .dropdown-item').click()
-    cy.get('.navbar-toggler').click() 
-    cy.get('.dropdown > .nav-link').click()
-    cy.get(':nth-child(2) > .dropdown-item').click() 
-    cy.get('.navbar-toggler').click() 
-    cy.get(':nth-child(4) > .nav-link').click()
-    cy.get('.navbar-toggler').click()
-    cy.get(':nth-child(5) > .nav-link').click()
-
-
-
-    //Dentro da página do admin
- 
+    cy.get('.navbar-toggler').click()//Clica na barra de navegação
+    cy.get('.navbar-nav > :nth-child(1) > .nav-link').click()//Clica em Home
+    cy.get('.navbar-toggler').click() //Clica na barra de navegação
+    cy.get('.dropdown > .nav-link').click()//Clica em Turmas
+    cy.get(':nth-child(1) > .dropdown-item').click() //Clica em disciplinas
+    cy.get('.navbar-toggler').click() //Clica na barra de navegação
+    cy.get('.dropdown > .nav-link').click()//Clica em Turmas
+    cy.get(':nth-child(2) > .dropdown-item').click() //Clica em frequencia
+    cy.get('.navbar-toggler').click() //clica na navbar
+    cy.get(':nth-child(4) > .nav-link').click()//clica em perfil
+    cy.get('.navbar-toggler').click()//clica na navbar
+    cy.get(':nth-child(5) > .nav-link').click() //clica no diario
   });
 
 
