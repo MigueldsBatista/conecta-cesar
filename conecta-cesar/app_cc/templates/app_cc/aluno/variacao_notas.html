@@ -1,0 +1,31 @@
+{%extends 'app_cc/aluno/main.html'%}
+{% block content %}
+   <style>    .bar-container {
+    width: 100%;  /* Largura total */
+    padding: 10px;  /* Espaçamento */
+    background-color: #f0f0f0;  /* Cor de fundo */
+    border: 1px solid #ccc;  /* Borda ao redor */
+}
+
+.bar {
+    height: 20px;  /* Altura das barras */
+    background-color: #3498db;  /* Cor das barras */
+    margin-bottom: 10px;  /* Espaço entre barras */
+    text-align: right;  /* Alinhamento do texto */
+    color: white;  /* Cor do texto */
+    padding-right: 10px;  /* Espaço para o texto */
+}
+</style>
+    <div class="container mt-4">  <!-- Espaçamento no topo -->
+        <h1 class="text-center">Variação das Notas</h1>  <!-- Título da página -->
+        <div class="bar-container">  <!-- Contêiner para as barras -->
+            {% for disciplina_info in disciplinas_com_notas %}
+                <!-- Barra proporcional ao valor da nota -->
+                <div class="bar" style="width: {{ disciplina_info.largura }}%;">  <!-- Largura com valor mínimo -->
+                    {{ disciplina_info.disciplina }} - {{ disciplina_info.nota }}  <!-- Exibir disciplina e nota -->
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock content %}
+    

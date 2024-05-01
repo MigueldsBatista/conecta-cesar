@@ -127,6 +127,37 @@ def frequencia(request):
     return render(request, 'app_cc/aluno/frequencia.html', context)
 #---------------------------------------------------------------------------------------------------------------- 
    
+
+@has_role_or_redirect(Aluno) 
+def variacao_notas(request):
+    try:
+        aluno = AlunoModel.objects.get(usuario=request.user)
+    except AlunoModel.DoesNotExist:
+        aluno = None
+
+    disciplinas_com_notas = []
+
+    if aluno and aluno.turma:
+        disciplinas = aluno.turma.disciplinas.all()
+
+        for disciplina in disciplinas:
+            nota_instance = Nota.objects.filter(aluno=aluno, disciplina=disciplina).first()
+            nota = nota_instance.valor if nota_instance else 0
+
+            # Calcular a largura das barras
+            largura = max(nota * 10, 2)  # Largura mínima de 2% para notas zero
+
+            disciplinas_com_notas.append({
+                'disciplina': disciplina.nome,
+                'nota': nota,
+                'largura': largura
+            })
+
+    return render(request, 'app_cc/aluno/variacao_notas.html', {
+        'disciplinas_com_notas': disciplinas_com_notas
+    })
+#---------------------------------------------------------------------------------------------------------------- 
+
 @has_role_or_redirect(Aluno)
 def perfil(request):
     try:
