@@ -1,82 +1,24 @@
 {% extends "app_cc/aluno/main.html" %}
 
-
 {% block content %}
-  
-
-  <!-- Adicionando blocos de aluno -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div class="card" style="margin: 20px 0;">
-          <div class="card-header">DISCIPLINA 1</div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FALTA
-              <span class="badge bg-warning rounded-pill">2</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FREQUÊNCIA
-              <span class="badge bg-warning rounded-pill" id="frequencia1">95.8%</span>
-            </li>	 
-          </ul>
-        </div>  
-        <div class="card" style="margin: 20px 0;">
-          <div class="card-header">DISCIPLINA 2</div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FALTA
-              <span class="badge bg-warning rounded-pill">3</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FREQUÊNCIA
-              <span class="badge bg-warning rounded-pill" id="frequencia2">90%</span>
-            </li>	 
-          </ul>
-        </div>  
-
-        <div class="card" style="margin: 20px 0;">
-          <div class="card-header">DISCIPLINA 3</div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FALTA
-              <span class="badge bg-warning rounded-pill">1</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FREQUÊNCIA
-              <span class="badge bg-warning rounded-pill" id="frequencia3">98.5%</span>
-            </li>	 
-          </ul>
-        </div>  
-
-        <div class="card" style="margin: 20px 0;">
-          <div class="card-header">DISCIPLINA 4</div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FALTA
-              <span class="badge bg-warning rounded-pill">0</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FREQUÊNCIA
-              <span class="badge bg-warning rounded-pill" id="frequencia4">100%</span>
-            </li>	 
-          </ul>
-        </div>  
-
-        <div class="card" style="margin: 20px 0;">
-          <div class="card-header">DISCIPLINA 5</div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FALTA
-              <span class="badge bg-warning rounded-pill">0</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              FREQUÊNCIA
-              <span class="badge bg-warning rounded-pill" id="frequencia5">100%</span>
-            </li>	 
-          </ul>
-        </div>  
+<div class="container mt-4">  <!-- Adicionando espaço no topo -->
+  <h2 class="text-center">Faltas e Frequência</h2>  <!-- Título centralizado -->
+  {% for disciplina_info in disciplinas_com_faltas %}
+    <div class="card mb-4">  <!-- Usando Cards para cada disciplina -->
+      <div class="card-header bg-info text-white">Disciplina: {{ disciplina_info.disciplina.nome }}</div>  <!-- Cabeçalho com cor -->
+      <div class="card-body">  <!-- Corpo do Card -->
+        <ul class="list-group list-group-flush">  <!-- List Group para alinhamento -->
+          <li class="list-group-item d-flex justify-content-between align-items-center">  <!-- Espaçamento entre elementos -->
+            Faltas
+            <span class="badge bg-danger rounded-pill">{{ disciplina_info.faltas }}</span>  <!-- Total de faltas -->
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">  <!-- Frequência -->
+            Frequência
+            <span class="badge bg-success rounded-pill">{{ disciplina_info.frequencia|floatformat:1 }}%</span>  <!-- Frequência percentual -->
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
+  {% endfor %}
+</div>
 {% endblock content %}

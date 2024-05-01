@@ -73,7 +73,34 @@ def boletim(request):
 #----------------------------------------------------------------------------------------------------------------   
 @has_role_or_redirect(Aluno) 
 def frequencia(request):
-    return render(request, 'app_cc/aluno/frequencia.html')
+    # Obter o aluno atual
+    aluno = request.user.aluno
+
+    # Obter disciplinas associadas à turma do aluno
+    disciplinas = aluno.turma.disciplinas.all()
+
+    disciplinas_com_faltas = []
+
+    # Para cada disciplina, conte as faltas do aluno
+    for disciplina in disciplinas:
+        # Encontrar todas as faltas para esta disciplina
+        faltas = Falta.objects.filter(aluno=aluno).count()
+
+        # Supondo que cada disciplina tenha um número fixo de aulas no semestre
+        total_de_aulas = 15  # Defina o número total de aulas para a disciplina
+        frequencia = 100 * (1 - (faltas / total_de_aulas))  # Calcular a frequência percentual
+
+        disciplinas_com_faltas.append({
+            'disciplina': disciplina,
+            'faltas': faltas,
+            'frequencia': frequencia
+        })
+
+    return render(
+        request,
+        'app_cc/aluno/frequencia.html',
+        {'disciplinas_com_faltas': disciplinas_com_faltas}
+    )
 #---------------------------------------------------------------------------------------------------------------- 
    
 @has_role_or_redirect(Aluno)
@@ -133,37 +160,38 @@ def perfilp(request):
 
     return render(request, 'app_cc/professor/perfilp.html', context)
 #----------------------------------------------------------------------------------------------------------------    
-
 @has_role_or_redirect(Professor)
 def frequenciap(request):
-    # Pegue o professor atual
     professor = request.user.professor
-    # Obtenha as disciplinas associadas ao professor
     disciplinas = Disciplina.objects.filter(professor=professor)
     hoje = date.today()
 
     if request.method == "POST":
-        # Para cada disciplina, turma e aluno, verifique se uma falta foi marcada
+        # Colete todas as faltas que deveriam existir após o POST
+        faltas_depois_do_post = set(request.POST.keys())
+        
+        # Para cada disciplina, turma e aluno, verifique se a falta deve ser adicionada ou removida
         for disciplina in disciplinas:
             for turma in disciplina.turmas.all():
                 for aluno in AlunoModel.objects.filter(turma=turma):
                     falta_key = f"falta[{aluno.id}]"
-                    falta_value = request.POST.get(falta_key)
 
-                    if falta_value:
-                        # Verifique se a falta já foi registrada para a data de hoje
+                    # Se o checkbox está marcado, adicionar a falta
+                    if falta_key in faltas_depois_do_post:
                         if not Falta.objects.filter(aluno=aluno, data=hoje).exists():
                             Falta.objects.create(aluno=aluno, data=hoje)
+                    # Se o checkbox está desmarcado, remover a falta se ela existir
+                    else:
+                        Falta.objects.filter(aluno=aluno, data=hoje).delete()
 
-    # Criar estrutura para disciplinas, turmas e alunos, com faltas marcadas
+    # Estrutura para disciplinas, turmas e alunos, com totais de faltas
     disciplinas_com_turmas_e_alunos = []
     for disciplina in disciplinas:
         disciplina_info = {
             'disciplina': disciplina,
-            'turmas': []  # Lista para armazenar as turmas e alunos associados
+            'turmas': []
         }
 
-        # Para cada turma, adicione os alunos e indique se têm falta hoje
         for turma in disciplina.turmas.all():
             alunos_na_turma = AlunoModel.objects.filter(turma=turma)
             turma_info = {
@@ -171,12 +199,13 @@ def frequenciap(request):
                 'alunos': []
             }
 
-            # Adiciona alunos à turma, indicando se já têm falta hoje
             for aluno in alunos_na_turma:
+                total_faltas = Falta.objects.filter(aluno=aluno).count()
                 tem_falta_hoje = Falta.objects.filter(aluno=aluno, data=hoje).exists()
                 aluno_info = {
                     'aluno': aluno,
                     'turma': turma,
+                    'total_faltas': total_faltas,
                     'tem_falta_hoje': tem_falta_hoje
                 }
                 turma_info['alunos'].append(aluno_info)
@@ -191,8 +220,6 @@ def frequenciap(request):
         'app_cc/professor/frequenciap.html',
         {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
     )
-      
-        
 #----------------------------------------------------------------------------------------------------------------    
 
 @has_role_or_redirect(Professor)

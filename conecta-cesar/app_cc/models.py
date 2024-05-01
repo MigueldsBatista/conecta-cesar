@@ -85,6 +85,6 @@ class Falta(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name='faltas')
     data = models.DateField()
     justificada = models.BooleanField(default=False)
-
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='faltas', null=True)  # Relacionamento com Disciplina
     def __str__(self):
         return f"Falta de {self.aluno.usuario.username} em {self.data}"
