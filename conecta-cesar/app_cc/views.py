@@ -1,32 +1,36 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Turma, Falta
-from rolepermissions.decorators import has_role
-from functools import wraps
+from django.urls import reverse
+from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta
+from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
 from datetime import date
+from functools import wraps
 
-
-
-
-# Register
- 
-def has_role_or_redirect(role):
+def has_role_or_redirect(required_role):
     def decorator(view_func):
         @wraps(view_func)
         def _wrapped_view(request, *args, **kwargs):
+            # Verificar se o usuário está autenticado
             if not request.user.is_authenticated:
                 messages.error(request, "Você precisa fazer login para acessar esta página.")
-                return redirect("login")
-            elif not has_role(request.user, role):
-                messages.error(request, "Permissão negada. Você não tem autorização para acessar esta página.")
-                return redirect("login")  # Redirecionar para uma página apropriada
+                return redirect(reverse("login"))  # Redireciona para a página de login
+            
+            # Verificar se o usuário é administrador (superuser)
+            if request.user.is_superuser:
+                messages.error(request, "Administradores não têm acesso a esta página.")
+                return redirect(reverse("login"))  # Redireciona para a página de login com mensagem de erro
+            
+            # Verificar se o usuário tem o papel necessário
+            if not has_role(request.user, required_role):
+                messages.error(request, f"Permissão negada. Você precisa ser '{required_role.__name__}' para acessar esta página.")
+                return redirect(reverse("login"))  # Redireciona para a página de login com mensagem de erro
+            
+            # Se o usuário está autenticado e tem o papel correto, permite o acesso à view
             return view_func(request, *args, **kwargs)
+        
         return _wrapped_view
     return decorator
-
-
 # -----------------STUDENT VIEWS--------------------------------------------
 @has_role_or_redirect(Aluno)
 def avisos(request):
