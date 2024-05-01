@@ -13,7 +13,7 @@ describe('Test Suite for Multiple User Types', () => {
   });
 
 
-  it('Register as Admin', () => {
+  it('Register as Professor', () => {
     cy.visit('');
     cy.get('a').click();
     cy.get('[type="text"]').type(randomName); // Usa o nome gerado
@@ -24,6 +24,19 @@ describe('Test Suite for Multiple User Types', () => {
     cy.get(':nth-child(2) > .form-control').type(randomName); // Reutiliza o mesmo nome
     cy.get(':nth-child(3) > .form-control').type('123');
     cy.get('.btn').click();
+    cy.get('.navbar-toggler').click()  
+    cy.get('.navbar-nav > :nth-child(1) > .nav-link').click()
+    cy.get('.navbar-toggler').click() 
+    cy.get('.dropdown > .nav-link').click()
+    cy.get(':nth-child(1) > .dropdown-item').click()
+    cy.get('.navbar-toggler').click() 
+    cy.get('.dropdown > .nav-link').click()
+    cy.get(':nth-child(2) > .dropdown-item').click() 
+    cy.get('.navbar-toggler').click() 
+    cy.get(':nth-child(4) > .nav-link').click()
+    cy.get('.navbar-toggler').click()
+    cy.get(':nth-child(5) > .nav-link').click()
+
 
 
     //Dentro da página do admin
@@ -31,7 +44,7 @@ describe('Test Suite for Multiple User Types', () => {
   });
 
 
-  it('Register as Collector', () => {
+  it('Register as Student', () => {
     cy.visit('/');
     cy.get('a').click();
     cy.get('[type="text"]').type(randomName); // Usa o nome gerado
@@ -44,9 +57,6 @@ describe('Test Suite for Multiple User Types', () => {
     cy.get(':nth-child(3) > .form-control').type('123');
     cy.get('.btn').click();
     //Dentro da página do coletor
-    cy.get('p > .btn')
-    cy.get('#localizacao_atual').type(randomAdress)
-    cy.get('.mt-3 > .btn').click()
 
   });
 });

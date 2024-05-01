@@ -49,58 +49,82 @@ def disciplinas_e_notas(request):
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Aluno)
 def boletim(request):
-    # Obter o aluno associado ao usuário autenticado
-    aluno = AlunoModel.objects.get(usuario=request.user)
+    try:
+        # Obter o aluno associado ao usuário autenticado
+        aluno = AlunoModel.objects.get(usuario=request.user)
+    except AlunoModel.DoesNotExist:
+        aluno = None
 
-    # Obter todas as disciplinas associadas à turma do aluno
-    disciplinas = aluno.turma.disciplinas.all()
+    if aluno and aluno.turma:
+        # Obter todas as disciplinas associadas à turma do aluno
+        disciplinas = aluno.turma.disciplinas.all()
 
-    # Crie uma lista para armazenar as disciplinas e suas notas
-    disciplinas_com_notas = []
+        # Crie uma lista para armazenar as disciplinas e suas notas
+        disciplinas_com_notas = []
 
-    for disciplina in disciplinas:
-        # Tentar obter a nota para a disciplina
-        try:
-            nota_instance = Nota.objects.get(disciplina=disciplina, aluno=aluno)
-        except Nota.DoesNotExist:
-            nota_instance = None
+        for disciplina in disciplinas:
+            # Tentar obter a nota para a disciplina
+            try:
+                nota_instance = Nota.objects.get(disciplina=disciplina, aluno=aluno)
+            except Nota.DoesNotExist:
+                nota_instance = None
 
-        # Adicionar disciplina e nota à lista
-        disciplinas_com_notas.append((disciplina.nome, nota_instance))
+            # Adicionar disciplina e nota à lista
+            disciplinas_com_notas.append((disciplina.nome, nota_instance))
 
-    # Renderize o template com as disciplinas e notas associadas
-    return render(request, 'app_cc/aluno/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
+        context = {
+            'disciplinas_com_notas': disciplinas_com_notas
+        }
+    else:
+        context = {
+            'error': 'Turma ou disciplinas não encontradas para o aluno.'  # Caso de erro
+        }
+
+    return render(request, 'app_cc/aluno/boletim.html', context)
 #----------------------------------------------------------------------------------------------------------------   
 @has_role_or_redirect(Aluno) 
 def frequencia(request):
-    # Obter o aluno atual
-    aluno = request.user.aluno
+    try:
+        # Obter o aluno associado ao usuário autenticado
+        aluno = request.user.aluno
+    except AlunoModel.DoesNotExist:
+        aluno = None
 
-    # Obter disciplinas associadas à turma do aluno
-    disciplinas = aluno.turma.disciplinas.all()
+    if aluno and aluno.turma:
+        # Obter disciplinas associadas à turma do aluno
+        disciplinas = aluno.turma.disciplinas.all()
 
-    disciplinas_com_faltas = []
+        if disciplinas:
+            disciplinas_com_faltas = []
 
-    # Para cada disciplina, conte as faltas do aluno
-    for disciplina in disciplinas:
-        # Encontrar todas as faltas para esta disciplina
-        faltas = Falta.objects.filter(aluno=aluno).count()
+            # Para cada disciplina, conte as faltas do aluno
+            for disciplina in disciplinas:
+                # Encontrar todas as faltas para esta disciplina
+                faltas = Falta.objects.filter(aluno=aluno).count()
 
-        # Supondo que cada disciplina tenha um número fixo de aulas no semestre
-        total_de_aulas = 15  # Defina o número total de aulas para a disciplina
-        frequencia = 100 * (1 - (faltas / total_de_aulas))  # Calcular a frequência percentual
+                # Supondo um número fixo de aulas por disciplina
+                total_de_aulas = 15  # Valor ajustável
+                frequencia = 100 * (1 - (faltas / total_de_aulas))  # Calcular a frequência
 
-        disciplinas_com_faltas.append({
-            'disciplina': disciplina,
-            'faltas': faltas,
-            'frequencia': frequencia
-        })
+                disciplinas_com_faltas.append({
+                    'disciplina': disciplina,
+                    'faltas': faltas,
+                    'frequencia': frequencia
+                })
 
-    return render(
-        request,
-        'app_cc/aluno/frequencia.html',
-        {'disciplinas_com_faltas': disciplinas_com_faltas}
-    )
+            context = {
+                'disciplinas_com_faltas': disciplinas_com_faltas
+            }
+        else:
+            context = {
+                'error': 'Nenhuma disciplina encontrada para sua turma.'  # Caso de erro
+            }
+    else:
+        context = {
+            'error': 'Turma não encontrada para o aluno.'  # Caso de erro
+        }
+
+    return render(request, 'app_cc/aluno/frequencia.html', context)
 #---------------------------------------------------------------------------------------------------------------- 
    
 @has_role_or_redirect(Aluno)
@@ -124,15 +148,34 @@ def perfil(request):
 
 @has_role_or_redirect(Aluno)
 def diario(request):
-    # Obtém todos os diários salvos
-    diarios = Diario.objects.all()
-    # Renderiza o template 'app_cc/diario.html' passando os diários para o contexto
-    return render(request, 'app_cc/aluno/diario.html', {'diarios': diarios})
+    try:
+        # Obter o aluno associado ao usuário autenticado
+        aluno = AlunoModel.objects.get(usuario=request.user)
+    except AlunoModel.DoesNotExist:
+        aluno = None
+
+    if aluno and aluno.turma:
+        # Obter disciplinas associadas à turma do aluno
+        disciplinas = aluno.turma.disciplinas.all()
+
+        # Obter diários associados às disciplinas do aluno
+        diarios = Diario.objects.filter(disciplina__in=disciplinas)
+
+        context = {
+            'diarios': diarios,
+            'disciplinas': disciplinas
+        }
+    else:
+        context = {
+            'error': 'Turma não encontrada ou sem disciplinas associadas.'  # Caso de erro
+        }
+
+    return render(request, 'app_cc/aluno/diario.html', context)
 
 
 @has_role_or_redirect(Aluno)
 def calendario(request):
-    return render('app_cc/aluno/calendario.html')
+    return render(request, 'app_cc/aluno/calendario.html')
 
 #----------------------------------------------------------------------------------------------------------------    
 #----------------------------------------PROFESSOR VIEWS---------------------------------------------------------  
@@ -229,15 +272,37 @@ def calendariop(request):
 
 @has_role_or_redirect(Professor)
 def diariop(request):
+    professor = request.user.professor  # Obter o professor associado ao usuário
+
+    # Obter todas as disciplinas associadas ao professor
+    disciplinas = Disciplina.objects.filter(professor=professor)
+
     if request.method == 'POST':
-        disciplina = request.POST.get('disciplina')
+        # Obter dados do POST
+        disciplina_id = request.POST.get('disciplina')
         titulo = request.POST.get('titulo')
         texto = request.POST.get('texto')
-        Diario.objects.create(disciplina=disciplina, titulo=titulo, texto=texto)
-        return redirect('diariop')
+
+        # Verificar se a disciplina pertence ao professor
+        disciplina = Disciplina.objects.filter(id=disciplina_id, professor=professor).first()
+
+        if disciplina:
+            # Criar um novo diário para essa disciplina
+            Diario.objects.create(disciplina=disciplina, titulo=titulo, texto=texto)
+            return redirect('diariop')  # Redirecionar para a mesma página
+        else:
+            return messages.error(request, "Disciplina não permitida.")  # Caso de erro
+
     else:
-        diarios = Diario.objects.all()
-        return render(request, 'app_cc/professor/diariop.html', {'diarios': diarios})
+        # Obter todos os diários associados às disciplinas do professor
+        diarios = Diario.objects.filter(disciplina__in=disciplinas)
+
+        context = {
+            'disciplinas': disciplinas,
+            'diarios': diarios
+        }
+
+        return render(request, 'app_cc/professor/diariop.html', context)
 #----------------------------------------------------------------------------------------------------------------    
 
 @has_role_or_redirect(Professor)

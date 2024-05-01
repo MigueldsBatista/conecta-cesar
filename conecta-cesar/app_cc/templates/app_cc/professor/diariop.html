@@ -1,17 +1,15 @@
 {% extends 'app_cc/professor/mainp.html' %}
 {% block content %}
-<h1 class="titulo">DIÁRIO</h1>
-<div class="container">
-    <!-- Formulário para inserir um novo diário -->
-    <form method="post">
+<div class="container mt-4">  <!-- Adicionando espaço no topo -->
+    <h1 class="text-center">DIÁRIO</h1>  <!-- Centralizar o título -->
+    <form method="post">  <!-- Formulário para adicionar um diário -->
         {% csrf_token %}
         <div class="mb-3">
             <label for="disciplina" class="form-label">Disciplina:</label>
-            <select class="form-select" name="disciplina" id="disciplina">
-                <option value="Matemática">Matemática</option>
-                <option value="Português">Português</option>
-                <option value="História">História</option>
-                <!-- Adicione outras disciplinas conforme necessário -->
+            <select class="form-select" name="disciplina" id="disciplina" required>  <!-- Seleção de disciplinas -->
+                {% for disciplina in disciplinas %}
+                    <option value="{{ disciplina.id }}">{{ disciplina.nome }}</option>  <!-- Disciplinas do professor -->
+                {% endfor %}
             </select>
         </div>
 
@@ -25,19 +23,23 @@
             <textarea class="form-control" id="textoDiario" name="texto" rows="5" placeholder="Digite o texto do diário" required></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Enviar Diário</button>
+        <button type="submit" class="btn btn-primary">Enviar Diário</button>  <!-- Botão para enviar -->
     </form>
 
-    <!-- Exibe os diários salvos -->
-    {% if diarios %}
-    <h2>Diários Salvos:</h2>
-    <ul>
+    <!-- Exibir diários salvos -->
+    {% if diarios and diarios|length > 0 %}
+    <h2 class="mt-4">Diários Salvos:</h2>
+    <ul class="list-group">  <!-- Usar List Group para exibição -->
         {% for diario in diarios %}
-        <li>{{ diario.disciplina }} - ({{ diario.data }})<br>{{ diario.titulo }}<br>{{diario.texto}} </li>
+        <li class="list-group-item">
+            {{ diario.disciplina.nome }} - ({{ diario.data }})  <!-- Disciplina e data -->
+            <br><strong>{{ diario.titulo }}</strong>  <!-- Título do diário -->
+            <br>{{ diario.texto }}  <!-- Texto do diário -->
+        </li>
         {% endfor %}
     </ul>
     {% else %}
-    <p>Nenhum diário encontrado.</p>
+    <p class="alert alert-warning text-center">Nenhum diário encontrado.</p>  <!-- Mensagem se não houver diários -->
     {% endif %}
 </div>
 {% endblock content %}
