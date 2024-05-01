@@ -1,18 +1,18 @@
 {% extends "app_cc/aluno/main.html" %}
 
 {% block content %}
-<div class="container mt-4">  <!-- Adicionando espaço no topo -->
+<div class="container mt-4">  <!-- Espaço no topo -->
   <h2 class="text-center">Faltas e Frequência</h2>  <!-- Título centralizado -->
   {% for disciplina_info in disciplinas_com_faltas %}
-    <div class="card mb-4">  <!-- Usando Cards para cada disciplina -->
+    <div class="card mb-4">  <!-- Card para cada disciplina -->
       <div class="card-header bg-info text-white">Disciplina: {{ disciplina_info.disciplina.nome }}</div>  <!-- Cabeçalho com cor -->
       <div class="card-body">  <!-- Corpo do Card -->
-        <ul class="list-group list-group-flush">  <!-- List Group para alinhamento -->
+        <ul class="list-group list-group-flush">  <!-- Lista para formatação -->
           <li class="list-group-item d-flex justify-content-between align-items-center">  <!-- Espaçamento entre elementos -->
             Faltas
-            <span class="badge bg-danger rounded-pill">{{ disciplina_info.faltas }}</span>  <!-- Total de faltas -->
+            <span class="badge bg-danger rounded-pill">{{ disciplina_info.faltas }}</span>  <!-- Total de faltas por disciplina -->
           </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">  <!-- Frequência -->
+          <li class="list-group-item d-flex justify-content-between align-items-center">  <!-- Espaçamento para frequência -->
             Frequência
             <span class="badge bg-success rounded-pill">{{ disciplina_info.frequencia|floatformat:1 }}%</span>  <!-- Frequência percentual -->
           </li>
@@ -21,4 +21,4 @@
     </div>
   {% endfor %}
 </div>
-{% endblock content %}
+{% endblock %}

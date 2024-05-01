@@ -90,38 +90,32 @@ def frequencia(request):
     except AlunoModel.DoesNotExist:
         aluno = None
 
+    disciplinas_com_faltas = []
+
     if aluno and aluno.turma:
         # Obter disciplinas associadas à turma do aluno
         disciplinas = aluno.turma.disciplinas.all()
 
-        if disciplinas:
-            disciplinas_com_faltas = []
+        for disciplina in disciplinas:
+            # Encontrar todas as faltas do aluno para essa disciplina específica
+            faltas = Falta.objects.filter(aluno=aluno, disciplina=disciplina).count()
 
-            # Para cada disciplina, conte as faltas do aluno
-            for disciplina in disciplinas:
-                # Encontrar todas as faltas para esta disciplina
-                faltas = Falta.objects.filter(aluno=aluno).count()
+            # Supondo um número fixo de aulas por disciplina
+            total_de_aulas = 15  # Valor ajustável
+            frequencia = 100 * (1 - (faltas / total_de_aulas))  # Calcular a frequência
 
-                # Supondo um número fixo de aulas por disciplina
-                total_de_aulas = 15  # Valor ajustável
-                frequencia = 100 * (1 - (faltas / total_de_aulas))  # Calcular a frequência
+            disciplinas_com_faltas.append({
+                'disciplina': disciplina,
+                'faltas': faltas,
+                'frequencia': frequencia
+            })
 
-                disciplinas_com_faltas.append({
-                    'disciplina': disciplina,
-                    'faltas': faltas,
-                    'frequencia': frequencia
-                })
-
-            context = {
-                'disciplinas_com_faltas': disciplinas_com_faltas
-            }
-        else:
-            context = {
-                'error': 'Nenhuma disciplina encontrada para sua turma.'  # Caso de erro
-            }
+        context = {
+            'disciplinas_com_faltas': disciplinas_com_faltas
+        }
     else:
         context = {
-            'error': 'Turma não encontrada para o aluno.'  # Caso de erro
+            'error': 'Nenhuma disciplina ou turma encontrada para o aluno.'
         }
 
     return render(request, 'app_cc/aluno/frequencia.html', context)
@@ -241,25 +235,26 @@ def frequenciap(request):
     hoje = date.today()
 
     if request.method == "POST":
-        # Colete todas as faltas que deveriam existir após o POST
         faltas_depois_do_post = set(request.POST.keys())
-        
-        # Para cada disciplina, turma e aluno, verifique se a falta deve ser adicionada ou removida
+
+        # Processar faltas para cada disciplina individualmente
         for disciplina in disciplinas:
             for turma in disciplina.turmas.all():
                 for aluno in AlunoModel.objects.filter(turma=turma):
-                    falta_key = f"falta[{aluno.id}]"
+                    falta_key = f"falta[{aluno.id}-{disciplina.id}]"
 
-                    # Se o checkbox está marcado, adicionar a falta
+                    # Adicionar falta para a disciplina correta
                     if falta_key in faltas_depois_do_post:
-                        if not Falta.objects.filter(aluno=aluno, data=hoje).exists():
-                            Falta.objects.create(aluno=aluno, data=hoje)
-                    # Se o checkbox está desmarcado, remover a falta se ela existir
+                        if not Falta.objects.filter(aluno=aluno, data=hoje, disciplina=disciplina).exists():
+                            Falta.objects.create(aluno=aluno, data=hoje, disciplina=disciplina)
+
+                    # Remover falta para a disciplina correta
                     else:
-                        Falta.objects.filter(aluno=aluno, data=hoje).delete()
+                        Falta.objects.filter(aluno=aluno, data=hoje, disciplina=disciplina).delete()
 
     # Estrutura para disciplinas, turmas e alunos, com totais de faltas
     disciplinas_com_turmas_e_alunos = []
+
     for disciplina in disciplinas:
         disciplina_info = {
             'disciplina': disciplina,
@@ -267,28 +262,27 @@ def frequenciap(request):
         }
 
         for turma in disciplina.turmas.all():
-            alunos_na_turma = AlunoModel.objects.filter(turma=turma)
             turma_info = {
                 'turma': turma,
                 'alunos': []
             }
 
-            for aluno in alunos_na_turma:
-                total_faltas = Falta.objects.filter(aluno=aluno).count()
-                tem_falta_hoje = Falta.objects.filter(aluno=aluno, data=hoje).exists()
+            for aluno in AlunoModel.objects.filter(turma=turma):
+                total_faltas = Falta.objects.filter(aluno=aluno, disciplina=disciplina).count()
+                tem_falta_hoje = Falta.objects.filter(aluno=aluno, data=hoje, disciplina=disciplina).exists()
+                
                 aluno_info = {
                     'aluno': aluno,
-                    'turma': turma,
                     'total_faltas': total_faltas,
                     'tem_falta_hoje': tem_falta_hoje
                 }
+
                 turma_info['alunos'].append(aluno_info)
 
             disciplina_info['turmas'].append(turma_info)
 
         disciplinas_com_turmas_e_alunos.append(disciplina_info)
 
-    # Renderizar o template com as disciplinas, turmas e alunos
     return render(
         request,
         'app_cc/professor/frequenciap.html',

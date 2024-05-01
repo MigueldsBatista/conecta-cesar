@@ -1,29 +1,29 @@
 {% extends "app_cc/professor/mainp.html" %}
 
 {% block content %}
-<div class="container mt-4">  <!-- Adicionando espaço no topo -->
-  <h2 class="text-center">Registrar Faltas</h2>  <!-- Título centralizado -->
+<div class="container mt-4">
+  <h2 class="text-center">Registrar Faltas</h2>
   <form method="POST">
     {% csrf_token %}
     {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
-      <div class="card mb-4">  <!-- Card para cada disciplina -->
-        <div class="card-header bg-primary text-white">Disciplina: {{ disciplina_info.disciplina.nome }}</div>  <!-- Cabeçalho com cor -->
-        <div class="card-body">  <!-- Corpo do Card -->
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">Disciplina: {{ disciplina_info.disciplina.nome }}</div>
+        <div class="card-body">
           {% for turma_info in disciplina_info.turmas %}
-            <h4 class="card-title">Turma: {{ turma_info.turma.nome }}</h4>  <!-- Estilo do título -->
+            <h4 class="card-title">Turma: {{ turma_info.turma.nome }}</h4>
             {% for aluno_info in turma_info.alunos %}
-              <div class="card mb-2">  <!-- Novo Card para cada aluno -->
-                <div class="card-header">Aluno: {{ aluno_info.aluno.usuario.username }}</div>  <!-- Nome do aluno -->
-                <ul class="list-group list-group-flush">  <!-- List Group para alinhamento -->
+              <div class="card mb-2">
+                <div class="card-header">Aluno: {{ aluno_info.aluno.usuario.username }}</div>
+                <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <!-- CheckBox para marcar falta -->
                     <div>
-                      Marcar Falta 
-                      <input type="checkbox" name="falta[{{ aluno_info.aluno.id }}]" 
-                      {% if aluno_info.tem_falta_hoje %} checked {% endif %}>
+                      Marcar Falta
+                      <input type="checkbox" name="falta[{{ aluno_info.aluno.id }}-{{ disciplina_info.disciplina.id }}]" 
+                        {% if aluno_info.tem_falta_hoje %} checked {% endif %}>
                     </div>
-                    <!-- Total de faltas -->
-                    <span class="badge bg-danger rounded-pill">{{ aluno_info.total_faltas }}</span>  <!-- Mostrar total de faltas -->
+                    <!-- Total de faltas para a disciplina -->
+                    <span class="badge bg-danger rounded-pill">{{ aluno_info.total_faltas }}</span>
                   </li>
                 </ul>
               </div>
@@ -33,9 +33,9 @@
       </div>
     {% endfor %}
     <!-- Botão para enviar o formulário -->
-    <div class="text-center mt-4">  <!-- Adicionando espaço entre cards e botão -->
-      <button type="submit" class="btn btn-primary">Registrar Faltas</button>  <!-- Botão com estilo -->
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary">Registrar Faltas</button>
     </div>
   </form>
 </div>
-{% endblock content %}
+{% endblock %}
