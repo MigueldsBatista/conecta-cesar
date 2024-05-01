@@ -1,20 +1,39 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Disciplina, Nota, Diario
-from rolepermissions.decorators import has_role_decorator
-from rolepermissions.decorators import has_permission_decorator
+from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Turma, Falta
+from rolepermissions.decorators import has_role
+from functools import wraps
 from project_cc.roles import Professor, Aluno
+from django.contrib import messages
+from datetime import date
+
+
 
 
 # Register
  
+def has_role_or_redirect(role):
+    def decorator(view_func):
+        @wraps(view_func)
+        def _wrapped_view(request, *args, **kwargs):
+            if not request.user.is_authenticated:
+                messages.error(request, "Você precisa fazer login para acessar esta página.")
+                return redirect("login")
+            elif not has_role(request.user, role):
+                messages.error(request, "Permissão negada. Você não tem autorização para acessar esta página.")
+                return redirect("login")  # Redirecionar para uma página apropriada
+            return view_func(request, *args, **kwargs)
+        return _wrapped_view
+    return decorator
 
-# -----------------------------------------STUDENT VIEWS--------------------------------------------
-@has_role_decorator(Aluno)
+
+# -----------------STUDENT VIEWS--------------------------------------------
+@has_role_or_redirect(Aluno)
 def avisos(request):
     return render(request, 'app_cc/aluno/avisos.html')
+
 #----------------------------------------------------------------------------------------------------------------    
-@has_role_decorator(Aluno)
+@has_role_or_redirect(Aluno)
 def disciplinas_e_notas(request):
     disciplinas_com_notas = []
     disciplinas = Disciplina.objects.all()
@@ -24,30 +43,55 @@ def disciplinas_e_notas(request):
     return render(request, 'app_cc/aluno/disciplina.html', {'disciplinas_com_notas': disciplinas_com_notas})
 
 #----------------------------------------------------------------------------------------------------------------    
-@has_role_decorator(Aluno)
+@has_role_or_redirect(Aluno)
 def boletim(request):
-    disciplinas = Disciplina.objects.all()
+    # Obter o aluno associado ao usuário autenticado
+    aluno = AlunoModel.objects.get(usuario=request.user)
+
+    # Obter todas as disciplinas associadas à turma do aluno
+    disciplinas = aluno.turma.disciplinas.all()
+
+    # Crie uma lista para armazenar as disciplinas e suas notas
     disciplinas_com_notas = []
+
     for disciplina in disciplinas:
+        # Tentar obter a nota para a disciplina
         try:
-            nota_instance = Nota.objects.get(disciplina=disciplina)
+            nota_instance = Nota.objects.get(disciplina=disciplina, aluno=aluno)
         except Nota.DoesNotExist:
             nota_instance = None
-        disciplinas_com_notas.append((disciplina, nota_instance))
+
+        # Adicionar disciplina e nota à lista
+        disciplinas_com_notas.append((disciplina.nome, nota_instance))
+
+    # Renderize o template com as disciplinas e notas associadas
     return render(request, 'app_cc/aluno/boletim.html', {'disciplinas_com_notas': disciplinas_com_notas})
 #----------------------------------------------------------------------------------------------------------------   
-@has_role_decorator(Aluno) 
+@has_role_or_redirect(Aluno) 
 def frequencia(request):
     return render(request, 'app_cc/aluno/frequencia.html')
 #---------------------------------------------------------------------------------------------------------------- 
    
-@has_role_decorator(Aluno)
+@has_role_or_redirect(Aluno)
 def perfil(request):
-    return render(request, 'app_cc/aluno/perfil.html')
+    try:
+        # Tenta obter o professor associado ao usuário logado
+        aluno = AlunoModel.objects.get(usuario=request.user)
+        context = {
+            'nome': aluno.usuario.username,
+            'email': aluno.email,
+            'ra':aluno.ra
+        }
+    except ProfessorModel.DoesNotExist:
+        # Se o professor não existir, exibe uma mensagem ou redireciona
+        messages.error(request, "Aluno associado não encontrado.")
+        return redirect("login")  # Redirecionar para uma página de erro ou uma página apropriada
+
+    return render(request, 'app_cc/aluno/perfil.html', context)
 
 #---------------------------------------------------------------------------------------------------------------- 
 
-@has_role_decorator(Aluno)
+@has_role_or_redirect(Aluno)
 def diario(request):
     # Obtém todos os diários salvos
     diarios = Diario.objects.all()
@@ -55,7 +99,7 @@ def diario(request):
     return render(request, 'app_cc/aluno/diario.html', {'diarios': diarios})
 
 
-@has_role_decorator(Aluno)
+@has_role_or_redirect(Aluno)
 def calendario(request):
     return render('app_cc/aluno/calendario.html')
 
@@ -63,27 +107,96 @@ def calendario(request):
 #----------------------------------------PROFESSOR VIEWS---------------------------------------------------------  
 #----------------------------------------------------------------------------------------------------------------    
 
-@has_role_decorator(Professor)
+@has_role_or_redirect(Professor)
 def turmas(request):
     return render(request, 'app_cc/professor/turmas.html')
 #----------------------------------------------------------------------------------------------------------------    
 
-@has_role_decorator(Professor)
+@has_role_or_redirect(Professor)
 def perfilp(request):
-    return render(request, 'app_cc/professor/perfilp.html')
+    try:
+        # Tenta obter o professor associado ao usuário logado
+        professor = ProfessorModel.objects.get(usuario=request.user)
+        context = {
+            'nome': professor.usuario.username,
+            'email': professor.email,
+            'ra':professor.ra
+        }
+    except ProfessorModel.DoesNotExist:
+        # Se o professor não existir, exibe uma mensagem ou redireciona
+        messages.error(request, "Professor associado não encontrado.")
+        return redirect("login")  # Redirecionar para uma página de erro ou uma página apropriada
+
+    return render(request, 'app_cc/professor/perfilp.html', context)
 #----------------------------------------------------------------------------------------------------------------    
 
-@has_role_decorator(Professor)
+@has_role_or_redirect(Professor)
 def frequenciap(request):
-    return render(request, 'app_cc/professor/frequenciap.html')
+    # Pegue o professor atual
+    professor = request.user.professor
+    # Obtenha as disciplinas associadas ao professor
+    disciplinas = Disciplina.objects.filter(professor=professor)
+    hoje = date.today()
+
+    if request.method == "POST":
+        # Para cada disciplina, turma e aluno, verifique se uma falta foi marcada
+        for disciplina in disciplinas:
+            for turma in disciplina.turmas.all():
+                for aluno in AlunoModel.objects.filter(turma=turma):
+                    falta_key = f"falta[{aluno.id}]"
+                    falta_value = request.POST.get(falta_key)
+
+                    if falta_value:
+                        # Verifique se a falta já foi registrada para a data de hoje
+                        if not Falta.objects.filter(aluno=aluno, data=hoje).exists():
+                            Falta.objects.create(aluno=aluno, data=hoje)
+
+    # Criar estrutura para disciplinas, turmas e alunos, com faltas marcadas
+    disciplinas_com_turmas_e_alunos = []
+    for disciplina in disciplinas:
+        disciplina_info = {
+            'disciplina': disciplina,
+            'turmas': []  # Lista para armazenar as turmas e alunos associados
+        }
+
+        # Para cada turma, adicione os alunos e indique se têm falta hoje
+        for turma in disciplina.turmas.all():
+            alunos_na_turma = AlunoModel.objects.filter(turma=turma)
+            turma_info = {
+                'turma': turma,
+                'alunos': []
+            }
+
+            # Adiciona alunos à turma, indicando se já têm falta hoje
+            for aluno in alunos_na_turma:
+                tem_falta_hoje = Falta.objects.filter(aluno=aluno, data=hoje).exists()
+                aluno_info = {
+                    'aluno': aluno,
+                    'turma': turma,
+                    'tem_falta_hoje': tem_falta_hoje
+                }
+                turma_info['alunos'].append(aluno_info)
+
+            disciplina_info['turmas'].append(turma_info)
+
+        disciplinas_com_turmas_e_alunos.append(disciplina_info)
+
+    # Renderizar o template com as disciplinas, turmas e alunos
+    return render(
+        request,
+        'app_cc/professor/frequenciap.html',
+        {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
+    )
+      
+        
 #----------------------------------------------------------------------------------------------------------------    
 
-@has_role_decorator(Professor)
+@has_role_or_redirect(Professor)
 def calendariop(request):
     return render(request, 'app_cc/professor/calendariop.html')
 #----------------------------------------------------------------------------------------------------------------    
 
-@has_role_decorator(Professor)
+@has_role_or_redirect(Professor)
 def diariop(request):
     if request.method == 'POST':
         disciplina = request.POST.get('disciplina')
@@ -96,32 +209,63 @@ def diariop(request):
         return render(request, 'app_cc/professor/diariop.html', {'diarios': diarios})
 #----------------------------------------------------------------------------------------------------------------    
 
-@has_role_decorator(Professor)
+@has_role_or_redirect(Professor)
 def avisosp(request):
     return render(request, 'app_cc/professor/avisosp.html')
 #----------------------------------------------------------------------------------------------------------------    
-@has_role_decorator(Professor)
+@has_role_or_redirect(Professor)
 def boletimp(request):
+    disciplinas = Disciplina.objects.filter(professor__usuario=request.user)
     if request.method == "POST":
-        for disciplina in Disciplina.objects.all():
-            nota_value = request.POST.get(f"notas[{disciplina.disciplina}]")
-            if nota_value is not None:
-                nota_value = nota_value.replace(',', '.')
-                try:
-                    nota_value = float(nota_value)
-                except ValueError:
-                    return HttpResponse("Erro: Valor da nota inválido")
-                nota_instance, created = Nota.objects.get_or_create(disciplina=disciplina)
-                nota_instance.nota = nota_value
-                nota_instance.save()
+        for disciplina in disciplinas:
+            turmas = disciplina.turmas.all()
+            for turma in turmas:
+                for aluno in AlunoModel.objects.filter(turma=turma):
+                    nota_key = f"notas[{aluno.usuario.username}-{turma.id}]"
+                    nota_value = request.POST.get(nota_key)
 
-    disciplinas_com_notas = []
-    for disciplina in Disciplina.objects.all():
-        notas = Nota.objects.filter(disciplina=disciplina)
-        disciplinas_com_notas.append((disciplina, notas))
+                    if nota_value:
+                        try:
+                            nota_float = float(nota_value.replace(',', '.'))
+                            if nota_float < 0 or nota_float > 10:
+                                messages.error(request, "A nota deve estar entre 0 e 10.")
+                                return redirect("boletimp")
 
-    return render(request, 'app_cc/professor/boletimp.html', {'disciplinas_com_notas': disciplinas_com_notas})
+                            nota, created = Nota.objects.get_or_create(
+                                disciplina=disciplina,
+                                aluno=aluno
+                            )
+                            nota.valor = nota_float
+                            nota.save()
 
+                        except ValueError:
+                            messages.error(request, "Valor inválido para nota.")
+                            return redirect("boletimp")
 
+    # Aqui, criamos uma estrutura que inclui as notas associadas a cada aluno
+    disciplinas_com_turmas_e_alunos = []
+    for disciplina in disciplinas:
+        disciplina_info = {
+            'disciplina': disciplina,
+            'turmas': disciplina.turmas.all(),
+            'alunos_com_notas': []  # Lista para armazenar alunos e suas notas
+        }
 
+        for turma in disciplina_info['turmas']:
+            alunos_na_turma = AlunoModel.objects.filter(turma=turma)
+            for aluno in alunos_na_turma:
+                nota = Nota.objects.filter(disciplina=disciplina, aluno=aluno).first()  # Nota associada
+                nota_valor = nota.valor if nota else 0  # Se não houver nota, usar 0
+                disciplina_info['alunos_com_notas'].append({
+                    'aluno': aluno,
+                    'turma': turma,
+                    'nota': nota_valor
+                })
 
+        disciplinas_com_turmas_e_alunos.append(disciplina_info)
+
+    return render(
+        request,
+        'app_cc/professor/boletimp.html',
+        {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
+    )

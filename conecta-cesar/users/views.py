@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login as django_login#para evitar 
 from rolepermissions.roles import assign_role
 from rolepermissions.checkers import has_role
 from project_cc.roles import Aluno, Professor
+from app_cc.models import Aluno as AlunoModel, Professor as ProfessorModel
 from django.contrib import messages
   
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -29,8 +30,10 @@ def cadastro(request):
 
         if user_type == 'professor':
             assign_role(user, Professor)#delega papel professor e aluno
+            ProfessorModel.objects.create(usuario=user,  email=user_email)
         elif user_type == 'aluno':
             assign_role(user, Aluno)
+            AlunoModel.objects.create(usuario=user,  email=user_email)
         else:
             messages.error(request, "Papel do usuário não especificado. Selecione 'professor' ou 'aluno'.")
             return redirect("cadastro")
@@ -72,3 +75,5 @@ def plataforma(request):
     if request.user.is_authenticated:  # Corrigido erro de digitação
         return request('content.html')
     return HttpResponse('Você precisa estar logado')
+
+# Função de sinal para criar um modelo Aluno ou Professor quando um usuário for criado

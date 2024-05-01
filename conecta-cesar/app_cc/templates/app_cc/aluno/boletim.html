@@ -2,7 +2,6 @@
 
 {% block content %}
 
-  <!-- Content -->
   <div class="container">
     <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
     
@@ -12,7 +11,7 @@
       <div class="nota-container">
         <p class="grade-text">
           {% if nota_instance %}
-            <h5>{{ nota_instance.nota }}</h5>
+            <h5>{{ nota_instance.valor }}</h5> <!-- Mostrar o valor da nota -->
           {% else %}
             <h5>Nenhuma nota registrada</h5>
           {% endif %}
@@ -25,7 +24,6 @@
     
   </div>
 
-  <!-- Button -->
   <div class="text-end mt-3">
     <button class="orange-button" onclick="window.location.href='mediag.html'">></button>
   </div>

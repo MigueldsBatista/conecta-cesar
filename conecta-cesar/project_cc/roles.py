@@ -5,3 +5,4 @@ class Professor(AbstractUserRole):
 
 class Aluno(AbstractUserRole):
     available_permissions={'ver_notas': True, 'ver_diarios': True, 'ver_avisos':True}
+    

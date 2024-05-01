@@ -2,38 +2,44 @@
 
 {% block content %}
 
-  <!-- Content -->
-  <div class="container">
+<div class="container">
     <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
-    <form method="post">
-      {% csrf_token %}
-      {% for disciplina, notas in disciplinas_com_notas %}
-      <div class="grade-container">
-        <h5>{{ disciplina }}</h5>
-        {% for nota in notas %}
-        <div class="nota-container">
-          <p class="grade-text">
-            <input type="text" name="notas[{{ disciplina }}]" value="{{ nota.nota }}">
-          </p>
-        </div>
-        {% empty %}
-        <div class="nota-container">
-          <p class="grade-text">
-            <input type="text" name="notas[{{ disciplina }}]" placeholder="Adicionar nota">
-          </p>
-        </div>
+    <form method="post" action="{%url 'boletimp' %}">
+        {% csrf_token %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Disciplina</th>
+                    <th>Turma</th>
+                    <th>Aluno</th>
+                    <th>RA</th>
+                    <th>Nota</th>
+                    <th> Editar Nota</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
+            {% for turma in disciplina_info.turmas %}
+            {% for aluno_info in disciplina_info.alunos_com_notas %}
+            {% if aluno_info.turma == turma %}
+                <tr>
+                    <td>{{ disciplina_info.disciplina.nome }}</td>
+                    <td>{{ turma.nome }}</td>
+                    <td>{{ aluno_info.aluno.usuario.username }}</td>
+                    <td>{{ aluno_info.aluno.ra }}</td>
+                    <td>{{ aluno_info.nota }}</td> <!-- Exibir a nota associada -->
+                    <td>
+                        <input type="number" name="notas[{{ aluno_info.aluno.usuario.username }}-{{ turma.id }}]" min="0" max="10" step="0.1" value="{{ aluno_info.nota }}">
+                    </td>
+                </tr>
+            {% endif %}
         {% endfor %}
-      </div>
-      {% empty %}
-      <p>Nenhum registro encontrado.</p>
-      {% endfor %}
-      <button type="submit" class="btn-custom btn-save">Salvar</button>
+    {% endfor %}
+{% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn-custom btn-save">Salvar</button>
     </form>
-  </div>
-
-  <!-- Button -->
-  <div class="text-end mt-3">
-    <button class="orange-button" onclick="window.location.href='mediag.html'">></button>
-  </div>
-
+</div>
+<a href='{%url 'boletimp'%}'>
 {% endblock content %}

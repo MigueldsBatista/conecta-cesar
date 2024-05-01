@@ -4,7 +4,7 @@ from app_cc.models import Diario
 from app_cc.models import Turma
 from app_cc.models import Nota
 from app_cc.models import Aluno
-from app_cc.models import Professor
+from app_cc.models import Professor, Falta
 
 
 
@@ -21,6 +21,7 @@ admin.site.register(Disciplina)
 admin.site.register(Diario)
 admin.site.register(Turma)
 admin.site.register(Aluno)
+admin.site.register(Falta)
 
 
 
