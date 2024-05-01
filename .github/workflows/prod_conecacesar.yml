@@ -28,8 +28,20 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r conecta-cesar/requirements.txt        
+        run: |
+          cd conecta-cesar
+          pip install -r requirements.txt
+          npm ci
+          cd ..
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+
+      - name: Run local server
+        run: |
+          cd conecta-cesar
+          python manage.py migrate
+          python manage.py runserver &
+          sleep 5
+          npx cypress run
 
       - name: Zip artifact for deployment
         run: |
