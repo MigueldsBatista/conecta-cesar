@@ -43,6 +43,16 @@ jobs:
           sleep 5
           npx cypress run
 
+          
+      - name: Cleaning testing files
+        run: |
+          rm cypress.config.js
+          rm package-lock.json
+          rm package.json
+          rm -rf cypress
+          rm -rf node_modules
+          cd ..
+
       - name: Zip artifact for deployment
         run: |
           cd conecta-cesar/
