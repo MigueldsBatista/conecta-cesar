@@ -11,5 +11,8 @@
     "url": "conecta-cesar"
   },
   "author": "miguel",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.8.1"
+  }
 }
