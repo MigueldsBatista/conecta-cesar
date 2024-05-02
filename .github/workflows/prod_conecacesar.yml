@@ -34,7 +34,13 @@ jobs:
           cd ..
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
- 
+      - name: Cleaning testing files
+        run: |
+          cd conecta-cesar/
+          rm db.sqlite3
+          rm .env
+          cd ..
+          
       - name: Zip artifact for deployment
         run: |
           cd conecta-cesar/
