@@ -1,31 +1,48 @@
-{%extends 'app_cc/aluno/main.html'%}
+{% extends 'app_cc/aluno/main.html' %}
+
 {% block content %}
-   <style>    .bar-container {
-    width: 100%;  /* Largura total */
-    padding: 10px;  /* Espaçamento */
-    background-color: #f0f0f0;  /* Cor de fundo */
-    border: 1px solid #ccc;  /* Borda ao redor */
+<style>
+.bar-container {
+    padding: 10px;  
+    background-color: #f0f0f0;  
+    border: 1px solid #ccc;  
+    width: 100%;  
 }
 
 .bar {
-    height: 20px;  /* Altura das barras */
-    background-color: #3498db;  /* Cor das barras */
-    margin-bottom: 10px;  /* Espaço entre barras */
-    text-align: right;  /* Alinhamento do texto */
-    color: white;  /* Cor do texto */
-    padding-right: 10px;  /* Espaço para o texto */
+    height: 20px;  
+    background-color: #3498db;  
+    margin-bottom: 10px;  
+    color: white; 
+    display: flex;  /* Usar flex para alinhamento */
+    justify-content: flex-start;  /* Alinhar texto à esquerda */
+    align-items: center;  /* Centralizar verticalmente */
+    padding: 0 10px;  /* Adicionar espaço horizontal */
 }
 </style>
-    <div class="container mt-4">  <!-- Espaçamento no topo -->
-        <h1 class="text-center">Variação das Notas</h1>  <!-- Título da página -->
-        <div class="bar-container">  <!-- Contêiner para as barras -->
-            {% for disciplina_info in disciplinas_com_notas %}
-                <!-- Barra proporcional ao valor da nota -->
-                <div class="bar" style="width: {{ disciplina_info.largura }}%;">  <!-- Largura com valor mínimo -->
-                    {{ disciplina_info.disciplina }} - {{ disciplina_info.nota }}  <!-- Exibir disciplina e nota -->
-                </div>
-            {% endfor %}
-        </div>
+
+<div class="container mt-4">  <!-- Espaçamento no topo -->
+    <h1 class="text-center">Variação das Notas</h1>  <!-- Título da página -->
+    <div class="bar-container">  <!-- Contêiner para as barras -->
+        {% for disciplina_info in disciplinas_com_notas %}
+            <!-- Barra proporcional ao valor da nota -->
+            <div class="bar" data-nota="{{ disciplina_info.nota }}" style="width: {{ disciplina_info.largura }}%;">  
+                {{ disciplina_info.disciplina }}  <!-- Exibir a sigla da disciplina -->
+            </div>
+        {% endfor %}
     </div>
-    {% endblock content %}
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Pega todas as barras
+    var barras = document.querySelectorAll(".bar");
     
+    // Define a largura com base na nota
+    barras.forEach(function(bar) {
+        var nota = parseFloat(bar.getAttribute("data-nota"));  // Pega a nota do atributo
+        var largura = (nota / 10) * 100;  // Calcula a largura como percentual
+        bar.style.width = largura + "%";  // Define a largura
+    });
+});
+</script>
+{% endblock %}

@@ -43,10 +43,15 @@ class Disciplina(models.Model):
     nome = models.CharField(max_length=100, null=True)
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE, related_name="disciplinas", null=True)
     turmas = models.ManyToManyField(Turma, related_name="disciplinas")  # Muitas disciplinas em muitas turmas
-
+    
     def __str__(self):
         return self.nome
 
+    def obter_sigla(self):
+        # Divide o nome por espaços e pega a primeira letra de cada palavra
+        return "".join([palavra[0].upper() for palavra in self.nome.split()])
+
+  
 # Modelo para Alunos
 class Aluno(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name="aluno", null=True)

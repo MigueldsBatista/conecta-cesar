@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container my-4">
-    <h2 class="text-primary">Horas Extras</h2>
+    <h2 class="text-primary text-center">Horas Extras</h2>
 
     <!-- Exibir mensagens de erro/sucesso com Bootstrap -->
     {% if messages %}
@@ -10,68 +10,73 @@
             <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} alert-dismissible fade show" role="alert">
                 {{ message }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>  <!-- Adicionando botão para fechar o alerta -->
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         {% endfor %}
     {% endif %}
+    <div class="row">
+        
+        <div class="col-md-6 offset-md-3">  <!-- Centralizar no desktop, ajuste no mobile -->
+            <div class="card my-4">  <!-- Usando cartão para organizar conteúdo -->
+                <div class="card-body">
+                <p>Total de Horas Extras Acumuladas: <strong>{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
+                    <h5 class="card-title">Enviar Arquivo para Hora Extra</h5>
+                    
 
-    <p>Total de Horas Extras Acumuladas: <strong>{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->
 
-    <div class="card my-4">  <!-- Usando cartão para organizar conteúdo -->
-        <div class="card-body">
-            <h5 class="card-title">Enviar Arquivo para Hora Extra</h5>
-
-            <form action='{% url "hora_extra" %}' method="POST" enctype="multipart/form-data" class="mb-4">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label para="my_file" class="form-label">Selecionar arquivo</label>
-                    <input type="file" name="my_file" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label para="horas_extras" class="form-label">Horas Extras (min: 0.1)</label>
-                    <input type="number" name="horas_extras" class="form-control" step="0.1" min="0.1" required>  <!-- Valor mínimo para horas extras -->
-                </div>
-                <button type="submit" class="btn btn-warning">Enviar</button>
-            </form>
-
-            <h5>Seus Arquivos Enviados</h5>
-            {% if arquivos %}
-                <div class="list-group">  <!-- Lista para organização de itens -->
-                    {% for arquivo in arquivos %}
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ arquivo.archive.url }}" width="50px" height="50px" style="object-fit: cover;" class="rounded img-thumbnail" alt="Preview">  <!-- Pequena pré-visualização -->
-                                <div class="ml-3">
-                                    <strong>{{ arquivo.title }}</strong>
-                                    <br>
-                                    Horas Extras: {{ arquivo.horas_extras }}  <!-- Mostrar horas extras associadas -->
-                                </div>
-                            </div>
-                            <div>
-                                <!-- Formulário para atualizar horas extras -->
-                                <form action="{% url 'hora_extra' %}" method="POST" class="d-inline">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="update_file" value="{{ arquivo.id }}">
-                                    <input type="number" name="horas_extras" value="{{ arquivo.horas_extras }}" step="0.1" min="0.1" class="form-control" style="width: 100px;">
-                                    <button type="submit" class="btn btn-sm btn-outline-primary">Atualizar</button>  <!-- Botão para atualizar -->
-                                </form>
-
-                                <!-- Formulário para deletar o arquivo -->
-                                <form action="{% url 'hora_extra' %}" method="POST" class="d-inline">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="delete_file" value="{{ arquivo.id }}">
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir este arquivo?')">Excluir</button>  <!-- Botão para deletar -->
-                                </form>
-
-                                <a href="{{ arquivo.archive.url }}" download class="btn btn-sm btn-outline-success">Baixar</a>  <!-- Botão para baixar -->
-                            </div>
+                    <form action='{% url "hora_extra" %}' method="POST" enctype="multipart/form-data" class="mb-4">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="my_file" class="form-label">Selecionar arquivo</label>
+                            <input type="file" name="my_file" class="form-control" required>
                         </div>
-                    {% endfor %}
+                        <div class="form-group">
+                            <label for="horas_extras" class="form-label">Horas Extras (min: 0.1)</label>
+                            <input type="number" name="horas_extras" class="form-control" step="0.1" min="0.1" required>  <!-- Valor mínimo para horas extras -->
+                        </div>
+                        <button type="submit" class="btn btn-warning">Enviar</button>
+                    </form>
+
+                    <h5>Seus Arquivos Enviados</h5>
+                    {% if arquivos %}
+                        <div class="list-group">  <!-- Lista para organização de itens -->
+                            {% for arquivo in arquivos %}
+                                <div class="list-group-item d-flex justify-content-between align-items-center flex-wrap">  <!-- Flex-wrap para celulares -->
+                                    <div class="d-flex align-items-center mb-2 mb-md-0">  <!-- Ajuste para mobile -->
+                                        <img src="{{ arquivo.archive.url }}" width="50px" height="50px" style="object-fit: cover;" class="rounded img-thumbnail" alt="Preview">
+                                        <div class="ml-3">
+                                            <strong>{{ arquivo.title }}</strong>
+                                            <br>
+                                            Horas Extras: {{ arquivo.horas_extras }}
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <!-- Formulário para atualizar horas extras -->
+                                        <form action="{% url 'hora_extra' %}" method="POST" class="d-inline">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="update_file" value="{{ arquivo.id }}">
+                                            <input type="number" name="horas_extras" value="{{ arquivo.horas_extras }}" step="0.1" min="0.1" class="form-control form-control-sm" style="width: 100px;">
+                                            <button type="submit" class="btn btn-sm btn-outline-primary">Atualizar</button>
+                                        </form>
+
+                                        <!-- Formulário para deletar o arquivo -->
+                                        <form action="{% url 'hora_extra' %}" method="POST" class="d-inline">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="delete_file" value="{{ arquivo.id }}">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir este arquivo?')">Excluir</button>
+                                        </form>
+
+                                        <a href="{{ arquivo.archive.url }}" download class="btn btn-sm btn-outline-success">Baixar</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-warning">Você ainda não enviou arquivos.</p>
+                    {% endif %}
                 </div>
-            {% else %}
-                <p class="text-warning">Você ainda não enviou arquivos.</p>  <!-- Aviso se não houver arquivos -->
-            {% endif %}
+            </div>
         </div>
     </div>
 </div>

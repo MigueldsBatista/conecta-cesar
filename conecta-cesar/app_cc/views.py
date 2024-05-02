@@ -239,15 +239,18 @@ def variacao_notas(request):
     if aluno and aluno.turma:
         disciplinas = aluno.turma.disciplinas.all()
 
+        def gerar_sigla(nome):
+            # Divide por espaços e pega a primeira letra de cada palavra
+            return "".join([palavra[0].upper() for palavra in nome.split()])
+
         for disciplina in disciplinas:
             nota_instance = Nota.objects.filter(aluno=aluno, disciplina=disciplina).first()
             nota = nota_instance.valor if nota_instance else 0
 
-            # Calcular a largura das barras
-            largura = max(nota * 10, 2)  # Largura mínima de 2% para notas zero
+            largura = max((nota / 10) * 100, 2)  # Calcular largura das barras no back-end
 
             disciplinas_com_notas.append({
-                'disciplina': disciplina.nome,
+                'disciplina': gerar_sigla(disciplina.nome),  # Obter sigla
                 'nota': nota,
                 'largura': largura
             })
