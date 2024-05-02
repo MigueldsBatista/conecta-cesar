@@ -1,4 +1,4 @@
-<<<<<<< HEAD:README.md
+
 # Conecta-Cesar
 
 Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais eficaz entre os alunos do Cesar School e a própria instituição de ensino. Enquanto já existe um sistema semelhante em vigor, porém que não vem agradando os alunos, este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
@@ -83,7 +83,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
     <a href="https://github.com/xTvini">Vinícius Diniz</a> - vdas@cesar.school 📩
   </li>
 </ul>
-=======
+
 # Conecta-Cesar
 
 Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais eficaz entre os alunos do Cesar School e a própria instituição de ensino. Enquanto já existe um sistema semelhante em vigor, porém que não vem agradando os alunos, este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
@@ -146,4 +146,3 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
     <a href="https://github.com/xTvini">Vinícius Diniz</a> - vdas@cesar.school 📩
   </li>
 </ul>
->>>>>>> prod:READMEE.md
