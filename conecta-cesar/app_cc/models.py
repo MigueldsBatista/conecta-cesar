@@ -90,3 +90,12 @@ class Falta(models.Model):
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='faltas', null=True)  # Relacionamento com Disciplina
     def __str__(self):
         return f"Falta de {self.aluno.usuario.username} em {self.data}"
+    
+class File(models.Model):
+    title=models.CharField(max_length=20, null=True)
+    archive=models.ImageField()
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="arquivos", null=True)  # Relacionamento com Aluno
+    horas_extras = models.FloatField(default=0)  # Campo para armazenar horas extras
+
+    def __str__(self):
+        return f"{self.title} - {self.aluno.usuario.username}"

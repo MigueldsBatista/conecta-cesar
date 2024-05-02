@@ -121,7 +121,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-MEDIA_URL="/images/"
+
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+MEDIA_URL="media/"
+
+FILE_UPLOAD_MAX_MEMORY_SIZE=2500000 #Padrão 2,5MB
 
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 

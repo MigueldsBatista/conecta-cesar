@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta
+from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
 from datetime import date
 from functools import wraps
+from django.conf import settings
+import os
 
 def has_role_or_redirect(required_role):
     def decorator(view_func):
@@ -36,7 +38,110 @@ def has_role_or_redirect(required_role):
 def avisos(request):
     return render(request, 'app_cc/aluno/avisos.html')
 
+#----------------------------------------------------------------------------------------------------------------  
+@has_role_or_redirect(Aluno)
+def hora_extra(request):
+    # Obter o aluno associado ao usuário autenticado
+    aluno = AlunoModel.objects.get(usuario=request.user)
+
+    if request.method == "GET":
+        # Obter os arquivos enviados pelo aluno
+        arquivos = File.objects.filter(aluno=aluno)
+
+        # Calcular o total de horas extras acumuladas
+        total_horas_extras = sum([arquivo.horas_extras for arquivo in arquivos])
+        
+        return render(request, "app_cc/aluno/hora_extra.html", {"arquivos": arquivos, "total_horas_extras": total_horas_extras})
+
+    elif request.method == "POST":
+        # Se for exclusão de arquivo
+        if "delete_file" in request.POST:
+            file_id = request.POST.get("delete_file")
+            try:
+                file = File.objects.get(id=file_id, aluno=aluno)
+                # Deletar do sistema de arquivos e banco de dados
+                if os.path.exists(file.archive.path):
+                    os.remove(file.archive.path)
+                file.delete()
+                messages.success(request, "Arquivo excluído com sucesso.")
+            except File.DoesNotExist:
+                messages.error(request, "Arquivo não encontrado para exclusão.")
+
+            return redirect("hora_extra")
+
+        # Para atualização de horas extras
+        if "update_file" in request.POST:
+            file_id = request.POST.get("update_file")
+            horas_extras = request.POST.get("horas_extras")
+
+            # Verificar se o campo está vazio
+            if not horas_extras or horas_extras.strip() == "":
+                messages.error(request, "O campo de horas extras não pode ser vazio.")
+                return redirect("hora_extra")
+
+            try:
+                horas_extras = float(horas_extras)
+                if horas_extras <= 0:
+                    messages.error(request, "Horas extras devem ser maior que 0.")
+                    return redirect("hora_extra")
+            except ValueError:
+                messages.error(request, "Valor inválido para horas extras.")
+                return redirect("hora_extra")
+
+            try:
+                file = File.objects.get(id=file_id, aluno=aluno)
+                file.horas_extras = horas_extras  # Atualizar as horas extras
+                file.save()
+                messages.success(request, "Horas extras atualizadas com sucesso.")
+            except File.DoesNotExist:
+                messages.error(request, "Arquivo não encontrado para atualização.")
+
+            return redirect("hora_extra")
+
+        # Para uploads de novos arquivos
+        file = request.FILES.get("my_file")
+        horas_extras = request.POST.get("horas_extras")
+
+        if not file:
+            messages.error(request, "Nenhum arquivo recebido.")
+            return redirect("hora_extra")
+
+        if not horas_extras or horas_extras.strip() == "":
+            messages.error(request, "O campo de horas extras não pode ser vazio.")
+            return redirect("hora_extra")
+
+        try:
+            horas_extras = float(horas_extras)
+            if horas_extras <= 0:
+                messages.error(request, "Horas extras devem ser maior que 0.")
+                return redirect("hora_extra")
+        except ValueError:
+            messages.error(request, "Valor inválido para horas extras.")
+            return redirect("hora_extra")
+
+        # Se for um novo arquivo
+        file_name_with_date = f"{file.name[:-4]}-{date.today()}.jpg"
+
+        file_path = os.path.join(settings.MEDIA_ROOT, f"user_files/{file_name_with_date}")
+
+        # Salvar o arquivo diretamente no sistema de arquivos
+        with open(file_path, "wb+") as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+
+        # Criar um objeto do modelo `File`
+        archive = File(
+            title=file_name_with_date,
+            archive=f"user_files/{file_name_with_date}",
+            aluno=aluno,
+            horas_extras=horas_extras
+        )
+        archive.save()
+
+        messages.success(request, "Arquivo salvo com sucesso.")
+        return redirect("hora_extra")    
 #----------------------------------------------------------------------------------------------------------------    
+
 @has_role_or_redirect(Aluno)
 def disciplinas_e_notas(request):
     disciplinas_com_notas = []
