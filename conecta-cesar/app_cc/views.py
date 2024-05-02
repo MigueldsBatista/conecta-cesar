@@ -260,17 +260,33 @@ def variacao_notas(request):
 @has_role_or_redirect(Aluno)
 def perfil(request):
     try:
-        # Tenta obter o professor associado ao usuário logado
         aluno = AlunoModel.objects.get(usuario=request.user)
+        
+        if request.method == 'POST':
+            foto_perfil = request.FILES.get('foto_perfil')  # Captura o arquivo enviado pelo formulário
+
+            if foto_perfil:
+                # Exclua a antiga foto de perfil, se existir
+                if aluno.foto_perfil and os.path.isfile(aluno.foto_perfil.path):
+                    os.remove(aluno.foto_perfil.path)
+
+                # Atribua a nova foto de perfil ao modelo
+                aluno.foto_perfil = foto_perfil
+                aluno.save()
+                messages.success(request, "Foto de perfil atualizada com sucesso!")
+            else:
+                messages.error(request, "Por favor, envie uma nova foto de perfil.")
+
         context = {
             'nome': aluno.usuario.username,
             'email': aluno.email,
-            'ra':aluno.ra
+            'ra': aluno.ra,
+            'foto_perfil': aluno.foto_perfil.url if aluno.foto_perfil else None,  # Adicionar a foto ao contexto
         }
-    except ProfessorModel.DoesNotExist:
-        # Se o professor não existir, exibe uma mensagem ou redireciona
-        messages.error(request, "Aluno associado não encontrado.")
-        return redirect("login")  # Redirecionar para uma página de erro ou uma página apropriada
+
+    except AlunoModel.DoesNotExist:
+        messages.error(request, "Aluno associado ao usuário não encontrado.")
+        return redirect("login")
 
     return render(request, 'app_cc/aluno/perfil.html', context)
 
@@ -319,17 +335,33 @@ def turmas(request):
 @has_role_or_redirect(Professor)
 def perfilp(request):
     try:
-        # Tenta obter o professor associado ao usuário logado
         professor = ProfessorModel.objects.get(usuario=request.user)
+        
+        if request.method == 'POST':
+            foto_perfil = request.FILES.get('foto_perfil')  # Captura o arquivo enviado pelo formulário
+
+            if foto_perfil:
+                # Exclua a antiga foto de perfil, se existir
+                if professor.foto_perfil and os.path.isfile(professor.foto_perfil.path):
+                    os.remove(professor.foto_perfil.path)
+
+                # Atribua a nova foto de perfil ao modelo
+                professor.foto_perfil = foto_perfil
+                professor.save()
+                messages.success(request, "Foto de perfil atualizada com sucesso!")
+            else:
+                messages.error(request, "Por favor, envie uma nova foto de perfil.")
+
         context = {
             'nome': professor.usuario.username,
             'email': professor.email,
-            'ra':professor.ra
+            'ra': professor.ra,
+            'foto_perfil': professor.foto_perfil.url if professor.foto_perfil else None,  # Adicionar a foto ao contexto
         }
+
     except ProfessorModel.DoesNotExist:
-        # Se o professor não existir, exibe uma mensagem ou redireciona
-        messages.error(request, "Professor associado não encontrado.")
-        return redirect("login")  # Redirecionar para uma página de erro ou uma página apropriada
+        messages.error(request, "Professor associado ao usuário não encontrado.")
+        return redirect("login")
 
     return render(request, 'app_cc/professor/perfilp.html', context)
 #----------------------------------------------------------------------------------------------------------------    

@@ -26,6 +26,8 @@ class Professor(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='professor', null=True)
     email= models.EmailField(null=True, max_length=254)
     ra = models.CharField(max_length=10, unique=True, default=generate_unique_ra)  # Função explícita para RA
+    foto_perfil = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)  # Novo campo de foto de perfil
+
 
     
     
@@ -51,6 +53,8 @@ class Aluno(models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE, related_name="alunos", null=True)
     email = models.EmailField(null=True, max_length=254)  # Garantir emails únicos
     ra = models.CharField(max_length=10, unique=True, default=generate_unique_ra)
+    foto_perfil = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)  # Novo campo de foto de perfil
+
      
      # Função explícita para RA
 
@@ -92,7 +96,7 @@ class Falta(models.Model):
         return f"Falta de {self.aluno.usuario.username} em {self.data}"
     
 class File(models.Model):
-    title=models.CharField(max_length=20, null=True)
+    title=models.CharField(max_length=100, null=True)
     archive=models.ImageField()
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="arquivos", null=True)  # Relacionamento com Aluno
     horas_extras = models.FloatField(default=0)  # Campo para armazenar horas extras

@@ -1,18 +1,5 @@
 from django.contrib import admin
-from app_cc.models import Disciplina, Nota
-from app_cc.models import Diario
-from app_cc.models import Turma
-from app_cc.models import Nota
-from app_cc.models import Aluno
-from app_cc.models import Professor, Falta
-
-
-
-
-
-
-
-
+from app_cc.models import Disciplina, Nota, Diario, Turma, Nota, Aluno, Professor, Falta
 
 # Register your models here.
 admin.site.register(Professor)

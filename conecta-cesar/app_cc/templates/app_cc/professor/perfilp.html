@@ -1,28 +1,40 @@
-{% extends "app_cc/professor/mainp.html" %}
-
+{% extends "app_cc/aluno/main.html" %}
 
 {% block content %}
-
-  <div class="main-content"style="margin-top: -50px">
+<div class="main-content" style="margin-top: -50px">
     <div class="profile-container">
-      <div class="profile-header">
-        <img src="https://avatars.githubusercontent.com/u/46529244?v=4" alt="Foto de Perfil">
-        <h1>{{nome}}</h1>
-      </div>
-
-      <!-- estrutura do projeto -->
-      <div class="projetos">
-        <div class="container-projetos">
-          <h4>Informações Pessoais</h4>
-          <p class="line-1 anim-typewriter">Professor(a) da CESAR SCHOOL</p>
-         
-          <ol>
-            <li> RA: {{ra}}</li>
-            <li> CURSO: CIÊNCIAS DA COMPUTAÇÃO</li>
-            <li> EMAIL: {{email}}</li>
-          </ol>
+        <div class="profile-header">
+            {% if foto_perfil %}
+                <img src="{{ foto_perfil }}" alt="Foto de Perfil" style="width: 100px; height: 100px; object-fit: cover;">
+            {% else %}
+                <img src="https://via.placeholder.com/100" alt="Foto de Perfil">  <!-- Imagem padrão se não houver foto -->
+            {% endif %}
+            <form action="{% url 'perfil' %}" method="post" enctype="multipart/form-data">  <!-- Importante definir enctype -->
+              {% csrf_token %}
+              <div class="form-group">
+                  <input type="file" name="foto_perfil" class="form-control" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Atualizar Foto de Perfil</button>
+          </form>
+          
+            <h1>{{ nome }}</h1>
         </div>
-      </div>
+
+        <div class="projetos">
+            <div class="container-projetos">
+                <h4>Informações Pessoais</h4>
+                <p class="line-1 anim-typewriter">Professor(a) da CESAR SCHOOL</p>
+
+                <ol>
+                    <li>RA: {{ ra }}</li>
+                    <li>CURSO: CIÊNCIAS DA COMPUTAÇÃO</li>
+                    <li>EMAIL: {{ email }}</li>
+                </ol>
+                
+                <!-- Formulário para alterar a foto de perfil -->
+              
+            </div>
+        </div>
     </div>
-  </div>
-{% endblock content %}
+</div>
+{% endblock %}
