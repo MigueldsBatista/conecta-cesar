@@ -50,7 +50,9 @@ class Aluno(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name="aluno", null=True)
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE, related_name="alunos", null=True)
     email = models.EmailField(null=True, max_length=254)  # Garantir emails únicos
-    ra = models.CharField(max_length=10, unique=True, default=generate_unique_ra)  # Função explícita para RA
+    ra = models.CharField(max_length=10, unique=True, default=generate_unique_ra)
+     
+     # Função explícita para RA
 
     
     def __str__(self):
