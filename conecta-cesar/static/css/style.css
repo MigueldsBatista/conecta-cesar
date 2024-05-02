@@ -5,14 +5,21 @@
   background-color: #f47a09;
 }
 
+.navbar-brand,
 .nav-link {
   color: black !important;
 }
 
-
+.navbar-toggler-icon,
 .bg-dark.text-light {
   background-color: white !important;
   color: black !important;
+}
+
+body {
+  background-color: orange;
+  margin: 0;
+  padding: 0;
 }
 
 .main-content {
@@ -21,12 +28,12 @@
   align-items: center;
   justify-content: center;
 }
-/* Bota o o conteiner branco do perfil*/
+
 .profile-container {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   margin-top: 50px;
 }
 
@@ -50,12 +57,19 @@
   color: black !important;
 }
 
+.body,
+a,
+.navbar-brand,
 .nav-link {
   color: black !important;
 }
 
 .rounded-4 {
   border-radius: 4%;
+}
+
+.red-text {
+  color: red;
 }
 
 .custom-card {
@@ -72,6 +86,11 @@
   background-color: #f0f0f0;
   transform: translateY(-5px);
 }
+
+.custom-card h5 {
+  margin: 0;
+}
+
 .overall-card {
   display: flex;
   justify-content: space-between;
@@ -94,16 +113,12 @@
 }
 
 .orange-button {
-  background-color: bisque;
+  background-color: orange;
   color: white;
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  
-}
-#link_boletim{
-  text-decoration: none;
 }
 
 .grade-container {
@@ -115,7 +130,11 @@
   border-radius: 10px;
   margin-top: 20px;
   width: 100%;
+
 }
+
+
+
 .grade-text {
   font-size: 18px;
   font-weight: bold;
@@ -139,4 +158,26 @@
 }
 .titulo{
   text-align: center;
+}
+.same-size-img {
+  height: 200px; 
+  width: 100%;
+  object-fit: cover;
+}
+.bar-container {
+  padding: 10px;  
+  background-color: #f0f0f0;  
+  border: 1px solid #ccc;  
+  width: 100%;  
+}
+
+.bar {
+  height: 20px;  
+  background-color: #3498db;  
+  margin-bottom: 10px;  
+  color: white; 
+  display: flex; 
+  justify-content: flex-start; 
+  align-items: center; 
+    padding: 0 10px;
 }
