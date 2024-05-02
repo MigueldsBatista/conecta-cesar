@@ -1,4 +1,4 @@
-{% extends "app_cc/aluno/main.html" %}
+{% extends "app_cc/professor/mainp.html" %}
 
 {% block content %}
 <div class="main-content" style="margin-top: -50px">
@@ -9,7 +9,7 @@
             {% else %}
                 <img src="https://via.placeholder.com/100" alt="Foto de Perfil">  <!-- Imagem padrão se não houver foto -->
             {% endif %}
-            <form action="{% url 'perfil' %}" method="post" enctype="multipart/form-data">  <!-- Importante definir enctype -->
+            <form action="{% url 'perfilp' %}" method="post" enctype="multipart/form-data">  <!-- Importante definir enctype -->
               {% csrf_token %}
               <div class="form-group">
                   <input type="file" name="foto_perfil" class="form-control" required>

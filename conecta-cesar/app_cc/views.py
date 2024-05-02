@@ -332,16 +332,16 @@ def turmas(request):
     return render(request, 'app_cc/professor/turmas.html')
 #----------------------------------------------------------------------------------------------------------------    
 
-@has_role_or_redirect(Professor)
+@has_role_or_redirect(Professor)  # Garante que apenas usuários com papel de professor têm acesso
 def perfilp(request):
     try:
-        professor = ProfessorModel.objects.get(usuario=request.user)
+        professor = ProfessorModel.objects.get(usuario=request.user)  # Verifica se o usuário é um professor
         
         if request.method == 'POST':
             foto_perfil = request.FILES.get('foto_perfil')  # Captura o arquivo enviado pelo formulário
 
             if foto_perfil:
-                # Exclua a antiga foto de perfil, se existir
+                # Se existe uma foto anterior, remova-a
                 if professor.foto_perfil and os.path.isfile(professor.foto_perfil.path):
                     os.remove(professor.foto_perfil.path)
 
@@ -356,13 +356,13 @@ def perfilp(request):
             'nome': professor.usuario.username,
             'email': professor.email,
             'ra': professor.ra,
-            'foto_perfil': professor.foto_perfil.url if professor.foto_perfil else None,  # Adicionar a foto ao contexto
+            'foto_perfil': professor.foto_perfil.url if professor.foto_perfil else None,
         }
 
     except ProfessorModel.DoesNotExist:
         messages.error(request, "Professor associado ao usuário não encontrado.")
-        return redirect("login")
-
+        return redirect("login")  # Redireciona para a página de login
+    
     return render(request, 'app_cc/professor/perfilp.html', context)
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
