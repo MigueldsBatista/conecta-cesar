@@ -15,7 +15,12 @@
                   <input type="file" name="foto_perfil" class="form-control" required>
               </div>
               <button type="submit" class="btn btn-primary">Atualizar Foto de Perfil</button>
+              <br>
+              {%for message in messages%}
+                {{message}}
+                {%endfor%}
           </form>
+
           
             <h1>{{ nome }}</h1>
         </div>
@@ -31,8 +36,7 @@
                     <li>EMAIL: {{ email }}</li>
                 </ol>
                 
-                <!-- Formulário para alterar a foto de perfil -->
-              
+          
             </div>
         </div>
     </div>

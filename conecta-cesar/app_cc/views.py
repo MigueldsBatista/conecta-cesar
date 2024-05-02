@@ -266,7 +266,13 @@ def perfil(request):
             foto_perfil = request.FILES.get('foto_perfil')  # Captura o arquivo enviado pelo formulário
 
             if foto_perfil:
-                # Exclua a antiga foto de perfil, se existir
+                # Verifique se o arquivo é PNG ou JPG
+                ext = os.path.splitext(foto_perfil.name)[1].lower()  # Pega a extensão do arquivo
+                if ext not in ['.jpg', '.jpeg', '.png']:
+                    messages.error(request, "Apenas arquivos PNG e JPG são permitidos.")
+                    return redirect('perfil')  # Redireciona para a mesma página
+
+                # Se há uma foto antiga, exclua-a
                 if aluno.foto_perfil and os.path.isfile(aluno.foto_perfil.path):
                     os.remove(aluno.foto_perfil.path)
 
@@ -281,7 +287,7 @@ def perfil(request):
             'nome': aluno.usuario.username,
             'email': aluno.email,
             'ra': aluno.ra,
-            'foto_perfil': aluno.foto_perfil.url if aluno.foto_perfil else None,  # Adicionar a foto ao contexto
+            'foto_perfil': aluno.foto_perfil.url if aluno.foto_perfil else None,
         }
 
     except AlunoModel.DoesNotExist:
@@ -289,7 +295,6 @@ def perfil(request):
         return redirect("login")
 
     return render(request, 'app_cc/aluno/perfil.html', context)
-
 #---------------------------------------------------------------------------------------------------------------- 
 
 @has_role_or_redirect(Aluno)
@@ -335,12 +340,18 @@ def turmas(request):
 @has_role_or_redirect(Professor)  # Garante que apenas usuários com papel de professor têm acesso
 def perfilp(request):
     try:
-        professor = ProfessorModel.objects.get(usuario=request.user)  # Verifica se o usuário é um professor
+        professor = ProfessorModel.objects.get(usuario=request.user)
         
         if request.method == 'POST':
             foto_perfil = request.FILES.get('foto_perfil')  # Captura o arquivo enviado pelo formulário
 
             if foto_perfil:
+                # Verifica se o arquivo é do tipo correto (PNG ou JPG)
+                extensao = os.path.splitext(foto_perfil.name)[1].lower()  # Obtém a extensão do arquivo
+                if extensao not in ['.jpg', '.jpeg', '.png']:  # Checa se é um formato válido
+                    messages.error(request, "Somente arquivos JPG ou PNG são permitidos.")
+                    return redirect("perfilp")  # Redireciona para a mesma página
+
                 # Se existe uma foto anterior, remova-a
                 if professor.foto_perfil and os.path.isfile(professor.foto_perfil.path):
                     os.remove(professor.foto_perfil.path)
@@ -361,8 +372,8 @@ def perfilp(request):
 
     except ProfessorModel.DoesNotExist:
         messages.error(request, "Professor associado ao usuário não encontrado.")
-        return redirect("login")  # Redireciona para a página de login
-    
+        return redirect("login")
+
     return render(request, 'app_cc/professor/perfilp.html', context)
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
@@ -530,3 +541,4 @@ def boletimp(request):
         'app_cc/professor/boletimp.html',
         {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
     )
+
