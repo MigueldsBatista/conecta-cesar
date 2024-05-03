@@ -14,7 +14,7 @@ describe('Test Suite for Multiple User Types', () => {
 
 
   it('Register as Professor', () => {
-    cy.visit('');
+    cy.visit('/auth/login/');
     cy.get('a').click();
     cy.get('[type="text"]').type(randomName); // Usa o nome gerado
     cy.get('[type="email"]').type(randomEmail); // Usa o email gerado
@@ -40,7 +40,7 @@ describe('Test Suite for Multiple User Types', () => {
 
 
   it('Register as Student', () => {
-    cy.visit('/');
+    cy.visit('/auth/login/');
     cy.get('a').click();
     cy.get('[type="text"]').type(randomName); // Usa o nome gerado
     cy.get('[type="email"]').type(randomEmail); // Usa o email gerado
@@ -51,7 +51,9 @@ describe('Test Suite for Multiple User Types', () => {
     cy.get(':nth-child(2) > .form-control').type(randomName); // Reutiliza o mesmo nome
     cy.get(':nth-child(3) > .form-control').type('123');
     cy.get('.btn').click();
-    //Dentro da página do coletor
 
+    //Dentro da página do Aluno
+    cy.get('.navbar-toggler-icon').click()
+    cy.get(':nth-child(1) > .nav-link').click()
   });
 });
