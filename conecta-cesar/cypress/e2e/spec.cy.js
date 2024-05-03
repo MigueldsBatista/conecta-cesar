@@ -53,7 +53,73 @@ describe('Test Suite for Multiple User Types', () => {
     cy.get('.btn').click();
 
     //Dentro da página do Aluno
-    cy.get('.navbar-toggler-icon').click()
-    cy.get(':nth-child(1) > .nav-link').click()
+    cy.get('.navbar-toggler-icon').click();
+    cy.wait(1000);
+    cy.get(':nth-child(1) > .nav-link').click();
+    cy.wait(1000);
+    cy.get('.navbar-toggler').click();
+    cy.wait(1000);
+    cy.get(':nth-child(2) > .nav-link').click();
+    cy.wait(1000);
+
+    //Dentro da página do Calendário
+    cy.get('.fa-angle-right').click();
+    cy.wait(1000);
+    cy.get('.fa-angle-left').click();
+    cy.wait(1000);
+    cy.get('.navbar-toggler').click();
+    cy.wait(1000);
+    cy.get('.dropdown > .nav-link').click();
+    cy.wait(1000);
+    cy.get(':nth-child(1) > .dropdown-item').click();
+    cy.wait(1000);
+    cy.get('.orange-button').click();
+    cy.wait(1000);
+    cy.get('.navbar-toggler').click();
+    cy.wait(1000);
+    cy.get('.dropdown > .nav-link').click();
+    cy.wait(1000);
+    cy.get(':nth-child(2) > .dropdown-item').click();
+    cy.wait(1000);
+    cy.get('.navbar-toggler').click();
+    cy.wait(1000);
+    cy.get(':nth-child(4) > .nav-link').click();
+
+    cy.fixture('fotoTeste.png').then((fileContent) => {
+      cy.get('.form-control').attachFile({
+        fileContent: fileContent,
+        fileName: 'fotoTeste.png',
+        mimeType: 'image/png'
+      });
+    });
+    cy.wait(1000);
+
+    cy.get('.btn').click();
+    cy.get('img').should('be.visible');
+
+    cy.wait(1000);
+    cy.get('.navbar-toggler').click();
+    cy.wait(1000);
+    cy.get(':nth-child(5) > .nav-link').click();
+    cy.get(':nth-child(2) > .form-control').click();
+    cy.fixture('fotoTeste.png').then((fileContent) => {
+      cy.get('.form-control').attachFile({
+        fileContent: fileContent,
+        fileName: 'fotoTeste.png',
+        mimeType: 'image/png'
+      });
+    });
+    cy.get(':nth-child(3) > .form-control').type('15');
+    cy.wait(1000);
+    cy.get('.btn').click();
+    cy.wait(1000);
+    cy.get('.navbar-toggler').click();
+    cy.wait(1000);
+    cy.get(':nth-child(6) > .nav-link').click();
+    cy.wait(1000);
+    cy.get('.navbar-toggler').click();
+    cy.wait(1000);
+    cy.get(':nth-child(7) > .nav-link').click();
+    
   });
 });
