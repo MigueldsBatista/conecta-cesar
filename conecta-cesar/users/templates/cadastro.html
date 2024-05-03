@@ -18,12 +18,12 @@ crossorigin="anonymous"></script>
 </head>
 <!------------------------------------------------------------------------------------------------------------------------>
 
-<body class="custom-bg">
+<body class="custom-bg d-flex flex-column justify-content-center align-items-center vh-100">
   <div style="text-align: center"><img src="{% static 'images/white-cesar.png' %}"  alt="logo cesar"></div>
   <br>
   <br>
 <br>
-  <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+  <div class="container-fluid d-flex justify-content-center align-items-center vh-100" >
     <form method="post" style="width: 300px; background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px;margin-top: -20%;">
       {% csrf_token %}
 <!-------------------------------------------------------------------------------------------------------------------------------------->        

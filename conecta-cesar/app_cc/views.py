@@ -9,6 +9,10 @@ from functools import wraps
 from django.conf import settings
 import os
 
+def gerar_sigla(nome):
+            # Divide por espaços e pega a primeira letra de cada palavra
+            return "".join([palavra[0].upper() for palavra in nome.split()])
+
 def has_role_or_redirect(required_role):
     def decorator(view_func):
         @wraps(view_func)
@@ -239,10 +243,7 @@ def variacao_notas(request):
     if aluno and aluno.turma:
         disciplinas = aluno.turma.disciplinas.all()
 
-        def gerar_sigla(nome):
-            # Divide por espaços e pega a primeira letra de cada palavra
-            return "".join([palavra[0].upper() for palavra in nome.split()])
-
+    
         for disciplina in disciplinas:
             nota_instance = Nota.objects.filter(aluno=aluno, disciplina=disciplina).first()
             nota = nota_instance.valor if nota_instance else 0
@@ -544,4 +545,3 @@ def boletimp(request):
         'app_cc/professor/boletimp.html',
         {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
     )
-
