@@ -3,45 +3,88 @@
 
 {% block content %}
 <!-- Container principal -->
-<div class="container mt-3">
-  <!-- Primeira linha de imagens -->
-  <div class="row">
-    <div class="col-md-4 mb-4">
-      <div class="bg-dark text-light p-4 rounded-5">
-        <img src="{% static 'images/aviso1.jpg' %}" class="img-fluid same-size-img" alt="Imagem 1">
-        <h3>Aviso 1</h3>
-        <p>Descrição do aviso 1</p>
-      </div>
-    </div>
-    <div class="col-md-4 mb-4">
-      <div class="bg-dark text-light p-4 rounded-5">
-        <img src="{% static 'images/aviso2.jpg' %}" class="img-fluid same-size-img" alt="Imagem 2">
-        <h3>Aviso 2</h3>
-        <p>Descrição do aviso 2</p>
-      </div>
-    </div>
-    <div class="col-md-4 mb-4">
-      <div class="bg-dark text-light p-4 rounded-5">
-        <img src="{% static 'images/aviso3.jpg' %}" class="img-fluid same-size-img" alt="Imagem 3">
-        <p>Descrição do aviso 3</p>
+<div class="container mt-3 text-center">
+  <!-- Avisos -->
+  <div class="row justify-content-center">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <button class="btn btn-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso1" aria-expanded="false" aria-controls="collapseAviso1">
+          <hr>
+          <h5>Conheça o Cesar School</h5>
+          <hr>
+          <div class="card-body">
+            <p>O Cesar School é uma instituição de ensino que busca promover a inovação e o empreendedorismo através da educação. Conheça nossos cursos e descubra como podemos ajudá-lo a alcançar seus objetivos profissionais.</p>
+            &#9660; 
+          </div>
+        </button>
+        <div class="collapse" id="collapseAviso1">
+          <div class="card-footer">
+            <img src="{% static 'images/aviso1.jpg' %}" class="img-fluid same-size-img" alt="Imagem 1">
+           </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Segunda linha de imagens -->
-  <div class="row">
-    <div class="col-md-4 mb-4">
-      <div class="bg-dark text-light p-4 rounded-5">
-        <img src="{% static 'images/aviso3.jpg' %}" class="img-fluid same-size-img" alt="Imagem 4">
-        <h3>Aviso 4</h3>
-        <p>Descrição do aviso 4</p>
+  <div class="row justify-content-center">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <button class="btn btn-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso2" aria-expanded="false" aria-controls="collapseAviso2">
+          <hr>
+          <h5>Caminhos para uma escrita criativa</h5>
+          <hr>
+          <div class="card-body">
+            <p>Descubra como desbloquear sua criatividade e aprimorar suas habilidades de escrita com nossos cursos especializados. Explore novas técnicas e encontre inspiração para suas histórias.</p>
+            &#9660;
+          </div>
+        </button>
+        <div class="collapse" id="collapseAviso2">
+          <div class="card-footer">
+            <img src="{% static 'images/aviso2.jpg' %}" class="img-fluid same-size-img" alt="Imagem 2">
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-4 mb-4">
-      <div class="bg-dark text-light p-4 rounded-5">
-        <img src="{% static 'images/aviso5.jpg' %}" class="img-fluid same-size-img" alt="Imagem 5">
-        <h3>Aviso 5</h3>
-        <p>Descrição do aviso 5</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <button class="btn btn-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso3" aria-expanded="false" aria-controls="collapseAviso3">
+          <hr>
+          <h5>IA para médicos</h5>
+          <hr>
+          <div class="card-body">
+            <p>Explore como a inteligência artificial está transformando a prática médica. Descubra como as tecnologias emergentes estão sendo aplicadas para melhorar o diagnóstico, tratamento e cuidados com os pacientes.</p>
+            &#9660;
+          </div>
+        </button>
+        <div class="collapse" id="collapseAviso3">
+          <div class="card-footer">
+            <img src="{% static 'images/aviso3.jpg' %}" class="img-fluid same-size-img" alt="Imagem 3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <button class="btn btn-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso4" aria-expanded="false" aria-controls="collapseAviso4">
+          <hr>
+          <h5>As inscrições para a AIED 2024 estão oficialmente abertas!</h5>
+          <hr>
+          <div class="card-body">
+            <p>A AIED 2024 oferece uma oportunidade única de explorar as últimas tendências em educação e tecnologia. Inscreva-se agora para participar de palestras, workshops e apresentações de pesquisas inovadoras.</p>
+            &#9660;
+          </div>
+        </button>
+        <div class="collapse" id="collapseAviso4">
+          <div class="card-footer">
+            <img src="{% static 'images/aviso4.jpg' %}" class="img-fluid same-size-img" alt="Imagem 4">
+          </div>
+        </div>
       </div>
     </div>
   </div>
