@@ -16,6 +16,11 @@
   color: black !important;
 }
 
+.card-header-custom {
+  background-color: #3498db; /* A cor azul desejada */
+  color: white; /* Mantém o texto branco para contraste */
+}
+
 body {
   background-color: orange;
   margin: 0;
@@ -81,6 +86,7 @@ a,
   margin: 20px 0;
   transition: all 0.3s ease;
 }
+
 
 .custom-card:hover {
   background-color: #f0f0f0;
@@ -181,3 +187,4 @@ a,
   align-items: center; 
     padding: 0 10px;
 }
+

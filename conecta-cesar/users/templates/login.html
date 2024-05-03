@@ -1,12 +1,7 @@
-{%load static %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="PT-BR">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-crossorigin="anonymous"></script>
-<!------------------------------------------------------------------------------------------------------------------------>
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,58 +9,51 @@ crossorigin="anonymous"></script>
   <link rel="stylesheet" href="{% static '/css/style.css' %}" type="text/css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 </head>
-<!------------------------------------------------------------------------------------------------------------------------>
 
-<body class="custom-bg d-flex flex-column justify-content-center align-items-center vh-100" >
+<body class="custom-bg d-flex flex-column justify-content-center align-items-center vh-100">
   <div style="text-align: center;"><img src="{% static 'images/white-cesar.png' %}"  alt="logo cesar"></div>
-  <br><br>
   
   <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
-    <form method="POST" action="{% url 'login' %}" style="width: 300px; background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px;margin-top: -20%;" >
+    <form method="POST" action="{% url 'login' %}" style="width: 300px; background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px;">
       {% csrf_token %}
-<!-------------------------------------------------------------------------------------------------------------------------------------->        
-
       <div class="mb-3">
         <label class="form-label">Usuário</label>
-        <input type="text" class="form-control" name="username" required
-          placeholder="Digite o nome de usuário">
+        <input type="text" class="form-control" name="username" required placeholder="Digite o nome de usuário">
         <div class="form-text">Ex. Ricardo Costa</div>
       </div>
-<!-------------------------------------------------------------------------------------------------------------------------------------->        
 
       <div class="mb-3">
         <label class="form-label">Senha</label>
         <input type="password" class="form-control"  name="senha" placeholder="Digite a senha"  required>
       </div>
 
-<!-------------------------------------------------------------------------------------------------------------------------------------->        
-
       <input type="submit" class="btn btn-primary" value="Entrar">
-      <br>
-<!------------------------------------------------------------------------------------------------------------------------------------>        
-
-        Ainda não tem uma conta? <a href="{% url 'cadastro' %}"> Registrar-se</a>
-        <br>
-        <br>
-<!-------------------------------------------------------------------------------------------------------------------------------------->        
-        {% if messages %}
-        {% for message in messages %}
-          {% if message.tags == 'success' %}
-            <div class="alert alert-success" role="alert">{{ message }}</div> <!-- Exibe alerta verde -->
-          {% else %}
-            <div class="alert alert-danger" role="alert">{{ message }}</div> <!-- Exibe alerta vermelho -->
-        
-          {% endif %}
-        {% endfor %}
+      <div>
+        Ainda não tem uma conta? <a href="{% url 'cadastro' %}">Registrar-se</a>
+      </div>
+      
+      {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'success' %}
+          <div class="alert alert-success" role="alert">{{ message }}</div>
+        {% else %}
+          <div class="alert alert-danger" role="alert">{{ message }}</div>
+        {% endif %}
+      {% endfor %}
       {% endif %}
     </form>
-
   </div>
-  
-  
+
+  <footer class="container-fluid text-center" style="padding-bottom: 10px; background-color: rgba(255, 255, 255, 0.8); bottom: -200; width: 100%;">
+    <p>Para motivos de avaliação, deixamos algumas contas com relacionamentos configurados de professores, alunos, turmas e disciplinas. OBS: todas as senhas são 123.<br>
+      Professores: Ricardo Costa, Carol Melo, Pamela Lins, Ricardo Cesar.<br>
+      Alunos: Tiago Gurgel, Miguel Batista, Kauane Melo, Fernanda Ordonho, Rafael Barros, Vinicius Diniz.
+    </p>
+  </footer>
 
 </body>
-
 </html>
