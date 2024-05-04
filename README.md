@@ -84,6 +84,48 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 </ul>
 </details>
+
+<details>
+<summary>Entrega 3</summary>
+<ul>
+  <li>
+    <a  href="#"
+      >ScreenCast Lo-Fi</a
+    >
+  </li>
+  <li>
+    <a  href="#"
+      >Protótipo no Figma</a
+    >
+  </li>
+  <li>
+    <a  href="#"
+      >ScreenCast - Uso do Sistema</a
+    >
+  </li>
+  <li>
+    <a  href="#"
+      >Programação em par</a
+    >
+  </li>
+  <li>
+    <a  href="#"
+      >Diagrama de Atividades</a
+    >
+  </li>
+  <li>
+    <a  href="#"
+      >ScreenCast - Deployment e Build</a
+    >
+  </li>
+  <li>
+    <a  href="#"
+      >ScreenCast - Testes E2E</a
+    >
+  </li>
+</ul>
+
+</details>
 ## 👩‍💻 Membros
 
 <ul>
