@@ -144,8 +144,8 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     >
   </li>
   <li>
-    <a  href=""
-      >Diagrama de Atividades **</a
+    <a  href="https://github.com/MigueldsBatista/conecta-cesar/tree/main/Mídia/Entrega%203%20Diagramas"
+      >Diagrama de Atividades</a
     >
   </li>
   <li>
