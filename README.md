@@ -31,7 +31,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
   </li>
   
   <li>
-    <a  href="https://docs.google.com/document/d/10O_WayuQXqjM3a-Ibwi0VkkPwDqrdGoMv61UE1SCnow/edit?usp=sharing"
+    <a  href="https://docs.google.com/document/d/1ljz8ROeIYSIZLIOdjvwuQpQeAy53GX0e1S5-C4grJJ4/edit?usp=sharing"
       >Relatórios de Pair Programming</a
     >
   </li>
@@ -112,7 +112,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
     >
   </li>
  <li>
-    <a  href="https://docs.google.com/document/d/10O_WayuQXqjM3a-Ibwi0VkkPwDqrdGoMv61UE1SCnow/edit?usp=sharing"
+    <a  href="https://docs.google.com/document/d/1ljz8ROeIYSIZLIOdjvwuQpQeAy53GX0e1S5-C4grJJ4/edit?usp=sharing"
       >Relatórios de Pair Programming</a
     >
   </li>
