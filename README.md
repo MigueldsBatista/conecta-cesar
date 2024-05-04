@@ -40,7 +40,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 ## ♟️ Entregas
 
 <details>
-<summary>Entrega 01</summary>
+<summary>Entrega 1</summary>
 <ul>
   <li>
 <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/backlog.jpg">Imagem do backlog no Jira</a>
@@ -60,7 +60,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 </details>
 
 <details>
-<summary>Entrega 02</summary>
+<summary>Entrega 2</summary>
 <ul>
 
 <li>
@@ -126,6 +126,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 </ul>
 
 </details>
+
 ## 👩‍💻 Membros
 
 <ul>
