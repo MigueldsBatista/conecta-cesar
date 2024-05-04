@@ -134,8 +134,8 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
 <summary>Entrega 3</summary>
 <ul>
   <li>
-    <a  href="#"
-      >ScreenCast Lo-Fi **</a
+    <a  href="https://youtu.be/avyPEtwfK7U"
+      >ScreenCast Lo-Fi</a
     >
   </li>
  <li>
