@@ -51,29 +51,37 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
       >Protótipo  de Baixa Fidelidade - Screencast</a
     >
   </li>
- <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/painel%20jira.jpeg">Painel Do jira com a sprint 1 iniciada</a>
-
- <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/print%20sprint%201.jpeg">Imagem da Sprint 1 na aba do backlog</a>
-
-<a href ="https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/print%20backlog%20entrega%2002.jpeg">Imagem do Backlog pós-início da sprint 1
+  
+  <li>
+ <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/painel%20jira.jpeg">Quadro sprint 1 iniciada</a>
+  </li>
 
 </ul>
 </details>
 
-<summary>Entrega 02</summary>
 <details>
+<summary>Entrega 02</summary>
 <ul>
-  <li>
-    <a href="https://conecacesar.azurewebsites.net">Link para o Site</a>
-  </li>
-  
+
 <li>
 <a href ="https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/novo%20diagrama1.jpg">Diagrama de Atividades</a>
 </li>
 
 
-<li> <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/bugtracker.jpeg">BugTracker</a>
+<li> 
+  <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/bugtracker.jpeg">BugTracker</a>
 </li>
+
+<li> 
+  <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/bugtracker.jpeg">Screencast Site</a>
+</li>
+
+<li> 
+  <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/bugtracker.jpeg">Screencast Lo-Fi</a>
+</li>
+
+
+
 </ul>
 </details>
 ## 👩‍💻 Membros
