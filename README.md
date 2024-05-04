@@ -31,9 +31,9 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
 
 ## ⚙️ Principais Funcionalidades
 
-- **Quadro de Avisos:** Notifica os alunos os eventos importantes por meio de um quadro de avisos.
+- **Quadro de Avisos:** Notifica os alunos os eventos importantes da faculdade por meio de uma página de avisos.
 - **Boletim:** Visualização de notas para os alunos, e lançamento das notas pelos professores.
-- **Gerenciamento de Faltas:** Onde os alunos possam ver suas faltas e os professores gerenciarem as mesmas.
+- **Gerenciamento de Faltas:** Onde os alunos podem ver suas faltas e os professores gerenciarem as mesmas.
 - **Certificados:** Os alunos podem armazenar seus certificados e calcular a quantidade de horas extras realizadas.
 - **Compatibilidade:** Nossa plataforma será compatível tanto para computadores, quanto dispositivos móveis através de um aplicativo.
 - **Acompanhamento do Progresso Acadêmico:** Incluindo gráficos que auxiliam os alunos na análise do desempenho individual e coletivo.
