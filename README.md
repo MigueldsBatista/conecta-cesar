@@ -1,26 +1,26 @@
 <p align="center">
   <img
-    src="https://img.shields.io/badge/Status-Em%20desenvolvimento-green?style=flat-square"
-    alt="Status"
+    src="https://img.shields.io/github/last-commit/MigueldsBatista/conecta-cesar"
+    alt="Last commit"
   />
 </p>
 
 <p align="center">
   <img
-    src="https://img.shields.io/github/repo-size/P-E-N-T-E-S/Kolekto?style=flat"
+    src="https://img.shields.io/github/repo-size/MigueldsBatista/conecta-cesar"
     alt="Repository Size"
   />
   <img
-    src="https://img.shields.io/github/languages/count/P-E-N-T-E-S/Kolekto?style=flat&logo=python"
+    src="https://img.shields.io/github/languages/count/MigueldsBatista/conecta-cesar"
     alt="Language Count"
   />
   <img
-    src="https://img.shields.io/github/commit-activity/t/P-E-N-T-E-S/Kolekto?style=flat&logo=github"
+    src="https://img.shields.io/github/commit-activity/t/MigueldsBatista/conecta-cesar"
     alt="Commit Activity"
   />
   <a href="LICENSE"
     ><img
-      src="https://img.shields.io/github/license/P-E-N-T-E-S/Kolekto"
+      src="https://img.shields.io/github/license/MigueldsBatista/conecta-cesar"
       alt="License"
   /></a>
 </p>
