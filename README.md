@@ -18,7 +18,7 @@
     src="https://img.shields.io/github/commit-activity/t/P-E-N-T-E-S/Kolekto?style=flat&logo=github"
     alt="Commit Activity"
   />
-  <a href="LICENSE.md"
+  <a href="LICENSE"
     ><img
       src="https://img.shields.io/github/license/P-E-N-T-E-S/Kolekto"
       alt="License"
