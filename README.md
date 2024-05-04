@@ -42,10 +42,10 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 <details>
 <summary>Entrega 01</summary>
 <ul>
+  <li>
 <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/backlog.jpg">Imagem do backlog no Jira</a>
-
-<a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/quadro.jpg">Imagem do quadro do Jira</a>
-
+</li>
+  
 <li>
     <a  href="https://youtu.be/zFNmWAJjifI"
       >Protótipo  de Baixa Fidelidade - Screencast</a
