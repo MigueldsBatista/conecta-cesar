@@ -1,6 +1,33 @@
+<p align="center">
+  <img
+    src="https://img.shields.io/badge/Status-Em%20desenvolvimento-green?style=flat-square"
+    alt="Status"
+  />
+</p>
+
+<p align="center">
+  <img
+    src="https://img.shields.io/github/repo-size/P-E-N-T-E-S/Kolekto?style=flat"
+    alt="Repository Size"
+  />
+  <img
+    src="https://img.shields.io/github/languages/count/P-E-N-T-E-S/Kolekto?style=flat&logo=python"
+    alt="Language Count"
+  />
+  <img
+    src="https://img.shields.io/github/commit-activity/t/P-E-N-T-E-S/Kolekto?style=flat&logo=github"
+    alt="Commit Activity"
+  />
+  <a href="LICENSE.md"
+    ><img
+      src="https://img.shields.io/github/license/P-E-N-T-E-S/Kolekto"
+      alt="License"
+  /></a>
+</p>
+
 # Conecta-Cesar
 
-Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais eficaz entre os alunos do Cesar School e a própria instituição de ensino. Enquanto já existe um sistema semelhante em vigor, porém que não vem agradando os alunos, este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
+Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está sendo desenvolvida como parte da disciplina de Fundamentos de Software (FDS) para estabelecer uma conexão mais eficaz entre os alunos do Cesar School e a própria instituição de ensino. Enquanto já existe um sistema semelhante em vigor, porém que não vem agradando os alunos, este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
 
 ## ⚙️ Principais Funcionalidades
 
