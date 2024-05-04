@@ -13,6 +13,12 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 ## 🖇️ Links Importantes
 
+    <ul>
+      <li>
+    <a href="https://conecacesar.azurewebsites.net/auth/login/"></a>
+    >Link do Site
+    </li>
+    </ul>
 <ul>
   <li>
     <a  href="https://conecta-cesar.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiZDJlOTY0YzQ0MjY0NGVhMmExYjE3YzE5YzJjYThlODIiLCJwIjoiaiJ9"
