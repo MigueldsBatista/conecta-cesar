@@ -38,6 +38,16 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
 - **Compatibilidade:** Nossa plataforma será compatível tanto para computadores, quanto dispositivos móveis através de um aplicativo.
 - **Acompanhamento do Progresso Acadêmico:** Incluindo gráficos que auxiliam os alunos na análise do desempenho individual e coletivo.
 
+## ⚙ Tecnologias Utilizadas
+
+- **Linguagem de Programação:** O aplicativo é desenvolvido usando o Python, HMTL e CSS.
+- **Banco de Dados:** Utilizamos um banco de dados para armazenar informações de usuários, produtos, transações e outros dados relevante, usando o padrão do Django o SQLite no repositório local. Para o de deploy ultilizamos PostgressSQL 
+- **Framework de Desenvolvimento:** Utilizamos o Django, para acelerar o desenvolvimento e Boostrap na parte do frontend.
+- **Frontend:** A interface do usuário é desenvolvida utilizando tecnologias como HTML, CSS e o framework mencionando anteriormente, o Boostrap.
+- **Organização:** Para nos organizarmos e seguirmos os principios de desenvolvimento de software ultilizamos o jira
+
+
+
 ## 🖇️ Links Importantes
 
 <ul>
