@@ -127,8 +127,8 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
     >
   </li>
   <li>
-    <a  href=""
-      >ScreenCast - Testes E2E **</a
+    <a  href="https://youtu.be/j_EwXFhZmps"
+      >ScreenCast - Testes E2E</a
     >
   </li>
 </ul>
