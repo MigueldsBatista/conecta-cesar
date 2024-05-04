@@ -131,7 +131,20 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
       >ScreenCast - Testes E2E</a
     >
   </li>
+
+   <li>
+    <a  href="#"
+      >Quadro Sprint 2</a
+    >
+  </li>
+
+   <li>
+    <a  href="#"
+      >BugTracker</a
+    >
+  </li>
 </ul>
+
 
 </details>
 
