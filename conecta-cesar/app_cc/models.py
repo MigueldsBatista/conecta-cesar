@@ -101,7 +101,7 @@ class Falta(models.Model):
         return f"Falta de {self.aluno.usuario.username} em {self.data}"
     
 class File(models.Model):
-    title=models.CharField(max_length=100, null=True)
+    title=models.CharField(max_length=300, null=True)#Considerar deletar o título para evitar error
     archive=models.ImageField()
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="arquivos", null=True)  # Relacionamento com Aluno
     horas_extras = models.FloatField(default=0)  # Campo para armazenar horas extras
