@@ -54,8 +54,12 @@ def hora_extra(request):
 
         # Calcular o total de horas extras acumuladas
         total_horas_extras = sum([arquivo.horas_extras for arquivo in arquivos])
-        
-        return render(request, "app_cc/aluno/hora_extra.html", {"arquivos": arquivos, "total_horas_extras": total_horas_extras})
+
+        return render(
+            request,
+            "app_cc/aluno/hora_extra.html",
+            {"arquivos": arquivos, "total_horas_extras": total_horas_extras},
+        )
 
     elif request.method == "POST":
         # Se for exclusão de arquivo
@@ -63,6 +67,7 @@ def hora_extra(request):
             file_id = request.POST.get("delete_file")
             try:
                 file = File.objects.get(id=file_id, aluno=aluno)
+
                 # Deletar do sistema de arquivos e banco de dados
                 if os.path.exists(file.archive.path):
                     os.remove(file.archive.path)
@@ -74,7 +79,7 @@ def hora_extra(request):
             return redirect("hora_extra")
 
         # Para atualização de horas extras
-        if "update_file" in request.POST:
+        elif "update_file" in request.POST:
             file_id = request.POST.get("update_file")
             horas_extras = request.POST.get("horas_extras")
 
@@ -89,12 +94,12 @@ def hora_extra(request):
                     messages.error(request, "Horas extras devem ser maior que 0.")
                     return redirect("hora_extra")
             except ValueError:
-                messages.error(request, "Valor inválido para horas extras.")
+                messages.error("Valor inválido para horas extras.")
                 return redirect("hora_extra")
 
             try:
                 file = File.objects.get(id=file_id, aluno=aluno)
-                file.horas_extras = horas_extras  # Atualizar as horas extras
+                file.horas_extras = horas_extras
                 file.save()
                 messages.success(request, "Horas extras atualizadas com sucesso.")
             except File.DoesNotExist:
@@ -107,7 +112,12 @@ def hora_extra(request):
         horas_extras = request.POST.get("horas_extras")
 
         if not file:
-            messages.error(request, "Nenhum arquivo recebido.")
+            messages.error("Nenhum arquivo recebido.")
+            return redirect("hora_extra")
+
+        # Verificar se o tipo do arquivo é aceitável
+        if not file.name.lower().endswith(('.jpg', '.jpeg', '.png')):
+            messages.error(request, "Formato de arquivo inválido. Envie apenas jpg, jpeg ou png.")
             return redirect("hora_extra")
 
         if not horas_extras or horas_extras.strip() == "":
@@ -125,25 +135,26 @@ def hora_extra(request):
 
         # Se for um novo arquivo
         file_name_with_date = f"{file.name[:-4]}-{date.today()}.jpg"
-
+        
         file_path = os.path.join(settings.MEDIA_ROOT, f"user_files/{file_name_with_date}")
 
         # Salvar o arquivo diretamente no sistema de arquivos
-        with open(file_path, "wb+") as destination:
+        with open(file_path, "wb+") as destino:
             for chunk in file.chunks():
-                destination.write(chunk)
+                destino.write(chunk)
 
         # Criar um objeto do modelo `File`
         archive = File(
             title=file_name_with_date,
             archive=f"user_files/{file_name_with_date}",
             aluno=aluno,
-            horas_extras=horas_extras
+            horas_extras=horas_extras,
         )
         archive.save()
 
         messages.success(request, "Arquivo salvo com sucesso.")
-        return redirect("hora_extra")    
+        return redirect("hora_extra")
+   
 #----------------------------------------------------------------------------------------------------------------    
 
 @has_role_or_redirect(Aluno)

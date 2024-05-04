@@ -6,15 +6,19 @@
 
     <!-- Exibir mensagens de erro/sucesso com Bootstrap -->
     {% if messages %}
+    <div>
         {% for message in messages %}
-            <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %} alert-dismissible fade show" role="alert">
+            <div 
+                class="alert alert-{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}danger{% elif 'warning' in message.tags %}warning{% else %}info{% endif %} alert-dismissible fade show" 
+                role="alert">
                 {{ message }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         {% endfor %}
-    {% endif %}
+    </div>
+{% endif %}
     <div class="row">
         
         <div class="col-md-6 offset-md-3">  <!-- Centralizar no desktop, ajuste no mobile -->
