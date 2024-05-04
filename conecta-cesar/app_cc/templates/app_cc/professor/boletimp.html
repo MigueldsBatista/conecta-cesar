@@ -33,7 +33,7 @@
                           <td>
                             <!-- Chave única para cada aluno-turma-disciplina -->
                             <input  style="height: 23px;" type="number" name="notas[{{ aluno_info.aluno.usuario.username }}-{{ turma.id }}-{{ disciplina_info.disciplina.id }}]" 
-                            min="0" max="10" step="0.1" value="{{ aluno_info.nota }}">
+                            min="0" max="10" step="0.01" value="{{ aluno_info.nota }}">
                           </td>
                         </tr>
                       {% endif %}
