@@ -26,13 +26,13 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
   </li>
     <li>
     <a  href="https://www.figma.com/file/1bqw5G2PKniOytyCujdKn5/FDS1?type=design&node-id=0%3A1&mode=design&t=68hMQEzQnMPQzem2-1"
-      >Protótipo  de Baixa Fidelidade no Figma</a
+      >Protótipo Lo-Fi no Figma</a
     >
   </li>
   
   <li>
     <a  href="https://docs.google.com/document/d/10O_WayuQXqjM3a-Ibwi0VkkPwDqrdGoMv61UE1SCnow/edit?usp=sharing"
-      >Relatório de Pair Programming</a
+      >Relatórios de Pair Programming</a
     >
   </li>
 </ul>
@@ -62,7 +62,11 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 <details>
 <summary>Entrega 2</summary>
 <ul>
-
+<li>
+    <a  href="https://www.figma.com/file/1bqw5G2PKniOytyCujdKn5/FDS1?type=design&node-id=0%3A1&mode=design&t=68hMQEzQnMPQzem2-1"
+      >Protótipo Lo-Fi no Figma</a
+    >
+  </li>
 <li>
 <a href ="https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/novo%20diagrama1.jpg">Diagrama de Atividades</a>
 </li>
@@ -73,13 +77,17 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 </li>
 
 <li> 
-  <a href="#">Screencast Site</a>
+  <a href="#">Screencast - Uso do Sistema</a>
 </li>
 
 <li> 
   <a href="#">Screencast Lo-Fi</a>
 </li>
-
+ <li>
+    <a  href="https://docs.google.com/document/d/10O_WayuQXqjM3a-Ibwi0VkkPwDqrdGoMv61UE1SCnow/edit?usp=sharing"
+      >Relatórios de Pair Programming</a
+    >
+  </li>
 
 
 </ul>
@@ -93,9 +101,9 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
       >ScreenCast Lo-Fi</a
     >
   </li>
-  <li>
-    <a  href="#"
-      >Protótipo no Figma</a
+ <li>
+    <a  href="https://www.figma.com/file/1bqw5G2PKniOytyCujdKn5/FDS1?type=design&node-id=0%3A1&mode=design&t=68hMQEzQnMPQzem2-1"
+      >Protótipo Lo-Fi no Figma</a
     >
   </li>
   <li>
@@ -103,9 +111,9 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
       >ScreenCast - Uso do Sistema</a
     >
   </li>
-  <li>
-    <a  href="#"
-      >Programação em par</a
+ <li>
+    <a  href="https://docs.google.com/document/d/10O_WayuQXqjM3a-Ibwi0VkkPwDqrdGoMv61UE1SCnow/edit?usp=sharing"
+      >Relatórios de Pair Programming</a
     >
   </li>
   <li>
