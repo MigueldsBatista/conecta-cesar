@@ -97,7 +97,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 <summary>Entrega 3</summary>
 <ul>
   <li>
-    <a  href="#"
+    <a  href=""
       >ScreenCast Lo-Fi</a
     >
   </li>
@@ -107,7 +107,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
     >
   </li>
   <li>
-    <a  href="#"
+    <a  href=""
       >ScreenCast - Uso do Sistema</a
     >
   </li>
@@ -117,17 +117,17 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
     >
   </li>
   <li>
-    <a  href="#"
+    <a  href=""
       >Diagrama de Atividades</a
     >
   </li>
   <li>
-    <a  href="#"
+    <a  href="https://youtu.be/Dzw1E2DsxVE"
       >ScreenCast - Deployment e Build</a
     >
   </li>
   <li>
-    <a  href="#"
+    <a  href=""
       >ScreenCast - Testes E2E</a
     >
   </li>
