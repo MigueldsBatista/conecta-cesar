@@ -36,7 +36,9 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
     >
   </li>
 </ul>
+
 ## ♟️ Entregas
+
 <details>
 <summary>Entrega 01</summary>
 <ul>
@@ -49,11 +51,11 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
       >Protótipo  de Baixa Fidelidade - Screencast</a
     >
   </li>
-  ![Imagem do Painel Do jira com a sprint 1 iniciada](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/painel%20jira.jpeg)
+ <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/painel%20jira.jpeg">Painel Do jira com a sprint 1 iniciada</a>
 
-![Imagem da Sprint 1 na aba do backlog](https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/print%20sprint%201.jpeg)
+ <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/print%20sprint%201.jpeg">Imagem da Sprint 1 na aba do backlog</a>
 
-![Imagem do Backlog pós-início da sprint 1](https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/print%20backlog%20entrega%2002.jpeg)
+<a href ="https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/print%20backlog%20entrega%2002.jpeg">Imagem do Backlog pós-início da sprint 1
 
 </ul>
 </details>
