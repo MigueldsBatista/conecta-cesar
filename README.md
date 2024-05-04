@@ -139,7 +139,7 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
   </li>
 
    <li>
-    <a  href="#"
+    <a  href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/BugTracker%20Entrega%203.png"
       >BugTracker</a
     >
   </li>
