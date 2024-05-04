@@ -4,13 +4,12 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 
 ## ⚙️ Principais Funcionalidades
 
-- **Quadro de Avisos:** Notifica os alunos da aproximação de eventos importantes por meio de um quadro de avisos.
+- **Quadro de Avisos:** Notifica os alunos os eventos importantes por meio de um quadro de avisos.
 - **Boletim:** Visualização de notas para os alunos, e lançamento das notas pelos professores.
 - **Gerenciamento de Faltas:** Onde os alunos possam ver suas faltas e os professores gerenciarem as mesmas.
-- **Biblioteca Digital:** Através dessa página, qualquer um pode desde reservar livros até verificar os prazos de devolução.
 - **Certificados:** Os alunos podem armazenar seus certificados e calcular a quantidade de horas extras realizadas.
 - **Compatibilidade:** Nossa plataforma será compatível tanto para computadores, quanto dispositivos móveis através de um aplicativo.
-- **Acompanhamento do Progresso Acadêmico:** Incluindo gráficos que auxiliem tanto os alunos quanto os professores na análise do desempenho individual e coletivo.
+- **Acompanhamento do Progresso Acadêmico:** Incluindo gráficos que auxiliam os alunos na análise do desempenho individual e coletivo.
 
 ## 🖇️ Links Importantes
 
