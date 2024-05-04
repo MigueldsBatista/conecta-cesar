@@ -73,11 +73,11 @@ Nossa plataforma está sendo desenvolvida para estabelecer uma conexão mais efi
 </li>
 
 <li> 
-  <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/bugtracker.jpeg">Screencast Site</a>
+  <a href="#">Screencast Site</a>
 </li>
 
 <li> 
-  <a href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/bugtracker.jpeg">Screencast Lo-Fi</a>
+  <a href="#">Screencast Lo-Fi</a>
 </li>
 
 
