@@ -105,7 +105,7 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     >
   </li>
 <li>
-<a href ="https://github.com/MigueldsBatista/conecta-cesar/blob/main/M%C3%ADdia/novo%20diagrama1.jpg">Diagrama de Atividades</a>
+<a href ="https://github.com/MigueldsBatista/conecta-cesar/tree/main/Mídia/Diagramas">Diagrama de Atividades</a>
 </li>
 
 
