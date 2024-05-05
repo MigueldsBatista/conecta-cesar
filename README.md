@@ -212,5 +212,3 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
   <img src="https://contrib.rocks/image?repo=MigueldsBatista/conecta-cesar" />
 </a>
 
-Made with [contrib.rocks](https://contrib.rocks).
-
