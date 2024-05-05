@@ -208,3 +208,9 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
   </li>
 </ul>
 
+<a href="https://github.com/MigueldsBatista/conecta-cesar/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=MigueldsBatista/conecta-cesar" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+
