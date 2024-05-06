@@ -37,7 +37,7 @@ describe('Test Suite for Multiple User Types', () => {
     cy.get(':nth-child(4) > .nav-link').click()//clica em perfil
     cy.fixture('fotoTeste.png').then((fileContent) => {
       cy.get('.form-control').attachFile({
-        fileContent: fileContent,
+        fileContent: fileContent,//teste de foto do perfil
         fileName: 'fotoTeste.png',
         mimeType: 'image/png'
       });
