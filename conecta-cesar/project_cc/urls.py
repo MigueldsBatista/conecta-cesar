@@ -6,13 +6,17 @@ from django.conf.urls.static import static
 
 # Função para redirecionar para uma página específica ao acessar a página inicial
 def homepage(request):
-    return redirect('login')  # Redirecionar para a rota 'login'
+    return redirect('login')
+
+def adminpg(request):
+    return redirect('admin')  # Redirecionar para a rota 'login'
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Rotas para o administrador
     path('auth/', include('users.urls')),  # Incluindo URLs do app 'users'
     path('app/', include('app_cc.urls')),  # Incluindo URLs do app 'app_cc'
-    path('', homepage),  # Redirecionar para a página de login ao acessar o caminho raiz
+    path('', homepage),
+      # Redirecionar para a página de login ao acessar o caminho raiz
 ]
 
 # Configuração para servir arquivos estáticos/media

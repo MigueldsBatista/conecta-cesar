@@ -8,6 +8,9 @@ from app_cc.models import Aluno as AlunoModel, Professor as ProfessorModel
 from django.contrib import messages
 from rolepermissions.roles import assign_role
 
+
+
+
 def cadastro(request):
     if request.method == 'GET':
         return render(request, 'cadastro.html')
