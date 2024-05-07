@@ -1,28 +1,66 @@
 {% extends 'app_cc/aluno/main.html' %}
 
 {% block content %}
-<div class="container mt-4">  <!-- Espaçamento no topo -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="container mt-4">
     <h1 class="text-center">Variação das Notas</h1>  <!-- Título da página -->
-    <div class="bar-container">  <!-- Contêiner para as barras -->
-        {% for disciplina_info in disciplinas_com_notas %}
-            <!-- Barra proporcional ao valor da nota -->
-            <div class="bar" data-nota="{{ disciplina_info.nota }}" style="width: {{ disciplina_info.largura }}%;">  
-                {{ disciplina_info.disciplina }}  <!-- Exibir a sigla da disciplina -->
-            </div>
-        {% endfor %}
-    </div>
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Pega todas as barras
-    var barras = document.querySelectorAll(".bar");
-    
-    // Define a largura com base na nota
-    barras.forEach(function(bar) {
-        var nota = parseFloat(bar.getAttribute("data-nota"));  // Pega a nota do atributo
-        var largura = (nota / 10) * 100;  // Calcula a largura como percentual
-        bar.style.width = largura + "%";  // Define a largura
+
+    <!-- Canvas para o gráfico de barras horizontais -->
+    <canvas id="notasChart"></canvas>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var disciplinas = {{ disciplinas_com_notas|safe }};  // Converte para JSON seguro
+
+        var labels = [];
+        var notas = [];
+
+        disciplinas.forEach(function(disciplina_info) {
+            labels.push(disciplina_info.disciplina);  // Nome ou sigla da disciplina
+            notas.push(parseFloat(disciplina_info.nota));  // Valor da nota
+        });
+
+        var ctx = document.getElementById("notasChart").getContext("2d");
+        var notasChart = new Chart(ctx, {
+            type: 'bar',  // Tipo de gráfico
+            data: {
+                labels: labels,  // Disciplinas no eixo Y
+                datasets: [{
+                    label: 'Notas',  // Legenda do gráfico
+                    data: notas,  // Notas ao longo do eixo X
+                    backgroundColor: '#3498db',  // Cor das barras
+                    borderColor: 'rgba(75, 192, 192, 1)',  // Cor das bordas
+                    borderWidth: 1  // Largura das bordas
+                }]
+            },
+            options: {
+                indexAxis: 'y',  // Define as barras para horizontais
+                scales: {
+                    x: {
+                        beginAtZero: true,  // Começa do zero
+                        max: 10,  // Máximo valor para o eixo X (escala de 0 a 10)
+                        title: {
+                            display: true,
+                            text: 'Nota',
+                        },
+                    },
+                    y: {  // Configurações para o eixo Y
+                        ticks: {  // Configurações para os rótulos
+                            font: {
+                                weight: 'bold',  // Define a fonte como negrito
+                                size: 14,  // Aumenta o tamanho da fonte
+                            },
+                        },
+                        title: {
+                            display: true,
+                            text: 'Disciplinas',
+                        },
+                    },
+                },
+            },
+        });
     });
-});
-</script>
+    </script>
+</div>
 {% endblock %}

@@ -10,7 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         # Criação do usuário para o professor
         user_professor = User.objects.create_user(
-            username='professor1', password='123', email='prof1@test.com'
+            username='professor1', password='123', email='professor1@test.com'
         )
 
         # Criação do professor e associação ao usuário

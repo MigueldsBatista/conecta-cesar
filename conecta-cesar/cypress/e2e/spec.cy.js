@@ -1,13 +1,20 @@
 /* 
+deletar o diretorio nodule modules
+
+deletar os packages .json
+
+
 Pra iniciar 
 npm init
 npm install cypress --save -include=dev 
+npm install --save-dev cypress-file-upload
 npx cypress open
  */
 // Testes para usuários do tipo Professor
 
 //Foi criado o comando "py ./manage.py tests" para criar os perfis de aluno e professor, esse comando sera executado no workflows da azure para garantir que os testes sejam realizados com sucesso o comando esta em app_cc/management/commands/tests.py
 // Testes para usuários do tipo Professor
+
 describe('Test Suite for Professors', () => {
   // Loga no início de cada teste como "professor1"
   beforeEach(() => {
@@ -17,12 +24,12 @@ describe('Test Suite for Professors', () => {
     cy.get('.btn').click(); // Loga no sistema
   });
 
-  it('Página Inicial', () => {
+  it('Página Inicial do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('.navbar-nav > :nth-child(1) > .nav-link').click(); // Clica em Home
   });
 
-  it('Disciplina', () => {
+  it('Disciplinas do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('.dropdown > .nav-link').click(); 
     cy.get(':nth-child(1) > .dropdown-item').click(); // Acessa disciplinas
@@ -37,20 +44,32 @@ describe('Test Suite for Professors', () => {
     cy.get('.btn').click();
   });
 
-  it('Frequência', () => {
+  it('Frequência do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('.dropdown > .nav-link').click(); 
     cy.get(':nth-child(2) > .dropdown-item').click(); // Frequência
     cy.get('div > input').click()
-    cy.get('.btn').click()
+    cy.get('.btn').click()//Registra a falta
 
-    
+
+    cy.get('.badge').invoke('text').then((badgeValue) => {
+      cy.wrap(badgeValue).as('badgeValue'); // Salva a quantidade de faltas
+    });
+    cy.get('.btn').click(); //Tenta clicar novamente em registrar uma falta
+    cy.get('@badgeValue').then((badgeValue) => {
+    cy.get('.badge').invoke('text').should('equal', badgeValue); //Verifica a quantidade de faltas não mudou
+    });
+
   });
 
-  it('Perfil', () => {
+  it('Perfil do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(4) > .nav-link').click(); // Perfil
     
+    cy.get('.btn').click();//Tenta clicar no botão de enviar arquivo sem nenhum arquivo
+     cy.get('.alert').should('not.exist'); // O alerta não deve estar presente
+
+
     cy.fixture('pdfTeste.pdf').then((fileContent) => {
       cy.get(':nth-child(2) > .form-control').attachFile({
         fileContent,
@@ -58,7 +77,13 @@ describe('Test Suite for Professors', () => {
         mimeType: 'application/pdf', 
       });
     });
+    cy.get('.btn').click()
+    cy.get('.alert').within(() => {
+      // Verifica se o texto "Somente arquivos JPG ou PNG são permitidos" está presente no formulário
+      cy.contains('Somente arquivos JPG ou PNG são permitidos.').should('be.visible');
+    });
 
+    
     cy.fixture('fotoTeste.png').then((fileContent) => {
       cy.get('.form-control').attachFile({
         fileContent,
@@ -68,10 +93,12 @@ describe('Test Suite for Professors', () => {
     });
 
     cy.get('.btn').click();
-    //cy.get('img').should('be visible'); // Verifica se a imagem do perfil é visível
+    cy.get('.alert').within(() => {
+    cy.contains('Foto de perfil atualizada com sucesso!').should('be.visible');//Mensagem de sucesso
+    });
   });
 
-  it('Diário', () => {
+  it('Diário do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(5) > .nav-link').click(); // Acessa o diário
     cy.get('#tituloDiario').type('diario')
@@ -90,30 +117,33 @@ describe('Test Suite for Students', () => {
     cy.get('.btn').click(); // Loga no sistema
   });
 
-  it('Página Principal', () => {
+  it('Página Principal do Aluno', () => {
     cy.get('.navbar-toggler-icon').click(); 
     cy.get(':nth-child(1) > .nav-link').click(); // Página principal
   });
 
-  it('Calendário', () => {
+  it('Calendário do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(2) > .nav-link').click(); 
     cy.get('.fa-angle-right').click(); // Próximo mês
     cy.get('.fa-angle-left').click(); // Mês anterior
   });
 
-  it('Boletim', () => {
+  it('Boletim do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('.dropdown > .nav-link').click(); 
     cy.get(':nth-child(1) > .dropdown-item').click()
     cy.get('#link_boletim').click()
-    cy.get('.bar-container')//Vai pegar a barra do container
+    cy.get('#notasChart')//Vai pegar a barra do container do gráfico da nota que deve aparecer
 
   });
-  it('Perfil', () => {
+  it('Perfil do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(4) > .nav-link').click(); // Acessa o perfil
     
+    cy.get('.btn').click();//Tenta clicar no botão de enviar arquivo sem nenhum arquivo
+     cy.get('.alert').should('not.exist'); // O alerta não deve estar presente
+
     cy.fixture('pdfTeste.pdf').then((fileContent) => {
       cy.get(':nth-child(2) > .form-control').attachFile({
         fileContent,
@@ -121,6 +151,13 @@ describe('Test Suite for Students', () => {
         mimeType: 'application/pdf', 
       });
     });
+    cy.get('.btn').click()
+    cy.get('.alert').within(() => {
+      // Verifica se o texto "Somente arquivos JPG ou PNG são permitidos" está presente no formulário
+      cy.contains('Somente arquivos JPG ou PNG são permitidos.').should('be.visible');
+    });
+
+
 
     cy.fixture('fotoTeste.png').then((fileContent) => {
       cy.get('.form-control').attachFile({
@@ -129,14 +166,19 @@ describe('Test Suite for Students', () => {
         mimeType: 'image/png',
       });
     });
-
-    //cy.get('.btn').click();
-    //cy.get('img').should('be visible'); // Verifica se a imagem do perfil é visível
+    cy.get('.btn').click();
+    cy.get('.alert').within(() => {
+      
+      cy.contains('Foto de perfil atualizada com sucesso!').should('be.visible');//Mensagem de sucesso
+    });
   });
 
-  it('Hora extra', () => {
+  it('Horas extras do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(5) > .nav-link').click(); // Acessa Horas extras
+
+    cy.get('.mb-4 > .btn').click()//Enviar
+    cy.get('.alert').should('not.exist')
     
     cy.fixture('pdfTeste.pdf').then((fileContent) => {
       cy.get(':nth-child(2) > .form-control').attachFile({
@@ -145,7 +187,13 @@ describe('Test Suite for Students', () => {
         mimeType: 'application/pdf', 
       });
     });
-
+    cy.get(':nth-child(3) > .form-control').type('15')
+    cy.get('.mb-4 > .btn').click()//Enviar 
+    cy.get('.alert').within(() => {
+      // Verifica se o texto "Somente arquivos JPG ou PNG são permitidos" está presente no formulário
+      cy.contains('Somente arquivos JPG ou PNG são permitidos.').should('be.visible');
+    });
+    
 
     cy.fixture('fotoTeste.png').then((fileContent) => {
       cy.get(':nth-child(2) > .form-control').attachFile({
@@ -153,7 +201,7 @@ describe('Test Suite for Students', () => {
         fileName: 'fotoTeste.png',//Envia um arquivo funcional
         mimeType: 'image/png',
       });
-      cy.get(':nth-child(3) > .form-control').type('15')
+      cy.get(':nth-child(3) > .form-control').clear().type('15')
       cy.get('.mb-4 > .btn').click()//Enviar
 
       cy.get(':nth-child(1) > .text-center > :nth-child(1) > .form-control').type('10')
@@ -163,7 +211,7 @@ describe('Test Suite for Students', () => {
       cy.get(':nth-child(1) > .text-center > :nth-child(2) > .btn').click()//Excluir
 
     });
-    it('Diario', () => {
+    it('Diario do Aluno', () => {
       cy.get('.navbar-toggler').click(); 
       cy.get(':nth-child(6) > .nav-link').click(); 
       cy.get('.list-group > :nth-child(1)')
