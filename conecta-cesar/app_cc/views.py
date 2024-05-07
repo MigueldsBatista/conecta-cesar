@@ -117,7 +117,7 @@ def hora_extra(request):
 
         # Verificar se o tipo do arquivo é aceitável
         if not file.name.lower().endswith(('.jpg', '.jpeg', '.png')):
-            messages.error(request, "Formato de arquivo inválido. Envie apenas jpg, jpeg ou png.")
+            messages.error(request, "Somente arquivos JPG ou PNG são permitidos.")
             return redirect("hora_extra")
 
         if not horas_extras or horas_extras.strip() == "":
@@ -284,7 +284,7 @@ def perfil(request):
                 # Verifique se o arquivo é PNG ou JPG
                 ext = os.path.splitext(foto_perfil.name)[1].lower()  # Pega a extensão do arquivo
                 if ext not in ['.jpg', '.jpeg', '.png']:
-                    messages.error(request, "Apenas arquivos PNG e JPG são permitidos.")
+                    messages.error(request, "Somente arquivos JPG ou PNG são permitidos.")
                     return redirect('perfil')  # Redireciona para a mesma página
 
                 # Se há uma foto antiga, exclua-a

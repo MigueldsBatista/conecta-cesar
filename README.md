@@ -27,7 +27,7 @@
 
 # Conecta-Cesar
 
-Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está sendo desenvolvida como parte da disciplina de Fundamentos de Software (FDS) para estabelecer uma conexão mais eficaz entre os alunos do Cesar School e a própria instituição de ensino. Enquanto já existe um sistema semelhante em vigor, porém que não vem agradando os alunos, este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
+Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está sendo desenvolvida como parte da disciplina de Fundamentos de Software (FDS) para estabelecer uma conexão mais eficaz entre os alunos, professoras e a própria instituição de ensino. Enquanto já existe um sistema semelhante em vigor, porém que não vem agradando os alunos, este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
 
 ## ⚙️ Principais Funcionalidades
 
@@ -144,7 +144,7 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     >
   </li>
   <li>
-    <a  href="https://youtu.be/XLIJzpYkGxY"
+    <a  href="https://youtu.be/B0mTDGin588"
       >ScreenCast - Uso do Sistema</a
     >
   </li>
@@ -159,12 +159,12 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     >
   </li>
   <li>
-    <a  href="https://youtu.be/Dzw1E2DsxVE"
+    <a  href="https://youtu.be/KFibTU-0CS8"
       >ScreenCast - Deployment e Build</a
     >
   </li>
   <li>
-    <a  href="https://youtu.be/j_EwXFhZmps"
+    <a  href="https://youtu.be/a3wLo2k0VZ8"
       >ScreenCast - Testes E2E</a
     >
   </li>

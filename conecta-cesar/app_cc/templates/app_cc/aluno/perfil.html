@@ -1,6 +1,18 @@
 {% extends "app_cc/aluno/main.html" %}
 
 {% block content %}
+
+{% if messages %}
+<div>
+    {% for message in messages %}
+        <div 
+            class="alert alert-{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}danger{% elif 'warning' in message.tags %}warning{% else %}info{% endif %}  fade show" 
+            role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
 <div class="main-content" style="margin-top: -50px">
     <div class="profile-container">
         <div class="profile-header">
@@ -16,9 +28,7 @@
               </div>
               <button type="submit" class="btn btn-primary">Atualizar Foto de Perfil</button>
               <br>
-              {%for message in messages%}
-                {{message}}
-                {%endfor%}
+             
           </form>
 
             <h1>{{ nome }}</h1>
