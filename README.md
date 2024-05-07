@@ -144,7 +144,7 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     >
   </li>
   <li>
-    <a  href="https://youtu.be/XLIJzpYkGxY"
+    <a  href="https://youtu.be/B0mTDGin588"
       >ScreenCast - Uso do Sistema</a
     >
   </li>
@@ -159,12 +159,12 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     >
   </li>
   <li>
-    <a  href="https://youtu.be/Dzw1E2DsxVE"
+    <a  href="https://youtu.be/KFibTU-0CS8"
       >ScreenCast - Deployment e Build</a
     >
   </li>
   <li>
-    <a  href="https://youtu.be/j_EwXFhZmps"
+    <a  href="https://youtu.be/a3wLo2k0VZ8"
       >ScreenCast - Testes E2E</a
     >
   </li>
