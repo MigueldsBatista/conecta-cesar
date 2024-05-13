@@ -27,7 +27,7 @@
 
 # Conecta-Cesar
 
-Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está sendo desenvolvida como parte da disciplina de Fundamentos de Software (FDS) para estabelecer uma conexão mais eficaz entre os alunos, professoras e a própria instituição de ensino. Enquanto já existe um sistema semelhante em vigor, porém que não vem agradando os alunos, este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
+Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está sendo desenvolvida como parte da disciplina de Fundamentos de Software (FDS) para estabelecer uma conexão mais eficaz nas escolas entre os alunos, professoras e a própria instituição de ensino. Este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
 
 ## ⚙️ Principais Funcionalidades
 
@@ -36,7 +36,7 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
 - **Gerenciamento de Faltas:** Onde os alunos podem ver suas faltas e os professores gerenciarem as mesmas.
 - **Certificados:** Os alunos podem armazenar seus certificados e calcular a quantidade de horas extras realizadas.
 - **Compatibilidade:** Nossa plataforma será compatível tanto para computadores, quanto dispositivos móveis através de um aplicativo.
-- **Acompanhamento do Progresso Acadêmico:** Incluindo gráficos que auxiliam os alunos na análise do desempenho individual e coletivo.
+- **Acompanhamento do Progresso Acadêmico:** Incluindo gráficos que auxiliam os alunos na análise do desempenho individual.
 
 ## ⚙ Tecnologias Utilizadas
 
