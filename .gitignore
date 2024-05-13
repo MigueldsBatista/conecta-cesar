@@ -18,6 +18,13 @@ db.sqlite3-journal
 *.py[cod]
 *$py.class
 
+
+###Cypress
+node_modules/
+package-lock.json
+package.json
+
+
 # C extensions
 *.so
 

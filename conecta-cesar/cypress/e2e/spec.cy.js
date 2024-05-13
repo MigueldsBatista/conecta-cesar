@@ -22,7 +22,10 @@ describe('Test Suite - Setup and Tests', () => {
     cy.exec("rm db.sqlite3", { failOnNonZeroExit: false }); // Remove banco de dados
     cy.exec("python3 manage.py makemigrations", { failOnNonZeroExit: false }); // Executa migração do banco de dados
     cy.exec("python3 manage.py migrate", { failOnNonZeroExit: false }); // Executa migração do banco de dados
-    cy.exec("python3 manage.py tests", { failOnNonZeroExit: false }); // Executa testes Django
+    cy.exec("python3 manage.py tests", { failOnNonZeroExit: false });
+    cy.exec("python3 manage.py runserver", { failOnNonZeroExit: false });
+
+     // Executa testes Django
   });
 
   it('Verifica se o banco de dados foi recriado e migrações foram aplicadas', () => {
