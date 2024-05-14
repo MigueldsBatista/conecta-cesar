@@ -13,8 +13,8 @@
     {% endfor %}
 </div>
 {% endif %}
-<div class="main-content" style="margin-top: -50px">
-    <div class="profile-container">
+<div class="main-content">
+    <div class="profile-container" style="border-radius: 20px;">
         <div class="profile-header">
             {% if foto_perfil %}
                 <img src="{{ foto_perfil }}" alt="Foto de Perfil" style="width: 100px; height: 100px; object-fit: cover;">
@@ -23,7 +23,7 @@
             {% endif %}
             <form action="{% url 'perfil' %}" method="post" enctype="multipart/form-data">  <!-- Importante definir enctype -->
               {% csrf_token %}
-              <div class="form-group">
+              <div class="form-group" >
                   <input type="file" name="foto_perfil" class="form-control" required>
               </div>
               <button type="submit" class="btn btn-primary">Atualizar Foto de Perfil</button>

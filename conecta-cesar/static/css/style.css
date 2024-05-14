@@ -6,26 +6,18 @@
 }
 
 
-
-
-.main-content {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .profile-container {
+  padding: 20px !important;
   background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 50px;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+
 }
 
 .profile-header {
   text-align: center;
   margin-bottom: 20px;
+
 }
 
 .profile-header img {
@@ -49,6 +41,7 @@ a,
 .nav-link {
   color: black !important;
 }
+
 
 .rounded-4 {
   border-radius: 4%;
@@ -106,6 +99,7 @@ a,
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  padding-bottom: -10px;
   
  
 }
@@ -124,7 +118,20 @@ a,
   margin-top: 20px;
   width: 80%;
   margin: 20px auto;
+  
+
 }
+
+.nav-item img{
+  width: 8% !important;
+}
+.img_frequencia{
+  width: 10% !important;
+}
+
+
+/* Ajuste de tamanho das barras para dispositivos móveis */
+
 
   @media only screen and (max-width: 600px) {
     .grade-container {
@@ -132,9 +139,32 @@ a,
       align-items: flex-start;
       padding: 15px;
       width: 90%;
-    }
-}
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 
+    
+    }
+    .offcanvas-end
+    {
+    width: 60% !important; /* Largura desejada para dispositivos móveis */
+    }
+
+    .nav-item img{
+      width: 15% !important;
+    }
+
+    .img_frequencia{
+      width: 19% !important;
+    }
+    
+ .mobile-chart-container canvas {
+      height: 200px !important; /* altura das barras para dispositivos móveis */}
+
+      .boletim_input {
+        width: 50px; /* Define a largura desejada para o input */
+        height: 30px; /* Define a altura desejada para o input */
+        font-size: 14px; /* Define o tamanho da fonte do input */
+      }
+}
 
 
 .grade-text {
@@ -168,11 +198,13 @@ a,
   width: 100% !important;
 
 
+
   /* Adiciona espaço no topo */
 }
 .card{
   border: none !important; /* Remove a borda */
   border-radius: 20px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Horizontal offset, Vertical offset, Blur radius, Spread radius, Color */
 
 
 }
@@ -181,13 +213,15 @@ a,
   max-width: 90% !important; /* Ajuste conforme necessário */
   margin: 0 auto !important; /* Centraliza a barra de navegação */
 }
+
+
 /* Título centralizado */
 .text-center {
   text-align: center;
 }
 
 /* Cor do cabeçalho do cartão personalizada */
-.card-header-custom {
+.card-header {
 
   background-color: #323334 !important; /* Azul personalizado */
   color: white !important; /* Texto branco para contraste */
@@ -263,4 +297,6 @@ a,
   align-items: center; 
     padding: 0 10px;
 }
+
+/*STUDENT PROFILE CSS*/
 

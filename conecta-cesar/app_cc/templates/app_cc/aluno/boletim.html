@@ -4,7 +4,11 @@
 
   <div>
     <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
-    
+    <div class="text-end mt-3">
+      <button class="orange-button">
+          <a id="link_boletim" href="{% url 'variacao_notas' %} ">Variações de notas</a> 
+      </button>
+  </div>
     {% for disciplina, nota_instance in disciplinas_com_notas %}
     <div class="grade-container">
       <h5>{{ disciplina }}</h5>
@@ -24,9 +28,5 @@
     
   </div>
 
-  <div class="text-end mt-3">
-    <button class="orange-button">
-        <a id="link_boletim" href="{% url 'variacao_notas' %} ">Variações de notas</a> 
-    </button>
-</div>
+
 {% endblock content %}

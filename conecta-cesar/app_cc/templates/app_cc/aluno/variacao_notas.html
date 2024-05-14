@@ -3,11 +3,25 @@
 {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="container mt-4">
+<style>
+    /* Definindo a altura das barras */
+    .chart-container {
+        height: auto; /* altura automática */
+        min-height: 400px; /* altura mínima para evitar barras muito pequenas */
+    }
+
+    .chart-container canvas {
+        height: 100% !important; /* altura total do contêiner */
+    }
+</style>
+
+<div class="container mt-4" style="overflow-x: auto;">
     <h1 class="text-center">Variação das Notas</h1>  <!-- Título da página -->
 
     <!-- Canvas para o gráfico de barras horizontais -->
-    <canvas id="notasChart"></canvas>
+    <div class="chart-container" style="width: 100%; overflow-x: auto;">
+        <canvas id="notasChart"></canvas>
+    </div>
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -18,7 +32,7 @@
 
         disciplinas.forEach(function(disciplina_info) {
             labels.push(disciplina_info.disciplina);  // Nome ou sigla da disciplina
-            notas.push(parseFloat(disciplina_info.nota));  // Valor da nota
+            notas.push(parseFloat(disciplina_info.nota)*10);  // Valor da nota
         });
 
         var ctx = document.getElementById("notasChart").getContext("2d");
@@ -29,9 +43,9 @@
                 datasets: [{
                     label: 'Notas',  // Legenda do gráfico
                     data: notas,  // Notas ao longo do eixo X
-                    backgroundColor: '#3498db',  // Cor das barras
+                    backgroundColor: '#0AC5F5',  // Cor das barras
                     borderColor: 'rgba(75, 192, 192, 1)',  // Cor das bordas
-                    borderWidth: 1  // Largura das bordas
+                    borderWidth: 2  // Largura das bordas
                 }]
             },
             options: {
@@ -39,25 +53,23 @@
                 scales: {
                     x: {
                         beginAtZero: true,  // Começa do zero
-                        max: 10,  // Máximo valor para o eixo X (escala de 0 a 10)
-                        title: {
-                            display: true,
-                            text: 'Nota',
-                        },
+                        max: 100,  // Máximo valor para o eixo X (escala de 0 a 10)
                     },
                     y: {  // Configurações para o eixo Y
                         ticks: {  // Configurações para os rótulos
                             font: {
                                 weight: 'bold',  // Define a fonte como negrito
-                                size: 14,  // Aumenta o tamanho da fonte
+                                size: 11,
                             },
-                        },
-                        title: {
-                            display: true,
-                            text: 'Disciplinas',
+                            color: 'black' // Cor do texto
                         },
                     },
                 },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             },
         });
     });
