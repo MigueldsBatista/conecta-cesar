@@ -108,3 +108,8 @@ class File(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.aluno.usuario.username}"
+    
+"""class Avisos(models.Model):
+    title=models.CharField(max_length=150, null=True)
+    imagem=models.ImageField(upload_to='avisos/', null=True, blank=True)
+    description=models.CharField(max_length=300, null=True)"""

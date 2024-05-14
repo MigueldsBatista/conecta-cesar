@@ -24,7 +24,7 @@
     <!-- Example Code -->
     <nav class="navbar bg-body-tertiary fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'avisosp' %}"><img width="5%" src="{% static 'images/cesarschool.png' %}" alt="logo"> Conecta Cesar</a>
+        <a class="navbar-brand" href="{% url 'avisosp' %}"><img width="10%" src="{% static 'images/cesarschool.png' %}" alt="logo"> Conecta Cesar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -37,29 +37,31 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'avisosp' %}"><img width="5%" src="{% static 'images/home.png' %}" alt="home"> Home</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'avisosp' %}"><img  src="{% static 'images/home.png' %}" alt="home"> Home</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                  aria-expanded="false"><img width="5%" src="{% static 'images/turmas.png' %}" alt="turmas">
+                  aria-expanded="false"><img  src="{% static 'images/turmas.png' %}" alt="turmas">
                    Turmas
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'boletimp' %}"><img width="5%" src="{% static 'images/materias.png' %}" alt="materias"> Disciplina</a></li>
-                  <li><a class="dropdown-item" href="{% url 'frequenciap' %}"><img width="5%" src="{% static 'images/frequencia.png' %}" alt="frequencia"> Frequência</a></li>
+                  <li><a class="dropdown-item" href="{% url 'boletimp' %}"><img  src="{% static 'images/materias.png' %}" alt="materias"> Disciplina</a></li>
+                  <li><a class="dropdown-item" href="{% url 'frequenciap' %}"><img  src="{% static 'images/frequencia.png' %}" alt="frequencia"> Frequência</a></li>
                   
                 </ul>
               </li>
-                <a class="nav-link" href="{% url 'calendariop' %}"><img width="5%" src="{% static 'images/calendário.png' %}" alt="calendario"> Calendário</a>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'calendariop' %}"><img  src="{% static 'images/calendário.png' %}" alt="calendario"> Calendário</a>
+              </li>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'perfilp' %}"><img width="5%" src="{% static 'images/perfil.png' %}" alt="perfil"> Perfil</a>
+                <a class="nav-link" href="{% url 'perfilp' %}"><img  src="{% static 'images/perfil.png' %}" alt="perfil"> Perfil</a>
               </li>
                <li class="nav-item">
-                <a class="nav-link" href="{% url 'diariop' %}"><img width="5%" src="{% static 'images/diario.png' %}" alt="diario"> Diário</a>
+                <a class="nav-link" href="{% url 'diariop' %}"><img  src="{% static 'images/diario.png' %}" alt="diario"> Diário</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/"><img width="5%" src="{% static 'images/sair.png' %}" alt="sair"> Sair</a>
+                <a class="nav-link" href="/"><img  src="{% static 'images/sair.png' %}" alt="sair"> Sair</a>
               </li>
             </ul>
           </div>
