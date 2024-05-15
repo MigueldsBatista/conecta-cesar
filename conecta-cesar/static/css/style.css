@@ -132,7 +132,29 @@ a,
 
 /* Ajuste de tamanho das barras para dispositivos móveis */
 
+/*PERFIL*/
+.navbar {
+  height: 100px !important; /* Altura da navbar */
+  /* Outros estilos da navbar */
+}
 
+.main-content {
+  position: absolute; /* Tornar o posicionamento absoluto */
+  top: 50% !important; /* Colocar o elemento a 50% do topo da página */
+  left: 50% !important; /* Colocar o elemento a 50% da esquerda da página */
+  transform: translate(-50%, -50%) !important; /* Transladar o elemento para o centro */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center; /* Centralizar verticalmente */
+  width: 80% !important;
+  height: calc(100% - 50px); /* Altura da janela menos a altura da navbar */
+  margin-top: 50px; /* Metade da altura da navbar */
+}
+
+
+/**/
+
+/*MOBILE */
   @media only screen and (max-width: 600px) {
     .grade-container {
       flex-direction: column;
