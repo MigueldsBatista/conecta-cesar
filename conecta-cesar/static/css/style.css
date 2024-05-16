@@ -17,6 +17,11 @@ h1 color #bdc1c7
 
 strong orange tone #b54810
 
+********************
+guel eu não gostei mto dessas cores 
+-diniz :)
+********************
+
 orange for navbar #db5e3c
 other orange #e0603d
 navbar icon tone #7c7d84
@@ -161,9 +166,6 @@ color: #bdc1c7 !important;
 
 }
 
-.nav-item img{
-  width: 8% !important;
-}
 .img_frequencia{
   width: 10% !important;
 }
@@ -182,15 +184,6 @@ color: #bdc1c7 !important;
 
     
     }
-    .offcanvas-end
-    {
-    width: 60% !important; /* Largura desejada para dispositivos móveis */
-    }
-
-    .nav-item img{
-      width: 15% !important;
-    }
-
     .img_frequencia{
       width: 19% !important;
     }
@@ -335,3 +328,37 @@ color: #bdc1c7 !important;
 
 /*STUDENT PROFILE CSS*/
 
+/*NAV CSS*/
+.navbar{
+  background-color: #ff6600 !important;
+}
+.navbar-toggler{
+  border: 2px solid black !important;
+}
+.offcanvas, .dropdown-menu{
+  background-color: #ff6600 !important;
+  border: 2px solid black !important;
+}
+.offcanvas-end
+    {
+    width: 60% !important; /* Largura desejada para dispositivos móveis */
+  }
+.dropdown-menu{
+  border:2px solid black !important;
+}
+.nav-item  {
+  background-color: #ff6600 !important;
+  transition: color 0.3s ease;
+}
+.nav-item :hover {
+  border-radius: 5px 5px 5px 5px;
+  transition: border 0.3s ease;
+  background-color: #cc3300 !important;
+}
+.nav-item img{
+  width: 15% !important;
+}
+.nav-item img{
+  width: 8% !important;
+}
+/*END NAV CSS*/
