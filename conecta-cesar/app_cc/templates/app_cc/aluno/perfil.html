@@ -23,14 +23,15 @@
             {% endif %}
             <form action="{% url 'perfil' %}" method="post" enctype="multipart/form-data">  <!-- Importante definir enctype -->
               {% csrf_token %}
-              <div class="form-group" >
-                  <input type="file" name="foto_perfil" class="form-control" required>
+              <div class="form-group">
+                  <div class="file-input-wrapper">
+                      <input type="file" name="foto_perfil" id="foto_perfil" class="form-control">
+                      <label for="foto_perfil">Escolher Arquivo</label>
+                  </div>
               </div>
               <button type="submit" class="btn-submit">Atualizar Foto de Perfil</button>
               <br>
-             
           </form>
-
             <h1>{{ nome }}</h1>
         </div>
 
