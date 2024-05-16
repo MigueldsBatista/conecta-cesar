@@ -128,7 +128,7 @@
   height: 40px;
   color: white;
   border-radius: 50%;
-  background-color: rgb(226, 159, 34);
+  background-color: rgb(19, 153, 37);
   border: none;
   font-weight: 600;
   display: flex;
@@ -167,13 +167,73 @@
 
 .download-button::before {
   display: none;
-  content: "Download";
+  content: "Baixar";
   color: white;
   transition-duration: 0.3s;
   font-size: 2px;
 }
 
 .download-button:hover::before {
+  display: block;
+  padding-right: 10px;
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+}
+
+/*UPDATE BUTTON*/
+.update-button {
+  width: 40px;
+  height: 40px;
+  color: white;
+  border-radius: 50%;
+  background-color: rgb(29, 106, 206);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.update-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.update-svgIcon path {
+  fill: white;
+}
+
+.update-button:hover {
+  width: 120px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  align-items: center;
+}
+
+.update-button:hover .edit-svgIcon {
+  width: 20px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+
+}
+
+.update-button::before {
+  display: none;
+  content: "Atualizar";
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.update-button:hover::before {
   display: block;
   padding-right: 10px;
   font-size: 13px;
