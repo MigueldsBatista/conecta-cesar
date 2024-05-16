@@ -24,10 +24,10 @@ crossorigin="anonymous"></script>
   <br>
 <br>
   <div class="container-fluid d-flex justify-content-center align-items-center vh-100" >
-    <form method="post" style="width: 300px; background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px;margin-top: -20%;">
+    <form class="login-form" method="post">
       {% csrf_token %}
 <!-------------------------------------------------------------------------------------------------------------------------------------->        
-
+<div class="form-text-input">
       <div class="mb-3">
         <label class="form-label">Formulário</label>
         <br>
@@ -52,12 +52,13 @@ crossorigin="anonymous"></script>
             <option value="professor">Professor</option>
             <option value="aluno">Aluno</option>
         </select>
+      </div>
 <!-------------------------------------------------------------------------------------------------------------------------------------->        
-        <div class="login-button" >
+<br>
+      <div class="login-button" >
       <input type="submit" class="btn btn-primary " value="Cadastrar">
         </div>
-      <br>
-      <br>
+        <br>
         Ja tem uma conta? faça <a href="{% url 'login' %}">Login</a>
 <!-------------------------------------------------------------------------------------------------------------------------------------->        
 

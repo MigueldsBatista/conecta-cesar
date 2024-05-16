@@ -57,7 +57,7 @@
                             
                         </div>
                         <div class="form-group">
-                            <label for="horas_extras" class="form-label">Horas Extras (min: 0.1)</label>
+                            <label for="horas_extras" class="form-label">Horas Extras</label>
                             <input type="number" name="horas_extras" class="form-control" step="0.1" min="0.1" required>  <!-- Valor mínimo para horas extras -->
                         </div>
                         <!--Botão para enviar arquivo -->
@@ -90,8 +90,46 @@
                                         <!-- Formulário para deletar o arquivo -->
                                         <form action="{% url 'hora_extra' %}" method="POST" class="d-inline">
                                             {% csrf_token %}
-                                            <input type="hidden" name="delete_file" value="{{ arquivo.id }}">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir este arquivo?')">Excluir</button>
+                                            <input type="hidden" name="delete_file" value="{{ arquivo.id }}">                                            
+                                            <button type="submit" class="Btn" onclick="return confirm('Tem certeza que deseja excluir este arquivo?')">
+                                                <div class="sign">
+                                                  <svg
+                                                    viewBox="0 0 16 16"
+                                                    class="bi bi-trash3-fill"
+                                                    fill="currentColor"
+                                                    height="18"
+                                                    width="18"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                  >
+                                                    <path
+                                                      d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"
+                                                    ></path>
+                                                  </svg>
+                                                </div>
+                                              
+                                                <div class="text">Delete</div>
+                                              </button>
+                                              
+                                              <button type="submit" class="UploadBtn" onclick="return confirm('Tem certeza que deseja fazer o upload deste arquivo?')">
+                                                <div class="sign">
+                                                  <svg viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M8 1.5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 1 0V2a.5.5 0 0 0-.5-.5zM7.354.146a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7 1.707V13.5a.5.5 0 0 0 1 0V1.707l3.646 3.647a.5.5 0 0 0 .708-.708z"/>
+                                                    <path d="M5.5 16a.5.5 0 0 0 .5-.5V3.707l2.646 2.647a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L5 3.707V15.5a.5.5 0 0 0 .5.5z"/>
+                                                  </svg>
+                                                </div>
+                                                <div class="text">Upload</div>
+                                              </button>
+                                              
+                                              <button type="submit" class="RefreshBtn" onclick="return confirm('Tem certeza que deseja atualizar?')">
+                                                <div class="sign">
+                                                  <svg viewBox="0 0 16 16" class="bi bi-arrow-clockwise" fill="currentColor" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M9.646 2.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L11.293 6H4.5a.5.5 0 0 1 0-1h6.793l-2.147-2.146a.5.5 0 0 1 0-.708z"/>
+                                                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM7 8a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2H8a1 1 0 0 1-1-1z"/>
+                                                  </svg>
+                                                </div>
+                                                <div class="text">Atualizar</div>
+                                              </button>
+                                              
                                         </form>
 
                                         <a href="{{ arquivo.archive.url }}" download class="btn btn-sm btn-outline-success">Baixar</a>
