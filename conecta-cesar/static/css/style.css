@@ -13,13 +13,9 @@
 Color for dark-theme
 background #23252c
 containers #2c2e33
-h1 color #bdc1c7  / #b7bcc0
+h1 color #bdc1c7
 
 strong orange tone #b54810
-gray for frequency icon #27292e
-********************
-
-********************
 
 orange for navbar #db5e3c
 other orange #e0603d
@@ -118,6 +114,33 @@ color: #bdc1c7 !important;
   border: solid;
   margin-top: 10px;
 }
+.file-input-wrapper {
+  position: relative;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.file-input-wrapper input[type="file"] {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  opacity: 0 !important;
+}
+
+.file-input-wrapper label {
+  display: inline-block !important;
+  padding: 10px 20px !important;
+  background-color: #8f380c !important; /* Cor roxa */
+  box-shadow: #000000 0px 0px 5px !important;
+  color: #000000 !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+}
+
+.file-input-wrapper label:hover {
+  background-color: #8f380c !important; /* Mudando a cor quando o mouse passa por cima */
+}
+
 /*END PERFIL */
 
 
@@ -180,29 +203,7 @@ color: #bdc1c7 !important;
 
 /* Ajuste de tamanho das barras para dispositivos móveis */
 
-/*PERFIL*/
-.navbar {
-  height: 100px !important; /* Altura da navbar */
-  /* Outros estilos da navbar */
-}
 
-.main-content {
-  position: absolute; /* Tornar o posicionamento absoluto */
-  top: 50% !important; /* Colocar o elemento a 50% do topo da página */
-  left: 50% !important; /* Colocar o elemento a 50% da esquerda da página */
-  transform: translate(-50%, -50%) !important; /* Transladar o elemento para o centro */
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center; /* Centralizar verticalmente */
-  width: 80% !important;
-  height: calc(100% - 50px); /* Altura da janela menos a altura da navbar */
-  margin-top: 50px; /* Metade da altura da navbar */
-}
-
-
-/**/
-
-/*MOBILE */
   @media only screen and (max-width: 600px) {
     .grade-container {
       flex-direction: column;
@@ -362,11 +363,11 @@ color: #bdc1c7 !important;
   background-color: #ff6600 !important;
 }
 .navbar-toggler{
-  border: 2px solid black !important;
+  box-shadow: #000000 0px 0px 5px !important;
 }
 .offcanvas, .dropdown-menu{
   background-color: #ff6600 !important;
-  border: 2px solid black !important;
+  box-shadow: #000000 0px 0px 5px !important;
 }
 .offcanvas-end
     {
@@ -482,7 +483,7 @@ section {
 }
 
 .days {
-  border: 2px solid black;
+  border: 2px solid black;  
   background-color: rgba(32,33,36,255);
   color: #888888;
   border-radius: 0px 0px 20px 20px;
@@ -506,7 +507,7 @@ section {
 .days div:hover:not(.today) {
   background-color: #363636;
   color: white;
-  border: 2px solid white;
+  box-shadow: white 0px 0px 5px !important;
   border-radius: 10px;
 }
 
@@ -515,14 +516,14 @@ section {
 }
 
 .current-day {
-  border: 2px solid white;
+  box-shadow: white 0px 0px 5px !important;
   background-color: #f47a09 ;
   color: white;
   border-radius: 10px;
   
 }
 .calendar {
-  border: 2px solid #f47a09;
+  border: 2px solid #ff6600;
   border-radius: 20px 20px 20px 20px;
 }
 /*HORA EXTRA*/
