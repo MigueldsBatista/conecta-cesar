@@ -37,7 +37,6 @@ crossorigin="anonymous"></script>
         <br>
         <input type="email" class="form-control" name="email" 
           placeholder="Digite o email" required>
-        <div class="form-text">Ex: abc@cesar.school</div>
       </div>
 <!-------------------------------------------------------------------------------------------------------------------------------------->        
 
@@ -54,8 +53,9 @@ crossorigin="anonymous"></script>
             <option value="aluno">Aluno</option>
         </select>
 <!-------------------------------------------------------------------------------------------------------------------------------------->        
-
-      <input type="submit" class="btn btn-primary" value="Cadastrar">
+        <div class="login-button" >
+      <input type="submit" class="btn btn-primary " value="Cadastrar">
+        </div>
       <br>
       <br>
         Ja tem uma conta? faça <a href="{% url 'login' %}">Login</a>

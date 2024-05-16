@@ -1,5 +1,4 @@
-{% extends "app_cc/aluno/main.html" %}
-
+{% extends 'app_cc/aluno/main.html' %}
 {% block content %}
 <section>
     <!DOCTYPE html>
@@ -10,137 +9,12 @@
         <title>Calendário</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="styles.css">
-        <style>
-            /* Calendário */
-            * {
-                margin: 0;
-                padding: 0;
-                font-family: 'Dosis', sans-serif;
-                box-sizing: border-box;
-            }
-            
-            section {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                overflow: hidden;
-            }
-            
-            .box {
-                position: relative;
-                padding-top: 5px;
-                padding-bottom: 25px;
-                z-index: 1000;
-                border-radius: 30px;
-            }
-            
-            .container {
-                width: 90%; /* Alterado para ajustar à largura da tela */
-                max-width: 500px; /* Limitando a largura máxima */
-                background: white;
-                padding-top: 5px;
-                border: 1px solid rgba(255, 255, 255, 0.5);
-                border-right: 1px solid rgba(255, 255, 255, 0.2);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-                border-radius: 30px 30px 30px 30px;
-                align-items: center;
-                justify-content: center;
-                
-            }
-            
-            .month {
-                width: 100%;
-                
-                background-color: #3498db;
-                border-radius: 30px 30px 0px 0px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                text-align: center;
-            }
-            
-            .month i {
-                font-size: 1rem;
-                cursor: pointer;
-            }
-            
-            .month h1 {
-                font-size: 1.4rem; /* Reduzindo o tamanho do cabeçalho */
-                text-transform: uppercase;
-                font-weight: 400;
-            }
-            
-            .month h2 {
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
-            }
-            
-            .month p {
-                font-size: 1rem; /* Reduzindo o tamanho do parágrafo */
-                font-weight: 400;
-                text-transform: uppercase;
-            }
-            
-            .weekdays {
-                width: 100%;
-                padding: 0 0.2rem; /* Reduzindo o padding */
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                flex-wrap: wrap;
-            }
-            
-            .weekdays div {
-                font-size: 1rem; /* Reduzindo o tamanho da fonte */
-                letter-spacing: 0.1rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 2.5rem;
-                width: calc(100% / 7);
-            }
-            
-            .days {
-                width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                padding: .2rem;
-                justify-content: space-between;
-            }
-            
-            .days div {
-                font-size: 1rem;
-                margin: 0.3rem;
-                width: calc(100% / 7 - 0.6rem); /* Ajustando o tamanho dos dias */
-                height: 2.5rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            
-            .days div:hover:not(.today) {
-                background-color: #3498db;
-                border-radius: 0 10px 0 10px;
-            }
-            
-            .prev, .next {
-                font-size: 1.2rem;
-            }
-
-            .current-day {
-                background-color: #3498db;
-                border-radius: 0 10px 0 10px;
-                
-            }
-        </style>
     </head>
     <body>
-
-    <section>
+        <section>        
         <div class="box">
-            <div class="container">
+            <h2 class="text-center" style="color:white;">Calendário</h2>
+            <div class="container-calendar">
                 <div class="calendar">
                     <div class="month">
                         <i class="fas fa-angle-left prev"></i>
@@ -160,7 +34,6 @@
                         <div>SEX</div>
                         <div>SAB</div>
                     </div>
-                    <hr>
                     <div class="days"></div>
                 </div>
             </div>

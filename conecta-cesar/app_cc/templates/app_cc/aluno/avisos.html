@@ -2,15 +2,37 @@
 {% load static %}
 
 {% block content %}
+<section>
+  <!DOCTYPE html>
+  <html lang="pt-br">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Home</title>
+      <link rel="stylesheet" href="styles.css">
+      <style>
+        .btn{
+          background-color: rgba(32,33,36,255);
+          color: #888888;
+          border-radius: 20px 20px 20px 20px;
+        }
+        .btn:hover{
+          color:white;
+          background-color: #1F1B24;
+          border: 0.5px solid white;
+          border-radius: 20px 20px 20px 20px;
+        }
+      </style>
 <div class="container mt-3 text-center">
   <div class="row justify-content-center">
     <div class="col-md-6 mb-4">
+
       <div class="card">
-        <button class="btn btn-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso1" aria-expanded="false" aria-controls="collapseAviso1">
+        <button class="btn btn-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso1" aria-expanded="false" aria-controls="collapseAviso1">
           <hr>
-          <h5>Conheça o Cesar School</h5>
+          <h5 class="aviso-title">Conheça o Cesar School</h5>
           <hr>
-          <div class="card-body">
+          <div class="card-body aviso-body">
             <p>O Cesar School é uma instituição de ensino que busca promover a inovação e o empreendedorismo através da educação. Conheça nossos cursos e descubra como podemos ajudá-lo a alcançar seus objetivos profissionais.</p>
           </div>
           <div class="triangulo1">
