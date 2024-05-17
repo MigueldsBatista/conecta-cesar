@@ -16,7 +16,7 @@
 </style>
 
 <div class="container mt-4" style="overflow-x: auto;">
-    <h1 class="text-center">Variação das Notas</h1>  <!-- Título da página -->
+    <h1 class="text-center grade-text">Gráfico das Notas</h1>  <!-- Título da página -->
 
     <!-- Canvas para o gráfico de barras horizontais -->
     <div class="chart-container" style="width: 100%; overflow-x: auto;">
@@ -24,55 +24,63 @@
     </div>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var disciplinas = {{ disciplinas_com_notas|safe }};  // Converte para JSON seguro
-
-        var labels = [];
-        var notas = [];
-
-        disciplinas.forEach(function(disciplina_info) {
-            labels.push(disciplina_info.disciplina);  // Nome ou sigla da disciplina
-            notas.push(parseFloat(disciplina_info.nota)*10);  // Valor da nota
-        });
-
-        var ctx = document.getElementById("notasChart").getContext("2d");
-        var notasChart = new Chart(ctx, {
-            type: 'bar',  // Tipo de gráfico
-            data: {
-                labels: labels,  // Disciplinas no eixo Y
-                datasets: [{
-                    label: 'Notas',  // Legenda do gráfico
-                    data: notas,  // Notas ao longo do eixo X
-                    backgroundColor: '#0AC5F5',  // Cor das barras
-                    borderColor: 'rgba(75, 192, 192, 1)',  // Cor das bordas
-                    borderWidth: 2  // Largura das bordas
-                }]
-            },
-            options: {
-                indexAxis: 'y',  // Define as barras para horizontais
-                scales: {
-                    x: {
-                        beginAtZero: true,  // Começa do zero
-                        max: 100,  // Máximo valor para o eixo X (escala de 0 a 10)
-                    },
-                    y: {  // Configurações para o eixo Y
-                        ticks: {  // Configurações para os rótulos
-                            font: {
-                                weight: 'bold',  // Define a fonte como negrito
-                                size: 11,
+        document.addEventListener("DOMContentLoaded", function() {
+            var disciplinas = {{ disciplinas_com_notas|safe }};  // Converte para JSON seguro
+        
+            var labels = [];
+            var notas = [];
+        
+            disciplinas.forEach(function(disciplina_info) {
+                labels.push(disciplina_info.disciplina);  // Nome ou sigla da disciplina
+                notas.push(parseFloat(disciplina_info.nota)*10);  // Valor da nota
+            });
+        
+            var ctx = document.getElementById("notasChart").getContext("2d");
+            var notasChart = new Chart(ctx, {
+                type: 'bar',  // Tipo de gráfico
+                data: {
+                    labels: labels,  // Disciplinas no eixo Y
+                    datasets: [{
+                        label: 'Notas',  // Legenda do gráfico
+                        data: notas,  // Notas ao longo do eixo X
+                        backgroundColor: '#b54810',  // Cor das barras
+                        borderWidth: 2  // Largura das bordas
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',  // Define as barras para horizontais
+                    scales: {
+                        x: {
+                            beginAtZero: true,  // Começa do zero
+                            max: 100,  // Máximo valor para o eixo X (escala de 0 a 10)
+                          
+                            ticks: {  // Configurações para os rótulos do eixo X
+                                font: {
+                                    weight: 'bold',  // Define a fonte como negrito
+                                    size: 11,
+                                },
+                                color: '#bdc1c7' // Cor do texto
+                            }
+                        },
+                        y: {  // Configurações para o eixo Y
+                           
+                            ticks: {  // Configurações para os rótulos do eixo Y
+                                font: {
+                                    weight: 'bold',  // Define a fonte como negrito
+                                    size: 11,
+                                },
+                                color: '#bdc1c7' // Cor do texto
                             },
-                            color: 'black' // Cor do texto
                         },
                     },
-                },
-                plugins: {
-                    legend: {
-                        display: false
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
                     }
-                }
-            },
+                },
+            });
         });
-    });
     </script>
 </div>
 {% endblock %}
