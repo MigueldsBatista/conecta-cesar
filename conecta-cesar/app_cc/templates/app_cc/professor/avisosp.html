@@ -11,27 +11,32 @@
       <title>Home</title>
       <link rel="stylesheet" href="styles.css">
       <style>
-        .btn{
-          background-color: rgba(32,33,36,255);
+        .btn-biri{
+          background-color: #282a2f;
           color: #888888;
           border-radius: 20px 20px 20px 20px;
+          border: none;
+          transition: background-color 0.5s, color 0.3s; /* Adicionando transição suave */
+
+
         }
-        .btn:hover{
-          color:white;
-          background-color: #1F1B24;
-          border: 0.5px solid white;
-          border-radius: 20px 20px 20px 20px;
-        }
+        .btn-biri:hover {
+          color: #b54810;
+          background-color: #3d3132;
+          box-shadow: 0px 0px 5px;
+          transform: scale(1.05); /* Aumentando ligeiramente o tamanho */
+      }
       </style>
 <div class="container mt-3 text-center">
   <div class="row justify-content-center">
     <div class="col-md-6 mb-4">
+
       <div class="card">
-        <button class="btn btn-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso1" aria-expanded="false" aria-controls="collapseAviso1">
+        <button class="btn-biri" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso1" aria-expanded="false" aria-controls="collapseAviso1">
           <hr>
-          <h5>Conheça o Cesar School</h5>
+          <h5 class="aviso-title">Conheça o Cesar School</h5>
           <hr>
-          <div class="card-body">
+          <div class="card-body aviso-body">
             <p>O Cesar School é uma instituição de ensino que busca promover a inovação e o empreendedorismo através da educação. Conheça nossos cursos e descubra como podemos ajudá-lo a alcançar seus objetivos profissionais.</p>
           </div>
           <div class="triangulo1">
@@ -50,7 +55,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6 mb-4">
       <div class="card">
-        <button class="btn btn-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso2" aria-expanded="false" aria-controls="collapseAviso2">
+        <button class="btn-biri " type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso2" aria-expanded="false" aria-controls="collapseAviso2">
           <hr>
           <h5>Caminhos para uma escrita criativa</h5>
           <hr>
@@ -73,7 +78,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6 mb-4">
       <div class="card">
-        <button class="btn btn-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso3" aria-expanded="false" aria-controls="collapseAviso3">
+        <button class="btn-biri " type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso3" aria-expanded="false" aria-controls="collapseAviso3">
           <hr>
           <h5>IA para médicos</h5>
           <hr>
@@ -96,7 +101,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6 mb-4">
       <div class="card">
-        <button class="btn btn-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso4" aria-expanded="false" aria-controls="collapseAviso4">
+        <button class="btn-biri " type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso4" aria-expanded="false" aria-controls="collapseAviso4">
           <hr>
           <h5>As inscrições para a AIED 2024 estão oficialmente abertas!</h5>
           <hr>
@@ -117,7 +122,7 @@
   </div>
 </div>
 <script>
-  const btnsTriangulos = document.querySelectorAll('.btn-white');
+  const btnsTriangulos = document.querySelectorAll('.btn-biri');
   const triangulos = document.querySelectorAll('[class^="triangulo"]');
 
   btnsTriangulos.forEach((btnTriangulo, index) => {

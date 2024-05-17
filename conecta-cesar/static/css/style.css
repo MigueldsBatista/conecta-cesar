@@ -694,8 +694,6 @@ color:#bdc1c7 !important;
   margin: 0 auto !important; /* Centraliza a barra de navegação */
 }
 
-
-
 /* Cor do cabeçalho do cartão personalizada */
 .card-header {
 
@@ -813,7 +811,7 @@ color:#bdc1c7 !important;
 }
 .dropdown-item:hover{
   background-color: #3d3132 !important;
-  text-decoration: underline !important;
+  text-decoration: none !important;
   color: #b54810 !important;
 }
 
@@ -824,7 +822,7 @@ color:#bdc1c7 !important;
 
 .nav-link:hover {
   color: #b54810 !important;
-  text-decoration: underline !important;
+  text-decoration: none !important;
 }
 
 
