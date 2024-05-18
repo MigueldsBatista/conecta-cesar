@@ -9,12 +9,12 @@
     {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
 
       <div class="card mb-4">
-        <div class="card-header bg-primary text-white">Disciplina: {{ disciplina_info.disciplina.nome }}</div>
+        <div class="card-header bg-primary text-white">{{ disciplina_info.disciplina.nome }}</div>
         <div class="card-body">
           <!-- Itera sobre as turmas para separar os alunos -->
           {% for turma in disciplina_info.turmas %}
             <div class="card mb-3">
-              <div class="card-header bg-secondary text-white">Turma: {{ turma.nome }}</div>
+              <div class="card-header bg-secondary text-white">{{ turma.nome }}</div>
               <div class="card-body">
                 <table class="table table-striped">
                   <thead>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File
+from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -8,6 +8,7 @@ from datetime import date
 from functools import wraps
 from django.conf import settings
 import os
+import json
 
 def gerar_sigla(nome):
             # Divide por espaços e pega a primeira letra de cada palavra
@@ -341,7 +342,18 @@ def diario(request):
 
 @has_role_or_redirect(Aluno)
 def calendario(request):
-    return render(request, 'app_cc/aluno/calendario.html')
+    aluno = request.user.aluno  # Obtém o aluno logado
+    disciplinas = aluno.turma.disciplinas.all()
+    print(disciplinas)
+    eventos = Evento.objects.filter(disciplina__in=disciplinas)  # Filtra os eventos pelas disciplinas do aluno
+    print(eventos)
+    eventos_list = list(eventos.values('titulo', 'descricao', 'data', 'horario', 'disciplina__nome'))
+    eventos_json = json.dumps(eventos_list, default=str)  # Serializa os eventos para JSON
+
+    context = {
+        'eventos_json': eventos_json
+    }
+    return render(request, 'app_cc/aluno/calendario.html', context)
 
 #----------------------------------------------------------------------------------------------------------------    
 #----------------------------------------PROFESSOR VIEWS---------------------------------------------------------  
@@ -453,9 +465,47 @@ def frequenciap(request):
     )
 #----------------------------------------------------------------------------------------------------------------    
 
+#----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def calendariop(request):
-    return render(request, 'app_cc/professor/calendariop.html')
+    professor = request.user.professor
+    disciplinas = Disciplina.objects.filter(professor=professor)
+
+    if request.method == "POST":  # Corrigido para 'POST'
+        titulo = request.POST.get('titulo')
+        descricao = request.POST.get('descricao')
+        data = request.POST.get('data')
+        horario = request.POST.get('horario')
+        disciplina_id = request.POST.get('disciplina')
+
+        try:
+            disciplina = Disciplina.objects.get(id=disciplina_id)
+            Evento.objects.create(
+                titulo=titulo,
+                descricao=descricao,
+                data=data,
+                horario=horario,
+                disciplina=disciplina,
+                professor=professor  # Usar a instância do professor corretamente
+            )
+            messages.success(request, 'Evento criado com sucesso!')
+        except Disciplina.DoesNotExist:
+            messages.error(request, 'Disciplina não encontrada.')
+        except Exception as e:
+            messages.error(request, f'Erro ao criar evento: {str(e)}')
+
+        return redirect('calendariop')
+    
+    else:
+        eventos = Evento.objects.filter(professor=professor)
+        eventos_list = list(eventos.values('titulo', 'descricao', 'data', 'horario', 'disciplina__nome'))
+        eventos_json = json.dumps(eventos_list, default=str)  # Serializar para JSON
+        context = {
+            'disciplinas': disciplinas,
+            'eventos_json': eventos_json  # Passando os eventos serializados
+        }
+        return render(request, 'app_cc/professor/calendariop.html', context)
+    
 #----------------------------------------------------------------------------------------------------------------    
 
 @has_role_or_redirect(Professor)

@@ -28,9 +28,6 @@ class Professor(models.Model):
     ra = models.CharField(max_length=10, unique=True, default=generate_unique_ra)  # Função explícita para RA
     foto_perfil = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)  # Novo campo de foto de perfil
 
-
-    
-    
     def __str__(self):
         return self.usuario.username
     
@@ -71,7 +68,16 @@ class Aluno(models.Model):
     def disciplinas(self):
         return self.turma.obter_disciplinas()  # Disciplinas associadas à turma
 
+class Evento(models.Model):
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField(blank=True)
+    data = models.DateField()
+    horario = models.TimeField(blank=True, null=True)
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
+    professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.titulo} - {self.data}"
 # Modelo para Notas
 class Nota(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="notas", null=True)

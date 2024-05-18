@@ -892,7 +892,9 @@ section {
   font-weight: 400;
   text-transform: uppercase;
 }
-
+.event-text{
+  color: #b54810 !important;
+}
 .weekdays {
 
   background-color: #363636;

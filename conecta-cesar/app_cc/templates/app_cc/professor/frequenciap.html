@@ -7,13 +7,13 @@
     {% csrf_token %}
     {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
       <div class="card mb-4">
-        <div class="card-header bg-primary text-white">Disciplina: {{ disciplina_info.disciplina.nome }}</div>
+        <div class="card-header bg-primary text-white">{{ disciplina_info.disciplina.nome }}</div>
         <div class="card-body">
           {% for turma_info in disciplina_info.turmas %}
-            <h4 class="card-title">Turma: {{ turma_info.turma.nome }}</h4>
+            <h4 class="card-title">{{ turma_info.turma.nome }}</h4>
             {% for aluno_info in turma_info.alunos %}
               <div class="card mb-2">
-                <div class="card-header">Aluno: {{ aluno_info.aluno.usuario.username }}</div>
+                <div class="card-header">{{ aluno_info.aluno.usuario.username }}</div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <!-- CheckBox para marcar falta -->
