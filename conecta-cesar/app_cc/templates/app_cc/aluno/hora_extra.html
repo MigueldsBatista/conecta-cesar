@@ -84,101 +84,59 @@
                                             <img src="{{ arquivo.archive.url }}" width="60px" height="60px" style="object-fit: cover;" class="rounded img-thumbnail file-preview" alt="{% trans "Preview" %}">
                                         </div>
                                       
+                                      <div class="d-flex align-items-center mt-2"> <!-- Flex container para alinhar os itens -->
                                       <!-- Formulário para atualizar horas extras -->
-                                      <div>
-                                      <form  id="myForm" action="{% url 'hora_extra' %}" method="POST">
+                                      <form id="myForm" action="{% url 'hora_extra' %}" method="POST" class="d-inline-flex align-items-center mr-2">
                                         {% csrf_token %}
-                                        
-                                        
-                                        <!-- Botão de atualizar -->
-
-                                        <button type="submit" class="update-button" id="update-button-{{ arquivo.id }}">
+                                        <input type="hidden" name="update_file" value="{{ arquivo.id }}">
+                                        <input type="number" name="horas_extras" value="{{ arquivo.horas_extras }}" step="0.1" min="0.1" class="form-control form-control-sm" style="width: 100px;">
+                                        <button type="submit" class="update-button ml-1">
                                           <div class="svg-wrapper-1">
                                             <div class="svg-wrapper">
                                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
                                                 <path d="M11 2H9v3h2z"/>
-                                                <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
+                                                <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5V15z"/>
                                               </svg>
                                             </div>
                                           </div>
-                                          
                                         </button>
-                                      
-                                        <!-- Botão de envio oculto -->
-                                        <input type="hidden" name="update_file" value="{{ arquivo.id }}">
-                                        <input type="number" name="horas_extras" value="{{ arquivo.horas_extras }}" step="0.1" min="0.1" class="form-control form-control-sm" style="width: 100px;">
-
-                                        </form>
-
-                               
-                                       
-                                      <!---->
-                                  
-                                      <!-- Formulário do botão para deletar o arquivo -->
-                                      <form action="{% url 'hora_extra' %}" method="POST">
-                                          {% csrf_token %}
-                                          <input type="hidden" name="delete_file" value="{{ arquivo.id }}">
-                                          
-                                          <!-- Botão de deletar -->
-                                          <button class="delete-button" onclick="return confirmDelete()">
-                                              <div class="svg-wrapper-1">
-                                                  <div class="svg-wrapper">
-                                                      <svg viewBox="0 0 16 16" class="bi bi-trash3-fill" fill="currentColor" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
-                                                          <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-                                                      </svg>
-                                                  </div>
-                                              </div>
-                                          </button>
                                       </form>
-                                  
-                                      <!-- Botão de download -->
-                                      <a href="{{ arquivo.archive.url }}" download class="download-button" >
+
+                                      <!-- Formulário do botão para deletar o arquivo -->
+                                      <form action="{% url 'hora_extra' %}" method="POST" class="d-inline-flex align-items-center mr-2">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="delete_file" value="{{ arquivo.id }}">
+                                        <button class="delete-button" onclick="return confirmDelete()">
                                           <div class="svg-wrapper-1">
-                                              <div class="svg-wrapper">
-                                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                                      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                                                      <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
-                                                  </svg>
-                                              </div>
+                                            <div class="svg-wrapper">
+                                              <svg viewBox="0 0 16 16" class="bi bi-trash3-fill" fill="currentColor" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                                              </svg>
+                                            </div>
                                           </div>
+                                        </button>
+                                      </form>
+
+                                      <!-- Botão de download -->
+                                      <a href="{{ arquivo.archive.url }}" download class="download-button d-inline-flex align-items-center">
+                                        <div class="svg-wrapper-1">
+                                          <div class="svg-wrapper">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                                            </svg>
+                                          </div>
+                                        </div>
                                       </a>
                                     </div>
-                                  </div>
+                                </div>
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p class="text-warning">{% trans "Você ainda não enviou arquivos." %}</p>
+                        <p>{% trans "Nenhum certificado enviado ainda." %}</p>
                     {% endif %}
                 </div>
             </div>
         </div>
-
-<script>                        
-
-    function confirmDelete() {
-        return confirm("Você tem certeza que deseja excluir o arquivo?");
-    }
-    // Adiciona um ouvinte de evento ao campo de upload
-    document.getElementById('file-input').addEventListener('change', function(event) {
-      // Obtém o arquivo selecionado
-      var file = event.target.files[0];
-  
-      // Verifica se um arquivo foi selecionado
-      if (file) {
-          // Cria um objeto URL para a imagem selecionada
-          var imageURL = URL.createObjectURL(file);
-  
-          // Obtém a pré-visualização da imagem existente
-          var imagePreview = document.getElementById('image-preview');
-  
-          // Atualiza o atributo src da imagem existente
-          imagePreview.src = imageURL;
-  
-          // Exibe o container de pré-visualização
-          var previewContainer = document.getElementById('preview-container');
-          previewContainer.style.display = 'block'; // Exibe o container
-      }
-  });
-  
-</script>
+    </div>
 {% endblock %}
