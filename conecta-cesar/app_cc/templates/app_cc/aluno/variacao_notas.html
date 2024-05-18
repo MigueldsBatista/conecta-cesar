@@ -1,4 +1,5 @@
 {% extends 'app_cc/aluno/main.html' %}
+{% load i18n %}
 
 {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -16,7 +17,7 @@
 </style>
 
 <div class="container mt-4" style="overflow-x: auto;">
-    <h1 class="text-center grade-text">Gráfico das Notas</h1>  <!-- Título da página -->
+    <h1 class="text-center grade-text">{% trans "Gráfico das Notas" %}</h1>  <!-- Título da página -->
 
     <!-- Canvas para o gráfico de barras horizontais -->
     <div class="chart-container" style="width: 100%; overflow-x: auto;">

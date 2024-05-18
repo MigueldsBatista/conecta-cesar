@@ -1,8 +1,9 @@
 {% extends "app_cc/professor/mainp.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="container my-4">
-    <h2 class="text-center extra-hour-title">Adicionar PowerPoints</h2>
+    <h2 class="text-center extra-hour-title">{%trans "Adicionar PowerPoints"%}</h2>
 
     <!-- Exibir mensagens de erro/sucesso com Bootstrap -->
     {% if messages %}
@@ -20,8 +21,8 @@
     <div class="col-md-6 offset-md-3">  <!-- Centralizar no desktop, ajuste no mobile -->
         <div class="card my-4">  <!-- Usando cartão para organizar conteúdo -->
             <div class="card-body">
-                <p>Total de Horas Extras Acumuladas: <strong class="extra-hour-number">{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
-                <form action='{% url "hora_extra" %}' method="POST" enctype="multipart/form-data" class="hour-form mb-4">
+                <p>{%trans "Total de Horas Extras Acumuladas:"%} <strong class="extra-hour-number">{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
+                <form action='{% url "slide" %}' method="POST" enctype="multipart/form-data" class="hour-form mb-4">
                     {% csrf_token %}
                     <div>
                         <div class="file-input-wrapper">
@@ -36,7 +37,7 @@
                         </div>
                         <!-- END BUTTON -->
                         <div class="form-group">
-                            <label for="horas_extras" class="form-label">Horas Extras</label>
+                            <label for="horas_extras" class="form-label">{%trans "Horas Extras"%}</label>
                             <input type="number" name="horas_extras" class="form-control" step="0.1" min="0.1" required>  <!-- Valor mínimo para horas extras -->
                         </div>
 
@@ -49,7 +50,7 @@
                                     </svg>
                                 </div>
                             </div>
-                            <span>Enviar</span>
+                            <span>{%trans "Enviar"%}</span>
                         </button>
 
                         <!-- Preview da imagem -->
@@ -59,7 +60,7 @@
                     </div>
                 </form>
 
-                <h5 class="orange-text"><strong>Certificados Enviados</strong> </h5>
+                <h5 class="orange-text"><strong>{%trans "Certificados Enviados"%}</strong> </h5>
                 {% if arquivos %}
                     <div class="hour-blocks">  <!-- Lista para organização de itens -->
                         {% for arquivo in arquivos %}
@@ -67,12 +68,12 @@
                             <div class="ml-3">
                                 {{ arquivo.title|slice:":20" }}
                                 <br>
-                                Horas Extras: {{ arquivo.horas_extras }}
+                               {%trans "Horas Extras:"%} {{ arquivo.horas_extras }}
                                 <img src="{{ arquivo.archive.url }}" width="60px" height="60px" style="object-fit: cover;" class="rounded img-thumbnail file-preview" alt="Preview">
                             </div>
 
                             <!-- Formulário para atualizar horas extras -->
-                            <form id="myForm" action="{% url 'hora_extra' %}" method="POST">
+                            <form id="myForm" action="{% url 'slide' %}" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="update_file" value="{{ arquivo.id }}">
                                 <input type="number" name="horas_extras" value="{{ arquivo.horas_extras }}" step="0.1" min="0.1" class="form-control form-control-sm" style="width: 100px;">
@@ -90,7 +91,7 @@
                             </form>
 
                             <!-- Formulário para deletar o arquivo -->
-                            <form action="{% url 'hora_extra' %}" method="POST">
+                            <form action="{% url 'slide' %}" method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="delete_file" value="{{ arquivo.id }}">
                                 <!-- Botão de deletar -->
@@ -120,7 +121,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p class="text-warning">Você ainda não enviou arquivos.</p>
+                    <p class="text-warning">{%trans "Você ainda não enviou arquivos."%}</p>
                 {% endif %}
             </div>
         </div>

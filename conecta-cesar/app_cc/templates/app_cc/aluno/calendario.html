@@ -1,11 +1,12 @@
 {% extends 'app_cc/aluno/main.html' %}
 {% block content %}
+{% load i18n %}
 
 {% if messages %}
 <div>
     {% for message in messages %}
         <div 
-            class="alert alert-{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}danger{% elif 'warning' in message.tags %}warning{% else %}info{% endif %}  fade show" 
+            class="alert alert-{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}danger{% elif 'warning' in message.tags %}warning{% else %}info{% endif %} fade show" 
             role="alert">
             {{ message }}
         </div>
@@ -14,9 +15,8 @@
 {% endif %}
 
 <div id="eventDetails" class="event-details event-text">
-       
         <ul id="eventList"></ul>
-    </div>
+</div>
 <section>
     <div class="box">
         <div class="container-calendar">
@@ -31,13 +31,13 @@
                     <i class="fas fa-angle-right next"></i>
                 </div>
                 <div class="weekdays">
-                    <div>DOM</div>
-                    <div>SEG</div>
-                    <div>TER</div>
-                    <div>QUA</div>
-                    <div>QUI</div>
-                    <div>SEX</div>
-                    <div>SAB</div>
+                    <div>{% trans "DOM" %}</div>
+                    <div>{% trans "SEG" %}</div>
+                    <div>{% trans "TER" %}</div>
+                    <div>{% trans "QUA" %}</div>
+                    <div>{% trans "QUI" %}</div>
+                    <div>{% trans "SEX" %}</div>
+                    <div>{% trans "SAB" %}</div>
                 </div>
                 <div class="days"></div>
             </div>
@@ -49,30 +49,28 @@
     <div id="eventForm" class="event-form" style="display: none;">
         <form method="post" id="addEventForm">
             {% csrf_token %}
-            <label for="titulo">Título:</label><br>
+            <label for="titulo">{% trans "Título:" %}</label><br>
             <input type="text" id="titulo" name="titulo" required><br>
 
-            <label for="descricao">Descrição:</label><br>
+            <label for="descricao">{% trans "Descrição:" %}</label><br>
             <textarea name="descricao"></textarea><br>
 
-            <label for="data">Data:</label><br>
+            <label for="data">{% trans "Data:" %}</label><br>
             <input type="date" name="data" id="data" required><br>
 
-            <label for="horario">Horário:</label><br>
+            <label for="horario">{% trans "Horário:" %}</label><br>
             <input type="time" name="horario"><br>
 
-            <label for="disciplina">Disciplina:</label>
+            <label for="disciplina">{% trans "Disciplina:" %}</label>
             <select name="disciplina" id="disciplina" required>
                 {% for disciplina in disciplinas %}
                     <option value="{{ disciplina.id }}">{{ disciplina.nome }}</option>
                 {% endfor %}
             </select><br>
 
-            <button type="submit">Enviar</button>
+            <button type="submit">{% trans "Enviar" %}</button>
         </form>
     </div>
-
-    
 </div>
 
 <script>
@@ -90,8 +88,8 @@
         const nextDays = 7 - lastDayIndex - 1;
 
         const months = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+            "{% trans 'Janeiro' %}", "{% trans 'Fevereiro' %}", "{% trans 'Março' %}", "{% trans 'Abril' %}", "{% trans 'Maio' %}", "{% trans 'Junho' %}",
+            "{% trans 'Julho' %}", "{% trans 'Agosto' %}", "{% trans 'Setembro' %}", "{% trans 'Outubro' %}", "{% trans 'Novembro' %}", "{% trans 'Dezembro' %}"
         ];
 
         document.querySelector(".date h1").innerHTML = months[date.getMonth()];
@@ -136,13 +134,11 @@
                 eventList.innerHTML = "";
                 selectedEvents.forEach(event => {
                     const listItem = document.createElement("li");
-                    listItem.innerHTML = `${event.disciplina__nome}<br>${event.titulo}<br>${event.descricao}<br>Horário: ${event.horario.slice(0, -3)}`;
+                    listItem.innerHTML = `${event.disciplina__nome}<br>${event.titulo}<br>${event.descricao}<br>{% trans 'Horário:' %} ${event.horario.slice(0, -3)}`;
                     eventList.appendChild(listItem);
                 });
             });
         });
-
-
     };
 
     document.querySelector(".prev").addEventListener("click", () => {
@@ -159,7 +155,6 @@
 </script>
 
 <style>
- 
     .event-day {
         background-color: #FFD700; /* Cor de fundo dourada para dias com eventos */
         color: #000; /* Cor do texto */

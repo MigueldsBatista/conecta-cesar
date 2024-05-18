@@ -1,11 +1,14 @@
 {% extends 'app_cc/professor/mainp.html' %}
+
+{% load i18n %}
+
 {% block content %}
 <div class="container mt-4">  <!-- Adicionando espaço no topo -->
-    <h1 class="text-center">DIÁRIO</h1>  <!-- Centralizar o título -->
+    <h1 class="text-center">{% trans "DIÁRIO" %}</h1>  <!-- Centralizar o título -->
     <form method="post">  <!-- Formulário para adicionar um diário -->
         {% csrf_token %}
         <div class="mb-3">
-            <label for="disciplina" class="form-label">Disciplina:</label>
+            <label for="disciplina" class="form-label">{% trans "Disciplina" %}:</label>
             <select class="form-select" name="disciplina" id="disciplina" required>  <!-- Seleção de disciplinas -->
                 {% for disciplina in disciplinas %}
                     <option value="{{ disciplina.id }}">{{ disciplina.nome }}</option>  <!-- Disciplinas do professor -->
@@ -14,12 +17,12 @@
         </div>
 
         <div class="mb-3">
-            <label for="tituloDiario" class="form-label">Título do Diário:</label>
+            <label for="tituloDiario" class="form-label">{% trans "Título do Diário" %}:</label>
             <input type="text" class="form-control"  name="titulo" placeholder="Insira o título do diário" required>
         </div>
 
         <div class="mb-3">
-            <label for="textoDiario" class="form-label">Texto do Diário:</label>
+            <label for="textoDiario" class="form-label">{% trans "Texto do Diário" %}:</label>
             <textarea class="form-control" name="texto" rows="5" placeholder="Digite o texto do diário" required></textarea>
         </div>
 
@@ -40,7 +43,7 @@
                 </svg>
               </div>
             </div>
-            <span>Enviar</span>
+            <span>{% trans "Enviar" %}</span>
           </button>
           <br>
             <!-- Botão para enviar -->
@@ -48,7 +51,7 @@
 
     <!-- Exibir diários salvos -->
     {% if diarios and diarios|length > 0 %}
-    <h2 class="mt-4">Diários Salvos:</h2>
+    <h2 class="mt-4">{%trans "Diários Salvos:"%}</h2>
     <ul class="list-group">  <!-- Usar List Group para exibição -->
         {% for diario in diarios %}
         <li class="list-group-item">
@@ -59,7 +62,7 @@
         {% endfor %}
     </ul>
     {% else %}
-    <p class="alert alert-warning text-center">Nenhum diário encontrado.</p>  <!-- Mensagem se não houver diários -->
+    <p class="alert alert-warning text-center">{%trans "Nenhum diário encontrado."%}</p>  <!-- Mensagem se não houver diários -->
     {% endif %}
 </div>
 <br>

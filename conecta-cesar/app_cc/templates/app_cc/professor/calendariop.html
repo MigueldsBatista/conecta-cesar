@@ -1,4 +1,6 @@
 {% extends 'app_cc/professor/mainp.html' %}
+{% load i18n %}
+
 {% block content %}
 
 {% if messages %}
@@ -31,13 +33,13 @@
                     <i class="fas fa-angle-right next"></i>
                 </div>
                 <div class="weekdays">
-                    <div>DOM</div>
-                    <div>SEG</div>
-                    <div>TER</div>
-                    <div>QUA</div>
-                    <div>QUI</div>
-                    <div>SEX</div>
-                    <div>SAB</div>
+                    <div>{% trans "DOM" %}</div>
+                    <div>{% trans "SEG" %}</div>
+                    <div>{% trans "TER" %}</div>
+                    <div>{% trans "QUA" %}</div>
+                    <div>{% trans "QUI" %}</div>
+                    <div>{% trans "SEX" %}</div>
+                    <div>{% trans "SAB" %}</div>
                 </div>
                 <div class="days"></div>
             </div>
@@ -49,26 +51,26 @@
     <div id="eventForm" class="event-form" style="display: none;">
         <form method="post" id="addEventForm">
             {% csrf_token %}
-            <label for="titulo">Título:</label><br>
+            <label for="titulo">{% trans "Título:" %}</label><br>
             <input type="text" id="titulo" name="titulo" required><br>
 
-            <label for="descricao">Descrição:</label><br>
+            <label for="descricao">{% trans "Descrição" %}:</label><br>
             <textarea name="descricao"></textarea><br>
 
-            <label for="data">Data:</label><br>
+            <label for="data">{% trans "Data" %}:</label><br>
             <input type="date" name="data" id="data" required><br>
 
-            <label for="horario">Horário:</label><br>
+            <label for="horario">{% trans "Horário" %}:</label><br>
             <input type="time" name="horario"><br>
 
-            <label for="disciplina">Disciplina:</label>
+            <label for="disciplina">{% trans "Disciplina" %}:</label>
             <select name="disciplina" id="disciplina" required>
                 {% for disciplina in disciplinas %}
                     <option value="{{ disciplina.id }}">{{ disciplina.nome }}</option>
                 {% endfor %}
             </select><br>
 
-            <button type="submit">Enviar</button>
+            <button type="submit">{% trans "Enviar" %}</button>
         </form>
     </div>
 

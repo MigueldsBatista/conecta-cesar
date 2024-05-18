@@ -1,8 +1,9 @@
 {% extends 'app_cc/aluno/main.html' %}
+{% load i18n %}
 
 {% block content %}
 <div class="container mt-4">  <!-- Espaçamento no topo -->
-  <h1 class="text-center"><strong>DIÁRIO</strong></h1>  <!-- Título centralizado -->
+  <h1 class="text-center"><strong>{% trans "DIÁRIO" %}</strong></h1>  <!-- Título centralizado -->
   
   {% if error %}  <!-- Caso de erro -->
     <div class="alert alert-danger text-center">  <!-- Mensagem de erro -->
@@ -10,7 +11,7 @@
     </div>
   {% else %}
     {% if diarios and diarios|length > 0 %}
-    <h2 class="mt-4 diario-title">Últimos Diários</h2>  <!-- Título para a lista de diários -->
+    <h2 class="mt-4 diario-title">{% trans "Últimos Diários" %}</h2>  <!-- Título para a lista de diários -->
     <ul class="list-group">  <!-- List Group para exibição -->
         {% for diario in diarios %}
         <li class="list-group-item diario-box">
@@ -21,7 +22,7 @@
         {% endfor %}
     </ul>
     {% else %}
-    <p class="alert alert-warning text-center">Nenhum diário encontrado.</p>  <!-- Mensagem se não houver diários -->
+    <p class="alert alert-warning text-center">{% trans "Nenhum diário encontrado." %}</p>  <!-- Mensagem se não houver diários -->
     {% endif %}
   {% endif %}
 </div>

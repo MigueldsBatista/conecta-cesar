@@ -1,6 +1,6 @@
 {% extends "app_cc/professor/mainp.html" %}
 {% load static %}
-
+{% load i18n %}
 {% block content %}
 <section>
   <!DOCTYPE html>
@@ -34,10 +34,10 @@
       <div class="card">
         <button class="btn-biri" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso1" aria-expanded="false" aria-controls="collapseAviso1">
           <hr>
-          <h5 class="aviso-title">Conheça o Cesar School</h5>
+          <h5 class="aviso-title">{% trans "Conheça o Cesar School" %}</h5>
           <hr>
           <div class="card-body aviso-body">
-            <p>O Cesar School é uma instituição de ensino que busca promover a inovação e o empreendedorismo através da educação. Conheça nossos cursos e descubra como podemos ajudá-lo a alcançar seus objetivos profissionais.</p>
+            <p>{% trans "O Cesar School é uma instituição de ensino que busca promover a inovação e o empreendedorismo através da educação. Conheça nossos cursos e descubra como podemos ajudá-lo a alcançar seus objetivos profissionais." %}</p>
           </div>
           <div class="triangulo1">
             &#9660;
@@ -57,10 +57,10 @@
       <div class="card">
         <button class="btn-biri " type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso2" aria-expanded="false" aria-controls="collapseAviso2">
           <hr>
-          <h5>Caminhos para uma escrita criativa</h5>
+          <h5>{% trans "Caminhos para uma escrita criativa" %}</h5>
           <hr>
           <div class="card-body">
-            <p>Descubra como desbloquear sua criatividade e aprimorar suas habilidades de escrita com nossos cursos especializados. Explore novas técnicas e encontre inspiração para suas histórias.</p>
+            <p>{% trans "Descubra como desbloquear sua criatividade e aprimorar suas habilidades de escrita com nossos cursos especializados. Explore novas técnicas e encontre inspiração para suas histórias" %}</p>
           </div>
           <div class="triangulo2">
             &#9660;
@@ -80,10 +80,10 @@
       <div class="card">
         <button class="btn-biri " type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso3" aria-expanded="false" aria-controls="collapseAviso3">
           <hr>
-          <h5>IA para médicos</h5>
+          <h5>{% trans "IA para médicos" %}</h5>
           <hr>
           <div class="card-body">
-            <p>Explore como a inteligência artificial está transformando a prática médica. Descubra como as tecnologias emergentes estão sendo aplicadas para melhorar o diagnóstico, tratamento e cuidados com os pacientes.</p>
+            <p>{% trans "Explore como a inteligência artificial está transformando a prática médica. Descubra como as tecnologias emergentes estão sendo aplicadas para melhorar o diagnóstico, tratamento e cuidados com os pacientes." %}</p>
           </div>
           <div class="triangulo3">
             &#9660;
@@ -103,10 +103,10 @@
       <div class="card">
         <button class="btn-biri " type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso4" aria-expanded="false" aria-controls="collapseAviso4">
           <hr>
-          <h5>As inscrições para a AIED 2024 estão oficialmente abertas!</h5>
+          <h5>{% trans "As inscrições para a AIED 2024 estão oficialmente abertas!" %}</h5>
           <hr>
           <div class="card-body">
-            <p>A AIED 2024 oferece uma oportunidade única de explorar as últimas tendências em educação e tecnologia. Inscreva-se agora para participar de palestras, workshops e apresentações de pesquisas inovadoras.</p>
+            <p>{% trans "A AIED 2024 oferece uma oportunidade única de explorar as últimas tendências em educação e tecnologia. Inscreva-se agora para participar de palestras, workshops e apresentações de pesquisas inovadoras." %}</p>
           </div>
           <div class="triangulo4">
             &#9660;

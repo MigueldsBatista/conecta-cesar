@@ -1,8 +1,9 @@
 {% extends "app_cc/professor/mainp.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="container mt-4">
-  <h2 class="text-center" style="font-size: 32px; font-weight: bold;">DISCIPLINAS</h2>
+  <h2 class="text-center" style="font-size: 32px; font-weight: bold;">{% trans "DISCIPLINAS" %}</h2>
   <form method="post" action="{% url 'boletimp' %}">
     {% csrf_token %}
     <!-- Itera sobre as disciplinas e turmas -->
@@ -19,9 +20,9 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Aluno</th>
-                      <th>Nota</th>
-                      <th>Editar</th>
+                      <th>{%trans "Aluno"%}</th>
+                      <th>{%trans "Nota"%}</th>
+                      <th>{% trans "Editar" %}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -64,7 +65,7 @@
           </svg>
         </div>
       </div>
-      <span>Salvar</span>
+      <span>{% trans "Salvar" %}</span>
     </button>    
   </form>
 </div>

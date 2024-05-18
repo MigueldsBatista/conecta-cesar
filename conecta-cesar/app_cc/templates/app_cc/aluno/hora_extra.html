@@ -1,8 +1,9 @@
 {% extends "app_cc/aluno/main.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="container my-4">
-    <h2 class="text-center extra-hour-title">Horas Extras</h2>
+    <h2 class="text-center extra-hour-title">{% trans "Horas Extras" %}</h2>
 
     <!-- Exibir mensagens de erro/sucesso com Bootstrap -->
     {% if messages %}
@@ -20,7 +21,7 @@
         <div class="col-md-6 offset-md-3">  <!-- Centralizar no desktop, ajuste no mobile -->
             <div class="card my-4">  <!-- Usando cartão para organizar conteúdo -->
                 <div class="card-body">
-                <p>Total de Horas Extras Acumuladas: <strong class="extra-hour-number">{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
+                <p>{% trans "Total de Horas Extras Acumuladas" %}: <strong class="extra-hour-number">{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
                     
 
 
@@ -41,7 +42,7 @@
                              </div>
                           <!-- END BUTTON -->
                  <div class="form-group">
-                      <label for="horas_extras" class="form-label">Horas Extras</label>
+                      <label for="horas_extras" class="form-label">{% trans "Horas Extras" %}</label>
                       <input type="number" name="horas_extras" class="form-control" step="0.1" min="0.1" required>  <!-- Valor mínimo para horas extras -->
                   </div>
 
@@ -54,7 +55,7 @@
                                       </svg>
                                   </div>
                               </div>
-                              <span>Enviar</span>
+                              <span>{% trans "Enviar" %}</span>
                           </button>
                    
                       
@@ -69,7 +70,7 @@
                
                   
               </form>
-                    <h5 class="orange-text"><strong>Certificados Enviados</strong> </h5>
+                    <h5 class="orange-text"><strong>{% trans "Certificados Enviados" %}</strong> </h5>
                     {% if arquivos %}
                         <div class="hour-blocks">  <!-- Lista para organização de itens -->
                             {% for arquivo in arquivos %}
@@ -79,8 +80,8 @@
                                         <div class="ml-3">
                                             {{ arquivo.title|slice:":20" }}
                                             <br>
-                                            Horas Extras: {{ arquivo.horas_extras }}
-                                            <img src="{{ arquivo.archive.url }}" width="60px" height="60px" style="object-fit: cover;" class="rounded img-thumbnail file-preview" alt="Preview">
+                                            {% trans "Horas Extras" %}: {{ arquivo.horas_extras }}
+                                            <img src="{{ arquivo.archive.url }}" width="60px" height="60px" style="object-fit: cover;" class="rounded img-thumbnail file-preview" alt="{% trans "Preview" %}">
                                         </div>
                                       
                                       <!-- Formulário para atualizar horas extras -->
@@ -146,7 +147,7 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p class="text-warning">Você ainda não enviou arquivos.</p>
+                        <p class="text-warning">{% trans "Você ainda não enviou arquivos." %}</p>
                     {% endif %}
                 </div>
             </div>

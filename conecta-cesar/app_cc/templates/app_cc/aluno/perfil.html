@@ -1,4 +1,5 @@
 {% extends "app_cc/aluno/main.html" %}
+{% load i18n %}
 
 {% block content %}
 
@@ -17,9 +18,9 @@
     <div class="profile-container" >
         <div class="profile-header">
             {% if foto_perfil %}
-                <img src="{{ foto_perfil }}" alt="Foto de Perfil" style="width: 100px; height: 100px; object-fit: cover;">
+                <img src="{{ foto_perfil }}" alt={%trans "Foto de Perfil"%} style="width: 100px; height: 100px; object-fit: cover;">
             {% else %}
-                <img src="https://via.placeholder.com/100" alt="Foto de Perfil">  <!-- Imagem padrão se não houver foto -->
+                <img src="https://via.placeholder.com/100" alt={%trans "Foto de Perfil"%}>  <!-- Imagem padrão se não houver foto -->
             {% endif %}
             <form action="{% url 'perfil' %}" method="post" enctype="multipart/form-data">  <!-- Importante definir enctype -->
               {% csrf_token %}
@@ -53,7 +54,7 @@
                     </label>
                       </div>
                     </div>
-                    <span>Salvar</span>
+                    <span>{% trans "Salvar" %}</span>
                   </button>
                 </div>
                   </div>
@@ -65,13 +66,13 @@
 
         <div class="projetos">
             <div class="container-projetos">
-                <h4>Informações Pessoais</h4>
-                <p class="line-1 anim-typewriter">Aluno(a) da CESAR SCHOOL</p>
+                <h4>{% trans "Informações Pessoais" %}</h4>
+                <p class="line-1 anim-typewriter">{% trans "Aluno(a) da CESAR SCHOOL" %}</p>
 
                 <ul>
-                    <li>RA: {{ ra }}</li>
-                    <li>CURSO: CIÊNCIAS DA COMPUTAÇÃO</li>
-                    <li>EMAIL: {{ email }}</li>
+                    <li>{% trans "RA" %}: {{ ra }}</li>
+                    <li>{% trans "CURSO: CIÊNCIAS DA COMPUTAÇÃO" %}</li>
+                    <li>{% trans "EMAIL" %}: {{ email }}</li>
                 </ul>
                 
                 <!-- Formulário para alterar a foto de perfil -->

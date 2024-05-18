@@ -1,9 +1,10 @@
 ﻿{% extends "app_cc/aluno/main.html" %}
+{% load i18n %}
 
 {% block content %}
 
   <div>
-    <h2 class="text-center mb-4 page-text" >DISCIPLINAS</h2>
+    <h2 class="text-center mb-4 page-text">{% trans "DISCIPLINAS" %}</h2>
     <div class="text-end mt-3">
       
           <a class="grade-button" id="link_boletim"  href="{% url 'variacao_notas' %} "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
@@ -19,16 +20,15 @@
           {% if nota_instance %}
             <h5>{{ nota_instance.valor }}</h5> <!-- Mostrar o valor da nota -->
           {% else %}
-            <h5>Nenhuma nota registrada</h5>
+            <h5>{% trans "Nenhuma nota registrada" %}</h5>
           {% endif %}
         </p>
       </div>
     </div>
     {% empty %}
-    <p>Nenhuma disciplina encontrada.</p>
+    <p>{% trans "Nenhuma disciplina encontrada." %}</p>
     {% endfor %}
     
   </div>
-
 
 {% endblock content %}

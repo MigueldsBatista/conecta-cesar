@@ -20,5 +20,5 @@ urlpatterns = [
     path('professor/frequenciap/', views.frequenciap, name='frequenciap'),
     path('professor/calendariop/', views.calendariop, name='calendariop'),
     path('professor/avisosp/', views.avisosp, name='avisosp'),
-    path('professor/disciplinas_e_notas/', views.disciplinas_e_notas, name='disciplinas_e_notas'),
+    path('professor/slidesp', views.slidesp, name="slidesp"),
 ]

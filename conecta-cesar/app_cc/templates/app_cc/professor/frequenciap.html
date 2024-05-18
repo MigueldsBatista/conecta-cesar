@@ -1,8 +1,8 @@
 {% extends "app_cc/professor/mainp.html" %}
-
+{% load i18n %}
 {% block content %}
 <div class="container mt-4">
-  <h2 class="text-center">Registrar Faltas</h2>
+  <h2 class="text-center">{%trans "Registrar Faltas"%}</h2>
   <form method="POST">
     {% csrf_token %}
     {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
@@ -18,7 +18,7 @@
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <!-- CheckBox para marcar falta -->
                     <div>
-                      Marcar Falta
+                      {%trans "Marcar Falta"%}
                       <input type="checkbox" name="falta[{{ aluno_info.aluno.id }}-{{ disciplina_info.disciplina.id }}]" 
                         {% if aluno_info.tem_falta_hoje %} checked {% endif %}>
                     </div>
@@ -50,7 +50,7 @@
           </svg>
         </div>
       </div>
-      <span>Salvar</span>
+      <span>{%trans "Salvar"%}</span>
     </button>
   </form>
 </div>

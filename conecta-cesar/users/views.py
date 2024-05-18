@@ -7,6 +7,8 @@ from project_cc.roles import Aluno, Professor
 from app_cc.models import Aluno as AlunoModel, Professor as ProfessorModel
 from django.contrib import messages
 from rolepermissions.roles import assign_role
+from django.utils.translation import gettext as _
+
 
 
 
@@ -22,7 +24,7 @@ def cadastro(request):
 
         # Verifica se já existe um usuário com esse nome
         if User.objects.filter(username=user_name).exists():
-            messages.error(request, "Já existe um usuário com esse nome")
+            messages.error(request, _("Já existe um usuário com esse nome"))
             return redirect("cadastro")  # Redireciona para a mesma página
 
         # Se não existe, cria o usuário
@@ -35,11 +37,11 @@ def cadastro(request):
             assign_role(user, Aluno)
             AlunoModel.objects.create(usuario=user,  email=user_email)
         else:
-            messages.error(request, "Papel do usuário não especificado. Selecione 'professor' ou 'aluno'.")
+            messages.error(request, _("Papel do usuário não especificado. Selecione 'professor' ou 'aluno'."))
             return redirect("cadastro")
 
         # Mensagem de sucesso
-        messages.success(request, "Usuário cadastrado com sucesso. Agora faça login.")
+        messages.success(request, _("Usuário cadastrado com sucesso. Agora faça login."))
         return redirect("login")  # Redireciona para a página de login
 
 def login(request):
@@ -59,10 +61,10 @@ def login(request):
             elif has_role(user, Aluno):
                 return redirect("avisos")  # URL da página do aluno
             else:
-                messages.error(request, "O usuário não tem um papel definido.")
+                messages.error(request, _("O usuário não tem um papel definido."))
                 return redirect("login")  # Volta para a página de login
         else:
-            messages.error(request, "Usuário ou senha incorretos. Por favor, tente novamente.")
+            messages.error(request, _("Usuário ou senha incorretos. Por favor, tente novamente."))
             return redirect("login")  # Redireciona para a página de login
 
 def plataforma(request):
@@ -71,4 +73,4 @@ def plataforma(request):
             return redirect("avisosp")  # Redireciona para a página do professor
         elif has_role(request.user, Aluno):
             return redirect("avisos")  # Redireciona para a página do aluno
-    return HttpResponse('Você precisa estar logado')
+    return HttpResponse(_('Você precisa estar logado'))

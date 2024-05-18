@@ -104,7 +104,7 @@ class Falta(models.Model):
     justificada = models.BooleanField(default=False)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='faltas', null=True)  # Relacionamento com Disciplina
     def __str__(self):
-        return f"Falta de {self.aluno.usuario.username} em {self.data}"
+        return f"Falta de {self.aluno.usuario.username} em {self.data}"#nao aparece pro usuario.
     
 class File(models.Model):
     title=models.CharField(max_length=300, null=True)#Considerar deletar o título para evitar error

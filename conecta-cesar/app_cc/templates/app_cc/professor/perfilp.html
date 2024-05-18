@@ -1,4 +1,5 @@
 {% extends "app_cc/professor/mainp.html" %}
+{% load i18n %}
 
 {% block content %}
 {% if messages %}
@@ -52,7 +53,7 @@
                     </label>
                       </div>
                     </div>
-                    <span>Salvar</span>
+                    <span>{% trans "Salvar" %}</span>
                   </button>
                 </div>
                   </div>
@@ -64,13 +65,13 @@
 
         <div class="projetos">
             <div class="container-projetos">
-                <h4>Informações Pessoais</h4>
-                <p class="line-1 anim-typewriter">Professor(a) da CESAR SCHOOL</p>
+                <h4>{% trans "Informações Pessoais" %}</h4>
+                <p class="line-1 anim-typewriter">{% trans "Professor(a) da CESAR SCHOOL" %}</p>
 
                 <ul>
-                    <li>RA: {{ ra }}</li>
-                    <li>CURSO: CIÊNCIAS DA COMPUTAÇÃO</li>
-                    <li>EMAIL: {{ email }}</li>
+                    <li>{% trans "RA" %}: {{ ra }}</li>
+                    <li>{% trans "CURSO: CIÊNCIAS DA COMPUTAÇÃO" %}</li>
+                    <li>{% trans "EMAIL" %}: {{ email }}</li>
                 </ul>
                 
                 <!-- Formulário para alterar a foto de perfil -->
