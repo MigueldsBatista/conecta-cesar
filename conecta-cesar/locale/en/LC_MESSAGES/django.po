@@ -8,9 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-18 18:45+0000\n"
+"POT-Creation-Date: 2024-05-19 14:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Miguel de Sousa Batista Rafael Leite Barros <msb2@cesar.school> <ralb@cesar.school>\n"
+"Last-Translator: Miguel de Sousa Batista Rafael Leite Barros <msb2@cesar."
+"school> <ralb@cesar.school>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -35,9 +36,9 @@ msgid ""
 "empreendedorismo através da educação. Conheça nossos cursos e descubra como "
 "podemos ajudá-lo a alcançar seus objetivos profissionais."
 msgstr ""
-"Cesar School is an educational institution that seeks to promote innovation and "
-"entrepreneurship through education. Discover our courses and find out how"
-"We can help you achieve your professional goals."
+"Cesar School is an educational institution that seeks to promote innovation "
+"and entrepreneurship through education. Discover our courses and find out "
+"howWe can help you achieve your professional goals."
 
 #: app_cc/templates/app_cc/aluno/avisos.html:47
 msgid "Imagem 1"
@@ -49,14 +50,19 @@ msgid "Caminhos para uma escrita criativa"
 msgstr "Paths to write creatively"
 
 #: app_cc/templates/app_cc/aluno/avisos.html:62
+#, fuzzy
+#| msgid ""
+#| "Descubra como desbloquear sua criatividade e aprimorar suas habilidades "
+#| "de escrita com nossos cursos especializados. Explore novas técnicas e "
+#| "encontre inspiração para suas histórias"
 msgid ""
-"Descubra como desbloquear sua criatividade e aprimorar suas habilidades de"
+"Descubra como desbloquear sua criatividade e aprimorar suas habilidades de "
 "escrita com nossos cursos especializados. Explore novas técnicas e encontre "
 "inspiração para suas histórias."
 msgstr ""
-"Discover how to unlock your creativity and improve your"
-"writing with our specialized courses. Explore new techniques and find "
-"inspiration for your stories."
+"Discover how to unlock your creativity and improve your skillswriting with "
+"our specialized courses. Explore new techniques and find Inspiration for "
+"your stories"
 
 #: app_cc/templates/app_cc/aluno/avisos.html:70
 msgid "Imagem 2"
@@ -75,8 +81,8 @@ msgid ""
 "o diagnóstico, tratamento e cuidados com os pacientes."
 msgstr ""
 "Explore how artificial intelligence is transforming medical practice."
-"Discover how emerging technologies are being applied to improve"
-"the diagnosis, treatment and care of patients."
+"Discover how emerging technologies are being applied to improvethe "
+"diagnosis, treatment and care of patients."
 
 #: app_cc/templates/app_cc/aluno/avisos.html:93
 msgid "Imagem 3"
@@ -93,200 +99,202 @@ msgid ""
 "A AIED 2024 oferece uma oportunidade única de explorar as últimas tendências "
 "em educação e tecnologia. Inscreva-se agora para participar de palestras, "
 "workshops e apresentações de pesquisas inovadoras."
-msgstr "AIED 2024 offers a unique opportunity to explore the latest trends"
-"in education and technology. Sign up now to attend lectures,"
-"innovative research workshops and presentations."
+msgstr ""
+"AIED 2024 offers a unique opportunity to explore the latest trendsin "
+"education and technology. Sign up now to attend lectures,innovative research "
+"workshops and presentations."
 
 #: app_cc/templates/app_cc/aluno/avisos.html:116
 msgid "Imagem 4"
 msgstr "Image 4"
 
-#: app_cc/templates/app_cc/aluno/boletim.html:6
-#: app_cc/templates/app_cc/professor/boletimp.html:5
+#: app_cc/templates/app_cc/aluno/boletim.html:7
+#: app_cc/templates/app_cc/professor/boletimp.html:6
 msgid "DISCIPLINAS"
 msgstr "DISCIPLINES"
 
-#: app_cc/templates/app_cc/aluno/boletim.html:22
+#: app_cc/templates/app_cc/aluno/boletim.html:23
 msgid "Nenhuma nota registrada"
 msgstr "There are no grades registered"
 
-#: app_cc/templates/app_cc/aluno/boletim.html:28
+#: app_cc/templates/app_cc/aluno/boletim.html:29
 msgid "Nenhuma disciplina encontrada."
 msgstr "No discipline was found"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:33
-#: app_cc/templates/app_cc/professor/calendariop.html:34
+#: app_cc/templates/app_cc/aluno/calendario.html:34
+#: app_cc/templates/app_cc/professor/calendariop.html:36
 msgid "DOM"
 msgstr "SUN"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:34
-#: app_cc/templates/app_cc/professor/calendariop.html:35
+#: app_cc/templates/app_cc/aluno/calendario.html:35
+#: app_cc/templates/app_cc/professor/calendariop.html:37
 msgid "SEG"
 msgstr "MON"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:35
-#: app_cc/templates/app_cc/professor/calendariop.html:36
+#: app_cc/templates/app_cc/aluno/calendario.html:36
+#: app_cc/templates/app_cc/professor/calendariop.html:38
 msgid "TER"
 msgstr "TUE"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:36
-#: app_cc/templates/app_cc/professor/calendariop.html:37
+#: app_cc/templates/app_cc/aluno/calendario.html:37
+#: app_cc/templates/app_cc/professor/calendariop.html:39
 msgid "QUA"
 msgstr "WED"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:37
-#: app_cc/templates/app_cc/professor/calendariop.html:38
+#: app_cc/templates/app_cc/aluno/calendario.html:38
+#: app_cc/templates/app_cc/professor/calendariop.html:40
 msgid "QUI"
 msgstr "THU"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:38
-#: app_cc/templates/app_cc/professor/calendariop.html:39
+#: app_cc/templates/app_cc/aluno/calendario.html:39
+#: app_cc/templates/app_cc/professor/calendariop.html:41
 msgid "SEX"
 msgstr "FRI"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:39
-#: app_cc/templates/app_cc/professor/calendariop.html:40
+#: app_cc/templates/app_cc/aluno/calendario.html:40
+#: app_cc/templates/app_cc/professor/calendariop.html:42
 msgid "SAB"
 msgstr "SAT"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:51
-#: app_cc/templates/app_cc/professor/calendariop.html:52
+#: app_cc/templates/app_cc/aluno/calendario.html:52
+#: app_cc/templates/app_cc/professor/calendariop.html:54
 msgid "Título:"
 msgstr "Titles:"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:54
+#: app_cc/templates/app_cc/aluno/calendario.html:55
 msgid "Descrição:"
 msgstr "Description:"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:57
+#: app_cc/templates/app_cc/aluno/calendario.html:58
 msgid "Data:"
 msgstr "Date:"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:60
-#: app_cc/templates/app_cc/aluno/calendario.html:136
+#: app_cc/templates/app_cc/aluno/calendario.html:61
+#: app_cc/templates/app_cc/aluno/calendario.html:137
 msgid "Horário:"
 msgstr "Time"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:63
+#: app_cc/templates/app_cc/aluno/calendario.html:64
 msgid "Disciplina:"
 msgstr "Discipline"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:70
-#: app_cc/templates/app_cc/aluno/hora_extra.html:57
-#: app_cc/templates/app_cc/professor/calendariop.html:71
-#: app_cc/templates/app_cc/professor/diariop.html:43
-#: app_cc/templates/app_cc/professor/slidesp.html:52
+#: app_cc/templates/app_cc/aluno/calendario.html:71
+#: app_cc/templates/app_cc/aluno/hora_extra.html:58
+#: app_cc/templates/app_cc/professor/calendariop.html:73
+#: app_cc/templates/app_cc/professor/diariop.html:46
+#: app_cc/templates/app_cc/professor/slidesp.html:53
 msgid "Enviar"
 msgstr "Send"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:90
+#: app_cc/templates/app_cc/aluno/calendario.html:91
 msgid "Janeiro"
 msgstr "January"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:90
+#: app_cc/templates/app_cc/aluno/calendario.html:91
 msgid "Fevereiro"
 msgstr "February"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:90
+#: app_cc/templates/app_cc/aluno/calendario.html:91
 msgid "Março"
 msgstr "March"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:90
+#: app_cc/templates/app_cc/aluno/calendario.html:91
 msgid "Abril"
 msgstr "April"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:90
+#: app_cc/templates/app_cc/aluno/calendario.html:91
 msgid "Maio"
 msgstr "May"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:90
+#: app_cc/templates/app_cc/aluno/calendario.html:91
 msgid "Junho"
 msgstr "June"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:91
+#: app_cc/templates/app_cc/aluno/calendario.html:92
 msgid "Julho"
 msgstr "July"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:91
+#: app_cc/templates/app_cc/aluno/calendario.html:92
 msgid "Agosto"
 msgstr "Augst"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:91
+#: app_cc/templates/app_cc/aluno/calendario.html:92
 msgid "Setembro"
 msgstr "September"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:91
+#: app_cc/templates/app_cc/aluno/calendario.html:92
 msgid "Outubro"
 msgstr "October"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:91
+#: app_cc/templates/app_cc/aluno/calendario.html:92
 msgid "Novembro"
 msgstr "November"
 
-#: app_cc/templates/app_cc/aluno/calendario.html:91
+#: app_cc/templates/app_cc/aluno/calendario.html:92
 msgid "Dezembro"
 msgstr "December"
 
-#: app_cc/templates/app_cc/aluno/diario.html:5
-#: app_cc/templates/app_cc/professor/diariop.html:4
+#: app_cc/templates/app_cc/aluno/diario.html:6
+#: app_cc/templates/app_cc/professor/diariop.html:7
 msgid "DIÁRIO"
 msgstr "Diary"
 
-#: app_cc/templates/app_cc/aluno/diario.html:13
+#: app_cc/templates/app_cc/aluno/diario.html:14
 msgid "Últimos Diários"
 msgstr "Latest Diaries"
 
-#: app_cc/templates/app_cc/aluno/diario.html:24
-#: app_cc/templates/app_cc/professor/diariop.html:62
+#: app_cc/templates/app_cc/aluno/diario.html:25
+#: app_cc/templates/app_cc/professor/diariop.html:65
 msgid "Nenhum diário encontrado."
 msgstr "No diary was found"
 
-#: app_cc/templates/app_cc/aluno/frequencia.html:5
+#: app_cc/templates/app_cc/aluno/frequencia.html:6
 msgid "Faltas e Frequência"
 msgstr "Frequency and Abscenses"
 
-#: app_cc/templates/app_cc/aluno/frequencia.html:13
+#: app_cc/templates/app_cc/aluno/frequencia.html:14
 msgid "Faltas"
 msgstr "Abscenses"
 
-#: app_cc/templates/app_cc/aluno/frequencia.html:17
+#: app_cc/templates/app_cc/aluno/frequencia.html:18
 #: app_cc/templates/app_cc/aluno/main.html:67
-#: app_cc/templates/app_cc/professor/mainp.html:57
+#: app_cc/templates/app_cc/professor/mainp.html:58
 msgid "Frequência"
 msgstr "Frequency"
 
-#: app_cc/templates/app_cc/aluno/hora_extra.html:5
-#: app_cc/templates/app_cc/aluno/hora_extra.html:44
-#: app_cc/templates/app_cc/aluno/hora_extra.html:82
-#: app_cc/templates/app_cc/professor/slidesp.html:39
+#: app_cc/templates/app_cc/aluno/hora_extra.html:6
+#: app_cc/templates/app_cc/aluno/hora_extra.html:45
+#: app_cc/templates/app_cc/aluno/hora_extra.html:83
+#: app_cc/templates/app_cc/professor/slidesp.html:40
 msgid "Horas Extras"
 msgstr "Overtime"
 
-#: app_cc/templates/app_cc/aluno/hora_extra.html:23
+#: app_cc/templates/app_cc/aluno/hora_extra.html:24
 msgid "Total de Horas Extras Acumuladas"
 msgstr "Total Accumulated Overtime"
 
-#: app_cc/templates/app_cc/aluno/hora_extra.html:72
-#: app_cc/templates/app_cc/professor/slidesp.html:62
+#: app_cc/templates/app_cc/aluno/hora_extra.html:73
+#: app_cc/templates/app_cc/professor/slidesp.html:63
 msgid "Certificados Enviados"
-msgstr "Certificates Sent"
+msgstr "My Certificates"
 
-#: app_cc/templates/app_cc/aluno/hora_extra.html:83
+#: app_cc/templates/app_cc/aluno/hora_extra.html:84
 msgid "Preview"
 msgstr "Preview"
 
-#: app_cc/templates/app_cc/aluno/hora_extra.html:149
-#: app_cc/templates/app_cc/professor/slidesp.html:123
-msgid "Você ainda não enviou arquivos."
-msgstr "You haven't uploaded files yet."
+#: app_cc/templates/app_cc/aluno/hora_extra.html:136
+#, fuzzy
+#| msgid "Certificados Enviados"
+msgid "Nenhum certificado enviado ainda."
+msgstr "My Certificates"
 
 #: app_cc/templates/app_cc/aluno/main.html:13
-#: app_cc/templates/app_cc/professor/mainp.html:37
+#: app_cc/templates/app_cc/professor/mainp.html:38
 msgid "Início"
 msgstr "Home"
 
 #: app_cc/templates/app_cc/aluno/main.html:46
-#: app_cc/templates/app_cc/professor/mainp.html:73
+#: app_cc/templates/app_cc/professor/mainp.html:74
 msgid "Calendário"
 msgstr "Calendar"
 
@@ -298,57 +306,72 @@ msgstr "Evaluation"
 msgid "Boletim"
 msgstr "Report card"
 
+#: app_cc/templates/app_cc/aluno/main.html:75
+#: app_cc/templates/app_cc/professor/mainp.html:89
+msgid "Perfil"
+msgstr "Profile"
+
 #: app_cc/templates/app_cc/aluno/main.html:80
 msgid "Hora Extra"
 msgstr "Overtime"
 
 #: app_cc/templates/app_cc/aluno/main.html:87
-#: app_cc/templates/app_cc/professor/mainp.html:82
+#: app_cc/templates/app_cc/professor/mainp.html:83
 msgid "Diário"
 msgstr "Diary"
 
 #: app_cc/templates/app_cc/aluno/main.html:93
-#: app_cc/templates/app_cc/professor/mainp.html:94
+#: app_cc/templates/app_cc/professor/mainp.html:96
+msgid "Idioma"
+msgstr "Language"
+
+#: app_cc/templates/app_cc/aluno/main.html:101
+#: app_cc/templates/app_cc/professor/mainp.html:104
+msgid "EN"
+msgstr ""
+
+#: app_cc/templates/app_cc/aluno/main.html:109
+#: app_cc/templates/app_cc/professor/mainp.html:112
 msgid "Sair"
 msgstr "Exit"
 
-#: app_cc/templates/app_cc/aluno/perfil.html:20
-#: app_cc/templates/app_cc/aluno/perfil.html:22
+#: app_cc/templates/app_cc/aluno/perfil.html:21
+#: app_cc/templates/app_cc/aluno/perfil.html:23
 msgid "Foto de Perfil"
 msgstr "Profile picture"
 
-#: app_cc/templates/app_cc/aluno/perfil.html:56
-#: app_cc/templates/app_cc/professor/boletimp.html:67
+#: app_cc/templates/app_cc/aluno/perfil.html:57
+#: app_cc/templates/app_cc/professor/boletimp.html:68
 #: app_cc/templates/app_cc/professor/frequenciap.html:53
-#: app_cc/templates/app_cc/professor/perfilp.html:55
+#: app_cc/templates/app_cc/professor/perfilp.html:56
 msgid "Salvar"
 msgstr "Save"
 
-#: app_cc/templates/app_cc/aluno/perfil.html:68
-#: app_cc/templates/app_cc/professor/perfilp.html:67
+#: app_cc/templates/app_cc/aluno/perfil.html:69
+#: app_cc/templates/app_cc/professor/perfilp.html:68
 msgid "Informações Pessoais"
 msgstr "Personal information"
 
-#: app_cc/templates/app_cc/aluno/perfil.html:69
+#: app_cc/templates/app_cc/aluno/perfil.html:70
 msgid "Aluno(a) da CESAR SCHOOL"
 msgstr "Student of CESAR SCHOOL"
 
-#: app_cc/templates/app_cc/aluno/perfil.html:72
-#: app_cc/templates/app_cc/professor/perfilp.html:71
+#: app_cc/templates/app_cc/aluno/perfil.html:73
+#: app_cc/templates/app_cc/professor/perfilp.html:72
 msgid "RA"
 msgstr "RA"
 
-#: app_cc/templates/app_cc/aluno/perfil.html:73
-#: app_cc/templates/app_cc/professor/perfilp.html:72
+#: app_cc/templates/app_cc/aluno/perfil.html:74
+#: app_cc/templates/app_cc/professor/perfilp.html:73
 msgid "CURSO: CIÊNCIAS DA COMPUTAÇÃO"
 msgstr "COURSE: COMPUTER SCIENCE"
 
-#: app_cc/templates/app_cc/aluno/perfil.html:74
-#: app_cc/templates/app_cc/professor/perfilp.html:73
+#: app_cc/templates/app_cc/aluno/perfil.html:75
+#: app_cc/templates/app_cc/professor/perfilp.html:74
 msgid "EMAIL"
 msgstr "EMAIL"
 
-#: app_cc/templates/app_cc/aluno/variacao_notas.html:19
+#: app_cc/templates/app_cc/aluno/variacao_notas.html:20
 msgid "Gráfico das Notas"
 msgstr "Grade chart"
 
@@ -358,50 +381,50 @@ msgid ""
 "escrita com nossos cursos especializados. Explore novas técnicas e encontre "
 "inspiração para suas histórias"
 msgstr ""
-"Discover how to unlock your creativity and improve your skills"
-"writing with our specialized courses. Explore new techniques and find "
-"Inspiration for your stories"
+"Discover how to unlock your creativity and improve your skillswriting with "
+"our specialized courses. Explore new techniques and find Inspiration for "
+"your stories"
 
-#: app_cc/templates/app_cc/professor/boletimp.html:22
+#: app_cc/templates/app_cc/professor/boletimp.html:23
 #: users/templates/cadastro.html:53
 msgid "Aluno"
 msgstr "Student"
 
-#: app_cc/templates/app_cc/professor/boletimp.html:23
+#: app_cc/templates/app_cc/professor/boletimp.html:24
 msgid "Nota"
 msgstr "Grade"
 
-#: app_cc/templates/app_cc/professor/boletimp.html:24
+#: app_cc/templates/app_cc/professor/boletimp.html:25
 msgid "Editar"
 msgstr "Edit"
 
-#: app_cc/templates/app_cc/professor/calendariop.html:55
+#: app_cc/templates/app_cc/professor/calendariop.html:57
 msgid "Descrição"
 msgstr "Description"
 
-#: app_cc/templates/app_cc/professor/calendariop.html:58
+#: app_cc/templates/app_cc/professor/calendariop.html:60
 msgid "Data"
 msgstr "Date"
 
-#: app_cc/templates/app_cc/professor/calendariop.html:61
+#: app_cc/templates/app_cc/professor/calendariop.html:63
 msgid "Horário"
 msgstr "Time"
 
-#: app_cc/templates/app_cc/professor/calendariop.html:64
-#: app_cc/templates/app_cc/professor/diariop.html:8
-#: app_cc/templates/app_cc/professor/mainp.html:50
+#: app_cc/templates/app_cc/professor/calendariop.html:66
+#: app_cc/templates/app_cc/professor/diariop.html:11
+#: app_cc/templates/app_cc/professor/mainp.html:51
 msgid "Disciplina"
 msgstr "Discipline"
 
-#: app_cc/templates/app_cc/professor/diariop.html:17
+#: app_cc/templates/app_cc/professor/diariop.html:20
 msgid "Título do Diário"
 msgstr "Diary title"
 
-#: app_cc/templates/app_cc/professor/diariop.html:22
+#: app_cc/templates/app_cc/professor/diariop.html:25
 msgid "Texto do Diário"
 msgstr "Diary text"
 
-#: app_cc/templates/app_cc/professor/diariop.html:51
+#: app_cc/templates/app_cc/professor/diariop.html:54
 msgid "Diários Salvos:"
 msgstr "Saved diaries"
 
@@ -413,50 +436,54 @@ msgstr "Register absences"
 msgid "Marcar Falta"
 msgstr ""
 
-#: app_cc/templates/app_cc/professor/mainp.html:12
+#: app_cc/templates/app_cc/professor/mainp.html:13
 #, fuzzy
 #| msgid "Conheça o Cesar School"
 msgid "Conecta Cesar - Home"
 msgstr "This is Cesar School"
 
-#: app_cc/templates/app_cc/professor/mainp.html:22
-#: app_cc/templates/app_cc/professor/mainp.html:29
+#: app_cc/templates/app_cc/professor/mainp.html:23
+#: app_cc/templates/app_cc/professor/mainp.html:30
 #, fuzzy
 #| msgid "Conheça o Cesar School"
 msgid "Conecta Cesar"
 msgstr "This is Cesar School"
 
-#: app_cc/templates/app_cc/professor/mainp.html:45
+#: app_cc/templates/app_cc/professor/mainp.html:46
 msgid "Turmas"
 msgstr "Classes"
 
-#: app_cc/templates/app_cc/professor/mainp.html:64
+#: app_cc/templates/app_cc/professor/mainp.html:65
 msgid "Área do professor"
-msgstr "Professor área"
+msgstr "Professor area"
 
-#: app_cc/templates/app_cc/professor/mainp.html:88
-msgid "Perfil"
-msgstr "Profile"
+#: app_cc/templates/app_cc/professor/mainp.html:100
+msgid "PT"
+msgstr ""
 
-#: app_cc/templates/app_cc/professor/perfilp.html:68
+#: app_cc/templates/app_cc/professor/perfilp.html:69
 msgid "Professor(a) da CESAR SCHOOL"
 msgstr "Professor of CESAR SCHOL"
 
-#: app_cc/templates/app_cc/professor/slidesp.html:5
+#: app_cc/templates/app_cc/professor/slidesp.html:6
 msgid "Adicionar PowerPoints"
 msgstr "Add PowerPoints"
 
-#: app_cc/templates/app_cc/professor/slidesp.html:23
+#: app_cc/templates/app_cc/professor/slidesp.html:24
 msgid "Total de Horas Extras Acumuladas:"
 msgstr "Total Accumulated Overtime:"
 
-#: app_cc/templates/app_cc/professor/slidesp.html:70
+#: app_cc/templates/app_cc/professor/slidesp.html:71
 msgid "Horas Extras:"
 msgstr "Overtime:"
 
+#: app_cc/templates/app_cc/professor/slidesp.html:124
+msgid "Você ainda não enviou arquivos."
+msgstr "You haven't uploaded files yet."
+
 #: app_cc/views.py:24
 msgid "Você precisa fazer login para acessar esta página."
-msgstr "you need to be log in to acess this page."
+msgstr "you need to be logged in to acess this page."
 
 #: app_cc/views.py:29
 msgid "Administradores não têm acesso a esta página."
@@ -467,8 +494,9 @@ msgstr "Admins do not have acess to this page."
 msgid ""
 "Permissão negada. Você precisa ser '{required_role.__name__}' para acessar "
 "esta página."
-msgstr "Permission denied. You need to be '{required_role.__name__}' to access "
-"This page. "
+msgstr ""
+"Permission denied. You need to be '{required_role.__name__}' to access This "
+"page. "
 
 #: app_cc/views.py:77
 msgid "Arquivo excluído com sucesso."
@@ -609,12 +637,6 @@ msgstr "you need to be logged"
 #: venv/lib/python3.10/site-packages/django/contrib/messages/apps.py:16
 msgid "Messages"
 msgstr "mensagens"
-
-
-
-
-
-
 
 #: venv/lib/python3.10/site-packages/django/contrib/sitemaps/apps.py:8
 msgid "Site Maps"
@@ -1825,3 +1847,12 @@ msgstr ""
 #: venv/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:248
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid ""
+#~ "Descubra como desbloquear sua criatividade e aprimorar suas habilidades "
+#~ "deescrita com nossos cursos especializados. Explore novas técnicas e "
+#~ "encontre inspiração para suas histórias."
+#~ msgstr ""
+#~ "Discover how to unlock your creativity and improve yourwriting with our "
+#~ "specialized courses. Explore new techniques and find inspiration for your "
+#~ "stories."

@@ -322,7 +322,9 @@ color: #bdc1c7 !important;
 
 /*AVISOS */
 
-
+.card h5{
+  color: #b54810 !important;
+}
 .card{
   background-color: #2c2e33 !important;
   color: #bdc1c7 !important;
@@ -807,6 +809,7 @@ color:#bdc1c7 !important;
 .nav-item :hover {
   border-radius: 5px 5px 5px 5px;
   transition: border 0.3s ease;
+
   background-color: #3d3132 !important;
 }
 .dropdown-item:hover{
