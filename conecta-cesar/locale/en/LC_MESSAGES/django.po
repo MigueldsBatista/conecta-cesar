@@ -38,7 +38,7 @@ msgid ""
 msgstr ""
 "Cesar School is an educational institution that seeks to promote innovation "
 "and entrepreneurship through education. Discover our courses and find out "
-"howWe can help you achieve your professional goals."
+"how we can help you achieve your professional goals."
 
 #: app_cc/templates/app_cc/aluno/avisos.html:47
 msgid "Imagem 1"
@@ -463,7 +463,7 @@ msgstr ""
 
 #: app_cc/templates/app_cc/professor/perfilp.html:69
 msgid "Professor(a) da CESAR SCHOOL"
-msgstr "Professor of CESAR SCHOL"
+msgstr "Professor at CESAR SCHOL"
 
 #: app_cc/templates/app_cc/professor/slidesp.html:6
 msgid "Adicionar PowerPoints"
