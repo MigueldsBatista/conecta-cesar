@@ -4,6 +4,8 @@ from . import views
 urlpatterns = [
     # Rotas para Alunos
     path('aluno/avisos/', views.avisos, name='avisos'),
+    path('aluno/avisos/<int:aviso_id>/', views.detalhe_aviso, name='detalhe_aviso'),
+
     path('aluno/boletim/', views.boletim, name='boletim'),
     path('aluno/frequencia/', views.frequencia, name='frequencia'),
     path('aluno/perfil/', views.perfil, name='perfil'),

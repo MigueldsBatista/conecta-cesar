@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento
+from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -42,7 +42,13 @@ def has_role_or_redirect(required_role):
 # -----------------STUDENT VIEWS--------------------------------------------
 @has_role_or_redirect(Aluno)
 def avisos(request):
-    return render(request, 'app_cc/aluno/avisos.html')
+    avisos=Aviso.objects.all()
+    return render(request, 'app_cc/aluno/avisos.html', {'avisos':avisos})
+
+@has_role_or_redirect(Aluno)
+def detalhe_aviso(request, aviso_id):
+    aviso = get_object_or_404(Aviso, pk=aviso_id)
+    return render(request, 'app_cc/aluno/detalhe_aviso.html', {'aviso': aviso})
 
 #----------------------------------------------------------------------------------------------------------------  
 @has_role_or_redirect(Aluno)

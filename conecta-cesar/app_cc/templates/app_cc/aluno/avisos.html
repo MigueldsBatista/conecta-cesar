@@ -1,142 +1,41 @@
 {% extends "app_cc/aluno/main.html" %}
 {% load static %}
+
+
+
 {% load i18n %}
 {% block content %}
-<section>
-  <!DOCTYPE html>
-  <html lang="pt-br">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>{% trans "Ínicio" %}</title>
-      <link rel="stylesheet" href="{% static 'styles.css' %}">
-      <style>
-        .btn-biri{
-          background-color: #282a2f;
-          color: #888888;
-          border-radius: 20px 20px 20px 20px;
-          border: none;
-          transition: background-color 0.5s, color 0.3s; /* Adicionando transição suave */
-        }
-        .btn-biri:hover {
-          color: #b54810;
-          background-color: #3d3132;
-          box-shadow: 0px 0px 5px;
-          transform: scale(1.05); /* Aumentando ligeiramente o tamanho */
-        }
-      </style>
-  </head>
-  <body>
-<div class="container mt-3 text-center">
-  <div class="row justify-content-center">
-    <div class="col-md-6 mb-4">
-      <div class="card">
-        <button class="btn-biri" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso1" aria-expanded="false" aria-controls="collapseAviso1">
-          <hr>
-          <h5 class="aviso-title ">{% trans "Conheça o Cesar School" %}</h5>
-          <hr>
-          <div class="card-body aviso-body">
-            <p>{% trans 'O Cesar School é uma instituição de ensino que busca promover a inovação e o empreendedorismo através da educação. Conheça nossos cursos e descubra como podemos ajudá-lo a alcançar seus objetivos profissionais.' %}</p>
-          </div>
-          <div class="triangulo1">
-            &#9660;
-          </div>
-        </button>
-        <div class="collapse" id="collapseAviso1">
-          <div class="card-footer">
-            <img src="{% static 'images/aviso1.jpg' %}" class="img-fluid same-size-img" alt="{% trans 'Imagem 1' %}">
-           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<link rel="stylesheet" href="{% static 'css/aviso.css' %}" type="text/css">
 
-  <div class="row justify-content-center">
-    <div class="col-md-6 mb-4">
-      <div class="card">
-        <button class="btn-biri" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso2" aria-expanded="false" aria-controls="collapseAviso2">
-          <hr>
-          <h5 >{% trans "Caminhos para uma escrita criativa" %}</h5>
-          <hr>
-          <div class="card-body">
-            <p>{% trans 'Descubra como desbloquear sua criatividade e aprimorar suas habilidades de escrita com nossos cursos especializados. Explore novas técnicas e encontre inspiração para suas histórias.' %}</p>
-          </div>
-          <div class="triangulo2">
-            &#9660;
-          </div>
-        </button>
-        <div class="collapse" id="collapseAviso2">
-          <div class="card-footer">
-            <img src="{% static 'images/aviso2.jpg' %}" class="img-fluid same-size-img" alt="{% trans 'Imagem 2' %}">
+
+  <div class="container">
+    <h1><strong>Notícias e <span>Avisos</span> </strong></h1>
+    <div class="news-carousel">
+
+        {% for aviso in avisos %}
+        <div class="news-item">
+          {% if aviso.imagem %}
+          <img src="{{ aviso.imagem.url }}" alt="{{ aviso.titulo }}">
+      {% else %}
+          <p>Sem imagem disponível</p>
+      {% endif %}          <h3>{{aviso.titulo}}</h3>
+          <a href="{% url 'detalhe_aviso' aviso.id %}">LEIA MAIS »</a>
+          <p>4 de Abril, 2024</p>
+      </div>
+        {% endfor %}
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="row justify-content-center">
-    <div class="col-md-6 mb-4">
-      <div class="card">
-        <button class="btn-biri" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso3" aria-expanded="false" aria-controls="collapseAviso3">
-          <hr>
-          <h5>{% trans "IA para médicos" %}</h5>
-          <hr>
-          <div class="card-body">
-            <p>{% trans 'Explore como a inteligência artificial está transformando a prática médica. Descubra como as tecnologias emergentes estão sendo aplicadas para melhorar o diagnóstico, tratamento e cuidados com os pacientes.' %}</p>
-          </div>
-          <div class="triangulo3">
-            &#9660;
-          </div>
-        </button>
-        <div class="collapse" id="collapseAviso3">
-          <div class="card-footer">
-            <img src="{% static 'images/aviso3.jpg' %}" class="img-fluid same-size-img" alt="{% trans 'Imagem 3' %}">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script>
+              $(document).ready(function(){
+                  $('.news-carousel').slick({
+                      autoplay: true,
+                      autoplaySpeed: 3000,
+                      dots: true,
+                      arrows: true,
+                  });
+              });
+          </script>
 
-  <div class="row justify-content-center">
-    <div class="col-md-6 mb-4">
-      <div class="card">
-        <button class="btn-biri" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAviso4" aria-expanded="false" aria-controls="collapseAviso4">
-          <hr>
-          <h5>{% trans "As inscrições para a AIED 2024 estão oficialmente abertas!" %}</h5>
-          <hr>
-          <div class="card-body">
-            <p>{% trans 'A AIED 2024 oferece uma oportunidade única de explorar as últimas tendências em educação e tecnologia. Inscreva-se agora para participar de palestras, workshops e apresentações de pesquisas inovadoras.' %}</p>
-          </div>
-          <div class="triangulo4">
-            &#9660;
-          </div>
-        </button>
-        <div class="collapse" id="collapseAviso4">
-          <div class="card-footer">
-            <img src="{% static 'images/aviso4.jpg' %}" class="img-fluid same-size-img" alt="{% trans 'Imagem 4' %}">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-  const btnsTriangulos = document.querySelectorAll('.btn-biri');
-  const triangulos = document.querySelectorAll('[class^="triangulo"]');
-
-  btnsTriangulos.forEach((btnTriangulo, index) => {
-    let isTrianguloUp = false;
-
-    btnTriangulo.addEventListener('click', () => {
-      if (isTrianguloUp) {
-        triangulos[index].innerHTML = '&#9660;';
-      } else {
-        triangulos[index].innerHTML = '&#9650;';
-      }
-      isTrianguloUp = !isTrianguloUp;
-    });
-  });
-</script>
-  </body>
-  </html>
 {% endblock content %}

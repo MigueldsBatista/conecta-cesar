@@ -78,6 +78,17 @@ class Evento(models.Model):
 
     def __str__(self):
         return f"{self.titulo} - {self.data}"
+    
+class Aviso(models.Model):
+    titulo = models.CharField(max_length=200)
+    corpo = models.TextField()
+    publicado = models.DateTimeField(auto_now_add=True)
+    imagem=models.ImageField(null=True, upload_to="images/" )
+
+    def __str__(self):
+        return self.titulo
+    
+
 # Modelo para Notas
 class Nota(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, related_name="notas", null=True)
