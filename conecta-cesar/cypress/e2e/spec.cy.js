@@ -28,7 +28,7 @@ describe('Test Suite - Setup and Tests', () => {
      // Executa testes Django
   });
 
-  it('Verifica se o banco de dados foi recriado e migrações foram aplicadas', () => {
+  it('Test Case Verifica se o banco de dados foi recriado e migrações foram aplicadas', () => {
     // Comando para listar arquivos no diretório atual para confirmar que o banco de dados foi recriado
     cy.exec("ls").then((result) => {
       const files = result.stdout.split('\n'); // Divide a saída para obter uma lista de arquivos
@@ -36,7 +36,7 @@ describe('Test Suite - Setup and Tests', () => {
     });
   });
 
-  it('Executa um teste simples para garantir que o ambiente está configurado corretamente', () => {
+  it('Test Case Executa um teste simples para garantir que o ambiente está configurado corretamente', () => {
     // Verifica se o comando anterior foi bem-sucedido e se o teste pode ser executado
     expect(true).to.be.true; // Exemplo simples para garantir que o teste funciona
   });
@@ -46,16 +46,16 @@ describe('Test Suite for Professors', () => {
   beforeEach(() => {
     cy.visit('/auth/login/');
     cy.get('[type="text"]').type('professor1'); // Nome de usuário
-    cy.get(':nth-child(3) > .form-control').type('123'); // Senha
+    cy.get(':nth-child(3) > .form-text-input > .form-control').type('123'); // Senha
     cy.get('.btn').click(); // Loga no sistema
   });
 
-  it('Página Inicial do Professor', () => {
+  it('Test Case Página Inicial do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('.navbar-nav > :nth-child(1) > .nav-link').click(); // Clica em Home
   });
 
-  it('Disciplinas do Professor', () => {
+  it('Test Case Disciplinas do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('.dropdown > .nav-link').click(); 
     cy.get(':nth-child(1) > .dropdown-item').click(); // Acessa disciplinas
@@ -70,7 +70,7 @@ describe('Test Suite for Professors', () => {
     cy.get('.btn').click();
   });
 
-  it('Frequência do Professor', () => {
+  it('Test Case Frequência do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('.dropdown > .nav-link').click(); 
     cy.get(':nth-child(2) > .dropdown-item').click(); // Frequência
@@ -88,7 +88,7 @@ describe('Test Suite for Professors', () => {
 
   });
 
-  it('Perfil do Professor', () => {
+  it('Test Case Perfil do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(4) > .nav-link').click(); // Perfil
     
@@ -124,7 +124,7 @@ describe('Test Suite for Professors', () => {
     });
   });
 
-  it('Diário do Professor', () => {
+  it('Test Case Diário do Professor', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(5) > .nav-link').click(); // Acessa o diário
     cy.get('#tituloDiario').type('diario')
@@ -143,19 +143,19 @@ describe('Test Suite for Students', () => {
     cy.get('.btn').click(); // Loga no sistema
   });
 
-  it('Página Principal do Aluno', () => {
+  it('Test Case Página Principal do Aluno', () => {
     cy.get('.navbar-toggler-icon').click(); 
     cy.get(':nth-child(1) > .nav-link').click(); // Página principal
   });
 
-  it('Calendário do Aluno', () => {
+  it('Test Case Calendário do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(2) > .nav-link').click(); 
     cy.get('.fa-angle-right').click(); // Próximo mês
     cy.get('.fa-angle-left').click(); // Mês anterior
   });
 
-  it('Boletim do Aluno', () => {
+  it('Test Case Boletim do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('.dropdown > .nav-link').click(); 
     cy.get(':nth-child(1) > .dropdown-item').click()
@@ -163,7 +163,7 @@ describe('Test Suite for Students', () => {
     cy.get('#notasChart')//Vai pegar a barra do container do gráfico da nota que deve aparecer
 
   });
-  it('Perfil do Aluno', () => {
+  it('Test Case Perfil do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(4) > .nav-link').click(); // Acessa o perfil
     
@@ -199,7 +199,7 @@ describe('Test Suite for Students', () => {
     });
   });
 
-  it('Horas extras do Aluno', () => {
+  it('Test Case Horas extras do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(5) > .nav-link').click(); // Acessa Horas extras
 
@@ -237,7 +237,7 @@ describe('Test Suite for Students', () => {
       cy.get(':nth-child(1) > .text-center > :nth-child(2) > .btn').click()//Excluir
 
     });
-    it('Diario do Aluno', () => {
+    it('Test Case Diario do Aluno', () => {
       cy.get('.navbar-toggler').click(); 
       cy.get(':nth-child(6) > .nav-link').click(); 
       cy.get('.list-group > :nth-child(1)')
