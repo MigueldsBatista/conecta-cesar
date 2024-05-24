@@ -48,7 +48,6 @@ describe('Test Suite for Professors', () => {
     cy.visit('/auth/login/');
     cy.get('[type="text"]').type('professor1'); // Nome de usuário
     cy.get(':nth-child(3) > .form-text-input > .form-control').type('123'); // Senha
-    cy.get(':nth-child(3) > .form-text-input > .form-control').type('123'); // Senha
     cy.get('.btn').click(); // Loga no sistema
   });
 
@@ -251,7 +250,7 @@ describe('Test Suite for Students', () => {
       
 
     });
-    it('Caso de teste Diario do Aluno', () => {
+    it('Diario do Aluno', () => {
       cy.get('.navbar-toggler').click(); 
       cy.get(':nth-child(6) > .nav-link').click(); 
       cy.get('.list-group > :nth-child(1)')
