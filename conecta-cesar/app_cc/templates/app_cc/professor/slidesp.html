@@ -22,7 +22,7 @@
         <div class="card my-4">  <!-- Usando cartão para organizar conteúdo -->
             <div class="card-body">
                 <p>{%trans "Total de Horas Extras Acumuladas:"%} <strong class="extra-hour-number">{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
-                <form action='{% url "slide" %}' method="POST" enctype="multipart/form-data" class="hour-form mb-4">
+                <form action='{% url "slidesp" %}' method="POST" enctype="multipart/form-data" class="hour-form mb-4">
                     {% csrf_token %}
                     <div>
                         <div class="file-input-wrapper">

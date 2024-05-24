@@ -139,4 +139,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+      // Definindo a função confirmDelete
+      function confirmDelete() {
+        if (confirm('Você realmente quer excluir este item?')) {
+          console.log('Arquivo excluído com sucesso.');
+          document.querySelector('.alert').textContent = 'Arquivo excluído com sucesso.';
+          document.querySelector('.alert').style.display = 'block';
+        }
+        return false;
+      }
+  
+      document.addEventListener('DOMContentLoaded', function() {
+        const deleteButton = document.querySelector('.delete-button');
+        if (deleteButton) {
+          deleteButton.addEventListener('click', confirmDelete);
+        }
+      });
+    </script>
 {% endblock %}
