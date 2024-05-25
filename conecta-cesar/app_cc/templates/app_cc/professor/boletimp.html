@@ -1,51 +1,53 @@
 {% extends "app_cc/professor/mainp.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2 class="text-center" style="font-size: 32px; font-weight: bold;">{% trans "DISCIPLINAS" %}</h2>
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/disciplina.css' %}" type="text/css">
+
+
+  <h2 class="text-center orange-text bold-text">{% trans "DISCIPLINAS" %}</h2>
   <form method="post" action="{% url 'boletimp' %}">
     {% csrf_token %}
     <!-- Itera sobre as disciplinas e turmas -->
     {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
+    <div class="white-color text-center bold-text disciplina-title"><h3>{{ disciplina_info.disciplina.nome }}</h3></div>
 
-      <div class="card mb-4">
-        <div class="card-header bg-primary text-white">{{ disciplina_info.disciplina.nome }}</div>
-        <div class="card-body">
-          <!-- Itera sobre as turmas para separar os alunos -->
-          {% for turma in disciplina_info.turmas %}
-            <div class="card mb-3">
-              <div class="card-header bg-secondary text-white">{{ turma.nome }}</div>
-              <div class="card-body">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>{%trans "Aluno"%}</th>
-                      <th>{%trans "Nota"%}</th>
-                      <th>{% trans "Editar" %}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for aluno_info in disciplina_info.alunos_com_notas %}
-                    {% if aluno_info.turma == turma %}
-                        <tr>
-                          <td>{{ aluno_info.aluno.usuario.username }}</td>
-                          <td>{{ aluno_info.nota }}</td> <!-- Exibir a nota associada -->
-                          <td>
-                            <!-- Chave única para cada aluno-turma-disciplina -->
-                            <input  class="boletim_input" type="number" name="notas[{{ aluno_info.aluno.usuario.username }}-{{ turma.id }}-{{ disciplina_info.disciplina.id }}]" 
-                            min="0" max="10" step="0.01" value="{{ aluno_info.nota }}">
-                          </td>
-                        </tr>
-                      {% endif %}
-                    {% endfor %}
-                  </tbody>
-                </table>
+    <!-- Itera sobre as turmas para separar os alunos -->
+    {% for turma in disciplina_info.turmas %}
+  
+          <div class="disciplina-table">
+          <h5 class="disciplina-title card-title white-color">{{ turma.nome }}</h5>
+
+            <table class="table-container container-color white-color"> <!-- Altere estas classes para personalizar a aparência da tabela -->
+              <div class="table-head">
+                <tr>
+                  <th>{% trans "Aluno" %}</th>
+                  <th>{% trans "Nota" %}</th>
+                  <th>{% trans "Editar" %}</th>
+
+                </tr>
               </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
+                {% for aluno_info in disciplina_info.alunos_com_notas %}
+                {% if aluno_info.turma == turma %}
+                <tr>
+                  <td>{{ aluno_info.aluno.usuario.username }}</td>
+                  <td>{{ aluno_info.nota }}</td>
+                  <td>
+                    <div class="form-text-input">
+                      <input type="number" name="notas[{{ aluno_info.aluno.usuario.username }}-{{ turma.id }}-{{ disciplina_info.disciplina.id }}]" 
+                        min="0" max="10" step="0.01" value="{{ aluno_info.nota }}">
+                        
+                    </div>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+          </div>
+    {% endfor %}
     {% endfor %}
     <!-- Botão para salvar as notas -->
     <button class="send text-center mt-4" style="display: block; margin: 0 auto;">
@@ -66,7 +68,7 @@
         </div>
       </div>
       <span>{% trans "Salvar" %}</span>
-    </button>    
+    </button>
   </form>
 </div>
 {% endblock %}

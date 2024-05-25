@@ -600,7 +600,8 @@ def boletimp(request):
                 disciplina_info['alunos_com_notas'].append({
                     'aluno': aluno,
                     'turma': turma,
-                    'nota': nota_valor
+                    'nota': nota_valor,
+                    
                 })
 
         disciplinas_com_turmas_e_alunos.append(disciplina_info)

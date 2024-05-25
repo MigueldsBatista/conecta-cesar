@@ -1,9 +1,12 @@
 {% extends 'app_cc/aluno/main.html' %}
 {% load i18n %}
-
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/diario.css' %}" type="text/css">
+
 <div class="container mt-4">  <!-- Espaçamento no topo -->
-  <h1 class="text-center"><strong>{% trans "DIÁRIO" %}</strong></h1>  <!-- Título centralizado -->
+  <h1 class="text-center orange-text bold-text">{% trans "Diários" %}</h1>  <!-- Título centralizado -->
   
   {% if error %}  <!-- Caso de erro -->
     <div class="alert alert-danger text-center">  <!-- Mensagem de erro -->
@@ -14,11 +17,14 @@
     <h2 class="mt-4 diario-title">{% trans "Últimos Diários" %}</h2>  <!-- Título para a lista de diários -->
     <ul class="list-group">  <!-- List Group para exibição -->
         {% for diario in diarios %}
+        <div class="diario-box">
         <li class="list-group-item diario-box">
             {{ diario.disciplina.nome }} - ({{ diario.data }})  <!-- Disciplina e data -->
             <br><strong>{{ diario.titulo }}</strong>  <!-- Título do diário -->
             <br>{{ diario.texto }}  <!-- Texto do diário -->
         </li>
+      </div>
+      <br>
         {% endfor %}
     </ul>
     {% else %}

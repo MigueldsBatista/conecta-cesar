@@ -1,0 +1,15 @@
+.list-group-item{
+
+    padding: 10px !important;
+   
+    border-radius: 20px !important;
+    background-color: #2c2e33 !important; 
+    color:#bdc1c7 !important;
+    border: none !important;
+}
+.form-text-input input, textarea, select{
+    background-color: #2c2e33 !important;
+    border: none !important;
+    color: #bdc1c7 !important;
+}
+

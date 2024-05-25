@@ -1,13 +1,19 @@
 {% extends 'app_cc/professor/mainp.html' %}
 
 {% load i18n %}
+{%load static%}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/diario.css' %}" type="text/css">
+
+
 <div class="container mt-4">  <!-- Adicionando espaço no topo -->
     <h1 class="text-center">{% trans "DIÁRIO" %}</h1>  <!-- Centralizar o título -->
     <form method="post">  <!-- Formulário para adicionar um diário -->
         {% csrf_token %}
-        <div class="mb-3">
+        <div class="mb-3 form-text-input">
             <label for="disciplina" class="form-label">{% trans "Disciplina" %}:</label>
             <select class="form-select" name="disciplina" id="disciplina" required>  <!-- Seleção de disciplinas -->
                 {% for disciplina in disciplinas %}
@@ -16,14 +22,14 @@
             </select>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 form-text-input">
             <label for="tituloDiario" class="form-label">{% trans "Título do Diário" %}:</label>
             <input type="text" class="form-control"  name="titulo" placeholder="Insira o título do diário" required>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 form-text-input">
             <label for="textoDiario" class="form-label">{% trans "Texto do Diário" %}:</label>
-            <textarea class="form-control" name="texto" rows="5" placeholder="Digite o texto do diário" required></textarea>
+            <textarea  class="form-control" name="texto" rows="5" placeholder="Digite o texto do diário" required></textarea>
         </div>
 
         <button class="send text-center mt-4" style="display: block; margin: 0 auto;">
@@ -59,6 +65,7 @@
             <br><strong>{{ diario.titulo }}</strong>  <!-- Título do diário -->
             <br>{{ diario.texto }}  <!-- Texto do diário -->
         </li>
+        <br>
         {% endfor %}
     </ul>
     {% else %}

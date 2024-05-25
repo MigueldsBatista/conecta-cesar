@@ -1,9 +1,13 @@
 {% extends "app_cc/aluno/main.html" %}
 {% load i18n %}
-
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/hora_extra.css' %}" type="text/css">
+
 <div class="container my-4">
-    <h2 class="text-center extra-hour-title">{% trans "Horas Extras" %}</h2>
+    <h2 class="text-center orange-text bold-text">{% trans "Horas Extras" %}</h2>
 
     <!-- Exibir mensagens de erro/sucesso com Bootstrap -->
     {% if messages %}
@@ -19,9 +23,9 @@
     {% endif %}
         
         <div class="col-md-6 offset-md-3">  <!-- Centralizar no desktop, ajuste no mobile -->
-            <div class="card my-4">  <!-- Usando cartão para organizar conteúdo -->
-                <div class="card-body">
-                <p>{% trans "Total de Horas Extras Acumuladas" %}: <strong class="extra-hour-number">{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
+            <div class="card my-4 rounded-box container-color white-color">  <!-- Usando cartão para organizar conteúdo -->
+                <div class="card-body " >
+                <p>{% trans "Total de Horas Extras Acumuladas" %}: <strong>{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
                     
 
 
@@ -70,18 +74,18 @@
                
                   
               </form>
-                    <h5 class="orange-text"><strong>{% trans "Certificados Enviados" %}</strong> </h5>
+                    <h5 class="bold-text">{% trans "Certificados Enviados" %}</h5>
                     {% if arquivos %}
                         <div class="hour-blocks">  <!-- Lista para organização de itens -->
                             {% for arquivo in arquivos %}
                             <div class="list-group-item">  
 
                                         
-                                        <div class="ml-3">
+                                        <div class="ml-3 hora-text-info">
                                             {{ arquivo.title|slice:":20" }}
                                             <br>
                                             {% trans "Horas Extras" %}: {{ arquivo.horas_extras }}
-                                            <img src="{{ arquivo.archive.url }}" width="60px" height="60px" style="object-fit: cover;" class="rounded img-thumbnail file-preview" alt="{% trans "Preview" %}">
+                                            <img src="{{ arquivo.archive.url }}" alt="{% trans "Preview" %}">
                                         </div>
                                       
                                       <div class="d-flex align-items-center mt-2"> <!-- Flex container para alinhar os itens -->
@@ -157,5 +161,24 @@
           deleteButton.addEventListener('click', confirmDelete);
         }
       });
+
+      // Pré-visualização de imagem
+      const fileInput = document.getElementById('file-input');
+      const imagePreview = document.getElementById('image-preview');
+
+      fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            imagePreview.src = event.target.result;
+            document.getElementById('preview-container').style.display = 'block'
+            };
+            reader.readAsDataURL(file);
+          } else {
+            imagePreview.src = '';
+            document.getElementById('preview-container').style.display = 'none';
+          }
+        });
     </script>
 {% endblock %}
