@@ -12,7 +12,7 @@ db.sqlite3-journal
 
 ###Cypress
 # Ignorar arquivos de módulos do Node.js
-node_modules         
+node_modules    
 *.json
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
