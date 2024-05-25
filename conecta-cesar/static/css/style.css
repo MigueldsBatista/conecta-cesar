@@ -72,7 +72,8 @@ background-color: #b54810 !important;
   
 }
 .login-button input:hover{
-  background-color: #8f380c !important;
+  background-color: #b54810 !important;
+  box-shadow: 0 0 5px 2px #b54810;
   
     
   }
@@ -90,11 +91,35 @@ background-color: #b54810 !important;
 }
 
 
-.form-text-input input{
-border: none !important;
-background-color: #23252c;
-color: #bdc1c7 !important;
-border-radius: 10px ;
+.form-text-input input {
+  border: none !important;
+  background-color: #23252c;
+  color: #bdc1c7 !important;
+  border-radius: 10px;
+  outline: none !important;
+  transition: background-color 0.25s ease, outline-color 0.25s ease;
+}
+
+/* Estilo para o input em focus */
+.form-text-input input:focus {
+  background-color: #23252c;
+  outline: 2px solid #b54810 !important;
+  box-shadow: 0 0 5px 2px #b54810;
+
+}
+
+/* Estilo para o input quando preenchido automaticamente pelo navegador */
+.form-text-input input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #23252c inset;
+  box-shadow: 0 0 0px 1000px #23252c inset;
+  -webkit-text-fill-color: #bdc1c7 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.form-text-input input:-webkit-autofill:focus {
+  background-color: #23252c;
+  -webkit-box-shadow: 0 0 0px 1000px #23252c inset;
+  box-shadow: 0 0 0px 1000px #23252c inset;
 }
 .form-text-input select{
   border: none;
@@ -102,13 +127,15 @@ border-radius: 10px ;
   color: #bdc1c7 !important;
   }
 .form-text-input input::placeholder {
-  color: #bdc1c7 !important; 
+  color: #bdc1c7 !important;
+ 
 }
 .form-text-input select::placeholder {
   color: #bdc1c7 !important; 
 }
 .form-text-input textarea::placeholder {
-  color: #bdc1c7 !important; 
+  color: #bdc1c7 !important;
+
 }
 
 /**/

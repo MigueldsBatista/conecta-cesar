@@ -45,8 +45,8 @@
                           
                              </div>
                           <!-- END BUTTON -->
-                 <div class="form-group">
-                      <label for="horas_extras" class="form-label">{% trans "Horas Extras" %}</label>
+                 <div class="form-text-input">
+                      <label for="horas_extras" >{% trans "Horas Extras" %}</label>
                       <input type="number" name="horas_extras" class="form-control" step="0.1" min="0.1" required>  <!-- Valor mínimo para horas extras -->
                   </div>
 
@@ -93,7 +93,7 @@
                                       <form id="myForm" action="{% url 'hora_extra' %}" method="POST" class="d-inline-flex align-items-center mr-2">
                                         {% csrf_token %}
                                         <input type="hidden" name="update_file" value="{{ arquivo.id }}">
-                                        <input type="number" name="horas_extras" value="{{ arquivo.horas_extras }}" step="0.1" min="0.1" class="form-control form-control-sm" style="width: 100px;">
+                                        <span class="form-text-input"><input type="number" name="horas_extras" value="{{ arquivo.horas_extras }}" step="0.1" min="0.1" class="form-control form-control-sm" style="width: 100px;"></span>
                                         <button type="submit" class="update-button ml-1">
                                           <div class="svg-wrapper-1">
                                             <div class="svg-wrapper">
