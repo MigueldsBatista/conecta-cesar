@@ -27,12 +27,7 @@ Bem-vindo ao projeto Conecta Cesar! Estamos empolgados em ter você contribuindo
 - Siga as boas práticas de codificação em Python, HTML e CSS.
   - Formatação correta do código.
   - Ordem de imports correta no código.
-  - Testes de unidade passando e cobrindo 90% de classes Rest.
-  - Testes de mutação passando e cobrindo 90% das mutações.
-  - Testes de quarkus passando.
-  - Compilação e Empacotamento do código funcionando.
-  - Quality Gate do Sonar passando.
-- Caso qualquer um desses itens não seja validado, o Push não passará pelos Checks, e o Call Center vai pedir pra você melhorar o Pull Request. :D
+  - Caso qualquer um desses itens não seja validado, o Push não passará pelos Checks, e o Call Center vai pedir pra você melhorar o Pull Request. :D
 
 
 
