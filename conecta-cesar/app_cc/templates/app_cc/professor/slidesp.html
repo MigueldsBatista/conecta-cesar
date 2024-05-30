@@ -1,7 +1,11 @@
 {% extends "app_cc/professor/mainp.html" %}
 {% load i18n %}
-
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/hora_extra.css' %}" type="text/css">
+
 <div class="container my-4">
     <h2 class="text-center extra-hour-title">{%trans "Adicionar PowerPoints"%}</h2>
 

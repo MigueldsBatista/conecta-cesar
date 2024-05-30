@@ -573,7 +573,14 @@ def diariop(request):
 
 @has_role_or_redirect(Professor)
 def avisosp(request):
-    return render(request, 'app_cc/professor/avisosp.html')
+    avisos=Aviso.objects.all()
+    print(avisos)
+    return render(request, 'app_cc/professor/avisosp.html', {'avisos':avisos})
+
+@has_role_or_redirect(Professor)
+def detalhe_aviso(request, aviso_id):   
+    aviso = get_object_or_404(Aviso, pk=aviso_id)
+    return render(request, 'app_cc/professor/detalhe_aviso.html', {'aviso': aviso})
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def boletimp(request):
