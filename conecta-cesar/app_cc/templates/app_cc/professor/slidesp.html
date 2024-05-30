@@ -1,9 +1,15 @@
 {% extends "app_cc/professor/mainp.html" %}
 {% load i18n %}
-
+{%load static%}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/slidesp.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
+
+
+
 <div class="container my-4">
-    <h2 class="text-center extra-hour-title">{%trans "Adicionar PowerPoints"%}</h2>
+    <h1 class="white-color text-center bold-text "> Área do <span class="orange-text">Professor</span></h1> <!-- Destaque para o total acumulado -->    
 
     <!-- Exibir mensagens de erro/sucesso com Bootstrap -->
     {% if messages %}
@@ -21,7 +27,6 @@
     <div class="col-md-6 offset-md-3">  <!-- Centralizar no desktop, ajuste no mobile -->
         <div class="card my-4">  <!-- Usando cartão para organizar conteúdo -->
             <div class="card-body">
-                <p>{%trans "Total de Horas Extras Acumuladas:"%} <strong class="extra-hour-number">{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
                 <form action='{% url "slidesp" %}' method="POST" enctype="multipart/form-data" class="hour-form mb-4">
                     {% csrf_token %}
                     <div>
@@ -36,10 +41,6 @@
                             </button>
                         </div>
                         <!-- END BUTTON -->
-                        <div class="form-group">
-                            <label for="horas_extras" class="form-label">{%trans "Horas Extras"%}</label>
-                            <input type="number" name="horas_extras" class="form-control" step="0.1" min="0.1" required>  <!-- Valor mínimo para horas extras -->
-                        </div>
 
                         <button class="send">
                             <div class="svg-wrapper-1">
@@ -60,7 +61,7 @@
                     </div>
                 </form>
 
-                <h5 class="orange-text"><strong>{%trans "Certificados Enviados"%}</strong> </h5>
+                <h5 class="orange-text"><strong>{%trans "Documentos Enviados"%}</strong> </h5>
                 {% if arquivos %}
                     <div class="hour-blocks">  <!-- Lista para organização de itens -->
                         {% for arquivo in arquivos %}
@@ -91,8 +92,8 @@
                             </form>
 
                             <!-- Formulário para deletar o arquivo -->
-                            <form action="{% url 'slide' %}" method="POST">
-                                {% csrf_token %}
+                            <form action="{% url 'slidesp' %}" method="POST">
+                                {% csrf_token %}    
                                 <input type="hidden" name="delete_file" value="{{ arquivo.id }}">
                                 <!-- Botão de deletar -->
                                 <button class="delete-button" onclick="return confirmDelete()">

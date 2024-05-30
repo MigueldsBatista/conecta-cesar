@@ -126,6 +126,13 @@ class File(models.Model):
     def __str__(self):
         return f"{self.title} - {self.aluno.usuario.username}"
    
+class ProfessorFile(models.Model):
+    professor=models.ForeignKey(Professor, on_delete=models.CASCADE, related_name="arquivos", null=True)
+    titulo=models.CharField(max_length=300, null=True)#Considerar deletar o título para evitar error
+    archive=models.ImageField()
+    descricao = models.TextField()  # Campo para armazenar horas extras
+
+
 # Modelo de Relatório
 class Relatorio(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE, related_name='relatorios')
