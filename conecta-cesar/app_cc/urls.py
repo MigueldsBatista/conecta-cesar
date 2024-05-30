@@ -23,4 +23,5 @@ urlpatterns = [
     path('professor/calendariop/', views.calendariop, name='calendariop'),
     path('professor/avisosp/', views.avisosp, name='avisosp'),
     path('professor/slidesp', views.slidesp, name="slidesp"),
+    path('professor/relatoriosp/', views.relatoriop, name="relatoriosp")
 ]

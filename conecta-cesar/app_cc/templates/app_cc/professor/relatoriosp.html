@@ -1,0 +1,78 @@
+{% extends "app_cc/professor/mainp.html" %}
+
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/disciplina.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/relatoriosp.css' %}" type="text/css">
+
+
+<h1 class="text-center bold-text white-color">Relatórios de <span class="orange-text">Desempenho<span></h1>
+
+{% if relatorios %}
+    
+    {% for relatorio in relatorios %}
+
+        <div class="disciplina-table">
+
+            <div class="white-color text-center bold-text disciplina-title"><h2>{{ relatorio.disciplina }}</h2></div>
+
+            <h4 class="white-color text-center">Notas abaixo da média</h4>
+
+            <table class="table-container container-color white-color">
+                <tr>
+                    <th>{% trans "Aluno" %}</th>
+                    <th>{% trans "Nota" %}</th>
+                    <th>{% trans "     " %}</th>
+                </tr>
+                {% for nota_relatorio in relatorio.notarelatorio_set.all %}
+                <tr>
+                    <td>{{ nota_relatorio.aluno.usuario.username }}</td>
+                    <td>{{ nota_relatorio.nota }}</td>
+                    <td>{% trans "     " %}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="disciplina-table">
+
+            <h4 class="white-color text-center">Alto Índice de falta</h4>
+
+            <table class="table-container container-color white-color">
+                
+                <tr>
+                    <th>{% trans "Aluno" %}</th>
+                    <th>{% trans "Faltas" %}</th>
+                    <th>{% trans "     " %}</th>
+                </tr>
+                {%if falta_relatorio%}
+                {% for falta_relatorio in relatorio.faltarelatorio_set.all %}
+                
+                <tr>
+                    <td>{{ falta_relatorio.aluno.usuario.username }}</td>
+                    <td>{{ falta_relatorio.faltas }}</td>
+                    <td>{% trans "     " %}</td>
+                </tr>
+                {% endfor %}
+           
+
+                {%else%}
+               <tr>
+               <td>Nenhum Aluno encontrado</td>
+            <td>0</td></tr>
+                {%endif%}
+            </table>
+        </div>
+
+    {% endfor %}
+    
+{% else %}
+    <h3 class="text-center white-color">Nenhum relatório disponível.</h3>
+{% endif %}
+
+{% endblock %}

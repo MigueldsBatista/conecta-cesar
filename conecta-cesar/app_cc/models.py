@@ -125,8 +125,59 @@ class File(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.aluno.usuario.username}"
-    
-"""class Avisos(models.Model):
-    title=models.CharField(max_length=150, null=True)
-    imagem=models.ImageField(upload_to='avisos/', null=True, blank=True)
-    description=models.CharField(max_length=300, null=True)"""
+   
+class ProfessorFile(models.Model):
+    professor=models.ForeignKey(Professor, on_delete=models.CASCADE, related_name="arquivos", null=True)
+    titulo=models.CharField(max_length=300, null=True)#Considerar deletar o título para evitar error
+    archive=models.ImageField()
+    descricao = models.TextField()  # Campo para armazenar horas extras
+
+
+# Modelo de Relatório
+class Relatorio(models.Model):
+    professor = models.ForeignKey(Professor, on_delete=models.CASCADE, related_name='relatorios')
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='relatorios', null=True)
+    alunos_nota_abaixo = models.ManyToManyField(Aluno, related_name='relatorios_nota_abaixo', through='NotaRelatorio')
+    alunos_frequencia_abaixo = models.ManyToManyField(Aluno, related_name='relatorios_frequencia_abaixo', through='FaltaRelatorio')
+
+    def atualizar_relatorio(self, disciplina):
+        # Reseta as listas de alunos
+        self.alunos_nota_abaixo.clear()
+        self.alunos_frequencia_abaixo.clear()
+
+        # Verifica notas abaixo de 7 na disciplina específica
+        notas = Nota.objects.filter(disciplina=disciplina, valor__lt=7)
+        for nota in notas:
+            nota_relatorio, created = NotaRelatorio.objects.get_or_create(relatorio=self, aluno=nota.aluno)
+            nota_relatorio.nota = nota.valor
+            nota_relatorio.save()
+            self.alunos_nota_abaixo.add(nota.aluno)
+
+        # Verifica faltas acima de 8 para todos os alunos na disciplina específica
+        
+        for aluno in Aluno.objects.filter(turma__disciplinas=disciplina):
+            total_faltas = Falta.objects.filter(aluno=aluno, disciplina=disciplina).count()
+            if total_faltas > 0:
+                falta_relatorio, created = FaltaRelatorio.objects.get_or_create(relatorio=self, aluno=aluno)
+                falta_relatorio.faltas = total_faltas
+                falta_relatorio.save()
+                self.alunos_frequencia_abaixo.add(aluno)
+
+    def __str__(self):
+        return f"Relatório do Professor {self.professor.usuario.username} - Disciplina {self.disciplina}"
+
+class NotaRelatorio(models.Model):
+    relatorio = models.ForeignKey(Relatorio, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    nota = models.FloatField(null=True, default=0)
+
+    def __str__(self):
+        return f"NotaRelatorio: {self.aluno.usuario.username} - Nota: {self.nota}"
+
+class FaltaRelatorio(models.Model):
+    relatorio = models.ForeignKey(Relatorio, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    faltas = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"FaltaRelatorio: {self.aluno.usuario.username} - Faltas: {self.faltas}"

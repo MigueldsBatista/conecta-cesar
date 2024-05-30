@@ -1,0 +1,460 @@
+﻿/*BUTTONS*/
+
+
+.delete-button {
+    width: 40px;
+    height: 40px;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(226, 34, 34);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none !important;
+  }
+  
+  .delete-svgIcon {
+    width: 17px;
+    transition-duration: 0.3s;
+  }
+  
+  .delete-svgIcon path {
+    fill: white;
+  }
+  
+  .delete-button:hover {
+    width: 120px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    align-items: center;
+  }
+  
+  .delete-button:hover .edit-svgIcon {
+    width: 20px;
+    transition-duration: 0.3s;
+    transform: translateY(60%);
+  
+  }
+  
+  .delete-button::before {
+    display: none;
+    content: "Excluir";
+    color: white;
+    transition-duration: 0.3s;
+    font-size: 2px;
+  }
+  
+  .delete-button:hover::before {
+    display: block;
+    padding-right: 10px;
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(0px);
+    transition-duration: 0.3s;
+  }
+  
+  
+  
+  /*upload*/
+  .upload-button {
+    width: 40px;
+    height: 40px;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(226, 159, 34);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none !important;
+  }
+  
+  .upload-svgIcon {
+    width: 17px;
+    transition-duration: 0.3s;
+  }
+  
+  .upload-svgIcon path {
+    fill: white;
+  }
+  
+  .upload-button:hover {
+    width: 120px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    align-items: center;
+  }
+  
+  .upload-button:hover .edit-svgIcon {
+    width: 20px;
+    transition-duration: 0.3s;
+    transform: translateY(60%);
+  
+  }
+  
+  .upload-button::before {
+    display: none;
+    content: "Carregar";
+    color: white;
+    transition-duration: 0.3s;
+    font-size: 2px;
+  }
+  
+  .upload-button:hover::before {
+    display: block;
+    padding-right: 10px;
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(0px);
+    transition-duration: 0.3s;
+  }
+  
+  /*download*/
+  .download-button {
+    width: 40px;
+    height: 40px;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(19, 153, 37);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none !important;
+  }
+  
+  .download-svgIcon {
+    width: 17px;
+    transition-duration: 0.3s;
+  }
+  
+  .download-svgIcon path {
+    fill: white;
+  }
+  
+  .download-button:hover {
+    width: 120px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    align-items: center;
+  }
+  
+  .download-button:hover .edit-svgIcon {
+    width: 20px;
+    transition-duration: 0.3s;
+    transform: translateY(60%);
+  
+  }
+  
+  .download-button::before {
+    display: none;
+    content: "Baixar";
+    color: white;
+    transition-duration: 0.3s;
+    font-size: 2px;
+  }
+  
+  .download-button:hover::before {
+    display: block;
+    padding-right: 10px;
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(0px);
+    transition-duration: 0.3s;
+  }
+  
+  /*UPDATE BUTTON*/
+  .update-button {
+    width: 40px;
+    height: 40px;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(29, 106, 206);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none !important;
+  }
+  
+  .update-svgIcon {
+    width: 17px;
+    transition-duration: 0.3s;
+  }
+  
+  .update-svgIcon path {
+    fill: white;
+  }
+  
+  .update-button:hover {
+    width: 120px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    align-items: center;
+  }
+  
+  .update-button:hover .edit-svgIcon {
+    width: 20px;
+    transition-duration: 0.3s;
+    transform: translateY(60%);
+  
+  }
+  
+  .update-button::before {
+    display: none;
+    content: "Atualizar";
+    color: white;
+    transition-duration: 0.3s;
+    font-size: 2px;
+  }
+  
+  .update-button:hover::before {
+    display: block;
+    padding-right: 10px;
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(0px);
+    transition-duration: 0.3s;
+  }
+
+
+
+
+  .edit-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgb(215, 105, 21);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none !important;
+  }
+  
+  .edit-svgIcon {
+    width: 17px;
+    transition-duration: 0.3s;
+  }
+  
+  .edit-svgIcon path {
+    fill: white;
+  }
+  
+  .edit-button:hover {
+    width: 120px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    align-items: center;
+  }
+  
+  .edit-button:hover .edit-svgIcon {
+    width: 20px;
+    transition-duration: 0.3s;
+    transform: translateY(60%);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+  
+  .edit-button::before {
+    display: none;
+    content: "Editar";
+    color: white;
+    transition-duration: 0.3s;
+    font-size: 2px;
+  }
+  
+  .edit-button:hover::before {
+    display: block;
+    padding-right: 10px;
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(0px);
+    transition-duration: 0.3s;
+  }
+  
+  
+.grade-button {
+    width: 40px;
+    height: 40px;
+    color: white;
+    border-radius: 50%;
+    background-color: #b54810;
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none !important;
+  }
+  
+  .grade-svgIcon {
+    width: 17px;
+    transition-duration: 0.3s;
+  }
+  
+  .grade-svgIcon path {
+    fill: white;
+  }
+  
+  .grade-button:hover {
+    width: 120px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    align-items: center;
+  }
+  
+  .grade-button:hover .edit-svgIcon {
+    width: 20px;
+    transition-duration: 0.3s;
+    transform: translateY(60%);
+  
+  }
+  
+  .grade-button::before {
+    display: none;
+    content: "Gráfico";
+    color: white;
+    transition-duration: 0.3s;
+    font-size: 2px;
+  }
+  
+  .grade-button:hover::before {
+    display: block;
+    padding-right: 10px;
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(0px);
+    transition-duration: 0.3s;
+  }
+
+
+  .send {
+    width: auto;
+    height: auto;
+    font-weight: 600;
+    font-size: 10px;
+    background: #13795b;
+    color: white;
+    padding: 0.7em 1em;
+    padding-left: 0.9em;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+  .send span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .send svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .send:hover .svg-wrapper {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+  }
+  
+  .send:hover svg {
+    transform: translateX(1.2em) rotate(45deg) scale(0.7);
+  }
+  
+  .send:hover span {
+    transform: translateX(5em);
+  }
+  
+  .send:active {
+    transform: scale(0.7);
+  }
+  
+  @keyframes fly-1 {
+    from {
+      transform: translateY(0.1em);
+    }
+  
+    to {
+      transform: translateY(-0.1em);
+    }
+  }
+  
+  /*NÃO SEI ONDE TA*/
+
+  .btn-custom {
+    background-color: green;
+    border-color: #f0f0f0;
+    /* Outros estilos personalizados */
+    border-radius: 7px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  
+  
+.btn-submit{
+    background-color: #13795b;
+    padding: 5px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+  
+    border: none;
+    margin-top: 10px;
+  }
+  .btn-submit:hover{
+    background-color: #0f5e46;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Horizontal offset, Vertical offset, Blur radius, Spread radius, Color */
+  }
+
+
+
+  .button-container {
+    display: flex;
+    align-items: center;
+  }
+  /*END BUTTONS ----------------------------*/

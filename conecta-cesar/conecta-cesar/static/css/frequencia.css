@@ -1,0 +1,67 @@
+
+/*FREQUENCIA*/
+.frequency-box{
+    border: none !important;
+    background-color:  #2c2e33 !important;
+    color:#bdc1c7 !important;
+  }
+ 
+
+  .frequency-cont {
+    background-color: #23252c;
+    color: #bdc1c7 !important;
+    font-weight: 600;
+    width: 20px;  /* Ajuste o tamanho conforme necessário */
+    height: 20px;  /* Ajuste o tamanho conforme necessário */
+    border-radius: 50%;  /* Torna o elemento um círculo */
+    display: inline-block;  /* Para garantir que ele se comporte como um elemento inline */
+    line-height: 20px;  /* Para centralizar o conteúdo verticalmente, se houver */
+    text-align: center;  /* Para centralizar o conteúdo horizontalmente, se houver */
+  }
+  /* Estilos personalizados para evitar conflitos com Bootstrap */
+  
+  /* Espaço no topo */
+  
+  .card{
+    border: none !important; /* Remove a borda */
+    border-radius: 20px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Horizontal offset, Vertical offset, Blur radius, Spread radius, Color */
+  }
+  
+  
+  /* Cor do cabeçalho do cartão personalizada */
+  .card-header {
+  
+    background-color: #323334 !important; /* Azul personalizado */
+    color: white !important; /* Texto branco para contraste */
+    border-top-left-radius: 20px !important; /* Arredonda o canto superior esquerdo do cabeçalho */
+    border-top-right-radius: 20px !important; /* Arredonda o canto superior direito do cabeçalho */
+  }
+  
+  /* Corpo do cartão */
+  .card-body {
+    padding: 1.25rem !important; /* Adiciona espaço interno */
+  }
+  
+  /* Estilos para as classes de botão de bootstrap */
+  .badge {
+    padding: .4rem .75rem; /* Espaçamento interno */
+    font-size: 1rem; /* Tamanho da fonte */
+    border-radius: 10px; /* Borda arredondada */
+  }
+  
+  /* Estilos para as cores dos distintivos de bootstrap */
+  .bg-danger {
+    background-color: #dc3545; /* Vermelho */
+    color: white; /* Texto branco para contraste */
+  }
+  
+  .bg-success {
+    background-color: #28a745 ; /* Verde */
+    color: white; /* Texto branco para contraste */
+  }
+  
+  /* Bordas arredondadas para os distintivos de bootstrap */
+  .rounded-pill {
+    border-radius: 50px; /* Borda arredondada */
+  }
