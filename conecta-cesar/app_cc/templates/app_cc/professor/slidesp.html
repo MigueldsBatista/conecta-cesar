@@ -27,10 +27,7 @@
     <div class="col-md-6 offset-md-3">  <!-- Centralizar no desktop, ajuste no mobile -->
         <div class="card my-4">  <!-- Usando cartão para organizar conteúdo -->
             <div class="card-body">
-<<<<<<< HEAD:app_cc/templates/app_cc/professor/slidesp.html
-                <p>{%trans "Total de Horas Extras Acumuladas:"%} <strong class="extra-hour-number">{{ total_horas_extras }}</strong></p> <!-- Destaque para o total acumulado -->    
-=======
->>>>>>> eff11cadb53bf6d859484ed08b7fdf418d668f18:conecta-cesar/app_cc/templates/app_cc/professor/slidesp.html
+                
                 <form action='{% url "slidesp" %}' method="POST" enctype="multipart/form-data" class="hour-form mb-4">
                     {% csrf_token %}
                     <div>
