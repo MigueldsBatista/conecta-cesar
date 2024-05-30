@@ -45,15 +45,16 @@ describe('Test Suite - Setup and Tests', () => {
 describe('Test Suite for Professors', () => {
   // Loga no início de cada teste como "professor1"
   beforeEach(() => {
-    cy.visit('/auth/login/');
-    cy.get('[type="text"]').type('professor1'); // Nome de usuário
+    cy.visit('http://127.0.0.1:8000/pt/auth/login/');
+    cy.get('[type="text"]').type('Ricardo'); // Nome de usuário
     cy.get(':nth-child(3) > .form-text-input > .form-control').type('123'); // Senha
     cy.get('.btn').click(); // Loga no sistema
+    cy.visit('http://127.0.0.1:8000/pt/app/professor/avisosp/');
   });
 
   it('Caso de teste Página Inicial do Professor', () => {
-    cy.get('.navbar-toggler').click(); 
-    cy.get('.navbar-nav > :nth-child(1) > .nav-link').click(); // Clica em Home
+    cy.get(':nth-child(1) > .col-md-6 > .card > .btn-biri').click();
+    cy.get(':nth-child(1) > .col-md-6 > .card > .btn-biri').click();
   });
 
   it('Caso de teste Disciplinas do Professor', () => {
@@ -61,13 +62,10 @@ describe('Test Suite for Professors', () => {
     cy.get('#turmas-dropdown > .nav-link').click(); 
     cy.get('#turmas-dropdown > .dropdown-menu > :nth-child(1) > .dropdown-item').click(); // Acessa disciplinas
 
-    cy.get(':nth-child(3) > input').type('-1')//digitar a nota -1
-    cy.get('.send').click();
+    cy.get(':nth-child(3) > .table-container > tbody > :nth-child(2) > :nth-child(3) > .form-text-input > input').type('10')
+    cy.get(':nth-child(3) > .table-container > tbody > :nth-child(3) > :nth-child(3) > .form-text-input > input').type('9')
+    cy.get(':nth-child(3) > .table-container > tbody > :nth-child(4) > :nth-child(3) > .form-text-input > input').type('8')
 
-    cy.get(':nth-child(3) > input').clear().type('11')//tenta digitar a nota 11
-    cy.get('.send').click();
-
-    cy.get(':nth-child(3) > input').clear().type('10')//digita nota 10
     cy.get('.send').click();
   });
 
@@ -75,19 +73,45 @@ describe('Test Suite for Professors', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('#turmas-dropdown > .nav-link').click(); 
     cy.get('#turmas-dropdown > .dropdown-menu > :nth-child(2) > .dropdown-item').click(); // Frequência
-    cy.get('div > input').click()
-    cy.get('.send').click()//Registra a falta
+    
+    cy.get(':nth-child(3) > :nth-child(1) > ul > li > div > input').click();
+    cy.get('.send').click();
 
 
-    cy.get('.badge').invoke('text').then((badgeValue) => {
+    cy.get(':nth-child(3) > :nth-child(1) > ul > li > span').invoke('text').then((badgeValue) => {
       cy.wrap(badgeValue).as('badgeValue'); // Salva a quantidade de faltas
     });
     cy.get('.send').click(); //Tenta clicar novamente em registrar uma falta
     cy.get('@badgeValue').then((badgeValue) => {
-    cy.get('.badge').invoke('text').should('equal', badgeValue); //Verifica a quantidade de faltas não mudou
+      cy.get(':nth-child(3) > :nth-child(1) > ul > li > span').invoke('text').should('equal', badgeValue); //Verifica a quantidade de faltas não mudou
     });
 
   });
+
+  it('Caso de teste Área do Professor', () => {
+
+    cy.get('.navbar-toggler').click(); 
+    cy.get('#turmas-dropdown > .nav-link').click(); 
+    cy.get('#turmas-dropdown > .dropdown-menu > :nth-child(3) > .dropdown-item').click(); // Acessa disciplinas
+
+  });
+
+  it('Caso de teste Calendário do Professor', () => {
+
+    cy.get('.navbar-toggler').click(); 
+    cy.get(':nth-child(3) > .nav-link').click(); 
+    cy.get('.event-day').click();
+    cy.get('.event-day').click();
+
+  });
+
+  it('Caso de teste Diário do Professor', () => {
+    cy.get('.navbar-toggler').click(); 
+    cy.get(':nth-child(4) > .nav-link').click(); // Acessa o diário
+    cy.get(':nth-child(3) > .form-control').type('diario')
+    cy.get(':nth-child(4) > .form-control').type('conteudo')
+    cy.get('.send').click()
+    });
 
   it('Caso de teste Perfil do Professor', () => {
     cy.get('.navbar-toggler').click(); 
@@ -127,46 +151,48 @@ describe('Test Suite for Professors', () => {
     cy.contains('Foto de perfil atualizada com sucesso!').should('be.visible');//Mensagem de sucesso
     });
   });
-
-  it('Caso de teste Diário do Professor', () => {
-    cy.get('.navbar-toggler').click(); 
-    cy.get(':nth-child(4) > .nav-link').click(); // Acessa o diário
-    cy.get(':nth-child(3) > .form-control').type('diario')
-    cy.get(':nth-child(4) > .form-control').type('conteudo')
-    cy.get('.send').click()
-    });
 });
 
 // Testes para usuários do tipo Aluno
 describe('Test Suite for Students', () => {
   // Loga o aluno antes de cada teste como "aluno1"
   beforeEach(() => {
-    cy.visit('/auth/login/');
-    cy.get('[type="text"]').type('aluno1'); // Nome de usuário
+    cy.visit('http://127.0.0.1:8000/pt/auth/login/');
+    cy.get('[type="text"]').type('Tiago'); // Nome de usuário
     cy.get(':nth-child(3) > .form-text-input > .form-control').type('123'); // Senha
     cy.get('.btn').click(); // Loga no sistema
+    cy.visit('http://127.0.0.1:8000/pt/app/aluno/avisos/');
   });
 
   it('Caso de teste Página Principal do Aluno', () => {
-    cy.get('.navbar-toggler-icon').click(); 
-    cy.get(':nth-child(1) > .nav-link').click(); // Página principal
+    cy.get(':nth-child(1) > .d-flex > a > .readmore-btn').click();
+    cy.get('.download-button').click();
   });
 
   it('Caso de teste Calendário do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
-    cy.get(':nth-child(2) > .nav-link').click(); 
-    //cy.get('.fa-angle-right').click(); // Próximo mês
-    //cy.get('.fa-angle-left').click(); // Mês anterior
+    cy.get('#calendario-link').click(); 
+    cy.get('[data-date="2024-05-24"]').click();
+    cy.get('[data-date="2024-05-24"]').click();
   });
 
   it('Caso de teste Boletim do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get('#avaliacao-link').click(); 
-    cy.get('#avaliacao-dropdown > .dropdown-menu > :nth-child(1) > a').click()
-    cy.get('#link_boletim').click()
-    cy.get('#notasChart')//Vai pegar a barra do container do gráfico da nota que deve aparecer
+    cy.get('#boletim-link').click();
+    cy.get('#link_boletim').click();
+    cy.get('#notasChart');//Vai pegar a barra do container do gráfico da nota que deve aparecer
 
   });
+
+  it('Caso de teste Frequência do Aluno', () => {
+
+    cy.get('.navbar-toggler').click();
+    cy.get('#avaliacao-link').click(); 
+    cy.get('#frequencia-link').click();
+
+  });
+
   it('Caso de teste Perfil do Aluno', () => {
     cy.get('.navbar-toggler').click(); 
     cy.get(':nth-child(4) > .nav-link').click(); // Acessa o perfil
@@ -221,7 +247,7 @@ describe('Test Suite for Students', () => {
         mimeType: 'application/pdf', 
       });
     });
-    cy.get('.form-group > .form-control').type('15')
+    cy.get(':nth-child(2) > .form-text-input > .form-control').type('15')
     cy.get('.send').click()//Enviar 
     cy.get('.alert').within(() => {
       // Verifica se o texto "Somente arquivos JPG ou PNG são permitidos" está presente no formulário
@@ -235,28 +261,27 @@ describe('Test Suite for Students', () => {
         fileName: 'fotoTeste.png',//Envia um arquivo funcional
         mimeType: 'image/png',
       });
-      cy.get('.form-group > .form-control').clear().type('15')
+      cy.get(':nth-child(2) > .form-text-input > .form-control').clear().type('15')
       cy.get('.send').click()//Enviar
 
-      cy.get('#myForm > .form-control').type('10')
-      cy.get('.update-button').click()//atualizar
+      cy.get(':nth-child(1) > .d-flex > #myForm > .form-text-input > .form-control').type('10')
+      cy.get(':nth-child(1) > .d-flex > #myForm > .update-button').click()//atualizar
      
 
-      cy.get('.delete-button').click()//Excluir
+      cy.get(':nth-child(1) > .d-flex > :nth-child(2) > .delete-button').click()//Excluir
       cy.get('.alert').within(() => {
         // Verifica se o texto "Somente arquivos JPG ou PNG são permitidos" está presente no formulário
         cy.contains('Arquivo excluído com sucesso.').should('be.visible');
       }); 
       
 
-    });
-    it('Diario do Aluno', () => {
-      cy.get('.navbar-toggler').click(); 
-      cy.get(':nth-child(6) > .nav-link').click(); 
-      cy.get('.list-group > :nth-child(1)')
-    });  
-    
+    });    
   });
+  it('Diario do Aluno', () => {
+    cy.get('.navbar-toggler').click(); 
+    cy.get(':nth-child(6) > .nav-link').click(); 
+    cy.get('.list-group > :nth-child(1)')
+  });  
 });
 
 after(() => {
