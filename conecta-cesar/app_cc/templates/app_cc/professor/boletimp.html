@@ -8,18 +8,18 @@
 <link rel="stylesheet" href="{% static 'css/disciplina.css' %}" type="text/css">
 
 
-  <h2 class="text-center orange-text bold-text">{% trans "DISCIPLINAS" %}</h2>
+  <h1 class="text-center orange-text bold-text">{% trans "DISCIPLINAS" %}</h1>
   <form method="post" action="{% url 'boletimp' %}">
     {% csrf_token %}
     <!-- Itera sobre as disciplinas e turmas -->
     {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
-    <div class="white-color text-center bold-text disciplina-title"><h3>{{ disciplina_info.disciplina.nome }}</h3></div>
+    <div class="white-color text-center bold-text disciplina-title"><h2>{{ disciplina_info.disciplina.nome }}</h2></div>
 
     <!-- Itera sobre as turmas para separar os alunos -->
     {% for turma in disciplina_info.turmas %}
   
           <div class="disciplina-table">
-          <h5 class="disciplina-title card-title white-color">{{ turma.nome }}</h5>
+          <h3 class="disciplina-title card-title white-color">{{ turma.nome }}</h3>
 
             <table class="table-container container-color white-color"> <!-- Altere estas classes para personalizar a aparência da tabela -->
               <div class="table-head">

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso
+from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, NotaRelatorio, FaltaRelatorio
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -10,6 +10,23 @@ from django.conf import settings
 import os
 import json
 from django.utils.translation import gettext as _
+from django.core.exceptions import ObjectDoesNotExist
+
+
+def gerar_relatorio(disciplinas, professor):
+    for disciplina in disciplinas:
+        try:
+            # Tenta obter um relatório existente para o professor e a disciplina
+            relatorio = Relatorio.objects.get(professor=professor, disciplina=disciplina)
+            print("Relatório existente encontrado:", relatorio)
+            relatorio.delete()
+            print("Relatório existente excluído.")
+
+        except ObjectDoesNotExist:
+            pass
+        relatorio = Relatorio.objects.create(professor=professor, disciplina=disciplina)
+        print("Novo relatório criado:", relatorio)
+        relatorio.atualizar_relatorio(disciplina)
 
 def gerar_sigla(nome):
             # Divide por espaços e pega a primeira letra de cada palavra
@@ -409,7 +426,7 @@ def perfilp(request):
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def frequenciap(request):
-    professor = request.user.professor
+    professor = ProfessorModel.objects.get(usuario=request.user)
     disciplinas = Disciplina.objects.filter(professor=professor)
     hoje = date.today()
 
@@ -462,17 +479,25 @@ def frequenciap(request):
 
         disciplinas_com_turmas_e_alunos.append(disciplina_info)
 
+        gerar_relatorio(disciplinas, professor)
+
     return render(
         request,
         'app_cc/professor/frequenciap.html',
         {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
     )
 #----------------------------------------------------------------------------------------------------------------    
+@has_role_or_redirect(Professor)
+def relatoriop(request):
+    professor = ProfessorModel.objects.get(usuario=request.user)
+    relatorios=Relatorio.objects.filter(professor=professor)
+
+    return render(request, "app_cc/professor/relatoriosp.html", {"relatorios":relatorios,})
 
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def calendariop(request):
-    professor = request.user.professor
+    professor = ProfessorModel.objects.get(usuario=request.user)
     disciplinas = Disciplina.objects.filter(professor=professor)
 
     if request.method == "POST":  # Corrigido para 'POST'
@@ -514,8 +539,7 @@ def calendariop(request):
 
 @has_role_or_redirect(Professor)
 def diariop(request):
-    professor = request.user.professor  # Obter o professor associado ao usuário
-
+    professor = ProfessorModel.objects.get(usuario=request.user)
     # Obter todas as disciplinas associadas ao professor
     disciplinas = Disciplina.objects.filter(professor=professor)
 
@@ -553,7 +577,10 @@ def avisosp(request):
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def boletimp(request):
-    disciplinas = Disciplina.objects.filter(professor__usuario=request.user)
+    professor = ProfessorModel.objects.get(usuario=request.user)
+    disciplinas = Disciplina.objects.filter(professor=professor)
+        # Manter um único relatório, se múltiplos existem
+
 
     if request.method == "POST":
         for disciplina in disciplinas:
@@ -576,6 +603,10 @@ def boletimp(request):
                             )
                             nota.valor = nota_float
                             nota.save()
+                            gerar_relatorio(disciplinas, professor)
+
+
+
 
                         except ValueError:
                             messages.error(request, _("Valor inválido para nota."))

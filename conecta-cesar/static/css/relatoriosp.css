@@ -1,0 +1,10 @@
+.relatorio-container{
+    border-radius: 20px;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2c2e33;
+    padding: 20px;
+    flex-direction: column;
+}
