@@ -50,6 +50,8 @@ describe('Test Suite for Professors', () => {
     cy.get(':nth-child(3) > .form-text-input > .form-control').type('123'); // Senha
     cy.get('.btn').click(); // Loga no sistema
     cy.visit('http://127.0.0.1:8000/pt/app/professor/avisosp/');
+
+    
   });
 
   it('Caso de teste Página Inicial do Professor', () => {

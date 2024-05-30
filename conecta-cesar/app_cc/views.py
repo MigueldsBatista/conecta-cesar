@@ -1,10 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-<<<<<<< HEAD:app_cc/views.py
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso
-=======
 from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, NotaRelatorio, FaltaRelatorio
->>>>>>> eff11cadb53bf6d859484ed08b7fdf418d668f18:conecta-cesar/app_cc/views.py
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
