@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile 
+from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -361,7 +361,7 @@ def diario(request):
 @has_role_or_redirect(Aluno)
 def calendario(request):
     aluno = request.user.aluno  # Obtém o aluno logado
-    disciplinas = aluno.turma.disciplinas.all()
+    disciplinas = aluno.turma.disciplinas.all() 
     print(disciplinas)
     eventos = Evento.objects.filter(disciplina__in=disciplinas)  # Filtra os eventos pelas disciplinas do aluno
     print(eventos)
@@ -377,12 +377,23 @@ def calendario(request):
 #----------------------------------------PROFESSOR VIEWS---------------------------------------------------------  
 #---------------------------------------------------------------------------------------------------------------- 
 
+@has_role_or_redirect(Aluno)
+def slides(request):
+    aluno=AlunoModel.objects.get(usuario=request.user)
+    disciplinas=Turma.obter_disciplinas(aluno.turma)
+    print(disciplinas)
+    arquivos=ProfessorFile.objects.filter(disciplina__in=disciplinas)
+
+    print(arquivos)
+
+    return render(request, "app_cc/aluno/slides.html", {"arquivos": arquivos, "disciplinas": disciplinas})
+
 @has_role_or_redirect(Professor)
 def slidesp(request):
     # Obter o professor associado ao usuário autenticado
     professor = ProfessorModel.objects.get(usuario=request.user)
+    disciplinas=Disciplina.objects.filter(professor=professor)
 
-    disciplinas = Disciplina.objects.filter(professor=professor)
 
 
     if request.method == "GET":
@@ -421,6 +432,7 @@ def slidesp(request):
         descricao = request.POST.get("slide_descricao")
         disciplina = request.POST.get("slide_disciplina")
 
+        disciplina=Disciplina.objects.get(nome=disciplina)
 
         # Verificar se o tipo do arquivo é aceitável
         if file:
@@ -449,14 +461,17 @@ def slidesp(request):
                 professor=professor,
                 disciplina=disciplina,
             )
+            print(archive)
             archive.save()
         else:
             archive = ProfessorFile(
                 titulo=titulo,
                 descricao=descricao,
                 professor=professor,
+                disciplina=disciplina,
             )
             archive.save()
+            print(archive)
 
         messages.success(request, _("Documento salvo com sucesso."))
         return redirect("slidesp")
@@ -466,7 +481,7 @@ def slidesp(request):
     return render(
         request,
         "app_cc/professor/slidesp.html",
-        {"arquivos": arquivos},
+        {"arquivos": arquivos, },
     )
 
 #----------------------------------------------------------------------------------------------------------------    
@@ -667,42 +682,45 @@ def avisosp(request):
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def boletimp(request):
+    # Obtém o objeto ProfessorModel do usuário logado
     professor = ProfessorModel.objects.get(usuario=request.user)
+    # Obter todas as disciplinas associadas ao professor
     disciplinas = Disciplina.objects.filter(professor=professor)
-        # Manter um único relatório, se múltiplos existem
-
-
+    
     if request.method == "POST":
+        # Percorre cada disciplina, turma e aluno
         for disciplina in disciplinas:
             for turma in disciplina.turmas.all():
                 for aluno in AlunoModel.objects.filter(turma=turma):
                     # Cria a chave de nota única para cada aluno-disciplina-turma
                     nota_key = f"notas[{aluno.usuario.username}-{turma.id}-{disciplina.id}]"
+                    # Obtém o valor da nota do POST
                     nota_value = request.POST.get(nota_key)
 
                     if nota_value:
                         try:
+                            # Converte a nota para float e verifica se está dentro do intervalo permitido
                             nota_float = float(nota_value.replace(',', '.'))
                             if nota_float < 0 or nota_float > 10:
                                 messages.error(request, _("A nota deve estar entre 0 e 10."))
                                 return redirect("boletimp")
 
+                            # Cria ou atualiza a nota do aluno
                             nota, created = Nota.objects.get_or_create(
                                 disciplina=disciplina,
                                 aluno=aluno
                             )
                             nota.valor = nota_float
                             nota.save()
+                            # Gera o relatório
                             gerar_relatorio(disciplinas, professor)
 
-
-
-
                         except ValueError:
+                            # Caso a nota seja inválida, exibe uma mensagem de erro
                             messages.error(request, _("Valor inválido para nota."))
                             return redirect("boletimp")
 
-    # Estrutura para disciplinas, turmas e alunos, com notas
+    # Cria uma estrutura para armazenar as disciplinas, turmas e alunos com suas notas
     disciplinas_com_turmas_e_alunos = []
 
     for disciplina in disciplinas:
@@ -715,6 +733,7 @@ def boletimp(request):
         for turma in disciplina_info['turmas']:
             alunos_na_turma = AlunoModel.objects.filter(turma=turma)
             for aluno in alunos_na_turma:
+                # Obtém a nota do aluno para a disciplina
                 nota = Nota.objects.filter(disciplina=disciplina, aluno=aluno).first()
                 nota_valor = nota.valor if nota else 0
 
@@ -727,6 +746,7 @@ def boletimp(request):
 
         disciplinas_com_turmas_e_alunos.append(disciplina_info)
 
+    # Renderiza a página com a estrutura de disciplinas, turmas e alunos, com suas notas
     return render(
         request,
         'app_cc/professor/boletimp.html',

@@ -49,13 +49,15 @@
                         <textarea type="text" name="slide_descricao" id="slide_descricao_input" required></textarea>
 
                         {%if disciplinas %}
-                        <select id="disciplina-input">
+                        
+                        <select id="disciplina-input" name="slide_disciplina">
                         {%for disciplina in disciplinas %}
-                        <option name="slide_disciplina">{{disciplina.nome}}</option>
+
+                        <option >{{disciplina.nome}}</option>
                         {%endfor%}
                         </select>
 
-                        {%else%}
+                        {% else %}
                         <p>Nenhuma disciplina encontrada</p>
                         {%endif%}
                         <button class="send">
@@ -78,13 +80,12 @@
                 </form>
 
                 
+                {% for arquivo in arquivos %}
 
-                {%for disciplina in disciplinas%}
-                <h2 class="bold-text">{{disciplina.nome}}</h2>
+                <h2 class="bold-text">{{arquivo.disciplina.nome}}</h2>
 
                 {% if arquivos %}
                     <div class="hour-blocks">  <!-- Lista para organização de itens -->
-                        {% for arquivo in arquivos %}
                         <div class="list-group-item">
                             <div class="ml-3">
                                 
@@ -130,19 +131,17 @@
                                 </div>
                             </a>
                         </div>
+                        {%endif%}
 
                             </form>
 
-                          
-                        {%endif%}
-                        {% endfor %}
+                     
 
                     </div>
                 {% else %}
                     <p class="text-warning">{%trans "Você ainda não enviou documentos."%}</p>
                 {% endif %}
-
-                {%endfor%}
+         {% endfor %}
 
             </div>
         </div>
@@ -175,4 +174,4 @@
         });
     </script>
 </div>
-{% endblock %}
+{% endblock content %}

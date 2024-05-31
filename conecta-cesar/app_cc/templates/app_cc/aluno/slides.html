@@ -1,0 +1,19 @@
+{% extends "app_cc/aluno/main.html" %}
+{%load i18n%}
+{%load static%}
+
+{%block content%}
+<div class="white-color">
+{%for disciplina in disciplinas %}
+
+{{disciplina}}
+
+{%for arquivo in arquivos %}
+
+{{arquivo.titulo}}
+{{arquivo.data}}
+{{arquivo.descricao}}
+{%endfor%}
+{%endfor%}
+</div>
+{%endblock content%}

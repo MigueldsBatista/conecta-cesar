@@ -13,6 +13,8 @@ urlpatterns = [
     path('aluno/calendario/', views.calendario, name='calendario'),
     path('aluno/variacao_notas/', views.variacao_notas, name='variacao_notas'),
     path('aluno/hora_extra/', views.hora_extra, name='hora_extra'),
+    path('aluno/slides', views.slides, name="slides"),
+
 
     # Rotas para Professores
     path('professor/boletimp/', views.boletimp, name='boletimp'),

@@ -67,6 +67,9 @@ class Aluno(models.Model):
     # Método para obter disciplinas associadas à turma do aluno
     def disciplinas(self):
         return self.turma.obter_disciplinas()  # Disciplinas associadas à turma
+    
+    def professores(self):
+        return self.turma.professores()
 
 class Evento(models.Model):
     titulo = models.CharField(max_length=200)
@@ -128,15 +131,16 @@ class File(models.Model):
    
 class ProfessorFile(models.Model):
     professor=models.ForeignKey(Professor, on_delete=models.CASCADE, related_name="arquivos", null=True)
-    disciplina=models.ForeignKey(Disciplina, on_delete=models.CASCADE, null=True)
+    disciplina=models.ForeignKey(Disciplina, on_delete=models.CASCADE, null=True, related_name="arquivos")
     titulo=models.CharField(max_length=300, null=True)#Considerar deletar o título para evitar error
     archive=models.FileField(null=True)
     descricao = models.TextField()  # Campo para armazenar horas extras
     data = models.DateTimeField(auto_now_add=True, null=True)
-    def get_ext(self, archive):
-        ext = archive.name.split('.')[-1]
-        return ext
 
+
+
+    def __str__(self):
+        return f"{self.titulo} - {self.professor.usuario.username} - {self.disciplina} - {self.descricao}"
 
 # Modelo de Relatório
 class Relatorio(models.Model):
