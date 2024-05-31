@@ -17,7 +17,6 @@ urlpatterns = [
     # Rotas para Professores
     path('professor/boletimp/', views.boletimp, name='boletimp'),
     path('professor/diariop/', views.diariop, name='diariop'),
-    path('professor/turmas/', views.turmas, name='turmas'),
     path('professor/perfilp/', views.perfilp, name='perfilp'),
     path('professor/frequenciap/', views.frequenciap, name='frequenciap'),
     path('professor/calendariop/', views.calendariop, name='calendariop'),

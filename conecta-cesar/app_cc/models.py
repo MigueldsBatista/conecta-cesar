@@ -128,9 +128,14 @@ class File(models.Model):
    
 class ProfessorFile(models.Model):
     professor=models.ForeignKey(Professor, on_delete=models.CASCADE, related_name="arquivos", null=True)
+    disciplina=models.ForeignKey(Disciplina, on_delete=models.CASCADE, null=True)
     titulo=models.CharField(max_length=300, null=True)#Considerar deletar o título para evitar error
-    archive=models.ImageField()
+    archive=models.FileField(null=True)
     descricao = models.TextField()  # Campo para armazenar horas extras
+    data = models.DateTimeField(auto_now_add=True, null=True)
+    def get_ext(self, archive):
+        ext = archive.name.split('.')[-1]
+        return ext
 
 
 # Modelo de Relatório

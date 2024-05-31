@@ -64,7 +64,7 @@
             <input type="time" name="horario"><br>
 
             <label for="disciplina">{% trans "Disciplina" %}:</label>
-            <select name="disciplina" id="disciplina" required>
+            <select name="disciplina" id="disciplina_input" required>
                 {% for disciplina in disciplinas %}
                     <option value="{{ disciplina.id }}">{{ disciplina.nome }}</option>
                 {% endfor %}

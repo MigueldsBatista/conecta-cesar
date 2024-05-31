@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, NotaRelatorio, FaltaRelatorio
+from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile 
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -11,6 +11,7 @@ import os
 import json
 from django.utils.translation import gettext as _
 from django.core.exceptions import ObjectDoesNotExist
+
 
 
 def gerar_relatorio(disciplinas, professor):
@@ -378,11 +379,96 @@ def calendario(request):
 
 @has_role_or_redirect(Professor)
 def slidesp(request):
-    return render(request, "app_cc/professor/slidesp.html")
+    # Obter o professor associado ao usuário autenticado
+    professor = ProfessorModel.objects.get(usuario=request.user)
 
-@has_role_or_redirect(Professor)
-def turmas(request):
-    return render(request, 'app_cc/professor/turmas.html')
+    disciplinas = Disciplina.objects.filter(professor=professor)
+
+
+    if request.method == "GET":
+        # Obter os arquivos enviados pelo professor
+        arquivos = ProfessorFile.objects.filter(professor=professor)
+
+        return render(
+            request,
+            "app_cc/professor/slidesp.html",
+            {"arquivos": arquivos, "disciplinas": disciplinas},
+        )
+
+    elif request.method == "POST":
+        # Se for exclusão de arquivo
+        if "delete_file" in request.POST:
+            file_id = request.POST.get("delete_file")
+            try:
+                file = ProfessorFile.objects.get(id=file_id, professor=professor)
+
+                # Deletar do sistema de arquivos e banco de dados
+                if file.archive:
+                    if os.path.exists(file.archive.path):
+                        os.remove(file.archive.path)
+                file.delete()
+                messages.success(request, _("Arquivo excluído com sucesso."))
+            except ProfessorFile.DoesNotExist:
+                messages.error(request, _("Arquivo não encontrado para exclusão."))
+
+            return redirect("slidesp")
+
+        # Para atualização de horas extras
+        
+        # Para uploads de novos arquivos
+        file = request.FILES.get("slide_file")
+        titulo = request.POST.get("slide_titulo")
+        descricao = request.POST.get("slide_descricao")
+        disciplina = request.POST.get("slide_disciplina")
+
+
+        # Verificar se o tipo do arquivo é aceitável
+        if file:
+            ext_permitidas = ('.jpg', '.jpeg', '.png', '.pdf', '.pptx', '.docx')
+            if not file.name.lower().endswith(ext_permitidas):
+                messages.error(request, _("Tipo de arquivo não permitido (Tipos aceitos: '.jpg', '.jpeg', '.png', '.pdf', '.pptx', '.docx')."))
+                return redirect("slidesp")
+
+            ext = file.name.split('.')[-1]
+
+            # Se for um novo arquivo
+            file_name_with_date = f"{file.name.rsplit('.', 1)[0]}-{date.today()}.{ext}"
+
+            file_path = os.path.join(settings.MEDIA_ROOT, f"documentosp/{file_name_with_date}")
+
+            # Salvar o arquivo diretamente no sistema de arquivos
+            with open(file_path, "wb+") as destino:
+                for chunk in file.chunks():
+                    destino.write(chunk)
+
+            # Criar um objeto do modelo `ProfessorFile`
+            archive = ProfessorFile(
+                titulo=titulo,
+                descricao=descricao,
+                archive=f"documentosp/{file_name_with_date}",
+                professor=professor,
+                disciplina=disciplina,
+            )
+            archive.save()
+        else:
+            archive = ProfessorFile(
+                titulo=titulo,
+                descricao=descricao,
+                professor=professor,
+            )
+            archive.save()
+
+        messages.success(request, _("Documento salvo com sucesso."))
+        return redirect("slidesp")
+    
+    # Após lidar com POST, renderizar com 'ext' no contexto
+    arquivos = ProfessorFile.objects.filter(professor=professor)
+    return render(
+        request,
+        "app_cc/professor/slidesp.html",
+        {"arquivos": arquivos},
+    )
+
 #----------------------------------------------------------------------------------------------------------------    
 
 @has_role_or_redirect(Professor)  # Garante que apenas usuários com papel de professor têm acesso
