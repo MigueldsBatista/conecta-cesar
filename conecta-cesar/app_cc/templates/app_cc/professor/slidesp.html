@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="{% static 'css/slidesp.css' %}" type="text/css">
 <link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
 
-<div class="container my-4">
     <h1 class="white-color text-center bold-text">Área do <span class="orange-text">Professor</span></h1>
 
     {% if messages %}
@@ -18,54 +17,64 @@
     </div>
     {% endif %}
 
-    <div class="col-md-6 offset-md-3">
-        <div class="card my-4">
-            <div class="card-body">
-                <form action='{% url "slidesp" %}' method="POST" id="enviar_documento_form" enctype="multipart/form-data" class="hour-form mb-4">
-                    {% csrf_token %}
-                    <div class="file-input-wrapper">
-                        <button type="button" class="upload-button">
-                            <input type="file" name="slide_file" class="form-control" id="file-input">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-up" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708z"/>
-                                <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383m.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
-                            </svg>
-                        </button>
+    <div class="form-container">
+        <form action='{% url "slidesp" %}' method="POST" id="enviar_documento_form" enctype="multipart/form-data" class="hour-form mb-4">
+            {% csrf_token %}
+
+            <!--BOTAO-->
+            <div class="file-input-wrapper">
+                <button type="button" class="upload-button">
+                    <input type="file" name="slide_file" class="form-control" id="file-input">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708z"/>
+                        <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383m.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
+                    </svg>
+                </button>
+            </div>
+            <!--BOTAO-->
+
+            <label for="slide_titulo_input">Título do documento</label>
+            <input type="text" name="slide_titulo" id="slide_titulo_input" required>
+            <br>
+            <label for="slide_descricao_input">Descrição do documento</label>
+            <textarea type="text" name="slide_descricao" id="slide_descricao_input" required></textarea>
+            <br>
+            {% if disciplinas %}
+            <select id="disciplina-input" name="slide_disciplina">
+                {% for disciplina in disciplinas %}
+                <option>{{ disciplina.nome }}</option>
+                {% endfor %}
+            </select>
+            {% else %}
+            <p>Nenhuma disciplina encontrada</p>
+            {% endif %}
+
+            <!--BOTAO-->
+            <button class="send">
+                <div class="svg-wrapper-1">
+                    <div class="svg-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="none" d="M0 0h24v24H0z"></path>
+                            <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                        </svg>
                     </div>
-                    <label for="slide_titulo_input">Título do documento</label>
-                    <input type="text" name="slide_titulo" id="slide_titulo_input" required>
-                    <label for="slide_descricao_input">Descrição do documento</label>
-                    <textarea type="text" name="slide_descricao" id="slide_descricao_input" required></textarea>
+                </div>
+                <span>{% trans "Enviar" %}</span>
+            </button>
+            <!--BOTAO-->
 
-                    {% if disciplinas %}
-                    <select id="disciplina-input" name="slide_disciplina">
-                        {% for disciplina in disciplinas %}
-                        <option>{{ disciplina.nome }}</option>
-                        {% endfor %}
-                    </select>
-                    {% else %}
-                    <p>Nenhuma disciplina encontrada</p>
-                    {% endif %}
+            <div id="preview-container" style="display: none;">
+                <img id="image-preview" src="#" class="img-thumbnail mt-2" style="max-width: 100%; height: auto;">
+            </div>
+        </form>
 
-                    <button class="send">
-                        <div class="svg-wrapper-1">
-                            <div class="svg-wrapper">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                    <path fill="none" d="M0 0h24v24H0z"></path>
-                                    <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <span>{% trans "Enviar" %}</span>
-                    </button>
-
-                    <div id="preview-container" style="display: none;">
-                        <img id="image-preview" src="#" class="img-thumbnail mt-2" style="max-width: 100%; height: auto;">
-                    </div>
-                </form>
-
+    </div>
+                
                 {% if arquivos %}
+                
                 {% for arquivo in arquivos %}
+            <div class="slide-container">
+                
                 <div class="slide-box">
                     <div class="slide-header">
                         {% if arquivo.archive %}
@@ -86,6 +95,8 @@
                                          
                         {% endif %}
                         <h4>{{ arquivo.descricao }}</h4>
+
+                        <!--BOTOES-->
                         <form id="documento_edit_form" action="{% url 'slidesp' %}" method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="delete_file" value="{{ arquivo.id }}">
@@ -98,6 +109,7 @@
                                     </div>
                                 </div>
                             </button>
+
                             {% if arquivo.archive %}
                             <a href="{{ arquivo.archive.url }}" download class="download-button">
                                 <div class="svg-wrapper-1">
@@ -109,17 +121,19 @@
                                     </div>
                                 </div>
                             </a>
+
                             {% endif %}
                         </form>
                     </div>
                 </div>
+                </div>
                 {% endfor %}
+          
+                   
                 {% else %}
                 <p class="text-warning">{% trans "Você ainda não enviou documentos." %}</p>
                 {% endif %}
-            </div>
-        </div>
-    </div>
+
 
     <script>
         function confirmDelete() {
@@ -137,5 +151,4 @@
             }
         });
     </script>
-</div>
 {% endblock content %}

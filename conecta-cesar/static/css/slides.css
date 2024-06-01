@@ -2,8 +2,6 @@
 
 
 .slide-container {
-    background-color: #2c2e33;
-    border-radius: 20px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -17,6 +15,7 @@
 }
 
 .slide-box {
+    border-radius: 20px;
     background-color: #3a3b3f;
     border-radius: 10px;
     margin-bottom: 3%;
@@ -40,6 +39,7 @@
 }
 .slide-box:hover {
     transform: scale(1.05);
+    border-radius: 10px;
 }
 
 .slide-header h2, .slide-header h3, .slide-header h5 {

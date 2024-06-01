@@ -11,27 +11,29 @@
 
 <div class="white-color slide-container">
     {% for arquivo in arquivos %}
+    <div class="slide-box">
+     
     {% if arquivo.archive %}
 
-    <div class="slide-box">
-        <div class="slide-header">
+       <div class="slide-header">
             <h2>{{ arquivo.disciplina.nome }}</h2>
             <h3><a href="{{ arquivo.archive.url }}" target="blank">{{ arquivo.titulo }}</a></h3>
             <h5>{{ arquivo.data }}</h5>
-        </div>
-        <div class="slide-content">
-            <a target="blank" href="{{ arquivo.archive.url }}"><img src="{{ arquivo.archive.url }}" alt="Preview" class="file-preview"></a>
+      
 
+            <a target="blank" href="{{ arquivo.archive.url }}"><img src="{{ arquivo.archive.url }}" alt="Preview" class="file-preview"></a>
+        </div>
             {%else%}
-            <div class="slide-box">
+            
                 <div class="slide-header">
                     <h2>{{ arquivo.disciplina.nome }}</h2>
                     <h3>{{ arquivo.titulo }}</h3>
                     <h5>{{ arquivo.data }}</h5>
                 </div>
-                <div class="slide-content">
+              
                     
             {% endif %}
+            <div class="slide-content">
             <h4>{{ arquivo.descricao }}</h4>
             {% if arquivo.archive %}
             <a href="{{ arquivo.archive.url }}" download class="download-button">
@@ -44,9 +46,10 @@
                     </div>
                 </div>
             </a>
-            {% endif %}
         </div>
+            {% endif %}
+    </div>
     </div>
     {% endfor %}
-</div>
+
 {% endblock content %}

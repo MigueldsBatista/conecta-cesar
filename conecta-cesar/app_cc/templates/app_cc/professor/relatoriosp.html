@@ -48,7 +48,7 @@
                 <tr>
                     <th>{% trans "Aluno" %}</th>
                     <th>{% trans "Faltas" %}</th>
-                    <th>{% trans "     " %}</th>
+                    <th>{% trans "vaz" %}</th>
                 </tr>
                 {%if falta_relatorio%}
                 {% for falta_relatorio in relatorio.faltarelatorio_set.all %}
@@ -56,7 +56,7 @@
                 <tr>
                     <td>{{ falta_relatorio.aluno.usuario.username }}</td>
                     <td>{{ falta_relatorio.faltas }}</td>
-                    <td>{% trans "     " %}</td>
+                    <td>{% trans "" %}</td>
                 </tr>
                 {% endfor %}
            
