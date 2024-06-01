@@ -17,14 +17,24 @@
 .slide-box {
     background-color: #3a3b3f;
     border-radius: 10px;
-    margin: 10px;
+    margin-bottom: 3%;
     padding: 20px;
-    width: 40%;
+    width: 100%;
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s;
 }
+@media  only screen and (max-width: 768px) {
+    .slide-container {width: 95%;}
+    .slide-box{margin-bottom: 5%;}
+}
+.slide-box a{
+    color: #bbb !important;
 
+}
+.slide-box img{
+    width: 20%;
+}
 .slide-box:hover {
     transform: scale(1.05);
 }
@@ -39,7 +49,6 @@
 }
 
 .slide-header h3 a {
-    color: #FFA500; /* Orange text */
     text-decoration: none;
 }
 
@@ -53,15 +62,6 @@
 }
 
 .slide-content {
-    margin-top: 10px;
-}
-
-.file-preview {
-    width: 100%;
-    height: auto;
-    max-height: 150px; /* Max height for images */
-    object-fit: cover;
-    border-radius: 5px;
     margin-top: 10px;
 }
 
