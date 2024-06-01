@@ -503,6 +503,7 @@ section {
 .days div:hover:not(.today) {
   background-color: #3d3132;
   color: #b54810;
+
   border-radius: 10px;
 }
 
@@ -531,7 +532,7 @@ section {
   border-radius: 10px;
 }
 #eventForm{
-  background-color: #b54810;
+  background-color: #2c2e33;
   text-align: center;
   border-radius: 20px;
   justify-content: center;
@@ -548,63 +549,14 @@ section {
 }
 .event-form, .event-details {
   width: 45%;
-  background-color: rgba(32, 33, 36, 255);;
+  background-color: #2c2e33;
   text-align: center;
   border-radius: 20px;
   width: auto; 
     margin-left: auto;
     margin-right: auto; 
-    margin-bottom: -150px;
 }
 .event-form form {
   display: flex;
   flex-direction: column;
-}
-.send {
-  display: block;
-  margin: 0 auto;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: background-color 0.3s ease;
-}
-
-.send .svg-wrapper-1 {
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  transform: translateY(-50%);
-}
-
-.send .svg-wrapper {
-  display: inline-block;
-}
-
-.send .svg-wrapper svg {
-  fill: white;
-  transition: transform 0.3s ease;
-  width: 30px; /* Aumenta o tamanho do ícone SVG */
-  height: 30px; /* Aumenta o tamanho do ícone SVG */
-}
-
-.send span {
-  margin-left: 10px;
-}
-
-.send:hover {
-  background-color: #45a049;
-}
-
-.send:hover .svg-wrapper svg {
-  transform: translateX(5px);
-}
-
-.send:focus {
-  outline: none;
 }

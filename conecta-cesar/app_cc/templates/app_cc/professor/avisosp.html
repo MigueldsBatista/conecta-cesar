@@ -17,7 +17,8 @@
           <p>Sem imagem disponível</p>
       {% endif %}          <h3>{{aviso.titulo}}</h3>
           <div class="d-flex justify-content-center align-items-center flex-column">
-          <a href="{% url 'detalhe_aviso' aviso.id %}"><button class="readmore-btn">
+          <a href="{% url 'detalhe_aviso' aviso.id %}">
+            <button class="readmore-btn">
             <span class="book-wrapper">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
