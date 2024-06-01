@@ -1,4 +1,6 @@
 
+
+
 .slide-container {
     background-color: #2c2e33;
     border-radius: 20px;
@@ -28,10 +30,11 @@
     .slide-container {width: 95%;}
     .slide-box{margin-bottom: 5%;}
 }
-.slide-box a{
+.slide-header a{
     color: #bbb !important;
 
 }
+
 .slide-box img{
     width: 20%;
 }
