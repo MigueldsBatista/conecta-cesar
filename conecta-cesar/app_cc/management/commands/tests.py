@@ -1,12 +1,14 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from app_cc.models import Turma, Professor, Disciplina, Aluno
+from app_cc.models import Turma, Professor, Disciplina, Aluno, Diario, Nota, Falta
 from rolepermissions.roles import assign_role
 from project_cc.roles import Professor as ProfessorRole, Aluno as AlunoRole
 from django.db.utils import IntegrityError
+from datetime import date, timedelta
 
 class Command(BaseCommand):
     help = 'Cria dados de teste para Cypress: Professor, Turma, Disciplina e Aluno'
+
     def handle(self, *args, **kwargs):
         try:
             # Criação do usuário para o professor
@@ -19,6 +21,7 @@ class Command(BaseCommand):
                 usuario=user_professor, ra='1234567890'
             )
             assign_role(user_professor, ProfessorRole)
+
             # Criação de uma turma
             turma = Turma.objects.create(nome='Turma 1')
 
@@ -37,6 +40,30 @@ class Command(BaseCommand):
             )
             assign_role(user_aluno, AlunoRole)
 
-            self.stdout.write(self.style.SUCCESS('Dados de teste criados com sucesso: Professor, Turma, Disciplina e Aluno'))
+            # Criação de um diário
+            diario = Diario.objects.create(
+                disciplina=disciplina, titulo="Título do Diário", texto="Descrição do Diário"
+            )
+
+            # Criação de uma nota para o aluno
+            nota = Nota.objects.create(
+                aluno=aluno, disciplina=disciplina, valor=6.0
+            )
+
+            # Adição de 8 faltas para o aluno em diferentes dias
+            base_date = date.today()
+            for i in range(9):#Faltas o suficiente para o aluno entrar pro relatório de desempenho
+                falta_date = base_date - timedelta(days=i)
+                Falta.objects.create(
+                    aluno=aluno, data=falta_date, justificada=False, disciplina=disciplina
+                )
+
+            User.objects.create_superuser(
+                username='adm', password='123', email='adm@test.com'
+            )
+
+            self.stdout.write(self.style.SUCCESS('Dados de teste criados com sucesso: Professor, Turma, Disciplina, Aluno, Diário, Nota , Faltas Superusuário'))
         except IntegrityError as e:
-            self.stdout.write(self.style.ERROR(f'Erro de integridade, os seguintes dados ja existem no banco de dados: {str(e)}'))
+            self.stdout.write(self.style.ERROR(f'Erro de integridade, os seguintes dados já existem no banco de dados: {str(e)}'))
+        except Exception as e:
+            self.stdout.write(self.style.ERROR(f'Erro ao criar dados de teste: {str(e)}'))

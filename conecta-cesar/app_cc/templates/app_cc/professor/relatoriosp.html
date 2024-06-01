@@ -32,7 +32,7 @@
                 {% for nota_relatorio in relatorio.notarelatorio_set.all %}
                 <tr>
                     <td>{{ nota_relatorio.aluno.usuario.username }}</td>
-                    <td>{{ nota_relatorio.nota }}</td>
+                    <td id="nota-valor">{{ nota_relatorio.nota }}</td>
                     <td>{% trans "     " %}</td>
                 </tr>
                 {% endfor %}
@@ -48,14 +48,14 @@
                 <tr>
                     <th>{% trans "Aluno" %}</th>
                     <th>{% trans "Faltas" %}</th>
-                    <th>{% trans "vaz" %}</th>
+                    <th>{% trans "" %}</th>
                 </tr>
-                {%if falta_relatorio%}
+                {%if relatorio.faltarelatorio_set.all%}
                 {% for falta_relatorio in relatorio.faltarelatorio_set.all %}
                 
                 <tr>
                     <td>{{ falta_relatorio.aluno.usuario.username }}</td>
-                    <td>{{ falta_relatorio.faltas }}</td>
+                    <td id="falta-valor">{{ falta_relatorio.faltas }}</td>
                     <td>{% trans "" %}</td>
                 </tr>
                 {% endfor %}
@@ -64,7 +64,7 @@
                 {%else%}
                <tr>
                <td>Nenhum Aluno encontrado</td>
-            <td>0</td></tr>
+            <td>0,0</td></tr>
                 {%endif%}
             </table>
         </div>

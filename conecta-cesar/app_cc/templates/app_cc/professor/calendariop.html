@@ -1,7 +1,12 @@
 {% extends 'app_cc/professor/mainp.html' %}
 {% load i18n %}
 {% load static %}
+
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static "css/calendario.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/buttons.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/form.css" %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 {% if messages %}
 <div>
@@ -15,10 +20,7 @@
 </div>
 {% endif %}
 
-<div id="eventDetails" class="event-details event-text">
-       
-        <ul id="eventList"></ul>
-    </div>
+
 <section>
     <div class="box">
         <div class="container-calendar">
@@ -47,21 +49,38 @@
     </div>
 </section>
 
+<div  class="custom-event-details event-text slide-container">
+    {% for evento in eventos %}
+        <div class="custom-slide-box">
+            <div class="custom-slide-header">
+                <h2>{{ evento.titulo }}</h2>
+            <h3>{{ evento.disciplina.nome }}</h3>
+            </div>
+
+            <div class="custom-slide-content">
+                <p>{% trans "Descrição" %}: {{ evento.descricao }}</p>
+                <p>{% trans "Data" %}: {{ evento.data }}</p>
+                <p>{% trans "Horário" %}: {{ evento.horario }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
 <div class="event-container">
-    <div id="eventForm" class="event-form" style="display: none;">
+    <div id="eventForm" class="form-container" style="display: none;">
         <form method="post" id="addEventForm">
             {% csrf_token %}
             <label for="titulo">{% trans "Título:" %}</label><br>
             <input type="text" id="titulo" name="titulo" required><br>
 
             <label for="descricao">{% trans "Descrição" %}:</label><br>
-            <textarea name="descricao"></textarea><br>
+            <textarea id="descricao" name="descricao"></textarea><br>
 
             <label for="data">{% trans "Data" %}:</label><br>
             <input type="date" name="data" id="data" required><br>
 
             <label for="horario">{% trans "Horário" %}:</label><br>
-            <input type="time" name="horario"><br>
+            <input type="time" id="horario" name="horario"><br>
 
             <label for="disciplina">{% trans "Disciplina" %}:</label>
             <select name="disciplina" id="disciplina_input" required>
@@ -88,6 +107,18 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const days = document.querySelectorAll('.days div');
+    const eventForm = document.getElementById('eventForm');
+
+    days.forEach(day => {
+        day.addEventListener('dblclick', function() {
+            eventForm.style.display = 'block';
+            eventForm.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+});
+    
     const events = {{ eventos_json|safe }};
     const date = new Date();
     const dateBr = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
@@ -136,25 +167,19 @@
 
         monthDays.innerHTML = days;
 
-        const daysElements = document.querySelectorAll(".days div");
-        daysElements.forEach(day => {
-            day.addEventListener("dblclick", () => {
-                const selectedDate = day.getAttribute("data-date");
-                const selectedEvents = events.filter(event => event.data === selectedDate);
-                
-                document.getElementById("eventForm").style.display = "block";
-                document.getElementById("data").value = selectedDate;
+        document.addEventListener('DOMContentLoaded', function() {
+            const days = document.querySelectorAll('.days div');
+            const eventForm = document.getElementById('eventForm');
         
-                const eventList = document.getElementById("eventList");
-                eventList.innerHTML = "";
-                selectedEvents.forEach(event => {
-                    const listItem = document.createElement("li");
-                    listItem.innerHTML = `${event.disciplina__nome}<br>${event.titulo}<br>${event.descricao}<br>Horário: ${event.horario.slice(0, -3)}`;
-                    eventList.appendChild(listItem);
+            days.forEach(day => {
+                day.addEventListener('dblclick', function() {
+                    eventForm.style.display = 'block';
+                    eventForm.scrollIntoView({ behavior: 'smooth' });
                 });
             });
-        });
+        
 
+        });
 
     };
 
@@ -170,150 +195,4 @@
 
     renderCalendar();
 </script>
-
-<style>
- 
-    .event-day {
-        background-color: #FFD700; /* Cor de fundo dourada para dias com eventos */
-        color: #000; /* Cor do texto */
-    }
-
-    .today {
-        background-color: #FF4500; /* Cor de fundo laranja para o dia atual */
-        color: #FFF; /* Cor do texto */
-    }
-
-    .event-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 100%;
-            
-    }
-    .event-form {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        width: 100%;
-        background-color: #3d3132;
-        
-    }
-    
-    .event-form form {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .event-form label {
-        margin-top: 10px;
-        color: #ccc;
-    }
-    
-    .event-form input[type="text"],
-    .event-form input[type="date"],
-    .event-form input[type="time"],
-    .event-form select,
-    .event-form textarea {
-        width: 100%;
-        padding: var(--input-btn-padding-y) var(--input-btn-padding-x);
-        margin-top: 5px;
-        border: var(--input-btn-border-width) solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-family: var(--input-btn-font-family);
-        font-size: var(--input-btn-font-size);
-        line-height: var(--input-btn-line-height);
-        
-    }
-    
-    .event-form textarea {
-        resize: vertical;
-        height: 100px;
-    }
-    
-    .event-form button {
-        margin-top: 20px;
-        padding: var(--input-btn-padding-y) var(--input-btn-padding-x);
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: var(--input-btn-font-size);
-        line-height: var(--input-btn-line-height);
-    }
-    
-    .event-form button:hover {
-        background-color: #45a049;
-    }
-    
-    .event-form input:focus,
-    .event-form textarea:focus,
-    .event-form select:focus {
-        outline: var(--input-btn-focus-width) solid var(--input-btn-focus-color);
-        box-shadow: var(--input-btn-focus-box-shadow);
-    }
-    .send {
-        width: 25%;
-        height: 25%;
-        margin-left: auto;
-        margin-right: auto; 
-        font-weight: 600;
-        font-size: 10px;
-        background: #13795b;
-        color: white;
-        padding: 0.7em 1em;
-        padding-left: 0.9em;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        border: none;
-        border-radius: 16px;
-        overflow: hidden;
-        transition: all 0.2s;
-        cursor: pointer;
-      }
-      
-      .send span {
-        display: block;
-        margin-left: 0.3em;
-        transition: all 0.3s ease-in-out;
-      }
-      
-      .send svg {
-        display: block;
-        transform-origin: center center;
-        transition: transform 0.3s ease-in-out;
-      }
-      
-      .send:hover .svg-wrapper {
-        animation: fly-1 0.6s ease-in-out infinite alternate;
-      }
-      
-      .send:hover svg {
-        transform: translateX(1.2em) rotate(45deg) scale(0.7);
-      }
-      
-      .send:hover span {
-        transform: translateX(5em);
-      }
-      
-      .send:active {
-        transform: scale(0.7);
-      }
-      
-      @keyframes fly-1 {
-        from {
-          transform: translateY(0.1em);
-        }
-      
-        to {
-          transform: translateY(-0.1em);
-        }
-      }
-</style>
-
-{% endblock content %}
+{% endblock %}

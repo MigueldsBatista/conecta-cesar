@@ -14,7 +14,7 @@
     <form method="post">  <!-- Formulário para adicionar um diário -->
         {% csrf_token %}
             <label for="disciplina" >{% trans "Disciplina" %}:</label>
-            <select class="form-select" name="disciplina" id="disciplina" required>  <!-- Seleção de disciplinas -->
+            <select class="form-select" name="disciplina" id="disciplina-select" required>  <!-- Seleção de disciplinas -->
                 {% for disciplina in disciplinas %}
                     <option value="{{ disciplina.id }}">{{ disciplina.nome }}</option>  <!-- Disciplinas do professor -->
                 {% endfor %}
@@ -23,11 +23,11 @@
 
      
             <label for="tituloDiario" class="form-label">{% trans "Título do Diário" %}:</label>
-            <input type="text" class="form-control"  name="titulo" placeholder="Insira o título do diário" required>
+            <input id="titulo-input" type="text" class="form-control"  name="titulo" placeholder="Insira o título do diário" required>
       
 
             <label for="textoDiario" >{% trans "Texto do Diário" %}:</label>
-            <textarea  class="form-control" name="texto" rows="5" placeholder="Digite o texto do diário" required></textarea>
+            <textarea id="descricao-input" class="form-control" name="texto" rows="5" placeholder="Digite o texto do diário" required></textarea>
        
 
         <button class="send text-center mt-4" style="display: block; margin: 0 auto;">

@@ -360,17 +360,29 @@ def diario(request):
 
 @has_role_or_redirect(Aluno)
 def calendario(request):
-    aluno = request.user.aluno  # Obtém o aluno logado
-    disciplinas = aluno.turma.disciplinas.all() 
-    print(disciplinas)
-    eventos = Evento.objects.filter(disciplina__in=disciplinas)  # Filtra os eventos pelas disciplinas do aluno
-    print(eventos)
-    eventos_list = list(eventos.values('titulo', 'descricao', 'data', 'horario', 'disciplina__nome'))
-    eventos_json = json.dumps(eventos_list, default=str)  # Serializa os eventos para JSON
+    # Obtém o aluno logado
+    aluno = request.user.aluno
 
+    # Obtém todas as disciplinas associadas à turma do aluno
+    disciplinas = aluno.turma.disciplinas.all()
+
+    # Obtém todos os eventos que estão associados a alguma dessas disciplinas
+    eventos = Evento.objects.filter(disciplina__in=disciplinas)
+    print(eventos)
+
+    # Converte os eventos em uma lista de dicionários, contendo apenas os campos
+    # 'titulo', 'descricao', 'data', 'horario' e 'disciplina__nome'
+    eventos_list = list(eventos.values('titulo', 'descricao', 'data', 'horario', 'disciplina__nome'))
+    # Serializa a lista de dicionários em formato JSON
+    eventos_json = json.dumps(eventos_list, default=str)
+
+    # Cria um dicionário com a chave 'eventos_json' e o valor correspondente
     context = {
-        'eventos_json': eventos_json
+        'eventos_json': eventos_json,
+        'eventos': eventos
     }
+    print(context)
+
     return render(request, 'app_cc/aluno/calendario.html', context)
 
 #----------------------------------------------------------------------------------------------------------------    
@@ -592,7 +604,9 @@ def frequenciap(request):
 def relatoriop(request):
     professor = ProfessorModel.objects.get(usuario=request.user)
     relatorios=Relatorio.objects.filter(professor=professor)
-
+    disciplinas=Disciplina.objects.filter(professor=professor)
+    gerar_relatorio(disciplinas, professor)
+    print(relatorios)
     return render(request, "app_cc/professor/relatoriosp.html", {"relatorios":relatorios,})
 
 #----------------------------------------------------------------------------------------------------------------    
@@ -632,7 +646,8 @@ def calendariop(request):
         eventos_json = json.dumps(eventos_list, default=str)  # Serializar para JSON
         context = {
             'disciplinas': disciplinas,
-            'eventos_json': eventos_json  # Passando os eventos serializados
+            'eventos_json': eventos_json ,              # Passando os eventos serializados
+            'eventos': eventos,
         }
         return render(request, 'app_cc/professor/calendariop.html', context)
     

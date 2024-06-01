@@ -166,7 +166,7 @@ class Relatorio(models.Model):
         
         for aluno in Aluno.objects.filter(turma__disciplinas=disciplina):
             total_faltas = Falta.objects.filter(aluno=aluno, disciplina=disciplina).count()
-            if total_faltas > 0:
+            if total_faltas >= 8:
                 falta_relatorio, created = FaltaRelatorio.objects.get_or_create(relatorio=self, aluno=aluno)
                 falta_relatorio.faltas = total_faltas
                 falta_relatorio.save()
