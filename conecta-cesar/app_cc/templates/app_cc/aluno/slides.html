@@ -1,19 +1,38 @@
 {% extends "app_cc/aluno/main.html" %}
-{%load i18n%}
-{%load static%}
+{% load i18n %}
+{% load static %}
 
-{%block content%}
-<div class="white-color">
-{%for disciplina in disciplinas %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/slides.css' %}">
 
-{{disciplina}}
+<h1 class="bold-text white-color text-center">Sala de <span class="orange-text">Aula</span></h1>
 
-{%for arquivo in arquivos %}
+<div class="white-color slide-container">
+    {% for arquivo in arquivos %}
+    {% if arquivo.archive %}
 
-{{arquivo.titulo}}
-{{arquivo.data}}
-{{arquivo.descricao}}
-{%endfor%}
-{%endfor%}
+    <div class="slide-box">
+        <div class="slide-header">
+            <h2>{{ arquivo.disciplina.nome }}</h2>
+            <h3><a href="{{ arquivo.archive.url }}" target="blank">{{ arquivo.titulo }}</a></h3>
+            <h5>{{ arquivo.data }}</h5>
+        </div>
+        <div class="slide-content">
+            <img src="{{ arquivo.archive.url }}" alt="Preview" class="file-preview">
+
+            {%else%}
+            <div class="slide-box">
+                <div class="slide-header">
+                    <h2>{{ arquivo.disciplina.nome }}</h2>
+                    <h3>{{ arquivo.titulo }}</h3>
+                    <h5>{{ arquivo.data }}</h5>
+                </div>
+                <div class="slide-content">
+                    
+            {% endif %}
+            <h4>{{ arquivo.descricao }}</h4>
+        </div>
+    </div>
+    {% endfor %}
 </div>
-{%endblock content%}
+{% endblock content %}
