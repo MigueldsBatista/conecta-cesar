@@ -1,0 +1,39 @@
+/* slidesp.css */
+.slide-box {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.slide-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.slide-header h3 a {
+    font-size: 1.25rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.slide-header h3 a:hover {
+    text-decoration: underline;
+}
+
+.slide-header h5 {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.slide-content img.file-preview {
+    max-width: 40%;
+    height: auto;
+    margin: 1rem 0;
+}
+
+.slide-content h4 {
+    font-size: 1rem;
+    color: #333;
+}

@@ -520,6 +520,7 @@ section {
 .calendar {
   border-radius: 20px 20px 20px 20px;
 }
+<<<<<<< HEAD
 .event-day {
   background-color: #FFD700; /* Cor de fundo dourada para dias com eventos */
   color: #000; /* Cor do texto */
@@ -560,3 +561,5 @@ section {
   display: flex;
   flex-direction: column;
 }
+=======
+>>>>>>> 8a63a851e5448b9b4b7ac2428eb8c8749f68d16c
