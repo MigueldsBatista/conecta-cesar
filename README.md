@@ -35,7 +35,7 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
 - **Boletim:** Visualização de notas para os alunos, e lançamento das notas pelos professores.
 - **Gerenciamento de Faltas:** Onde os alunos podem ver suas faltas e os professores gerenciarem as mesmas.
 - **Certificados:** Os alunos podem armazenar seus certificados e calcular a quantidade de horas extras realizadas.
-- **Compatibilidade:** Nossa plataforma será compatível tanto para computadores, quanto dispositivos móveis através de um aplicativo.
+- **Compatibilidade:** Nossa plataforma será compatível tanto para computadores, quanto dispositivos móveis através do site.
 - **Acompanhamento do Progresso Acadêmico:** Incluindo gráficos que auxiliam os alunos na análise do desempenho individual.
 
 ## ⚙ Tecnologias Utilizadas
