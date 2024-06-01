@@ -9,28 +9,26 @@
 <link rel="stylesheet" href="{% static 'css/diario.css' %}" type="text/css">
 
 
-<div class="container mt-4">  <!-- Adicionando espaço no topo -->
-    <h1 class="text-center">{% trans "DIÁRIO" %}</h1>  <!-- Centralizar o título -->
+
+    <h1 class="text-center white-color bold-text"><span class="orange-text">Diários</span> do Professor</h1>  <!-- Centralizar o título -->
     <form method="post">  <!-- Formulário para adicionar um diário -->
         {% csrf_token %}
-        <div class="mb-3 form-text-input">
-            <label for="disciplina" class="form-label">{% trans "Disciplina" %}:</label>
+            <label for="disciplina" >{% trans "Disciplina" %}:</label>
             <select class="form-select" name="disciplina" id="disciplina" required>  <!-- Seleção de disciplinas -->
                 {% for disciplina in disciplinas %}
                     <option value="{{ disciplina.id }}">{{ disciplina.nome }}</option>  <!-- Disciplinas do professor -->
                 {% endfor %}
             </select>
-        </div>
+   
 
-        <div class="mb-3 form-text-input">
+     
             <label for="tituloDiario" class="form-label">{% trans "Título do Diário" %}:</label>
             <input type="text" class="form-control"  name="titulo" placeholder="Insira o título do diário" required>
-        </div>
+      
 
-        <div class="mb-3 form-text-input">
-            <label for="textoDiario" class="form-label">{% trans "Texto do Diário" %}:</label>
+            <label for="textoDiario" >{% trans "Texto do Diário" %}:</label>
             <textarea  class="form-control" name="texto" rows="5" placeholder="Digite o texto do diário" required></textarea>
-        </div>
+       
 
         <button class="send text-center mt-4" style="display: block; margin: 0 auto;">
             <div class="svg-wrapper-1">
@@ -57,17 +55,23 @@
 
     <!-- Exibir diários salvos -->
     {% if diarios and diarios|length > 0 %}
-    <h2 class="mt-4">{%trans "Diários Salvos:"%}</h2>
-    <ul class="list-group">  <!-- Usar List Group para exibição -->
+    <h2 class="text-center light-orange-text">{%trans "Diários Salvos:"%}</h2>
+
+  
+    <ul >  <!-- Usar List Group para exibição -->
         {% for diario in diarios %}
-        <li class="list-group-item">
+        <div class="diario-box">  
+        <li >
             {{ diario.disciplina.nome }} - ({{ diario.data }})  <!-- Disciplina e data -->
             <br><strong>{{ diario.titulo }}</strong>  <!-- Título do diário -->
             <br>{{ diario.texto }}  <!-- Texto do diário -->
         </li>
         <br>
+         </div>
         {% endfor %}
+
     </ul>
+ 
     {% else %}
     <h3 class="white-color text-center">{%trans "Nenhum diário enviado"%}</h3>  <!-- Mensagem se não houver diários -->
     {% endif %}

@@ -13,7 +13,7 @@
     {% csrf_token %}
     <!-- Itera sobre as disciplinas e turmas -->
     {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
-    <div class="white-color text-center bold-text disciplina-title"><h3>{{ disciplina_info.disciplina.nome }}</h3></div>
+    <div class="light-orange-text text-center bold-text disciplina-title"><h3>{{ disciplina_info.disciplina.nome }}</h3></div>
 
     <!-- Itera sobre as turmas para separar os alunos -->
     {% for turma in disciplina_info.turmas %}
