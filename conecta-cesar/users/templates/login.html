@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="PT-BR">
@@ -17,25 +18,32 @@
 <body class="custom-bg d-flex flex-column justify-content-center align-items-center vh-100">
   <div style="text-align: center;"><img src="{% static 'images/white-cesar.png' %}"  alt="logo cesar"></div>
   
-  <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
-    <form method="POST" action="{% url 'login' %}" style="width: 300px; background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px;">
+  <div class=" container-fluid d-flex justify-content-center align-items-center vh-100">
+    <form class="login-form" method="POST" action="{% url 'login' %}">
       {% csrf_token %}
       <div class="mb-3">
-        <label class="form-label">Usuário</label>
-        <input type="text" class="form-control" name="username" required placeholder="Digite o nome de usuário">
-        <div class="form-text">Ex. Ricardo Costa</div>
+
+        <label class="form-label ">Usuário</label>
+        <div class="form-text-input"> 
+        <input type="text" id="login-input" class="form-control form-input" name="username" required placeholder="Digite o nome de usuário">
+      </div>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Senha</label>
-        <input type="password" class="form-control"  name="senha" placeholder="Digite a senha"  required>
+        <div class="form-text-input"> 
+        <input id="password-input" type="password" class="form-control"  name="senha" placeholder="Digite a senha"  required>
+        </div>
       </div>
 
+      <div class="login-button">
       <input type="submit" class="btn btn-primary" value="Entrar">
-      <div>
+      </div>
+
+      <div class="register-link text-center">
         Ainda não tem uma conta? <a href="{% url 'cadastro' %}">Registrar-se</a>
       </div>
-      
+    
       {% if messages %}
       {% for message in messages %}
         {% if message.tags == 'success' %}

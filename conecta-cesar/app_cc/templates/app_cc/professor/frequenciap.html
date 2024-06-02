@@ -1,41 +1,52 @@
 {% extends "app_cc/professor/mainp.html" %}
-
+{% load i18n %}
+{% load static %}
 {% block content %}
-<div class="container mt-4">
-  <h2 class="text-center">Registrar Faltas</h2>
-  <form method="POST">
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/frequenciap.css' %}" type="text/css">
+
+<div class="text-center orange-text"><h2><strong>{% trans "Registrar Faltas" %}</strong></h2></div>
+<form method="POST">
     {% csrf_token %}
-    {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
-      <div class="card mb-4">
-        <div class="card-header bg-primary text-white">Disciplina: {{ disciplina_info.disciplina.nome }}</div>
-        <div class="card-body">
-          {% for turma_info in disciplina_info.turmas %}
-            <h4 class="card-title">Turma: {{ turma_info.turma.nome }}</h4>
-            {% for aluno_info in turma_info.alunos %}
-              <div class="card mb-2">
-                <div class="card-header">Aluno: {{ aluno_info.aluno.usuario.username }}</div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <!-- CheckBox para marcar falta -->
-                    <div>
-                      Marcar Falta
-                      <input type="checkbox" name="falta[{{ aluno_info.aluno.id }}-{{ disciplina_info.disciplina.id }}]" 
-                        {% if aluno_info.tem_falta_hoje %} checked {% endif %}>
-                    </div>
-                    <!-- Total de faltas para a disciplina -->
-                    <span class="badge bg-danger rounded-pill">{{ aluno_info.total_faltas }}</span>
-                  </li>
-                </ul>
-              </div>
+    <div class="frequencia-container">
+        {% for disciplina_info in disciplinas_com_turmas_e_alunos %}
+            <div class="bold-text light-orange-text"><h3>{{ disciplina_info.disciplina.nome }}</h3></div>
+            {% for turma_info in disciplina_info.turmas %}
+                <h5 class="white-color">{{ turma_info.turma.nome }}</h5>
+                <div class="frequencia-box">
+                    {% for aluno_info in turma_info.alunos %}
+                        <div class="frequencia-items">
+                            <ul>
+                                <li>
+                                    <div>
+                                        <p>Aluno: {{ aluno_info.aluno.usuario.username }}</p>
+                                        {% trans "Marcar Falta" %}
+                                        <input type="checkbox" name="falta[{{ aluno_info.aluno.id }}-{{ disciplina_info.disciplina.id }}]" {% if aluno_info.tem_falta_hoje %} checked {% endif %}>
+                                    </div>
+                                    <span>{{ aluno_info.total_faltas }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
             {% endfor %}
-          {% endfor %}
-        </div>
-      </div>
-    {% endfor %}
-    <!-- Botão para enviar o formulário -->
-    <div class="text-center mt-4">
-      <button type="submit" class="btn btn-primary">Registrar Faltas</button>
+        {% endfor %}
     </div>
-  </form>
-</div>
+    <div>
+        <!-- Botão para enviar o formulário -->
+        <button class="send text-center mt-4" style="display: block; margin: 0 auto;">
+            <div class="svg-wrapper-1">
+                <div class="svg-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                    </svg>
+                </div>
+            </div>
+            <span>{% trans "Salvar" %}</span>
+        </button>
+    </div>
+</form>
 {% endblock %}

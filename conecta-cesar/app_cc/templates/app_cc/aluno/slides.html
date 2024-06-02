@@ -1,0 +1,56 @@
+{% extends "app_cc/aluno/main.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/slides.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/buttons.css' %}">
+
+
+<h1 class="bold-text white-color text-center">Sala de <span class="orange-text">Aula</span></h1>
+
+    {% for arquivo in arquivos %}
+    <div class="white-color slide-container">
+
+    <div class="slide-box">
+     
+    {% if arquivo.archive %}
+
+       <div class="slide-header">
+            <h2>{{ arquivo.disciplina.nome }}</h2>
+            <h3><a href="{{ arquivo.archive.url }}" target="blank">{{ arquivo.titulo }}</a></h3>
+            <h5>{{ arquivo.data }}</h5>
+      
+
+            <a target="blank" href="{{ arquivo.archive.url }}"><img src="{{ arquivo.archive.url }}" alt="Preview" class="file-preview"></a>
+        </div>
+            {%else%}
+            
+                <div class="slide-header">
+                    <h2>{{ arquivo.disciplina.nome }}</h2>
+                    <h3>{{ arquivo.titulo }}</h3>
+                    <h5>{{ arquivo.data }}</h5>
+                </div>
+              
+                    
+            {% endif %}
+            <div class="slide-content">
+            <h4>{{ arquivo.descricao }}</h4>
+            {% if arquivo.archive %}
+            <a href="{{ arquivo.archive.url }}" download class="download-button">
+                <div class="svg-wrapper-1">
+                    <div class="svg-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </div>
+            {% endif %}
+    </div>
+    </div>
+    {% endfor %}
+
+{% endblock content %}

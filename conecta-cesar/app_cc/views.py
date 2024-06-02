@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File
+from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -8,6 +8,26 @@ from datetime import date
 from functools import wraps
 from django.conf import settings
 import os
+import json
+from django.utils.translation import gettext as _
+from django.core.exceptions import ObjectDoesNotExist
+
+
+
+def gerar_relatorio(disciplinas, professor):
+    for disciplina in disciplinas:
+        try:
+            # Tenta obter um relatório existente para o professor e a disciplina
+            relatorio = Relatorio.objects.get(professor=professor, disciplina=disciplina)
+            print("Relatório existente encontrado:", relatorio)
+            relatorio.delete()
+            print("Relatório existente excluído.")
+
+        except ObjectDoesNotExist:
+            pass
+        relatorio = Relatorio.objects.create(professor=professor, disciplina=disciplina)
+        print("Novo relatório criado:", relatorio)
+        relatorio.atualizar_relatorio(disciplina)
 
 def gerar_sigla(nome):
             # Divide por espaços e pega a primeira letra de cada palavra
@@ -19,17 +39,17 @@ def has_role_or_redirect(required_role):
         def _wrapped_view(request, *args, **kwargs):
             # Verificar se o usuário está autenticado
             if not request.user.is_authenticated:
-                messages.error(request, "Você precisa fazer login para acessar esta página.")
+                messages.error(request, _("Você precisa fazer login para acessar esta página."))
                 return redirect(reverse("login"))  # Redireciona para a página de login
             
             # Verificar se o usuário é administrador (superuser)
             if request.user.is_superuser:
-                messages.error(request, "Administradores não têm acesso a esta página.")
+                messages.error(request, _("Administradores não têm acesso a esta página."))
                 return redirect(reverse("login"))  # Redireciona para a página de login com mensagem de erro
             
             # Verificar se o usuário tem o papel necessário
             if not has_role(request.user, required_role):
-                messages.error(request, f"Permissão negada. Você precisa ser '{required_role.__name__}' para acessar esta página.")
+                messages.error(request, _(f"Permissão negada. Você precisa ser '{required_role.__name__}' para acessar esta página."))
                 return redirect(reverse("login"))  # Redireciona para a página de login com mensagem de erro
             
             # Se o usuário está autenticado e tem o papel correto, permite o acesso à view
@@ -40,7 +60,13 @@ def has_role_or_redirect(required_role):
 # -----------------STUDENT VIEWS--------------------------------------------
 @has_role_or_redirect(Aluno)
 def avisos(request):
-    return render(request, 'app_cc/aluno/avisos.html')
+    avisos=Aviso.objects.all()
+    return render(request, 'app_cc/aluno/avisos.html', {'avisos':avisos})
+
+@has_role_or_redirect(Aluno)
+def detalhe_aviso(request, aviso_id):
+    aviso = get_object_or_404(Aviso, pk=aviso_id)
+    return render(request, 'app_cc/aluno/detalhe_aviso.html', {'aviso': aviso})
 
 #----------------------------------------------------------------------------------------------------------------  
 @has_role_or_redirect(Aluno)
@@ -72,9 +98,9 @@ def hora_extra(request):
                 if os.path.exists(file.archive.path):
                     os.remove(file.archive.path)
                 file.delete()
-                messages.success(request, "Arquivo excluído com sucesso.")
+                messages.success(request, _("Arquivo excluído com sucesso."))
             except File.DoesNotExist:
-                messages.error(request, "Arquivo não encontrado para exclusão.")
+                messages.error(request, _("Arquivo não encontrado para exclusão."))
 
             return redirect("hora_extra")
 
@@ -85,7 +111,7 @@ def hora_extra(request):
 
             # Verificar se o campo está vazio
             if not horas_extras or horas_extras.strip() == "":
-                messages.error(request, "O campo de horas extras não pode ser vazio.")
+                messages.error(request, _("O campo de horas extras não pode ser vazio."))
                 return redirect("hora_extra")
 
             try:
@@ -94,16 +120,16 @@ def hora_extra(request):
                     messages.error(request, "Horas extras devem ser maior que 0.")
                     return redirect("hora_extra")
             except ValueError:
-                messages.error("Valor inválido para horas extras.")
+                messages.error(_("Valor inválido para horas extras."))
                 return redirect("hora_extra")
 
             try:
                 file = File.objects.get(id=file_id, aluno=aluno)
                 file.horas_extras = horas_extras
                 file.save()
-                messages.success(request, "Horas extras atualizadas com sucesso.")
+                messages.success(request, _("Horas extras atualizadas com sucesso."))
             except File.DoesNotExist:
-                messages.error(request, "Arquivo não encontrado para atualização.")
+                messages.error(request, _("Arquivo não encontrado para atualização."))
 
             return redirect("hora_extra")
 
@@ -112,25 +138,25 @@ def hora_extra(request):
         horas_extras = request.POST.get("horas_extras")
 
         if not file:
-            messages.error("Nenhum arquivo recebido.")
+            messages.error(_("Nenhum arquivo recebido."))
             return redirect("hora_extra")
 
         # Verificar se o tipo do arquivo é aceitável
         if not file.name.lower().endswith(('.jpg', '.jpeg', '.png')):
-            messages.error(request, "Somente arquivos JPG ou PNG são permitidos.")
+            messages.error(request, _("Somente arquivos JPG ou PNG são permitidos."))
             return redirect("hora_extra")
 
         if not horas_extras or horas_extras.strip() == "":
-            messages.error(request, "O campo de horas extras não pode ser vazio.")
+            messages.error(request, _("O campo de horas extras não pode ser vazio."))
             return redirect("hora_extra")
 
         try:
             horas_extras = float(horas_extras)
             if horas_extras <= 0:
-                messages.error(request, "Horas extras devem ser maior que 0.")
+                messages.error(request, _("Horas extras devem ser maior que 0."))
                 return redirect("hora_extra")
         except ValueError:
-            messages.error(request, "Valor inválido para horas extras.")
+            messages.error(request, _("Valor inválido para horas extras."))
             return redirect("hora_extra")
 
         # Se for um novo arquivo
@@ -152,19 +178,12 @@ def hora_extra(request):
         )
         archive.save()
 
-        messages.success(request, "Arquivo salvo com sucesso.")
+        messages.success(request, _("Arquivo salvo com sucesso."))
         return redirect("hora_extra")
    
 #----------------------------------------------------------------------------------------------------------------    
 
-@has_role_or_redirect(Aluno)
-def disciplinas_e_notas(request):
-    disciplinas_com_notas = []
-    disciplinas = Disciplina.objects.all()
-    for disciplina in disciplinas:
-        notas = Nota.objects.filter(disciplina=disciplina)
-        disciplinas_com_notas.append((disciplina, notas))
-    return render(request, 'app_cc/aluno/disciplina.html', {'disciplinas_com_notas': disciplinas_com_notas})
+
 
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Aluno)
@@ -197,7 +216,7 @@ def boletim(request):
         }
     else:
         context = {
-            'error': 'Turma ou disciplinas não encontradas para o aluno.'  # Caso de erro
+            'error': _('Turma ou disciplinas não encontradas para o aluno.')  # Caso de erro
         }
 
     return render(request, 'app_cc/aluno/boletim.html', context)
@@ -235,7 +254,7 @@ def frequencia(request):
         }
     else:
         context = {
-            'error': 'Nenhuma disciplina ou turma encontrada para o aluno.'
+            'error': _('Nenhuma disciplina ou turma encontrada para o aluno.')
         }
 
     return render(request, 'app_cc/aluno/frequencia.html', context)
@@ -284,7 +303,7 @@ def perfil(request):
                 # Verifique se o arquivo é PNG ou JPG
                 ext = os.path.splitext(foto_perfil.name)[1].lower()  # Pega a extensão do arquivo
                 if ext not in ['.jpg', '.jpeg', '.png']:
-                    messages.error(request, "Somente arquivos JPG ou PNG são permitidos.")
+                    messages.error(request, _("Somente arquivos JPG ou PNG são permitidos."))
                     return redirect('perfil')  # Redireciona para a mesma página
 
                 # Se há uma foto antiga, exclua-a
@@ -294,9 +313,9 @@ def perfil(request):
                 # Atribua a nova foto de perfil ao modelo
                 aluno.foto_perfil = foto_perfil
                 aluno.save()
-                messages.success(request, "Foto de perfil atualizada com sucesso!")
+                messages.success(request, _("Foto de perfil atualizada com sucesso!"))
             else:
-                messages.error(request, "Por favor, envie uma nova foto de perfil.")
+                messages.error(request, _("Por favor, envie uma nova foto de perfil."))
 
         context = {
             'nome': aluno.usuario.username,
@@ -306,7 +325,7 @@ def perfil(request):
         }
 
     except AlunoModel.DoesNotExist:
-        messages.error(request, "Aluno associado ao usuário não encontrado.")
+        messages.error(request, _("Aluno associado ao usuário não encontrado."))
         return redirect("login")
 
     return render(request, 'app_cc/aluno/perfil.html', context)
@@ -333,7 +352,7 @@ def diario(request):
         }
     else:
         context = {
-            'error': 'Turma não encontrada ou sem disciplinas associadas.'  # Caso de erro
+            'error': _('Turma não encontrada ou sem disciplinas associadas.')  # Caso de erro
         }
 
     return render(request, 'app_cc/aluno/diario.html', context)
@@ -341,15 +360,142 @@ def diario(request):
 
 @has_role_or_redirect(Aluno)
 def calendario(request):
-    return render(request, 'app_cc/aluno/calendario.html')
+    # Obtém o aluno logado
+    aluno = request.user.aluno
+
+    # Obtém todas as disciplinas associadas à turma do aluno
+    disciplinas = aluno.turma.disciplinas.all()
+
+    # Obtém todos os eventos que estão associados a alguma dessas disciplinas
+    eventos = Evento.objects.filter(disciplina__in=disciplinas)
+    print(eventos)
+
+    # Converte os eventos em uma lista de dicionários, contendo apenas os campos
+    # 'titulo', 'descricao', 'data', 'horario' e 'disciplina__nome'
+    eventos_list = list(eventos.values('titulo', 'descricao', 'data', 'horario', 'disciplina__nome'))
+    # Serializa a lista de dicionários em formato JSON
+    eventos_json = json.dumps(eventos_list, default=str)
+
+    # Cria um dicionário com a chave 'eventos_json' e o valor correspondente
+    context = {
+        'eventos_json': eventos_json,
+        'eventos': eventos
+    }
+    print(context)
+
+    return render(request, 'app_cc/aluno/calendario.html', context)
 
 #----------------------------------------------------------------------------------------------------------------    
 #----------------------------------------PROFESSOR VIEWS---------------------------------------------------------  
-#----------------------------------------------------------------------------------------------------------------    
+#---------------------------------------------------------------------------------------------------------------- 
+
+@has_role_or_redirect(Aluno)
+def slides(request):
+    aluno=AlunoModel.objects.get(usuario=request.user)
+    disciplinas=Turma.obter_disciplinas(aluno.turma)
+    print(disciplinas)
+    arquivos=ProfessorFile.objects.filter(disciplina__in=disciplinas)
+
+    print(arquivos)
+
+    return render(request, "app_cc/aluno/slides.html", {"arquivos": arquivos, "disciplinas": disciplinas})
 
 @has_role_or_redirect(Professor)
-def turmas(request):
-    return render(request, 'app_cc/professor/turmas.html')
+def slidesp(request):
+    # Obter o professor associado ao usuário autenticado
+    professor = ProfessorModel.objects.get(usuario=request.user)
+    disciplinas=Disciplina.objects.filter(professor=professor)
+
+
+
+    if request.method == "GET":
+        # Obter os arquivos enviados pelo professor
+        arquivos = ProfessorFile.objects.filter(professor=professor)
+
+        return render(
+            request,
+            "app_cc/professor/slidesp.html",
+            {"arquivos": arquivos, "disciplinas": disciplinas},
+        )
+
+    elif request.method == "POST":
+        # Se for exclusão de arquivo
+        if "delete_file" in request.POST:
+            file_id = request.POST.get("delete_file")
+            try:
+                file = ProfessorFile.objects.get(id=file_id, professor=professor)
+
+                # Deletar do sistema de arquivos e banco de dados
+                if file.archive:
+                    if os.path.exists(file.archive.path):
+                        os.remove(file.archive.path)
+                file.delete()
+                messages.success(request, _("Arquivo excluído com sucesso."))
+            except ProfessorFile.DoesNotExist:
+                messages.error(request, _("Arquivo não encontrado para exclusão."))
+
+            return redirect("slidesp")
+
+        # Para atualização de horas extras
+        
+        # Para uploads de novos arquivos
+        file = request.FILES.get("slide_file")
+        titulo = request.POST.get("slide_titulo")
+        descricao = request.POST.get("slide_descricao")
+        disciplina = request.POST.get("slide_disciplina")
+
+        disciplina=Disciplina.objects.get(nome=disciplina)
+
+        # Verificar se o tipo do arquivo é aceitável
+        if file:
+            ext_permitidas = ('.jpg', '.jpeg', '.png', '.pdf', '.pptx', '.docx')
+            if not file.name.lower().endswith(ext_permitidas):
+                messages.error(request, _("Tipo de arquivo não permitido (Tipos aceitos: '.jpg', '.jpeg', '.png', '.pdf', '.pptx', '.docx')."))
+                return redirect("slidesp")
+
+            ext = file.name.split('.')[-1]
+
+            # Se for um novo arquivo
+            file_name_with_date = f"{file.name.rsplit('.', 1)[0]}-{date.today()}.{ext}"
+
+            file_path = os.path.join(settings.MEDIA_ROOT, f"documentosp/{file_name_with_date}")
+
+            # Salvar o arquivo diretamente no sistema de arquivos
+            with open(file_path, "wb+") as destino:
+                for chunk in file.chunks():
+                    destino.write(chunk)
+
+            # Criar um objeto do modelo `ProfessorFile`
+            archive = ProfessorFile(
+                titulo=titulo,
+                descricao=descricao,
+                archive=f"documentosp/{file_name_with_date}",
+                professor=professor,
+                disciplina=disciplina,
+            )
+            print(archive)
+            archive.save()
+        else:
+            archive = ProfessorFile(
+                titulo=titulo,
+                descricao=descricao,
+                professor=professor,
+                disciplina=disciplina,
+            )
+            archive.save()
+            print(archive)
+
+        messages.success(request, _("Documento salvo com sucesso."))
+        return redirect("slidesp")
+    
+    # Após lidar com POST, renderizar com 'ext' no contexto
+    arquivos = ProfessorFile.objects.filter(professor=professor)
+    return render(
+        request,
+        "app_cc/professor/slidesp.html",
+        {"arquivos": arquivos, },
+    )
+
 #----------------------------------------------------------------------------------------------------------------    
 
 @has_role_or_redirect(Professor)  # Garante que apenas usuários com papel de professor têm acesso
@@ -364,7 +510,7 @@ def perfilp(request):
                 # Verifica se o arquivo é do tipo correto (PNG ou JPG)
                 extensao = os.path.splitext(foto_perfil.name)[1].lower()  # Obtém a extensão do arquivo
                 if extensao not in ['.jpg', '.jpeg', '.png']:  # Checa se é um formato válido
-                    messages.error(request, "Somente arquivos JPG ou PNG são permitidos.")
+                    messages.error(request, _("Somente arquivos JPG ou PNG são permitidos."))
                     return redirect("perfilp")  # Redireciona para a mesma página
 
                 # Se existe uma foto anterior, remova-a
@@ -374,9 +520,9 @@ def perfilp(request):
                 # Atribua a nova foto de perfil ao modelo
                 professor.foto_perfil = foto_perfil
                 professor.save()
-                messages.success(request, "Foto de perfil atualizada com sucesso!")
+                messages.success(request, _("Foto de perfil atualizada com sucesso!"))
             else:
-                messages.error(request, "Por favor, envie uma nova foto de perfil.")
+                messages.error(request, _("Por favor, envie uma nova foto de perfil."))
 
         context = {
             'nome': professor.usuario.username,
@@ -386,14 +532,14 @@ def perfilp(request):
         }
 
     except ProfessorModel.DoesNotExist:
-        messages.error(request, "Professor associado ao usuário não encontrado.")
+        messages.error(request, _("Professor associado ao usuário não encontrado."))
         return redirect("login")
 
     return render(request, 'app_cc/professor/perfilp.html', context)
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def frequenciap(request):
-    professor = request.user.professor
+    professor = ProfessorModel.objects.get(usuario=request.user)
     disciplinas = Disciplina.objects.filter(professor=professor)
     hoje = date.today()
 
@@ -446,22 +592,70 @@ def frequenciap(request):
 
         disciplinas_com_turmas_e_alunos.append(disciplina_info)
 
+        gerar_relatorio(disciplinas, professor)
+
     return render(
         request,
         'app_cc/professor/frequenciap.html',
         {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
     )
 #----------------------------------------------------------------------------------------------------------------    
+@has_role_or_redirect(Professor)
+def relatoriop(request):
+    professor = ProfessorModel.objects.get(usuario=request.user)
+    relatorios=Relatorio.objects.filter(professor=professor)
+    disciplinas=Disciplina.objects.filter(professor=professor)
+    gerar_relatorio(disciplinas, professor)
+    print(relatorios)
+    return render(request, "app_cc/professor/relatoriosp.html", {"relatorios":relatorios,})
 
+#----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def calendariop(request):
-    return render(request, 'app_cc/professor/calendariop.html')
+    professor = ProfessorModel.objects.get(usuario=request.user)
+    disciplinas = Disciplina.objects.filter(professor=professor)
+
+    if request.method == "POST":  # Corrigido para 'POST'
+        titulo = request.POST.get('titulo')
+        descricao = request.POST.get('descricao')
+        data = request.POST.get('data')
+        horario = request.POST.get('horario')
+        disciplina_id = request.POST.get('disciplina')
+
+        try:
+            disciplina = Disciplina.objects.get(id=disciplina_id)
+            Evento.objects.create(
+                titulo=titulo,
+                descricao=descricao,
+                data=data,
+                horario=horario,
+                disciplina=disciplina,
+                professor=professor  # Usar a instância do professor corretamente
+            )
+            messages.success(request, _('Evento criado com sucesso!'))
+        except Disciplina.DoesNotExist:
+            messages.error(request, _('Disciplina não encontrada.'))
+        except Exception as e:
+            messages.error(request, f'Erro ao criar evento: {str(e)}')
+
+        return redirect('calendariop')
+    
+    else:
+        eventos = Evento.objects.filter(professor=professor)
+        eventos_list = list(eventos.values('titulo', 'descricao', 'data', 'horario', 'disciplina__nome'))
+        eventos_json = json.dumps(eventos_list, default=str)  # Serializar para JSON
+        context = {
+            'disciplinas': disciplinas,
+            'eventos_json': eventos_json ,              # Passando os eventos serializados
+            'eventos': eventos,
+        }
+        return render(request, 'app_cc/professor/calendariop.html', context)
+    
 #----------------------------------------------------------------------------------------------------------------    
 
 @has_role_or_redirect(Professor)
 def diariop(request):
-    professor = request.user.professor  # Obter o professor associado ao usuário
-
+    professor = ProfessorModel.objects.get(usuario=request.user)
     # Obter todas as disciplinas associadas ao professor
     disciplinas = Disciplina.objects.filter(professor=professor)
 
@@ -479,7 +673,7 @@ def diariop(request):
             Diario.objects.create(disciplina=disciplina, titulo=titulo, texto=texto)
             return redirect('diariop')  # Redirecionar para a mesma página
         else:
-            return messages.error(request, "Disciplina não permitida.")  # Caso de erro
+            return messages.error(request, _("Disciplina não permitida."))  # Caso de erro
 
     else:
         # Obter todos os diários associados às disciplinas do professor
@@ -495,39 +689,55 @@ def diariop(request):
 
 @has_role_or_redirect(Professor)
 def avisosp(request):
-    return render(request, 'app_cc/professor/avisosp.html')
+    avisos=Aviso.objects.all()
+    return render(request, 'app_cc/professor/avisosp.html', {"avisos":avisos})
+
+@has_role_or_redirect(Professor)
+def detalhe_avisop(request, aviso_id):
+    aviso = get_object_or_404(Aviso, pk=aviso_id)
+    return render(request, 'app_cc/professor/detalhe_avisop.html', {'aviso': aviso})
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def boletimp(request):
-    disciplinas = Disciplina.objects.filter(professor__usuario=request.user)
-
+    # Obtém o objeto ProfessorModel do usuário logado
+    professor = ProfessorModel.objects.get(usuario=request.user)
+    # Obter todas as disciplinas associadas ao professor
+    disciplinas = Disciplina.objects.filter(professor=professor)
+    
     if request.method == "POST":
+        # Percorre cada disciplina, turma e aluno
         for disciplina in disciplinas:
             for turma in disciplina.turmas.all():
                 for aluno in AlunoModel.objects.filter(turma=turma):
                     # Cria a chave de nota única para cada aluno-disciplina-turma
                     nota_key = f"notas[{aluno.usuario.username}-{turma.id}-{disciplina.id}]"
+                    # Obtém o valor da nota do POST
                     nota_value = request.POST.get(nota_key)
 
                     if nota_value:
                         try:
+                            # Converte a nota para float e verifica se está dentro do intervalo permitido
                             nota_float = float(nota_value.replace(',', '.'))
                             if nota_float < 0 or nota_float > 10:
-                                messages.error(request, "A nota deve estar entre 0 e 10.")
+                                messages.error(request, _("A nota deve estar entre 0 e 10."))
                                 return redirect("boletimp")
 
+                            # Cria ou atualiza a nota do aluno
                             nota, created = Nota.objects.get_or_create(
                                 disciplina=disciplina,
                                 aluno=aluno
                             )
                             nota.valor = nota_float
                             nota.save()
+                            # Gera o relatório
+                            gerar_relatorio(disciplinas, professor)
 
                         except ValueError:
-                            messages.error(request, "Valor inválido para nota.")
+                            # Caso a nota seja inválida, exibe uma mensagem de erro
+                            messages.error(request, _("Valor inválido para nota."))
                             return redirect("boletimp")
 
-    # Estrutura para disciplinas, turmas e alunos, com notas
+    # Cria uma estrutura para armazenar as disciplinas, turmas e alunos com suas notas
     disciplinas_com_turmas_e_alunos = []
 
     for disciplina in disciplinas:
@@ -540,17 +750,20 @@ def boletimp(request):
         for turma in disciplina_info['turmas']:
             alunos_na_turma = AlunoModel.objects.filter(turma=turma)
             for aluno in alunos_na_turma:
+                # Obtém a nota do aluno para a disciplina
                 nota = Nota.objects.filter(disciplina=disciplina, aluno=aluno).first()
                 nota_valor = nota.valor if nota else 0
 
                 disciplina_info['alunos_com_notas'].append({
                     'aluno': aluno,
                     'turma': turma,
-                    'nota': nota_valor
+                    'nota': nota_valor,
+                    
                 })
 
         disciplinas_com_turmas_e_alunos.append(disciplina_info)
 
+    # Renderiza a página com a estrutura de disciplinas, turmas e alunos, com suas notas
     return render(
         request,
         'app_cc/professor/boletimp.html',

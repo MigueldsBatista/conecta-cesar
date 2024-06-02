@@ -1,0 +1,65 @@
+.disciplina-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.table-container {
+    border-radius: 20px;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.disciplina-table table {
+    
+    width: 80%;
+    border-collapse: collapse; 
+    /* Junta as bordas das células da tabela */
+}
+
+.table-head {
+    background-color: #23252c;
+    color: #bdc1c7;
+}
+.form-text-input input{
+    text-align: center !important;
+    background-color: #bdc1c7 !important;
+    color: #23252c !important;
+}
+
+
+.table-head th {
+    
+    padding: 20px;
+}
+
+.disciplina-table td, .disciplina-table th {
+    padding: 10px 8rem;
+
+
+}
+
+.disciplina-title {
+    margin-top: 10px; /* Adiciona espaço acima do título da turma */
+}
+
+/* Define as cores alternadas para as células */
+.disciplina-table tr:nth-child(odd) td {
+    background-color: #2c2e33  !important;
+}
+  
+
+
+.disciplina-table tr:nth-child(even) td {
+    background-color: #27282c !important;
+}
+
+
+    @media only screen and (max-width: 768px) {
+        .disciplina-table td, .disciplina-table th {
+            padding: 10px 15px; /* Espaçamento específico para dispositivos móveis */
+        }
+    }

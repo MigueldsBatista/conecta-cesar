@@ -1,239 +1,136 @@
-{% extends "app_cc/aluno/main.html" %}
+{% extends 'app_cc/aluno/main.html' %}
+{% load i18n %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/calendario.css" %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+
+{% if messages %}
+<div>
+    {% for message in messages %}
+        <div 
+            class="alert alert-{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}danger{% elif 'warning' in message.tags %}warning{% else %}info{% endif %} fade show" 
+            role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <section>
-    <!DOCTYPE html>
-    <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Calendário</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link rel="stylesheet" href="styles.css">
-        <style>
-            /* Calendário */
-            * {
-                margin: 0;
-                padding: 0;
-                font-family: 'Dosis', sans-serif;
-                box-sizing: border-box;
-            }
-            
-            section {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-                overflow: hidden;
-            }
-            
-            .box {
-                position: relative;
-                padding-top: 5px;
-                padding-bottom: 25px;
-                z-index: 1000;
-                border-radius: 30px;
-            }
-            
-            .container {
-                width: 90%; /* Alterado para ajustar à largura da tela */
-                max-width: 500px; /* Limitando a largura máxima */
-                background: white;
-                padding-top: 5px;
-                border: 1px solid rgba(255, 255, 255, 0.5);
-                border-right: 1px solid rgba(255, 255, 255, 0.2);
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-                border-radius: 30px 30px 30px 30px;
-                align-items: center;
-                justify-content: center;
-                
-            }
-            
-            .month {
-                width: 100%;
-                
-                background-color: #3498db;
-                border-radius: 30px 30px 0px 0px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                text-align: center;
-            }
-            
-            .month i {
-                font-size: 1rem;
-                cursor: pointer;
-            }
-            
-            .month h1 {
-                font-size: 1.4rem; /* Reduzindo o tamanho do cabeçalho */
-                text-transform: uppercase;
-                font-weight: 400;
-            }
-            
-            .month h2 {
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
-            }
-            
-            .month p {
-                font-size: 1rem; /* Reduzindo o tamanho do parágrafo */
-                font-weight: 400;
-                text-transform: uppercase;
-            }
-            
-            .weekdays {
-                width: 100%;
-                padding: 0 0.2rem; /* Reduzindo o padding */
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                flex-wrap: wrap;
-            }
-            
-            .weekdays div {
-                font-size: 1rem; /* Reduzindo o tamanho da fonte */
-                letter-spacing: 0.1rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 2.5rem;
-                width: calc(100% / 7);
-            }
-            
-            .days {
-                width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                padding: .2rem;
-                justify-content: space-between;
-            }
-            
-            .days div {
-                font-size: 1rem;
-                margin: 0.3rem;
-                width: calc(100% / 7 - 0.6rem); /* Ajustando o tamanho dos dias */
-                height: 2.5rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            
-            .days div:hover:not(.today) {
-                background-color: #3498db;
-                border-radius: 0 10px 0 10px;
-            }
-            
-            .prev, .next {
-                font-size: 1.2rem;
-            }
-
-            .current-day {
-                background-color: #3498db;
-                border-radius: 0 10px 0 10px;
-                
-            }
-        </style>
-    </head>
-    <body>
-
-    <section>
-        <div class="box">
-            <div class="container">
-                <div class="calendar">
-                    <div class="month">
-                        <i class="fas fa-angle-left prev"></i>
-                        <div class="date">
-                            <h1 class='header'></h1>
-                            <h2 class='header'></h2>
-                            <p></p>
-                        </div>
-                        <i class="fas fa-angle-right next"></i>
+    <div class="box">
+        <div class="container-calendar">
+            <div class="calendar">
+                <div class="month">
+                    <i class="fas fa-angle-left prev"></i>
+                    <div class="date">
+                        <h1 class='header'></h1>
+                        <h2 class='header'></h2>
+                        <p></p>
                     </div>
-                    <div class="weekdays">
-                        <div>DOM</div>
-                        <div>SEG</div>
-                        <div>TER</div>
-                        <div>QUA</div>
-                        <div>QUI</div>
-                        <div>SEX</div>
-                        <div>SAB</div>
-                    </div>
-                    <hr>
-                    <div class="days"></div>
+                    <i class="fas fa-angle-right next"></i>
                 </div>
+                <div class="weekdays">
+                    <div>{% trans "DOM" %}</div>
+                    <div>{% trans "SEG" %}</div>
+                    <div>{% trans "TER" %}</div>
+                    <div>{% trans "QUA" %}</div>
+                    <div>{% trans "QUI" %}</div>
+                    <div>{% trans "SEX" %}</div>
+                    <div>{% trans "SAB" %}</div>
+                </div>
+                <div class="days"></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+<div  class="custom-event-details event-text slide-container">
+    {% for evento in eventos %}
+        <div class="custom-slide-box">
+            <div class="custom-slide-header">
+                <h2>{{ evento.titulo }}</h2>
+            <h3>{{ evento.disciplina.nome }}</h3>
+            </div>
 
-    <script>
+            <div class="custom-slide-content">
+                <p>{% trans "Descrição" %}: {{ evento.descricao }}</p>
+                <p>{% trans "Data" %}: {{ evento.data }}</p>
+                <p>{% trans "Horário" %}: {{ evento.horario }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const days = document.querySelectorAll('.days div');
+
+        const events = {{ eventos_json|safe }};
         const date = new Date();
-        const dateBr = {weekday: 'short', year: 'numeric', month:'short', day: 'numeric'};
-        const year = date.getFullYear();
+        const dateBr = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
 
         const renderCalendar = () => {
             date.setDate(1);
-            const monthDays = document.querySelector(".days");
+            const monthDays = document.querySelector('.days');
             const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
             const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
-            const firstDayIndex = date.getDay(); 
-            const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();  
+            const firstDayIndex = date.getDay();
+            const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
             const nextDays = 7 - lastDayIndex - 1;
-            const months = [
-                "Janeiro",
-                "Fevereiro",
-                "Março",
-                "Abril",
-                "Maio",
-                "Junho",
-                "Julho",
-                "Agosto",
-                "Setembro",
-                "Outubro",
-                "Novembro",
-                "Dezembro",
-            ];
-            document.querySelector(".date h1").innerHTML = months[date.getMonth()];
-            document.querySelector(".date p").innerHTML = new Date().toLocaleDateString('pt-BR', dateBr);
-            document.querySelector(".date h2").innerHTML = date.getFullYear();
-            let days =" ";
-            for(let x=firstDayIndex; x>0; x--){
-                days += `<div class="prev-date">${prevLastDay - x + 1}</div>`
-            }
-            for (let i = 1; i <= lastDay; i++) {
-                if( i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear(year)){
-                    days += `<div class="today">${i}</div>`;
-                } 
-                else {
-                    days += `<div>${i}</div>`;
-                }
-            }
-            for(let j=1; j<= nextDays; j++){
-                days += `<div class="next-date">${j}</div>`;    
-            }
-            monthDays.innerHTML = days;
 
-            // Adicionando classe ao dia atual
-            const currentDay = document.querySelector('.today');
-            if (currentDay) {
-                currentDay.classList.add('current-day');
+            const months = [
+                "{% trans 'Janeiro' %}", "{% trans 'Fevereiro' %}", "{% trans 'Março' %}", "{% trans 'Abril' %}", "{% trans 'Maio' %}", "{% trans 'Junho' %}",
+                "{% trans 'Julho' %}", "{% trans 'Agosto' %}", "{% trans 'Setembro' %}", "{% trans 'Outubro' %}", "{% trans 'Novembro' %}", "{% trans 'Dezembro' %}"
+            ];
+
+            document.querySelector('.date h1').innerHTML = months[date.getMonth()];
+            document.querySelector('.date p').innerHTML = new Date().toLocaleDateString('pt-BR', dateBr);
+            document.querySelector('.date h2').innerHTML = date.getFullYear();
+
+            let days = '';
+
+            for (let x = firstDayIndex; x > 0; x--) {
+                days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
             }
+
+            for (let i = 1; i <= lastDay; i++) {
+                const dayDate = new Date(date.getFullYear(), date.getMonth(), i);
+                const formattedDate = dayDate.toISOString().split('T')[0];
+                const isToday = i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear();
+
+                let dayClass = isToday ? "today" : "";
+
+                if (events.some(event => event.data === formattedDate)) {
+                    dayClass += " event-day";
+                }
+
+                days += `<div class="${dayClass}" data-date="${formattedDate}">${i}</div>`;
+            }
+
+            for (let j = 1; j <= nextDays; j++) {
+                days += `<div class="next-date">${j}</div>`;
+            }
+
+            monthDays.innerHTML = days;
         };
 
-        document.querySelector(".prev").addEventListener("click", () => {
+        document.querySelector('.prev').addEventListener('click', () => {
             date.setMonth(date.getMonth() - 1);
             renderCalendar();
         });
 
-        document.querySelector(".next").addEventListener("click", () => {
+        document.querySelector('.next').addEventListener('click', () => {
             date.setMonth(date.getMonth() + 1);
             renderCalendar();
         });
 
         renderCalendar();
-    </script>
-    </body>
-    </html>
-</section>
+    });
+</script>
+
+
 {% endblock content %}

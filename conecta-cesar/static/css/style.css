@@ -1,101 +1,205 @@
 
+
+
+/*Site background */
 .custom-bg {
   width: 100%;
   height: 100vh;
-  background-color: #f47a09;
+  background-color: #23252c;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+.light-orange-text{
+
+  color: #FFA500;
 }
 
-.navbar-brand,
-.nav-link {
-  color: black !important;
+/*classes predefinidas pra facilitar construção do site*/
+.orange-text{
+  color:#b54810 !important;
+}
+.white-color{
+color:#bdc1c7 !important;
+}
+.bold-text{
+  font-weight: bold !important;
 }
 
-.navbar-toggler-icon,
-.bg-dark.text-light {
-  background-color: white !important;
-  color: black !important;
+.underline-border{
+  border-bottom: solid 1px #bdc1c7 !important;
 }
 
-.card-header-custom {
-  background-color: #3498db; /* A cor azul desejada */
-  color: white; /* Mantém o texto branco para contraste */
+.background-color{
+  background-color: #23252c !important;
+}
+.container-color{
+ background-color: #2c2e33 !important; 
 }
 
-body {
-  background-color: orange;
-  margin: 0;
-  padding: 0;
+.rounded-box{
+  border-radius: 20px !important;
+}
+/*LOGIN PAGE
+
+Color for dark-theme
+background #23252c
+containers #2c2e33
+h1 color #bdc1c7
+
+strong orange tone #b54810
+
+orange for navbar #db5e3c
+other orange #e0603d
+navbar icon tone #7c7d84
+background for icon #3c2d2e
+
+*/
+
+
+.register-link a{
+  
+color: #bdc1c7 !important;
+}
+.register-link a:hover{
+  
+color: #b54810 !important;
+}
+.login-button {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 !important;
+}
+.login-button input{
+border: none;
+background-color: #b54810 !important; 
+  
+}
+.login-button input:hover{
+  background-color: #b54810 !important;
+  box-shadow: 0 0 5px 2px #b54810;
+  
+    
+  }
+
+.login-form{
+  width: 300px; 
+  background-color: #2c2e33;
+  padding: 20px;
+  border-radius: 20px;
+  color: #bdc1c7;
+}
+.login-form {
+  border: none;
+  color: #bdc1c7;
+}
+
+
+.form-text-input input {
+  border: none !important;
+  background-color: #23252c;
+  color: #bdc1c7 !important;
+  border-radius: 10px;
+  outline: none !important;
+  transition: background-color 0.25s ease, outline-color 0.25s ease;
+}
+
+/* Estilo para o input em focus */
+.form-text-input input:focus {
+  background-color: #23252c;
+  outline: 2px solid #b54810 !important;
+  box-shadow: 0 0 5px 2px #b54810;
+
+}
+
+/* Estilo para o input quando preenchido automaticamente pelo navegador */
+.form-text-input input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #23252c inset;
+  box-shadow: 0 0 0px 1000px #23252c inset;
+  -webkit-text-fill-color: #bdc1c7 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.form-text-input input:-webkit-autofill:focus {
+  background-color: #23252c;
+  -webkit-box-shadow: 0 0 0px 1000px #23252c inset;
+  box-shadow: 0 0 0px 1000px #23252c inset;
+}
+.form-text-input select{
+  border: none;
+  background-color: #23252c;
+  color: #bdc1c7 !important;
+  }
+.form-text-input input::placeholder {
+  color: #bdc1c7 !important;
+ 
+}
+.form-text-input select::placeholder {
+  color: #bdc1c7 !important; 
+}
+.form-text-input textarea::placeholder {
+  color: #bdc1c7 !important;
+
+}
+
+/**/
+
+/*AVISOS */
+
+
+/*PERFIL */
+.profile-container {
+  padding: 20px !important;
+  background-color: #2c2e33;
+  color: white;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  
 }
 
 .main-content {
-  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
 }
-
-.profile-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 50px;
-}
-
-.profile-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 .profile-header img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
 }
 
-.rounded-5 {
-  border-radius: 5%;
+.profile-header {
+  text-align: center;/*Alinha foto de perfil e botão no centro da página*/
+  margin-bottom: 20px;
 }
 
-.bg-dark.text-light {
-  background-color: white !important;
-  color: black !important;
+.file-input-wrapper {
+  position: relative;
+  margin-top: 10px;
+  display: inline-block;
 }
 
-.body,
-a,
-.navbar-brand,
-.nav-link {
-  color: black !important;
+.file-input-wrapper input[type="file"] {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  opacity: 0 !important;
 }
 
-.rounded-4 {
-  border-radius: 4%;
-}
-
-.red-text {
-  color: red;
-}
-
-.custom-card {
-  background-color: white;
-  border: none;
-  border-radius: 5%;
-  color: black;
-  padding: 20px;
-  margin: 20px 0;
-  transition: all 0.3s ease;
+.file-input-wrapper label {
+  padding: 5px;
+  color: #000000;
+  display: inline-block !important;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;  cursor: pointer !important;
 }
 
 
-.custom-card:hover {
-  background-color: #f0f0f0;
-  transform: translateY(-5px);
-}
+/*END PERFIL */
 
-.custom-card h5 {
-  margin: 0;
-}
+
 
 .overall-card {
   display: flex;
@@ -113,32 +217,79 @@ a,
   font-weight: bold;
 }
 
-.button-container {
-  display: flex;
-  align-items: center;
+
+
+
+/*BOLETIM ALUNO*/
+
+.page-text{
+  color: #b54810 !important;
 }
 
-.orange-button {
-  background-color: orange;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
+
+.grade-text{
+  color: #b54810;
+
+}
 .grade-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #f0f0f0;
+  background-color: #2c2e33;
+  color:#bdc1c7;
   padding: 10px 20px;
   border-radius: 10px;
   margin-top: 20px;
-  width: 100%;
+  width: 80%;
+  margin: 20px auto;
+  
 
 }
 
+
+.dropdown-item{
+color:#bdc1c7 !important;
+}
+/* Ajuste de tamanho das barras para dispositivos móveis */
+
+.nav-item svg{
+  width: 10% !important;
+}
+
+
+
+  @media only screen and (max-width: 768px) {
+    .nav-item svg{
+      width: 13% !important;
+    }
+    .offcanvas-end
+    {
+    width: 70% !important; /* #6d6f74 Largura desejada para dispositivos móveis */
+    }
+    .grade-container {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 15px;
+      width: 90%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    
+    }
+    .dropdown-item img{
+      width: 18% !important;
+    }
+   
+    
+ .mobile-chart-container canvas {
+      height: 200px !important; /* altura das barras para dispositivos móveis */}
+
+      .boletim_input {
+        width: 50px; /* Define a largura desejada para o input */
+        height: 30px; /* Define a altura desejada para o input */
+        font-size: 14px; /* Define o tamanho da fonte do input */
+      }
+}
 
 
 .grade-text {
@@ -151,14 +302,12 @@ a,
   font-weight: bold;
 }
 
-.btn-custom {
-  background-color: green;
-  border-color: #f0f0f0;
-  /* Outros estilos personalizados */
-  border-radius: 7px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-    
+
+/*END BOLETIM*/
+
+
+
+/**/
 .edit-nota {
   border-radius: 5px;
 }
@@ -187,4 +336,59 @@ a,
   align-items: center; 
     padding: 0 10px;
 }
+
+/*STUDENT PROFILE CSS*/
+
+/*NAV CSS*/
+.navbar{
+  background-color: #2c2e33 !important;
+}
+.navbar-toggler{
+  box-shadow: #252525 0px 0px 5px !important;
+  
+}
+.navbar-toggler .navbar-toggler-icon {
+  filter: brightness(0) invert(1) !important; /* Aplica um filtro para inverter a cor */
+}
+
+.offcanvas, .dropdown-menu{
+  
+  background-color: #282a2f !important;
+  box-shadow: #000000 0px 0px 5px !important;
+}
+
+.offcanvas-title{
+  color: #b54810 !important;
+}
+
+.dropdown-menu{
+  border:2px solid black !important;
+}
+.nav-item  {
+  background-color: #282a2f!important;
+  transition: color 0.3s ease;
+  
+}
+.nav-item :hover {
+  border-radius: 5px 5px 5px 5px;
+  transition: border 0.3s ease;
+
+  background-color: #3d3132 !important;
+}
+.dropdown-item:hover{
+  background-color: #3d3132 !important;
+  text-decoration: none !important;
+  color: #b54810 !important;
+}
+
+
+.nav-link {
+  color: #bdc1c7 !important;
+}
+
+.nav-link:hover {
+  color: #b54810 !important;
+  text-decoration: none !important;
+}
+
 

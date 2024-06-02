@@ -65,12 +65,15 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    # Add whitenoise middleware after the security middleware                             
+    # Add whitenoise middleware after the security middleware   
+                              
     'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
+   "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "project_cc.middlewares.CSRFMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -129,9 +132,17 @@ FILE_UPLOAD_MAX_MEMORY_SIZE=2500000 #Padrão 2,5MB
 
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'pt'
 
-TIME_ZONE = 'UTC'
+LANGUAGES=(
+    ('pt', u'Português'),
+    ('en', u'Inglês'),
+    ('es', u'Espanhol'),
+)
+LOCALE_PATHS=(
+    os.path.join(BASE_DIR, 'locale/'),
+)
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 

@@ -27,7 +27,7 @@
 
 # Conecta-Cesar
 
-Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está sendo desenvolvida como parte da disciplina de Fundamentos de Software (FDS) para estabelecer uma conexão mais eficaz entre os alunos, professoras e a própria instituição de ensino. Enquanto já existe um sistema semelhante em vigor, porém que não vem agradando os alunos, este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
+Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está sendo desenvolvida como parte da disciplina de Fundamentos de Software (FDS) para estabelecer uma conexão mais eficaz nas escolas entre os alunos, professoras e a própria instituição de ensino. Este novo projeto, chamado **Conecta-Cesar**, visa principalmente aprimorar a praticidade e a experiência do usuário.
 
 ## ⚙️ Principais Funcionalidades
 
@@ -35,8 +35,8 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
 - **Boletim:** Visualização de notas para os alunos, e lançamento das notas pelos professores.
 - **Gerenciamento de Faltas:** Onde os alunos podem ver suas faltas e os professores gerenciarem as mesmas.
 - **Certificados:** Os alunos podem armazenar seus certificados e calcular a quantidade de horas extras realizadas.
-- **Compatibilidade:** Nossa plataforma será compatível tanto para computadores, quanto dispositivos móveis através de um aplicativo.
-- **Acompanhamento do Progresso Acadêmico:** Incluindo gráficos que auxiliam os alunos na análise do desempenho individual e coletivo.
+- **Compatibilidade:** Nossa plataforma será compatível tanto para computadores, quanto dispositivos móveis através do site.
+- **Acompanhamento do Progresso Acadêmico:** Incluindo gráficos que auxiliam os alunos na análise do desempenho individual.
 
 ## ⚙ Tecnologias Utilizadas
 
@@ -144,7 +144,7 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     >
   </li>
   <li>
-    <a  href="https://youtu.be/XLIJzpYkGxY"
+    <a  href="https://youtu.be/B0mTDGin588"
       >ScreenCast - Uso do Sistema</a
     >
   </li>
@@ -159,12 +159,12 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     >
   </li>
   <li>
-    <a  href="https://youtu.be/Dzw1E2DsxVE"
+    <a  href="https://youtu.be/KFibTU-0CS8"
       >ScreenCast - Deployment e Build</a
     >
   </li>
   <li>
-    <a  href="https://youtu.be/j_EwXFhZmps"
+    <a  href="https://youtu.be/a3wLo2k0VZ8"
       >ScreenCast - Testes E2E</a
     >
   </li>

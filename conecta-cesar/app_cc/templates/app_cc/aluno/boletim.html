@@ -1,10 +1,19 @@
 ﻿{% extends "app_cc/aluno/main.html" %}
+{% load i18n %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
 
-  <div class="container">
-    <h2 class="text-center mb-4" style="font-size: 32px; font-weight: lighter;">DISCIPLINAS</h2>
-    
+  <div>
+    <h2 class="text-center mb-4 bold-text orange-text">{% trans "DISCIPLINAS" %}</h2>
+    <div class="text-end mt-3">
+      
+          <a class="grade-button" id="link_boletim"  href="{% url 'variacao_notas' %} "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+          </svg></a> 
+      
+  </div>
     {% for disciplina, nota_instance in disciplinas_com_notas %}
     <div class="grade-container">
       <h5>{{ disciplina }}</h5>
@@ -13,20 +22,15 @@
           {% if nota_instance %}
             <h5>{{ nota_instance.valor }}</h5> <!-- Mostrar o valor da nota -->
           {% else %}
-            <h5>Nenhuma nota registrada</h5>
+            <h5>{% trans "Nenhuma nota registrada" %}</h5>
           {% endif %}
         </p>
       </div>
     </div>
     {% empty %}
-    <p>Nenhuma disciplina encontrada.</p>
+    <p>{% trans "Nenhuma disciplina encontrada." %}</p>
     {% endfor %}
     
   </div>
 
-  <div class="text-end mt-3">
-    <button class="orange-button">
-        <a id="link_boletim" href="{% url 'variacao_notas' %} ">Variações de notas</a> 
-    </button>
-</div>
 {% endblock content %}
