@@ -36,12 +36,12 @@ python -m venv venv
 
 Para ativar o ambiente virtual:
 
-# No Windows:
+### No Windows:
 ```
 .\venv\Scripts\activate
 ```
 
-# No macOS/Linux:
+### No macOS/Linux:
 ```
 source venv/bin/activate
 ```
@@ -51,15 +51,26 @@ Com o ambiente virtual ativado dentro da mesma pasta, instale as dependências n
 ```
 pip install -r requirements.txt
 ```
-### 5. Execute o Servidor de Desenvolvimento
-Finalmente, para iniciar o servidor de desenvolvimento, execute:
+### 5. Execute as migrações:
+realize as migrações no banco usando: 
 ```
-python manage.py runserver
+python ./manage.py makemigrations
+```
+E depois
+```
+python ./manage.py migrate
+```
+### 6. Execute o Servidor de Desenvolvimento
+Finalmente, para iniciar o servidor de desenvolvimento, execute:
+
+
+```
+python ./manage.py runserver
 ```
 
 Agora, você deve ser capaz de acessar o aplicativo em seu navegador, normalmente o servidor local é http://127.0.0.1:8000/.
 
-### 6. Contribuindo com Código
+### 7. Contribuindo com Código
 
 Recomendamos o uso do Visual Studio Code (VSCode) para desenvolver o projeto. Para abrir o projeto no VSCode, siga os passos abaixo:
 
