@@ -18,8 +18,9 @@ Antes de começar, certifique-se de ter o seguinte instalado na sua máquina:
 ### 1. Clone o Repositório
 
 Abra seu terminal e navegue até o diretório onde deseja clonar o repositório. Em seguida, execute o comando abaixo:
-
+```
 git clone https://github.com/MigueldsBatista/conecta-cesar.git
+```
 
 ### 2. Navegue até o Diretório do Projeto
 Use o comando
