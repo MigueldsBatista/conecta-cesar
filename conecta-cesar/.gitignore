@@ -9,7 +9,7 @@ __pycache__/
 local_settings.py
 db.sqlite3-journal
 
-
+#
 ###Cypress
 # Ignorar arquivos de módulos do Node.js
 node_modules    
