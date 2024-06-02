@@ -68,7 +68,7 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid #555;
+    border: none;
     border-radius: 20px;
     background-color: #3a3b3f;
     color: #fff;
