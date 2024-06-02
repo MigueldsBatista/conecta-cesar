@@ -185,6 +185,59 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
 
 </details>
 
+<details>
+<summary>Entrega 4</summary>
+<ul>
+  <li>
+    <a  href="https://youtu.be/IFTt5GIn-f0"
+      >ScreenCast Lo-Fi</a
+    >
+  </li>
+ <li>
+    <a  href="https://www.figma.com/file/1bqw5G2PKniOytyCujdKn5/FDS1?type=design&node-id=0%3A1&mode=design&t=68hMQEzQnMPQzem2-1"
+      >Protótipo Lo-Fi no Figma</a
+    >
+  </li>
+  <li>
+    <a  href="https://youtu.be/TigCc1ubQOI"
+      >ScreenCast - Uso do Sistema</a
+    >
+  </li>
+ <li>
+    <a  href="https://docs.google.com/document/d/1ljz8ROeIYSIZLIOdjvwuQpQeAy53GX0e1S5-C4grJJ4/edit?usp=sharing"
+      >Relatórios de Pair Programming</a
+    >
+  </li>
+  <li>
+    <a  href="Mídia/Diagramas"
+      >Diagrama de Atividades</a
+    >
+  </li>
+  <li>
+    <a  href="https://youtu.be/VmHkqD9c84o"
+      >ScreenCast - Deployment e Build</a
+    >
+  </li>
+  <li>
+    <a  href="https://youtu.be/oV7axIPnxnI"
+      >ScreenCast - Testes E2E</a
+    >
+  </li>
+
+   <li>
+    <a  href="Mídia/Quadro Sprint 3.png"
+      >Quadro Sprint 3</a
+    >
+  </li>
+
+   <li>
+      <a href="Mídia/BTO entrega 4.png">BugTracker Aberto</a> <a href="Mídia/BTC entrega 4.png">BugTracker Fechado</a>
+
+  </li>
+</ul>
+
+
+</details>
 ## 👩‍💻 Membros
 
 <ul>
