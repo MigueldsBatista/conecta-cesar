@@ -242,6 +242,7 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
 
 
 </details>
+
 ## 👩‍💻 Membros
 
 <ul>
