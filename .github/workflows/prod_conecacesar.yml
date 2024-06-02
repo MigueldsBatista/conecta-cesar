@@ -31,6 +31,9 @@ jobs:
         run: |
           cd conecta-cesar
           pip install -r requirements.txt
+          npm init -y
+          npm install
+          npm install cypress --save -include=dev 
           npm ci
           cd ..
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
