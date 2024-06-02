@@ -79,6 +79,8 @@ class Evento(models.Model):
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
 
+    
+
     def __str__(self):
         return f"{self.titulo} - {self.data}"
     

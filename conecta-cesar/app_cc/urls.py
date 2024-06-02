@@ -23,6 +23,7 @@ urlpatterns = [
     path('professor/frequenciap/', views.frequenciap, name='frequenciap'),
     path('professor/calendariop/', views.calendariop, name='calendariop'),
     path('professor/avisosp/', views.avisosp, name='avisosp'),
+    path('professor/avisosp/<int:aviso_id>/', views.detalhe_avisop, name='detalhe_avisop'),
     path('professor/slidesp', views.slidesp, name="slidesp"),
     path('professor/relatoriosp/', views.relatoriop, name="relatoriosp")
 ]

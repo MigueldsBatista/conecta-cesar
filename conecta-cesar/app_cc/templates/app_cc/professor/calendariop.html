@@ -66,7 +66,6 @@
     {% endfor %}
 </div>
 
-<div class="event-container">
     <div id="eventForm" class="form-container" style="display: none;">
         <form method="post" id="addEventForm">
             {% csrf_token %}
@@ -77,10 +76,10 @@
             <textarea id="descricao" name="descricao"></textarea><br>
 
             <label for="data">{% trans "Data" %}:</label><br>
-            <input type="date" name="data" id="data" required><br>
+            <div class="horario-input"><input type="date" name="data" id="data" required><br></div>
 
-            <label for="horario">{% trans "Horário" %}:</label><br>
-            <input type="time" id="horario" name="horario"><br>
+            <label class"light-orange-text" for="horario">{% trans "Horário" %}:</label><br>
+            <div class="horario-input"><input  type="time" id="horario" name="horario"></div><br>
 
             <label for="disciplina">{% trans "Disciplina" %}:</label>
             <select name="disciplina" id="disciplina_input" required>
@@ -102,97 +101,98 @@
             </button>
         </form>
     </div>
-
-    
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const days = document.querySelectorAll('.days div');
-    const eventForm = document.getElementById('eventForm');
-
-    days.forEach(day => {
-        day.addEventListener('dblclick', function() {
-            eventForm.style.display = 'block';
-            eventForm.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-});
-    
-    const events = {{ eventos_json|safe }};
-    const date = new Date();
-    const dateBr = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
-
-    const renderCalendar = () => {
-        date.setDate(1);
-        const monthDays = document.querySelector(".days");
-        const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-        const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
-        const firstDayIndex = date.getDay();
-        const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
-        const nextDays = 7 - lastDayIndex - 1;
-
-        const months = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ];
-
-        document.querySelector(".date h1").innerHTML = months[date.getMonth()];
-        document.querySelector(".date p").innerHTML = new Date().toLocaleDateString('pt-BR', dateBr);
-        document.querySelector(".date h2").innerHTML = date.getFullYear();
-
-        let days = "";
-
-        for (let x = firstDayIndex; x > 0; x--) {
-            days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
-        }
-
-        for (let i = 1; i <= lastDay; i++) {
-            const dayDate = new Date(date.getFullYear(), date.getMonth(), i);
-            const formattedDate = dayDate.toISOString().split('T')[0];
-            const isToday = i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear();
-
-            let dayClass = isToday ? "today" : "";
-
-            if (events.some(event => event.data === formattedDate)) {
-                dayClass += " event-day";
-            }
-
-            days += `<div class="${dayClass}" data-date="${formattedDate}">${i}</div>`;
-        }
-
-        for (let j = 1; j <= nextDays; j++) {
-            days += `<div class="next-date">${j}</div>`;
-        }
-
-        monthDays.innerHTML = days;
-
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const days = document.querySelectorAll('.days div');
             const eventForm = document.getElementById('eventForm');
+            const dateInput = document.getElementById('data');
         
             days.forEach(day => {
                 day.addEventListener('dblclick', function() {
+                    const selectedDate = day.getAttribute('data-date');
+                    dateInput.value = selectedDate;
                     eventForm.style.display = 'block';
                     eventForm.scrollIntoView({ behavior: 'smooth' });
                 });
             });
         
-
+            document.getElementById('addEventForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Aqui você pode adicionar a lógica de envio do formulário
+                // Após o envio, role de volta para o topo da página
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         });
-
-    };
-
-    document.querySelector(".prev").addEventListener("click", () => {
-        date.setMonth(date.getMonth() - 1);
+        
+        const events = {{ eventos_json|safe }};
+        const date = new Date();
+        const dateBr = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+        
+        const renderCalendar = () => {
+            date.setDate(1);
+            const monthDays = document.querySelector(".days");
+            const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+            const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+            const firstDayIndex = date.getDay();
+            const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
+            const nextDays = 7 - lastDayIndex - 1;
+        
+            const months = [
+                "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+            ];
+        
+            document.querySelector(".date h1").innerHTML = months[date.getMonth()];
+            document.querySelector(".date p").innerHTML = new Date().toLocaleDateString('pt-BR', dateBr);
+            document.querySelector(".date h2").innerHTML = date.getFullYear();
+        
+            let days = "";
+        
+            for (let x = firstDayIndex; x > 0; x--) {
+                days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
+            }
+        
+            for (let i = 1; i <= lastDay; i++) {
+                const dayDate = new Date(date.getFullYear(), date.getMonth(), i);
+                const formattedDate = dayDate.toISOString().split('T')[0];
+                const isToday = i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear();
+        
+                let dayClass = isToday ? "today" : "";
+        
+                if (events.some(event => event.data === formattedDate)) {
+                    dayClass += " event-day";
+                }
+        
+                days += `<div class="${dayClass}" data-date="${formattedDate}">${i}</div>`;
+            }
+        
+            for (let j = 1; j <= nextDays; j++) {
+                days += `<div class="next-date">${j}</div>`;
+            }
+        
+            monthDays.innerHTML = days;
+        
+            const daysElements = document.querySelectorAll(".days div");
+            daysElements.forEach(day => {
+                day.addEventListener('dblclick', () => {
+                    const selectedDate = day.getAttribute('data-date');
+                    document.getElementById('data').value = selectedDate;
+                    document.getElementById('eventForm').style.display = 'block';
+                    document.getElementById('eventForm').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        };
+        
+        document.querySelector(".prev").addEventListener("click", () => {
+            date.setMonth(date.getMonth() - 1);
+            renderCalendar();
+        });
+        
+        document.querySelector(".next").addEventListener("click", () => {
+            date.setMonth(date.getMonth() + 1);
+            renderCalendar();
+        });
+        
         renderCalendar();
-    });
-
-    document.querySelector(".next").addEventListener("click", () => {
-        date.setMonth(date.getMonth() + 1);
-        renderCalendar();
-    });
-
-    renderCalendar();
-</script>
-{% endblock %}
+        </script>
+        {% endblock %}

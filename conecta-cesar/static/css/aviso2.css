@@ -6,13 +6,17 @@ p{
     color:#fff;
     text-align:center;
 }
+.aviso-data{
+    color: #837979;
+}
+
 /*botão de voltar reciclado do de download*/
-.download-button {
+.return-button {
     width: 40px;
     height: 40px;
     color: white;
     border-radius: 50%;
-    background-color: #993399;
+    background-color: #b54810 !important;
     border: none;
     font-weight: 600;
     display: flex;
@@ -35,21 +39,21 @@ p{
     fill: white;
   }
   
-  .download-button:hover {
+  .return-button:hover {
     width: 120px;
     border-radius: 50px;
     transition-duration: 0.3s;
     align-items: center;
   }
   
-  .download-button:hover .edit-svgIcon {
+  .return-button:hover .edit-svgIcon {
     width: 20px;
     transition-duration: 0.3s;
     transform: translateY(60%);
   
   }
   
-  .download-button::before {
+  .return-button::before {
     display: none;
     content: "Voltar";
     color: white;
@@ -57,7 +61,7 @@ p{
     font-size: 2px;
   }
   
-  .download-button:hover::before {
+  .return-button:hover::before {
     display: block;
     padding-right: 10px;
     font-size: 13px;

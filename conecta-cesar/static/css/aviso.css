@@ -1,126 +1,51 @@
-﻿/*DEFINIR UM TAMANHO PADRÃO PARA AS IMAGENS*/
-h3 span{
-    color: #b54810;
-}
-
-.container {
-    all: unset !important;
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    color: #bdc1c7;
-}
-.container h3{
-    color: #b54810 !important;
-   
-}
-
-
-
-.news-carousel {
-    border-radius: 20px !important;
-    margin: 20px auto;
-    width: 50%;
+﻿.news-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
 }
 
 .news-item {
-    background-color: #2c2e33;
-    border-radius: 20px !important;
-    overflow: hidden;
-    margin: 25px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    padding: 10px;
+  background: #3a3b3f;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 30%;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .news-item img {
-    border-radius: 20px !important;
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: 300px; /* Defina uma altura fixa */
+  object-fit: cover; /* Faz com que a imagem cubra a área, cortando o excesso */
+
 }
 
-.news-item h3 {
-    
-    padding: 10px;
-    font-size: 18px;
-    color: #333;
+.news-item h2 {
+  font-size: 1.2em;
+  margin: 10px 0;
+  padding: 0 10px;
+  color: #fff;
 }
-/*botão de "leia mais"*/
+
 .news-item a {
-    display: block;
-    padding: 10px;
-    color: #fff;
-    text-decoration: none;
-    margin: 10px 0;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-
-
-.news-item p {
-    padding: 10px;
-    font-size: 14px;
-    color: #666;
+.news-item .date {
+  color: #777;
+  font-size: 0.9em;
+  margin: 10px 0;
 }
-/*botão de leia mais*/
-.readmore-btn {
-    width: fit-contentd;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background-color: rgb(186, 125, 255);
-    border: none;
-    border-radius: 10px;
-    padding: 0px 15px;
-    gap: 0px;
-    transition: all 0.4s;
+
+@media only screen and (max-width: 768px) {
+  .news-item {
+      width: 100%;
   }
-  .book-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    position: relative;
-    width: 45px;
-    height: 100%;
-  }
-  .book-wrapper .book-page {
-    width: 50%;
-    height: auto;
-    position: absolute;
-  }
-  .readmore-btn:hover .book-page {
-    animation: paging 0.4s linear infinite;
-    transform-origin: left;
-  }
-  .readmore-btn:hover {
-    background-color: rgb(159, 74, 255);
-  }
-  @keyframes paging {
-    0% {
-      transform: rotateY(0deg) skewY(0deg);
-    }
-    50% {
-      transform: rotateY(90deg) skewY(-20deg);
-    }
-    100% {
-      transform: rotateY(180deg) skewY(0deg);
-    }
-  }
-  .text {
-    width: 105px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 15px;
-    color: rgb(255, 255, 255);
-  }
-  
+}
