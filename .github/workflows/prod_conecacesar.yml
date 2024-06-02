@@ -31,6 +31,7 @@ jobs:
         run: |
           cd conecta-cesar
           pip install -r requirements.txt
+          npm init -y
           npm ci
           cd ..
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
