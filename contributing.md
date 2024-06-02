@@ -52,11 +52,11 @@ Com o ambiente virtual ativado dentro da mesma pasta, instale as dependências n
 pip install -r requirements.txt
 ```
 ### 5. Execute as migrações:
-realize as migrações no banco usando: 
+Realize as migrações no banco usando: 
 ```
 python ./manage.py makemigrations
 ```
-E depois
+Em seguida
 ```
 python ./manage.py migrate
 ```
