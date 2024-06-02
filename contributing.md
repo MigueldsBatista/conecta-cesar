@@ -36,12 +36,12 @@ python -m venv venv
 
 Para ativar o ambiente virtual:
 
-No Windows:
+# No Windows:
 ```
 .\venv\Scripts\activate
 ```
 
-No macOS/Linux:
+# No macOS/Linux:
 ```
 source venv/bin/activate
 ```
@@ -63,7 +63,7 @@ Agora, você deve ser capaz de acessar o aplicativo em seu navegador, normalment
 
 Recomendamos o uso do Visual Studio Code (VSCode) para desenvolver o projeto. Para abrir o projeto no VSCode, siga os passos abaixo:
 
-Abra o VSCode.
+# Abra o VSCode.
 Clique em File > Open Folder... e selecione o diretório do projeto conecta-cesar.
 Certifique-se de que o ambiente virtual esteja ativado no terminal do VSCode.
 
@@ -76,22 +76,22 @@ git checkout -b minha-nova-feature
 ```
 
 Faça suas mudanças.
-Commit suas mudanças:
+# Commit suas mudanças:
 ```
 git commit -m "Adicionar nova feature"
 ```
 
-Push para a branch:
+# Push para a branch:
 ```
 git push origin minha-nova-feature
 ```
 
-Abra um Pull Request.
+# Abra um Pull Request.
 
 ### Processo de Revisão
 Nossa equipe irá analisar todos os pull requests. Apenas aqueles que forem coerentes e estiverem alinhados com os objetivos do projeto serão aprovados.
 
-Dúvidas?
+# Dúvidas?
 Se tiver qualquer dúvida, sinta-se à vontade para abrir uma issue.
 
 
