@@ -18,13 +18,11 @@ describe('Test Suite - Setup and Tests', () => {
   before(() => {
     // Renomeia o banco de dados existente, se houver
     cy.exec('if [ -f db.sqlite3 ]; then mv db.sqlite3 db_backup.sqlite3; fi', { failOnNonZeroExit: false });
-    
     cy.exec("cd ..", { failOnNonZeroExit: false }); // Sobe um diretório
     cy.exec("cd ..", { failOnNonZeroExit: false }); // Sobe um diretório
     cy.exec("rm db.sqlite3", { failOnNonZeroExit: false }); // Remove banco de dados existente
     cy.exec("python3 manage.py makemigrations", { failOnNonZeroExit: false }); // Executa migração do banco de dados
     cy.exec("python3 manage.py migrate", { failOnNonZeroExit: false }); // Executa migração do banco de dados
-    cy.exec("python3 manage.py tests", { failOnNonZeroExit: false });
   });
 
 
@@ -44,6 +42,16 @@ describe('Test Suite - Setup and Tests', () => {
 describe('Test Suite for Professors', () => {
   // Loga no início de cada teste como "professor1"
   beforeEach(() => {
+    cy.exec("python3 manage.py delete_tests", { failOnNonZeroExit: false }).then((result) => {
+      // Verifica se o comando foi executado com sucesso
+      expect(result.code).to.eq(0);
+    });
+    
+    // Cria novos dados de teste
+    cy.exec("python3 manage.py tests", { failOnNonZeroExit: false }).then((result) => {
+      // Verifica se o comando foi executado com sucesso
+      expect(result.code).to.eq(0);
+    });
     cy.visit('http://127.0.0.1:8000/pt/auth/login/');
     cy.get('#login-input').type('professor1'); // Nome de usuário
     cy.get(':nth-child(3) > .form-text-input > #password-input').type('123'); // Senha
@@ -123,30 +131,43 @@ describe('Test Suite for Professors', () => {
 
     cy.get('#navbar-link').click(); 
     cy.get('#turmas-dropdown > .nav-link').click(); 
-    cy.get('#sala-link').click(); // Acessa disciplinas
+    cy.get('#sala-link').click(); // Acessa area do prof
+
+    cy.get("#file-input").attachFile("failFile.unk");//Envia um unk e  nao deve funcionar
+    cy.get('#slide_titulo_input').type("titulo")
+    cy.get('#slide_descricao_input').type("descricao")
+    cy.get('#disciplina-input').select("Disciplina 1")
+    cy.get(".send").click();
+    cy.get('.alert').within(() => {
+      cy.contains('Tipo de arquivo não permitido.').should('be.visible');
+    })
+
+
     cy.get("#file-input").attachFile("fotoTeste.png");//Envia uma foto png e deve funcionar
     cy.get('#slide_titulo_input').type("titulo")
     cy.get('#slide_descricao_input').type("descricao")
     cy.get('#disciplina-input').select("Disciplina 1")
     cy.get(".send").click();
-    cy.get('.alert').should('be.visible')
-
-    cy.get("#file-input").attachFile("fotoTeste.png");//Envia um pdf e deve funcionar
+    cy.get('.alert').within(() => {
+      cy.contains('Documento salvo com sucesso.').should('be.visible');
+    })
+    cy.get("#file-input").attachFile("pdfTeste.pdf");//Envia um pdf e deve funcionar
     cy.get('#slide_titulo_input').type("titulo")
     cy.get('#slide_descricao_input').type("descricao")
     cy.get('#disciplina-input').select("Disciplina 1")
     cy.get(".send").click();
-    cy.get('.alert').should('be.visible')
-
+    cy.get('.alert').within(() => {
+      cy.contains('Documento salvo com sucesso.').should('be.visible');
+    })
 
     //envia sem um arquivo e deve funcionar
     cy.get('#slide_titulo_input').type("titulo")
     cy.get('#slide_descricao_input').type("descricao")
     cy.get('#disciplina-input').select("Disciplina 1")
     cy.get(".send").click();
-    cy.get('.alert').should('be.visible')
-
-
+    cy.get('.alert').within(() => {
+      cy.contains('Documento salvo com sucesso.').should('be.visible');
+    })
 
 
   });
@@ -154,7 +175,7 @@ describe('Test Suite for Professors', () => {
   it('Caso de teste Calendário do Professor', () => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const month = String(today.getMonth() + 1).padStart(2, '0'); 
     const day = String(today.getDate()).padStart(2, '0');
     const currentDate = `${year}-${month}-${day}`; // Formato YYYY-MM-DD
 
@@ -230,6 +251,14 @@ describe('Test Suite for Professors', () => {
 describe('Test Suite for Students', () => {
   // Loga o aluno antes de cada teste como "aluno1"
   beforeEach(() => {
+    cy.exec("python3 manage.py delete_tests", { failOnNonZeroExit: false }).then((result) => {
+      // Verifica se o comando foi executado com sucesso
+      expect(result.code).to.eq(0);
+    });
+    
+    cy.exec("python3 manage.py tests", { failOnNonZeroExit: false }).then((result) => {
+      expect(result.code).to.eq(0);
+    });
     cy.visit('http://127.0.0.1:8000/pt/auth/login/');
     cy.get('#login-input').type('aluno1'); // Nome de usuário
     cy.get(':nth-child(3) > .form-text-input > #password-input').type('123'); // Senha
@@ -286,9 +315,25 @@ describe('Test Suite for Students', () => {
 
   });
 
+  it('Caso de teste Sala de aula do Aluno', () => {
+
+    cy.get('#navbar-link').click();
+    cy.get('#sala-link').click(); 
+
+    cy.get('.slide-box').within(() => {
+      cy.contains('Disciplina 1').should('be.visible');
+      cy.contains('titulo').should('be.visible');//Dados devem bater com o que foi criado no comando tests
+      cy.contains('slide e2e').should('be.visible');
+
+    })
+
+
+    });
+
+
   it('Caso de teste Perfil do Aluno', () => {
     cy.get('#navbar-link').click(); 
-    cy.get(':nth-child(4) > .nav-link').click(); // Acessa o perfil
+    cy.get('#perfil-link').click(); // Acessa o perfil
     
     cy.get('.send').click();//Tenta clicar no botão de enviar arquivo sem nenhum arquivo
     cy.get('.alert').within(() => {
@@ -328,7 +373,7 @@ describe('Test Suite for Students', () => {
 
   it('Caso de teste Horas extras do Aluno', () => {
     cy.get('#navbar-link').click(); 
-    cy.get(':nth-child(5) > .nav-link').click(); // Acessa Horas extras
+    cy.get('#hora-link').click(); // Acessa Horas extras
 
     cy.get('.send').click()//Enviar
     cy.get('.alert').should('not.exist')
@@ -370,9 +415,9 @@ describe('Test Suite for Students', () => {
 
     });    
   });
-  it('Diario do Aluno', () => {
+  it('Caso de teste Diario do Aluno', () => {
     cy.get('#navbar-link').click(); 
-    cy.get(':nth-child(6) > .nav-link').click(); 
+    cy.get('#diario-link').click(); 
     cy.get('.list-group > :nth-child(1)')
   });  
 });

@@ -450,7 +450,7 @@ def slidesp(request):
         if file:
             ext_permitidas = ('.jpg', '.jpeg', '.png', '.pdf', '.pptx', '.docx')
             if not file.name.lower().endswith(ext_permitidas):
-                messages.error(request, _("Tipo de arquivo não permitido (Tipos aceitos: '.jpg', '.jpeg', '.png', '.pdf', '.pptx', '.docx')."))
+                messages.error(request, _("Tipo de arquivo não permitido."))
                 return redirect("slidesp")
 
             ext = file.name.split('.')[-1]

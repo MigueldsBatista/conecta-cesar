@@ -9,11 +9,11 @@ __pycache__/
 local_settings.py
 db.sqlite3-journal
 
-
+#
 ###Cypress
 # Ignorar arquivos de módulos do Node.js
 node_modules    
-*.json
+#*.json desativado por agora
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.

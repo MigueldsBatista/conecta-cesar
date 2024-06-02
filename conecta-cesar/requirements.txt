@@ -9,4 +9,3 @@ tzdata
 whitenoise
 django-role-permissions
 pillow
-
