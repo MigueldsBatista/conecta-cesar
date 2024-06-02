@@ -14,6 +14,7 @@
     padding: 20px;
 }
 
+
 .slide-box {
     border-radius: 20px;
     background-color: #3a3b3f;
@@ -28,6 +29,11 @@
 @media  only screen and (max-width: 768px) {
     .slide-container {width: 95%;}
     .slide-box{margin-bottom: 5%;}
+
+    .slide-box img{
+        width: 30px;
+        height: 30px; /* Defina uma altura fixa */
+    }
 }
 .slide-header a{
     color: #bbb !important;
@@ -35,7 +41,9 @@
 }
 
 .slide-box img{
-    width: 20%;
+    width: 80px;
+    height: 80px; /* Defina uma altura fixa */
+    object-fit: cover; /* Faz com que a imagem cubra a área, cortando o excesso */
 }
 .slide-box:hover {
     transform: scale(1.05);

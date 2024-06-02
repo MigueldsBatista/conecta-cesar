@@ -4,6 +4,17 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/slidesp.css' %}" type="text/css">
 <link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
+{% if messages %}
+<div>
+    {% for message in messages %}
+        <div 
+            class="alert alert-{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}danger{% elif 'warning' in message.tags %}warning{% else %}info{% endif %}  fade show" 
+            role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
 
     <h1 class="white-color text-center bold-text">Área do <span class="orange-text">Professor</span></h1>
 

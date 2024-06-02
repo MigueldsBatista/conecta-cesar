@@ -82,7 +82,7 @@
             <div class="horario-input"><input  type="time" id="horario" name="horario"></div><br>
 
             <label for="disciplina">{% trans "Disciplina" %}:</label>
-            <select name="disciplina" id="disciplina_input" required>
+            <select name="disciplina" id="disciplina" required>
                 {% for disciplina in disciplinas %}
                     <option value="{{ disciplina.id }}">{{ disciplina.nome }}</option>
                 {% endfor %}
@@ -108,7 +108,7 @@
             const dateInput = document.getElementById('data');
         
             days.forEach(day => {
-                day.addEventListener('dblclick', function() {
+                day.addEventListener('click', function() {
                     const selectedDate = day.getAttribute('data-date');
                     dateInput.value = selectedDate;
                     eventForm.style.display = 'block';
@@ -116,12 +116,6 @@
                 });
             });
         
-            document.getElementById('addEventForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                // Aqui você pode adicionar a lógica de envio do formulário
-                // Após o envio, role de volta para o topo da página
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
         });
         
         const events = {{ eventos_json|safe }};

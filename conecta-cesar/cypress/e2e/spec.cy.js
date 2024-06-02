@@ -54,9 +54,16 @@ describe('Test Suite for Professors', () => {
   });
 
   it('Caso de teste Página Inicial do Professor', () => {
-      cy.get('.navbar-toggler-icon').click();
-      cy.get('#inicio-link').click();
 
+      cy.get('.news-item').within(() => {
+        cy.contains('E2E aviso').should('be.visible');//corresponde se o titulo corresponde ao mesmo que criamos no comando tests
+      }); 
+      
+      cy.get('.news-item > .orange-text').click()
+  
+      cy.get('.container > :nth-child(2)').within(() => {
+        cy.contains('testes automatizados').should('be.visible');//testa se a descrição do nosso aviso criado no comando tests corresponde com a descrição do aviso da página
+      }); 
 
       //Faltando
   });
@@ -153,8 +160,8 @@ describe('Test Suite for Professors', () => {
 
     cy.get('#navbar-link').click(); 
     cy.get('#calendario-link').click(); 
-    cy.get('.today').click();//Clica Dia atual que deve ser igual a data atual
-    cy.get('.today').click();//Clica Dia atual que deve ser igual a data atual
+    cy.get('.today').click();//O dia atual deve estar em destaque
+    
 
 
     cy.get("#titulo").type("titulo")
@@ -231,21 +238,31 @@ describe('Test Suite for Students', () => {
   });
 
   it('Caso de teste Página Principal do Aluno', () => {
-    cy.get('#navbar-link').click(); 
-    cy.get('#home-link').click();
-    //cy.get(':nth-child(1) > .d-flex > a > .readmore-btn').click();
-    //cy.get('.download-button').click();
+
+
+      cy.get('.news-item').within(() => {
+      cy.contains('E2E aviso').should('be.visible');//corresponde se o titulo corresponde ao mesmo que criamos no comando tests
+    }); 
+    
+    cy.get('.news-item > .orange-text').click()
+    cy.get('.container > :nth-child(2)').within(() => {
+      cy.contains('testes automatizados').should('be.visible');//testa se a descrição do nosso aviso criado no comando tests corresponde com a descrição do aviso da página
+    }); 
   });
 
   it('Caso de teste Calendário do Aluno', () => {
-    //cy.visit('http://127.0.0.1:8000/pt/app/aluno/calendario/');
-    //cy.get(".today").click();
+    cy.visit('http://127.0.0.1:8000/pt/app/aluno/calendario/');
+    cy.get(".today").click();
 
-    
-    
+    cy.get('.custom-event-details > :nth-child(1)').within(() => {
+      cy.contains('Disciplina 1').should('be.visible');//o evento deve estar associado a disciplina criada no evento
+      cy.contains('evento e2e').should('be.visible');
+    })
+
   });
 
   it('Caso de teste Boletim do Aluno', () => {
+
     cy.get('#navbar-link').click(); 
     cy.get('#avaliacao-link').click(); 
     cy.get('#boletim-link').click();

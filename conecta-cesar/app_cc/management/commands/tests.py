@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from app_cc.models import Turma, Professor, Disciplina, Aluno, Diario, Nota, Falta,Aviso
+from app_cc.models import Turma, Professor, Disciplina, Aluno, Diario, Nota, Falta,Aviso, Evento
 from rolepermissions.roles import assign_role
 from project_cc.roles import Professor as ProfessorRole, Aluno as AlunoRole
 from django.db.utils import IntegrityError
@@ -67,8 +67,16 @@ class Command(BaseCommand):
                 corpo = "testes automatizados"
             )
             
+            Evento.objects.create(
+                titulo = "titulo",
+                descricao = "evento e2e",
+                horario = "12:30",
+                disciplina = disciplina,
+                professor = professor,
+                data = date.today()
+            )
                     
-            self.stdout.write(self.style.SUCCESS('Dados de teste criados com sucesso: Professor, Turma, Disciplina, Aluno, Diário, Nota , Aviso, Faltas Superusuário'))
+            self.stdout.write(self.style.SUCCESS('Dados de teste criados com sucesso: Professor, Turma, Disciplina, Aluno, Diário, Nota , Aviso, Evento Faltas Superusuário'))
         except IntegrityError as e:
             self.stdout.write(self.style.ERROR(f'Erro de integridade, os seguintes dados já existem no banco de dados: {str(e)}'))
         except Exception as e:
