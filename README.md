@@ -231,8 +231,12 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
   </li>
 
    <li>
-      <a href="Mídia/BTO entrega 4.png">BugTracker Aberto</a> <a href="Mídia/BTC entrega 4.png">BugTracker Fechado</a>
+      BugTracker<a href="Mídia/BTO entrega 4.png">(Aberto)</a> <a href="Mídia/BTC entrega 4.png">(Fechado)</a>
 
+  </li>
+
+  <li>
+    <a href="contributing.md">Contributing - Instruções para montar o ambiente</a>
   </li>
 </ul>
 
