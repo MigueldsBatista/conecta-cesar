@@ -1,10 +1,6 @@
 # Contribuindo para o Projeto Conecta Cesar 🤝
 
-Bem-vindo ao projeto Conecta Cesar! Estamos empolgados em ter você contribuindo para o desenvolvimento desta plataforma incrível para o universo escolar. Antes de começar, por favor, leia este guia para entender como você pode contribuir de maneira eficaz.
-
-# Contribuindo para o Projeto
-
-Obrigado por considerar contribuir para o nosso projeto! Siga as instruções abaixo para configurar o ambiente de desenvolvimento.
+Bem-vindo ao projeto Conecta Cesar! Obrigado por considerar contribuir para o nosso projeto! Siga as instruções abaixo para configurar o ambiente de desenvolvimento.
 
 ## Pré-requisitos
 
@@ -12,6 +8,7 @@ Antes de começar, certifique-se de ter o seguinte instalado na sua máquina:
 
 - [Python](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/downloads)
+-[VScode](https://code.visualstudio.com/download)
 
 ## Passos para Configuração
 
