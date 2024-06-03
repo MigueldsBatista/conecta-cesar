@@ -238,6 +238,10 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
   <li>
     <a href="contributing.md">Contributing - Instruções para montar o ambiente</a>
   </li>
+
+  <li>
+    <a href="https://www.canva.com/design/DAGGwVP83Gg/rkINph97rREksVJHYxlHqw/edit">Apresentação Final</a>
+  </li>
 </ul>
 
 
