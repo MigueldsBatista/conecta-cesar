@@ -8,7 +8,7 @@ Antes de começar, certifique-se de ter o seguinte instalado na sua máquina:
 
 - [Python](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/downloads)
--[VScode](https://code.visualstudio.com/download)
+- [VScode](https://code.visualstudio.com/download)
 
 ## Passos para Configuração
 
