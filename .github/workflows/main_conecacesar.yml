@@ -1,0 +1,62 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+# More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
+
+name: Build and deploy Python app to Azure Web App - conecacesar
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python version
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.12'
+
+      - name: Create and start virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+      
+      - name: Install dependencies
+        run: |
+          cd conecta-cesar
+          pip install -r requirements.txt
+          npm init -y
+          npm install
+          npm install cypress --save -include=dev 
+          npm ci
+          cd ..
+      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      - name: Run local server
+        run: |
+          cd conecta-cesar
+          python manage.py migrate
+          python manage.py runserver &
+          sleep 5
+          npx cypress run
+
+      - name: Cleaning testing files
+        run: |
+          cd conecta-cesar/
+          rm db.sqlite3
+          rm .env
+          rm cypress.config.js
+          rm package-lock.json
+          rm package.json
+          rm -rf cypress
+          rm -rf node_modules
+          cd ..
+          
+      
+
+          
