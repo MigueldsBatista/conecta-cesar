@@ -168,10 +168,7 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
       >ScreenCast - Testes E2E</a
     >
   </li>
-  
-<li>
-  <a href="https://youtu.be/sqvrm4nSu80">ScreenCast - pipeline testes na main</a>
-</li>
+
 
    <li>
     <a  href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/Quadro%20Sprint%202.png"
@@ -227,6 +224,10 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
       >ScreenCast - Testes E2E</a
     >
   </li>
+
+<li>
+  <a href="https://youtu.be/sqvrm4nSu80">ScreenCast - pipeline testes na main</a>
+</li>
 
    <li>
     <a  href="Mídia/Quadro Sprint 3.png"
