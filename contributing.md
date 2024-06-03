@@ -81,7 +81,7 @@ crie um Fork do repositório.
 Clone seu fork localmente.
 Crie uma branch para sua modificação:
 ```
-git checkout -b minha-nova-feature
+git checkout -b nova-feature
 ```
 
 Faça suas mudanças.
@@ -92,7 +92,7 @@ git commit -m "Adicionar nova feature"
 
 # Push para a branch:
 ```
-git push origin minha-nova-feature
+git push origin nova-feature
 ```
 
 # Abra um Pull Request.
