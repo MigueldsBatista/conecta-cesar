@@ -699,6 +699,15 @@ def detalhe_avisop(request, aviso_id):
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def boletimp(request):
+    
+    alunos = AlunoModel.objects.all()  
+    alunos_notas = []
+    for aluno in alunos:
+        notas = aluno.notas.all()
+        alunos_notas.extend(notas)
+    print(alunos_notas)
+
+
     # Obtém o objeto ProfessorModel do usuário logado
     professor = ProfessorModel.objects.get(usuario=request.user)
     # Obter todas as disciplinas associadas ao professor

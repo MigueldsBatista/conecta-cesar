@@ -9,3 +9,4 @@ tzdata
 whitenoise
 django-role-permissions
 pillow
+django-debug-toolbar

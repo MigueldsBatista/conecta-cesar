@@ -13,7 +13,7 @@ urlpatterns = [
     path('aluno/calendario/', views.calendario, name='calendario'),
     path('aluno/variacao_notas/', views.variacao_notas, name='variacao_notas'),
     path('aluno/hora_extra/', views.hora_extra, name='hora_extra'),
-    path('aluno/slides', views.slides, name="slides"),
+    path('aluno/slides/', views.slides, name="slides"),
 
 
     # Rotas para Professores
@@ -24,6 +24,6 @@ urlpatterns = [
     path('professor/calendariop/', views.calendariop, name='calendariop'),
     path('professor/avisosp/', views.avisosp, name='avisosp'),
     path('professor/avisosp/<int:aviso_id>/', views.detalhe_avisop, name='detalhe_avisop'),
-    path('professor/slidesp', views.slidesp, name="slidesp"),
+    path('professor/slidesp/', views.slidesp, name="slidesp"),
     path('professor/relatoriosp/', views.relatoriop, name="relatoriosp")
 ]
