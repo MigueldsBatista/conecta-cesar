@@ -209,3 +209,12 @@ class ToDoItem(models.Model):
 
     def __str__(self):
         return self.content
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+class Review(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    data_ocorrencia = models.DateField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.title
