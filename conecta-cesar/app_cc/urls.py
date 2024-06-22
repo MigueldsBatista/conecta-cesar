@@ -19,6 +19,8 @@ urlpatterns = [
     path('todo/<int:list_id>/add/', views.add_todo_item, name='add_todo_item'),
     path('todo/<int:list_id>/delete/', views.delete_todo_list, name='delete_todo_list'),
     path('todo/item/<int:item_id>/delete/', views.delete_todo_item, name='delete_todo_item'),
+    path('aluno/vocorrencias/', views.vocorrencias, name='vocorrencias'),
+
 
 
     # Rotas para Professores
@@ -30,5 +32,7 @@ urlpatterns = [
     path('professor/avisosp/', views.avisosp, name='avisosp'),
     path('professor/avisosp/<int:aviso_id>/', views.detalhe_avisop, name='detalhe_avisop'),
     path('professor/slidesp/', views.slidesp, name="slidesp"),
-    path('professor/relatoriosp/', views.relatoriop, name="relatoriosp")
+    path('professor/relatoriosp/', views.relatoriop, name="relatoriosp"),
+    path('professor/ocorrenciasp/', views.ocorrenciasp, name="ocorrenciasp")
+
 ]
