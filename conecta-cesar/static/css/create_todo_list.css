@@ -1,0 +1,54 @@
+/* Estilização do título */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Estilização do formulário */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #3a3b3f; /* Cor de fundo do formulário */
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilização dos rótulos (labels) */
+form label {
+    color: #FFA500; /* Laranja */
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Estilização dos inputs */
+form input[type="text"] {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    border: 1px solid #555;
+    background-color: #2c2e33;
+    color: #fff;
+    width: 100%;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura */
+}
+
+/* Estilização do botão */
+form button[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #FFA500; /* Laranja */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #FF8C00; /* Laranja mais escura ao passar o mouse */
+}

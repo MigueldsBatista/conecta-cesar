@@ -40,11 +40,16 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
 
 ## ⚙ Tecnologias Utilizadas
 
-- **Linguagem de Programação:** O aplicativo é desenvolvido usando o Python, HMTL e CSS.
-- **Banco de Dados:** Utilizamos um banco de dados para armazenar informações de usuários, produtos, transações e outros dados relevante, usando o padrão do Django o SQLite no repositório local. Para o de deploy ultilizamos PostgressSQL 
-- **Framework de Desenvolvimento:** Utilizamos o Django, para acelerar o desenvolvimento e Boostrap na parte do frontend.
-- **Frontend:** A interface do usuário é desenvolvida utilizando tecnologias como HTML, CSS e o framework mencionando anteriormente, o Boostrap.
-- **Organização:** Para nos organizarmos e seguirmos os principios de desenvolvimento de software ultilizamos o jira
+- **Linguagem de Programação**:<br>![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+- **Banco de Dados**:<br>![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+
+
+- **Framework de Desenvolvimento**:<br>![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+
+- **Frontend**:<br>![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+
+- **Organização**:<br>![Jira](https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white)
 
 
 
@@ -169,6 +174,7 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     >
   </li>
 
+
    <li>
     <a  href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/Quadro%20Sprint%202.png"
       >Quadro Sprint 2</a
@@ -179,6 +185,72 @@ Bem vindo ao repositório do nosso projeto Conecta Cesar. Nossa plataforma está
     <a  href="https://github.com/MigueldsBatista/conecta-cesar/blob/main/Mídia/BugTracker%20Entrega%203.png"
       >BugTracker</a
     >
+  </li>
+</ul>
+
+
+</details>
+
+<details>
+<summary>Entrega 4</summary>
+<ul>
+  <li>
+    <a  href="https://youtu.be/IFTt5GIn-f0"
+      >ScreenCast Lo-Fi</a
+    >
+  </li>
+ <li>
+    <a  href="https://www.figma.com/file/1bqw5G2PKniOytyCujdKn5/FDS1?type=design&node-id=0%3A1&mode=design&t=68hMQEzQnMPQzem2-1"
+      >Protótipo Lo-Fi no Figma</a
+    >
+  </li>
+  <li>
+    <a  href="https://youtu.be/TigCc1ubQOI"
+      >ScreenCast - Uso do Sistema</a
+    >
+  </li>
+ <li>
+    <a  href="https://docs.google.com/document/d/1ljz8ROeIYSIZLIOdjvwuQpQeAy53GX0e1S5-C4grJJ4/edit?usp=sharing"
+      >Relatórios de Pair Programming</a
+    >
+  </li>
+  <li>
+    <a  href="Mídia/Diagramas"
+      >Diagrama de Atividades</a
+    >
+  </li>
+  <li>
+    <a  href="https://youtu.be/VmHkqD9c84o"
+      >ScreenCast - Deployment e Build</a
+    >
+  </li>
+  <li>
+    <a  href="https://youtu.be/oV7axIPnxnI"
+      >ScreenCast - Testes E2E</a
+    >
+  </li>
+
+<li>
+  <a href="https://youtu.be/sqvrm4nSu80">ScreenCast - pipeline testes na main</a>
+</li>
+
+   <li>
+    <a  href="Mídia/Quadro Sprint 3.png"
+      >Quadro Sprint 3</a
+    >
+  </li>
+
+   <li>
+      BugTracker<a href="Mídia/BTO entrega 4.png">(Aberto)</a> <a href="Mídia/BTC entrega 4.png">(Fechado)</a>
+
+  </li>
+
+  <li>
+    <a href="contributing.md">Contributing - Instruções para montar o ambiente</a>
+  </li>
+
+  <li>
+    <a href="https://www.canva.com/design/DAGGwVP83Gg/rkINph97rREksVJHYxlHqw/edit">Apresentação Final</a>
   </li>
 </ul>
 

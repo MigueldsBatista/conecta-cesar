@@ -1,7 +1,6 @@
 {
   "name": "conecta-cesar",
   "version": "1.0.0",
-  "description": "",
   "main": "cypress.config.js",
   "dependencies": {
     "acorn": "^8.11.3",
@@ -333,5 +332,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {},
+  "description": ""
 }

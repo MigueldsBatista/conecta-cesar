@@ -54,13 +54,14 @@ class Aluno(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name="aluno", null=True)
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE, related_name="alunos", null=True)
     email = models.EmailField(null=True, max_length=254)  # Garantir emails únicos
+    disciplinas = models.ManyToManyField(Disciplina, related_name="alunos")
     ra = models.CharField(max_length=10, unique=True, default=generate_unique_ra)
-    foto_perfil = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)  # Novo campo de foto de perfil
-
+    foto_perfil = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+    
+      # Novo campo de foto de perfil
      
      # Função explícita para RA
 
-    
     def __str__(self):
         return f"{self.usuario.username}"
 
@@ -78,7 +79,6 @@ class Evento(models.Model):
     horario = models.TimeField(blank=True, null=True)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
-
     
 
     def __str__(self):
@@ -192,3 +192,20 @@ class FaltaRelatorio(models.Model):
 
     def __str__(self):
         return f"FaltaRelatorio: {self.aluno.usuario.username} - Faltas: {self.faltas}"
+
+class ToDoList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class ToDoItem(models.Model):
+    todo_list = models.ForeignKey(ToDoList, on_delete=models.CASCADE, related_name='items')
+    content = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.content

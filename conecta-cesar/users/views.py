@@ -13,23 +13,38 @@ from django.utils.translation import gettext as _
 
 
 
+# Cadastro de novo usuário
 def cadastro(request):
+    """
+    View function for user registration.
+
+    This function handles both GET and POST requests.
+    In case of a GET request, it renders the 'cadastro.html' template.
+    In case of a POST request, it creates a new user and assigns a role
+    based on the selected user type.
+    """
+
+    # The only way for the request to be a GET is if the user tries to access the registration page directly by typing the URL in the browser.
+    # In this case, we simply render the registration form.
     if request.method == 'GET':
         return render(request, 'cadastro.html')
+
     else:
+        # Get form data
         user_name = request.POST.get('username')
         user_email = request.POST.get('email')
         senha = request.POST.get('senha')
         user_type = request.POST.get('user_type')
 
-        # Verifica se já existe um usuário com esse nome
+        # Check if a user with the same name already exists
         if User.objects.filter(username=user_name).exists():
             messages.error(request, _("Já existe um usuário com esse nome"))
-            return redirect("cadastro")  # Redireciona para a mesma página
+            return redirect("cadastro")  # Redirect to the same page
 
-        # Se não existe, cria o usuário
+        # Create a new user
         user = User.objects.create_user(username=user_name, email=user_email, password=senha)
 
+        # Assign a role based on the selected user type
         if user_type == 'professor':
             assign_role(user, Professor)
             ProfessorModel.objects.create(usuario=user,  email=user_email)
@@ -40,9 +55,9 @@ def cadastro(request):
             messages.error(request, _("Papel do usuário não especificado. Selecione 'professor' ou 'aluno'."))
             return redirect("cadastro")
 
-        # Mensagem de sucesso
+        # Success message
         messages.success(request, _("Usuário cadastrado com sucesso. Agora faça login."))
-        return redirect("login")  # Redireciona para a página de login
+        return redirect("login")  # Redirect to the login page
 
 def login(request):
     if request.method == 'GET':
@@ -53,8 +68,11 @@ def login(request):
 
         user = authenticate(username=user_name, password=senha)
         if user:
+            # A função django-login é necessária para que o usuário seja considerado logado no sistema.
+            # A biblioteca Django mantém o estado do usuário logado usando um cookie.
+            # A função django-login cria e atualiza esse cookie para que o usuário seja considerado logado.
             django_login(request, user)
-        
+            
             if has_role(user, Professor):
                 return redirect("avisosp")  # URL da página do professor
             

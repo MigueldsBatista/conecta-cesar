@@ -127,6 +127,7 @@ describe('Test Suite for Professors', () => {
 
   });
 
+  
   it('Caso de teste Área do Professor', () => {
 
     cy.get('#navbar-link').click(); 

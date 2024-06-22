@@ -11,6 +11,9 @@ import os
 import json
 from django.utils.translation import gettext as _
 from django.core.exceptions import ObjectDoesNotExist
+from .models import ToDoItem, ToDoList
+from .forms import ToDoListForm 
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -699,6 +702,15 @@ def detalhe_avisop(request, aviso_id):
 #----------------------------------------------------------------------------------------------------------------    
 @has_role_or_redirect(Professor)
 def boletimp(request):
+    
+    alunos = AlunoModel.objects.all()  
+    alunos_notas = []
+    for aluno in alunos:
+        notas = aluno.notas.all()
+        alunos_notas.extend(notas)
+    print(alunos_notas)
+
+
     # Obtém o objeto ProfessorModel do usuário logado
     professor = ProfessorModel.objects.get(usuario=request.user)
     # Obter todas as disciplinas associadas ao professor
@@ -769,3 +781,79 @@ def boletimp(request):
         'app_cc/professor/boletimp.html',
         {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
     )
+
+def todo_list_view(request):
+    todo_lists = ToDoList.objects.all()  # Exemplo de obtenção de listas de tarefas
+    return render(request, 'app_cc/aluno/todo_list.html', {'todo_lists': todo_lists})
+
+@login_required
+def create_todo_list(request):
+    if request.method == 'POST':
+        form = ToDoListForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            ToDoList.objects.create(user=request.user, title=title)
+            return redirect('todo_list')  # Redireciona para a lista de tarefas após a criação
+    else:
+        form = ToDoListForm()
+
+    return render(request, 'app_cc/aluno/create_todo_list.html', {'form': form})
+
+    
+@login_required
+def add_todo_item(request, list_id):
+    todo_list = get_object_or_404(ToDoList, id=list_id)
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        ToDoItem.objects.create(todo_list=todo_list, content=content)
+        return redirect('todo_list')
+    return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+@login_required
+def delete_todo_list(request, list_id):
+    todo_list = get_object_or_404(ToDoList, id=list_id)
+    todo_list.delete()
+    return redirect('todo_list')
+
+@login_required
+def delete_todo_item(request, item_id):
+    item = get_object_or_404(ToDoItem, id=item_id)
+    item.delete()
+    return redirect('todo_list')

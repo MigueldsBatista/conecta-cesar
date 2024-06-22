@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
+from django.urls import re_path as url
 
 
 # Função para redirecionar para uma página específica ao acessar a página inicial
@@ -11,9 +12,15 @@ def homepage(request):
     return redirect('login')
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),  # Rotas para o administrador
 ]
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url('__debug__/', include(debug_toolbar.urls)),
+    ]
 
 urlpatterns += i18n_patterns(
     path('auth/', include('users.urls')),  # Incluindo URLs do app 'users'

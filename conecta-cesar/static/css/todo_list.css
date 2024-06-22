@@ -1,0 +1,81 @@
+/* Estilização para a página de To-Do Lists */
+
+/* Estilização do título */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Estilização da cor do texto branco */
+.white-color {
+    color: #fff;
+}
+
+/* Estilização da lista principal */
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Estilização do item da lista principal */
+.todo-list-item {
+    margin-bottom: 20px;
+    background-color: #3a3b3f;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilização do título da lista */
+.todo-list-item h2 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+/* Estilização dos itens da lista */
+.todo-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Estilização do item individual */
+.todo-item {
+    margin-bottom: 10px;
+    background-color: #2c2e33;
+    border-radius: 8px;
+    padding: 10px;
+    color: #fff;
+}
+
+/* Estilização dos botões de ação */
+.todo-action {
+    color: #FFA500;
+    margin-right: 10px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.todo-action:hover {
+    color: #e69500;
+}
+
+/* Estilização da mensagem quando não há listas */
+.no-lists-msg {
+    color: #fff;
+}
+
+/* Estilização do botão de criar nova lista */
+.create-list-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #FFA500;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.create-list-btn:hover {
+    background-color: #e69500;
+}
