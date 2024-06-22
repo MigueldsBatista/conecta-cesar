@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
+from .models import Review, Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -14,7 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import ToDoItem, ToDoList
 from .forms import ToDoListForm 
 from django.contrib.auth.decorators import login_required
-
+from django.utils.dateparse import parse_date
 
 
 def gerar_relatorio(disciplinas, professor):
@@ -857,3 +857,34 @@ def delete_todo_item(request, item_id):
     item = get_object_or_404(ToDoItem, id=item_id)
     item.delete()
     return redirect('todo_list')
+    
+@has_role_or_redirect(Aluno)
+def vocorrencias(request):
+    reviews = Review.objects.all()  
+    print(reviews)
+    return render(request, 'app_cc/aluno/vocorrencias.html', {'reviews': reviews})
+@has_role_or_redirect(Professor)
+def ocorrenciasp(request):
+    alunos = AlunoModel.objects.all()  # Recupera todos os alunos cadastrados
+    print("nao entra no debug")
+    if request.method == "POST":
+        print("teste")
+        title = request.POST.get('title')
+        print(title)
+        content = request.POST.get('content')
+        print(content)
+        aluno_id = request.POST.get('aluno')
+        print(f"id do aluno: {aluno_id}")
+        data_ocorrencia_str = request.POST.get('data_ocorrencia')  # Captura a data da ocorrência como string
+        data_ocorrencia = parse_date(data_ocorrencia_str)  # Converte a string da data para um objeto date
+        print(f"data da ocorrencia: {data_ocorrencia}")
+
+        if title and content and aluno_id and data_ocorrencia:
+            aluno = AlunoModel.objects.get(id=aluno_id)  # Obtém o objeto Aluno correspondente ao ID
+            Review.objects.create(title=title, content=content, aluno=aluno, data_ocorrencia=data_ocorrencia)
+            messages.success(request, 'Ocorrência enviada com sucesso.')
+            return redirect('ocorrenciasp')  # Redireciona para a página desejada
+    alunos = AlunoModel.objects.all()
+    return render(request, 'app_cc/professor/ocorrenciasp.html', {'alunos': alunos})
+
+
