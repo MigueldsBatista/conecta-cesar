@@ -1,0 +1,38 @@
+{% extends 'app_cc/aluno/main.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/todo_list.css' %}" type="text/css">
+
+<header>
+    <h1 class="text-center white-color">To-Do Lists</h1>
+</header>
+
+{% if todo_lists %}
+    <ul class="todo-list">
+        {% for todo_list in todo_lists %}
+        <li class="todo-list-item">
+            <h2>{{ todo_list.title }}</h2>
+            <a href="{% url 'add_todo_item' todo_list.id %}" class="todo-action">Adicionar Item</a>
+            <a href="{% url 'delete_todo_list' todo_list.id %}" class="todo-action">Deletar Lista</a>
+            <ul class="todo-items">
+                {% for item in todo_list.items.all %}
+                <li class="todo-item">
+                    {{ item.content }}
+                    <a href="{% url 'delete_todo_item' item.id %}" class="todo-action">Deletar Item</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+        <li>
+            <a href="{% url 'create_todo_list' %}" class="create-list-btn">Criar Nova Lista</a>
+        </li>
+    </ul>
+{% else %}
+    <p class="no-lists-msg">Sem Listas</p>
+    <a href="{% url 'create_todo_list' %}" class="create-list-btn">Criar Nova Lista</a>
+{% endif %}
+
+{% endblock %}
