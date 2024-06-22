@@ -1,0 +1,22 @@
+/* CSS para o botão de criar post */
+
+.create-post-btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.create-post-btn:hover {
+    background-color: #0056b3;
+}
+
+body{
+    color: white;
+}
+
