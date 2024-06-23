@@ -1,22 +1,98 @@
-/* CSS para o botão de criar post */
+.forum-header {
+    text-align: center;
+    margin: 20px 0;
+}
 
-.create-post-btn {
-    display: inline-block;
+.botao_forum {
+    background-color: #007bff; /* Cor azul */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+    display: inline-block; /* Mantém o comportamento de linha, permitindo a centralização */
+}   
+
+.botao_forum:hover {
+    background-color: #0056b3; /* Cor azul mais escura para o hover */
+    transform: scale(1.05); /* Aumenta ligeiramente o tamanho do botão */
+}
+
+body {
+    color: white;
+}
+
+.forum-form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control, .form-control-file {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn {
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
+    border: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
 }
 
-.create-post-btn:hover {
+.btn:hover {
+    background-color: #0056b3;
+}
+.ver-mais {
+    color: blue;
+    cursor: pointer;
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.download-btn:hover {
     background-color: #0056b3;
 }
 
-body{
-    color: white;
+.post {
+    background-color: #5c5c5c; /* Um tom de cinza claro */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Opcional: adiciona uma sombra leve para melhorar a distinção */
 }
 
+.delete-btn {
+    background-color: #ff4d4d; /* Cor vermelha para indicar ação de apagar */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000; /* Cor mais escura ao passar o mouse */
+}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Review, Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
+from .models import Post, Review, Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -15,6 +15,9 @@ from .models import ToDoItem, ToDoList
 from .forms import ToDoListForm 
 from django.contrib.auth.decorators import login_required
 from django.utils.dateparse import parse_date
+from django.utils import timezone
+from django.contrib.auth.models import User
+
 
 
 def gerar_relatorio(disciplinas, professor):
@@ -810,42 +813,6 @@ def add_todo_item(request, list_id):
     return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
 @login_required
 def delete_todo_list(request, list_id):
     todo_list = get_object_or_404(ToDoList, id=list_id)
@@ -887,4 +854,39 @@ def ocorrenciasp(request):
     alunos = AlunoModel.objects.all()
     return render(request, 'app_cc/professor/ocorrenciasp.html', {'alunos': alunos})
 
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+@login_required
+def forum_view(request):
+    posts = Post.objects.all()
+    return render(request, 'app_cc/aluno/forum.html', {'posts': posts})
+
+
+@login_required
+def create_post(request):
+    if request.method == "POST":
+        titulo = request.POST.get('titulo')
+        corpo = request.POST.get('corpo')
+        autor_id = request.user.id  # Assume que o usuário está autenticado
+        publicado_em = timezone.now()
+        pdf = request.FILES.get('pdf')  # Assume que o formulário tem um campo de upload de arquivo para o pdf
+
+        if titulo and corpo and autor_id:
+            autor = User.objects.get(id=autor_id)
+            Post.objects.create(titulo=titulo, corpo=corpo, autor=autor, publicado_em=publicado_em, pdf=pdf)
+            messages.success(request, 'Post criado com sucesso.')
+            return redirect('forum')  # Substitua 'forum_novo' pelo nome da sua URL de listagem de posts
+        else:
+            messages.error(request, 'Erro ao criar o post. Por favor, preencha todos os campos.')
+
+    return render(request, 'app_cc/aluno/forum_novo.html')
+
+@login_required
+def apagar_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.user == post.autor:
+        post.delete()
+        messages.success(request, 'Post apagado com sucesso.')
+    else:
+        messages.error(request, 'Você não tem permissão para apagar este post.')
+    return redirect('forum')  # Substitua 'forum' pelo nome da sua URL de listagem de posts

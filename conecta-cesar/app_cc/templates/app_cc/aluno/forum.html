@@ -1,0 +1,48 @@
+{% extends 'app_cc/aluno/main.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/forum.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+<div class="forum-header">
+    <a href="{% url 'create_post' %}" class="botao_forum">+ Criar Novo Post</a>
+</div>
+
+<div class="forum-posts">
+    {% for post in posts %}
+        <div class="post">
+            <h3>{{ post.titulo }}</h3>
+            <p>
+                {% if post.corpo|length > 50 %}
+                    {{ post.corpo|slice:":50" }}
+                    <span class="more" style="display:none;">{{ post.corpo|slice:"50:" }}</span>
+                    <a href="javascript:void(0);" onclick="this.previousElementSibling.style.display='inline'; this.style.display='none';" class="ver-mais">ver mais</a>
+                {% else %}
+                    {{ post.corpo }}
+                {% endif %}
+            </p>
+            {% if post.pdf %}
+                <a href="{{ post.pdf.url }}" download class="download-btn">Download</a>
+            {% endif %}
+            {% if user.is_authenticated and post.autor == user %}
+             <form action="{% url 'apagar_post' post.id %}" method="POST">
+             {% csrf_token %}
+            <button type="submit" class="delete-btn">Apagar Post</button>
+            </form>
+        {% endif %}
+            <small>Postado por: {{ post.autor.username }}, em {{ post.publicado_em|date:"d/m/Y H:i" }}</small>
+        </div>
+    {% empty %}
+        <p>Nenhum post foi encontrado.</p>
+    {% endfor %}
+</div>
+{% endblock %}
