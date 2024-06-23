@@ -228,14 +228,36 @@ class Post(models.Model):
     corpo = models.TextField()
     publicado_em = models.DateTimeField(default=timezone.now)
     pdf = models.FileField(upload_to="forum_pdfs/", null=True, blank=True)
+    curtidas = models.ManyToManyField(User, through='Like', related_name='curtidas_post')
 
     def delete(self, *args, **kwargs):
-        # Exclui o arquivo do sistema de arquivos
         if self.pdf:
             self.pdf.delete(save=False)
-        super(Post, self).delete(*args, **kwargs)  # Chama o método delete original para excluir o objeto do banco de dados
+        super(Post, self).delete(*args, **kwargs)
+
     def __str__(self):
         return f"{self.titulo} por {self.autor.username} em {self.publicado_em.strftime('%Y-%m-%d %H:%M')}"
 
+    def curtir(self, user):
+        like, created = Like.objects.get_or_create(usuario=user, post=self)
+        if not created:
+            like.delete()  
+            return False
+        return True
+
+    def total_curtidas(self):
+        return self.curtidas.count()
+
     class Meta:
         ordering = ['-publicado_em']
+
+class Like(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('usuario', 'post')  
+
+    def __str__(self):
+        return f'{self.usuario.username} curtiu {self.post.titulo}'

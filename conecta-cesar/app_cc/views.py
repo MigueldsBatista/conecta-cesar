@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Post, Review, Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
+from .models import Like, Post, Review, Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -875,7 +875,7 @@ def create_post(request):
             autor = User.objects.get(id=autor_id)
             Post.objects.create(titulo=titulo, corpo=corpo, autor=autor, publicado_em=publicado_em, pdf=pdf)
             messages.success(request, 'Post criado com sucesso.')
-            return redirect('forum')  # Substitua 'forum_novo' pelo nome da sua URL de listagem de posts
+            return redirect('forum')  
         else:
             messages.error(request, 'Erro ao criar o post. Por favor, preencha todos os campos.')
 
@@ -889,4 +889,14 @@ def apagar_post(request, post_id):
         messages.success(request, 'Post apagado com sucesso.')
     else:
         messages.error(request, 'Você não tem permissão para apagar este post.')
-    return redirect('forum')  # Substitua 'forum' pelo nome da sua URL de listagem de posts
+    return redirect('forum')  
+
+@login_required
+def curtir_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if post.curtir(request.user):
+        pass
+    else:
+        pass
+    return redirect('forum')  
+
