@@ -24,3 +24,11 @@
     font-size: 0.9em;
     margin: 10px 0;
   }
+  .vazio{
+    background-color: #ff0000;
+    color:black  !important;
+    padding:8px;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 5px;
+}

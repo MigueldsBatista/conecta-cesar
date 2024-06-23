@@ -7,15 +7,17 @@
 <div>
     <h1 class="text-center white-color">Ocorrências</h1>
     <section class="caixa_de_ocorrencias white-color">
-        {% for review in reviews %}
-            {% if review.aluno.usuario == request.user %}
+        {% if user_reviews %}
+            {% for review in user_reviews %}
                 <div class="item_de_ocorrencia">
                     <h2>{{ review.title }}</h2>
                     <h4>{{ review.content }}</h4>
                     <p class="date">{{ review.data_ocorrencia }}</p>
                 </div>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <p class="vazio">Não tem nenhuma ocorrência.</p>
+        {% endif %}
     </section>
 </div>
 {% endblock %}
