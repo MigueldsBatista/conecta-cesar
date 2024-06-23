@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Post, Review, Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
+from .models import Like, Post, Review, Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -785,8 +785,10 @@ def boletimp(request):
         {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
     )
 
+@login_required
 def todo_list_view(request):
-    todo_lists = ToDoList.objects.all()  # Exemplo de obtenção de listas de tarefas
+    user = request.user
+    todo_lists = ToDoList.objects.filter(user=user)
     return render(request, 'app_cc/aluno/todo_list.html', {'todo_lists': todo_lists})
 
 @login_required
@@ -799,29 +801,26 @@ def create_todo_list(request):
             return redirect('todo_list')  # Redireciona para a lista de tarefas após a criação
     else:
         form = ToDoListForm()
-
     return render(request, 'app_cc/aluno/create_todo_list.html', {'form': form})
 
-    
 @login_required
 def add_todo_item(request, list_id):
-    todo_list = get_object_or_404(ToDoList, id=list_id)
+    todo_list = get_object_or_404(ToDoList, id=list_id, user=request.user)
     if request.method == 'POST':
         content = request.POST.get('content')
         ToDoItem.objects.create(todo_list=todo_list, content=content)
         return redirect('todo_list')
     return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
 
-
 @login_required
 def delete_todo_list(request, list_id):
-    todo_list = get_object_or_404(ToDoList, id=list_id)
+    todo_list = get_object_or_404(ToDoList, id=list_id, user=request.user)
     todo_list.delete()
     return redirect('todo_list')
 
 @login_required
 def delete_todo_item(request, item_id):
-    item = get_object_or_404(ToDoItem, id=item_id)
+    item = get_object_or_404(ToDoItem, id=item_id, todo_list__user=request.user)
     item.delete()
     return redirect('todo_list')
     
@@ -875,7 +874,7 @@ def create_post(request):
             autor = User.objects.get(id=autor_id)
             Post.objects.create(titulo=titulo, corpo=corpo, autor=autor, publicado_em=publicado_em, pdf=pdf)
             messages.success(request, 'Post criado com sucesso.')
-            return redirect('forum')  # Substitua 'forum_novo' pelo nome da sua URL de listagem de posts
+            return redirect('forum')  
         else:
             messages.error(request, 'Erro ao criar o post. Por favor, preencha todos os campos.')
 
@@ -889,4 +888,14 @@ def apagar_post(request, post_id):
         messages.success(request, 'Post apagado com sucesso.')
     else:
         messages.error(request, 'Você não tem permissão para apagar este post.')
-    return redirect('forum')  # Substitua 'forum' pelo nome da sua URL de listagem de posts
+    return redirect('forum')  
+
+@login_required
+def curtir_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if post.curtir(request.user):
+        pass
+    else:
+        pass
+    return redirect('forum')  
+
