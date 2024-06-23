@@ -1,0 +1,63 @@
+{% extends 'app_cc/aluno/main.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/forum.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}" type="text/css">
+<h1 class="text-center">Fórum</h1>
+{% if messages %} <div>     {% for message in messages %}         <div class="alert alert-{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}danger{% elif 'warning' in message.tags %}warning{% else %}info{% endif %} fade show" role="alert">             {{ message }}         </div>     {% endfor %} </div> {% endif %}
+
+<div class="forum-header">
+    <a href="{% url 'create_post' %}" class="botao_forum">+ Criar Novo Post</a>
+</div>
+
+<div class="forum-posts">
+    {% for post in posts %}
+        <div class="post">
+            <h3>{{ post.titulo }}</h3>
+            <p>
+                {% if post.corpo|length > 50 %}
+                    {{ post.corpo|slice:":50" }}
+                    <span class="more" style="display:none;">{{ post.corpo|slice:"50:" }}</span>
+                    <a href="javascript:void(0);" onclick="this.previousElementSibling.style.display='inline'; this.style.display='none';" class="ver-mais">ver mais</a>
+                {% else %}
+                    {{ post.corpo }}
+                {% endif %}
+            </p>
+            {% if post.pdf %}
+            <a href="{{ arquivo.archive.url }}" download class="download-button d-inline-flex align-items-center">
+                <div class="svg-wrapper-1">
+                  <div class="svg-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                      <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                      <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            {% endif %}
+            {% if user.is_authenticated and post.autor == user %}
+             <form action="{% url 'apagar_post' post.id %}" method="POST">
+             {% csrf_token %}
+             <input type="hidden" name="delete_file" value="{{ arquivo.id }}">
+             <button class="delete-button" onclick="return confirmDelete()">
+               <div class="svg-wrapper-1">
+                 <div class="svg-wrapper">
+                   <svg viewBox="0 0 16 16" class="bi bi-trash3-fill" fill="currentColor" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                   </svg>
+                 </div>
+               </div>
+             </button>
+            </form>
+        {% endif %}
+            <small>Postado por: {{ post.autor.username }}, em {{ post.publicado_em|date:"d/m/Y H:i" }}</small>
+        </div>
+    {% empty %}
+    <div class="vazio">
+        <p class="text-center">Nenhum post foi encontrado.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

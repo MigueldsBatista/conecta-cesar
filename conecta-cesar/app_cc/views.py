@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
+from .models import Post, Review, Disciplina, Nota, Diario, Professor as ProfessorModel, Aluno as AlunoModel, Falta, File, Evento, Aviso, Relatorio, ProfessorFile, Turma
 from rolepermissions.checkers import has_role
 from project_cc.roles import Professor, Aluno
 from django.contrib import messages
@@ -14,6 +14,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import ToDoItem, ToDoList
 from .forms import ToDoListForm 
 from django.contrib.auth.decorators import login_required
+from django.utils.dateparse import parse_date
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 
@@ -810,42 +813,6 @@ def add_todo_item(request, list_id):
     return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
 @login_required
 def delete_todo_list(request, list_id):
     todo_list = get_object_or_404(ToDoList, id=list_id)
@@ -857,3 +824,69 @@ def delete_todo_item(request, item_id):
     item = get_object_or_404(ToDoItem, id=item_id)
     item.delete()
     return redirect('todo_list')
+    
+@has_role_or_redirect(Aluno)
+def vocorrencias(request):
+    reviews = Review.objects.all()  
+    print(reviews)
+    return render(request, 'app_cc/aluno/vocorrencias.html', {'reviews': reviews})
+@has_role_or_redirect(Professor)
+def ocorrenciasp(request):
+    alunos = AlunoModel.objects.all()  # Recupera todos os alunos cadastrados
+    print("nao entra no debug")
+    if request.method == "POST":
+        print("teste")
+        title = request.POST.get('title')
+        print(title)
+        content = request.POST.get('content')
+        print(content)
+        aluno_id = request.POST.get('aluno')
+        print(f"id do aluno: {aluno_id}")
+        data_ocorrencia_str = request.POST.get('data_ocorrencia')  # Captura a data da ocorrência como string
+        data_ocorrencia = parse_date(data_ocorrencia_str)  # Converte a string da data para um objeto date
+        print(f"data da ocorrencia: {data_ocorrencia}")
+
+        if title and content and aluno_id and data_ocorrencia:
+            aluno = AlunoModel.objects.get(id=aluno_id)  # Obtém o objeto Aluno correspondente ao ID
+            Review.objects.create(title=title, content=content, aluno=aluno, data_ocorrencia=data_ocorrencia)
+            messages.success(request, 'Ocorrência enviada com sucesso.')
+            return redirect('ocorrenciasp')  # Redireciona para a página desejada
+    alunos = AlunoModel.objects.all()
+    return render(request, 'app_cc/professor/ocorrenciasp.html', {'alunos': alunos})
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+@login_required
+def forum_view(request):
+    posts = Post.objects.all()
+    return render(request, 'app_cc/aluno/forum.html', {'posts': posts})
+
+
+@login_required
+def create_post(request):
+    if request.method == "POST":
+        titulo = request.POST.get('titulo')
+        corpo = request.POST.get('corpo')
+        autor_id = request.user.id  # Assume que o usuário está autenticado
+        publicado_em = timezone.now()
+        pdf = request.FILES.get('pdf')  # Assume que o formulário tem um campo de upload de arquivo para o pdf
+
+        if titulo and corpo and autor_id:
+            autor = User.objects.get(id=autor_id)
+            Post.objects.create(titulo=titulo, corpo=corpo, autor=autor, publicado_em=publicado_em, pdf=pdf)
+            messages.success(request, 'Post criado com sucesso.')
+            return redirect('forum')  # Substitua 'forum_novo' pelo nome da sua URL de listagem de posts
+        else:
+            messages.error(request, 'Erro ao criar o post. Por favor, preencha todos os campos.')
+
+    return render(request, 'app_cc/aluno/forum_novo.html')
+
+@login_required
+def apagar_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.user == post.autor:
+        post.delete()
+        messages.success(request, 'Post apagado com sucesso.')
+    else:
+        messages.error(request, 'Você não tem permissão para apagar este post.')
+    return redirect('forum')  # Substitua 'forum' pelo nome da sua URL de listagem de posts

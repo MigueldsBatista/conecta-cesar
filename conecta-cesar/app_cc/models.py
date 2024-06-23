@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import random
+from django.utils import timezone
 
 # Modelo para Turmas
 
@@ -209,3 +210,32 @@ class ToDoItem(models.Model):
 
     def __str__(self):
         return self.content
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+class Review(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    data_ocorrencia = models.DateField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.title
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+class Post(models.Model):
+    autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    titulo = models.CharField(max_length=200)
+    corpo = models.TextField()
+    publicado_em = models.DateTimeField(default=timezone.now)
+    pdf = models.FileField(upload_to="forum_pdfs/", null=True, blank=True)
+
+    def delete(self, *args, **kwargs):
+        # Exclui o arquivo do sistema de arquivos
+        if self.pdf:
+            self.pdf.delete(save=False)
+        super(Post, self).delete(*args, **kwargs)  # Chama o método delete original para excluir o objeto do banco de dados
+    def __str__(self):
+        return f"{self.titulo} por {self.autor.username} em {self.publicado_em.strftime('%Y-%m-%d %H:%M')}"
+
+    class Meta:
+        ordering = ['-publicado_em']
