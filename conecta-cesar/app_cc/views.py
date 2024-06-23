@@ -785,8 +785,10 @@ def boletimp(request):
         {'disciplinas_com_turmas_e_alunos': disciplinas_com_turmas_e_alunos}
     )
 
+@login_required
 def todo_list_view(request):
-    todo_lists = ToDoList.objects.all()  # Exemplo de obtenção de listas de tarefas
+    user = request.user
+    todo_lists = ToDoList.objects.filter(user=user)
     return render(request, 'app_cc/aluno/todo_list.html', {'todo_lists': todo_lists})
 
 @login_required
@@ -799,29 +801,26 @@ def create_todo_list(request):
             return redirect('todo_list')  # Redireciona para a lista de tarefas após a criação
     else:
         form = ToDoListForm()
-
     return render(request, 'app_cc/aluno/create_todo_list.html', {'form': form})
 
-    
 @login_required
 def add_todo_item(request, list_id):
-    todo_list = get_object_or_404(ToDoList, id=list_id)
+    todo_list = get_object_or_404(ToDoList, id=list_id, user=request.user)
     if request.method == 'POST':
         content = request.POST.get('content')
         ToDoItem.objects.create(todo_list=todo_list, content=content)
         return redirect('todo_list')
     return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
 
-
 @login_required
 def delete_todo_list(request, list_id):
-    todo_list = get_object_or_404(ToDoList, id=list_id)
+    todo_list = get_object_or_404(ToDoList, id=list_id, user=request.user)
     todo_list.delete()
     return redirect('todo_list')
 
 @login_required
 def delete_todo_item(request, item_id):
-    item = get_object_or_404(ToDoItem, id=item_id)
+    item = get_object_or_404(ToDoItem, id=item_id, todo_list__user=request.user)
     item.delete()
     return redirect('todo_list')
     
