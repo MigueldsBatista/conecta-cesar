@@ -4,15 +4,8 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/forum.css' %}" type="text/css">
 <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
-{% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-            <div class="{{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
+{% if messages %} <div>     {% for message in messages %}         <div class="alert alert-{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}danger{% elif 'warning' in message.tags %}warning{% else %}info{% endif %} fade show" role="alert">             {{ message }}         </div>     {% endfor %} </div> {% endif %}
+
 <div class="forum-header">
     <a href="{% url 'create_post' %}" class="botao_forum">+ Criar Novo Post</a>
 </div>
