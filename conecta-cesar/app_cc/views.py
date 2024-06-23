@@ -826,9 +826,8 @@ def delete_todo_item(request, item_id):
     
 @has_role_or_redirect(Aluno)
 def vocorrencias(request):
-    reviews = Review.objects.all()  
-    print(reviews)
-    return render(request, 'app_cc/aluno/vocorrencias.html', {'reviews': reviews})
+    user_reviews = Review.objects.filter(aluno__usuario=request.user)
+    return render(request, 'app_cc/aluno/vocorrencias.html', {'user_reviews': user_reviews})
 @has_role_or_redirect(Professor)
 def ocorrenciasp(request):
     alunos = AlunoModel.objects.all()  # Recupera todos os alunos cadastrados
