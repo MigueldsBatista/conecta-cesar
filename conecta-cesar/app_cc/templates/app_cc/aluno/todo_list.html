@@ -20,7 +20,7 @@
                 {% for item in todo_list.items.all %}
                 <li class="todo-item">
                     {{ item.content }}
-                    <a href="{% url 'delete_todo_item' item.id %}" class="todo-action">Deletar Item</a>
+                    <a href="{% url 'delete_todo_item' item.id %}" class="todo-action">Item Concluído</a>
                 </li>
                 {% endfor %}
             </ul>
