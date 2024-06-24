@@ -12,7 +12,6 @@ import json
 from django.utils.translation import gettext as _
 from django.core.exceptions import ObjectDoesNotExist
 from .models import ToDoItem, ToDoList
-from .forms import ToDoListForm 
 from django.contrib.auth.decorators import login_required
 from django.utils.dateparse import parse_date
 from django.utils import timezone
@@ -794,23 +793,30 @@ def todo_list_view(request):
 @login_required
 def create_todo_list(request):
     if request.method == 'POST':
-        form = ToDoListForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data['title']
+        title = request.POST.get('title').strip()  # Obtém o título do POST e remove espaços em branco extras
+        if title:
             ToDoList.objects.create(user=request.user, title=title)
             return redirect('todo_list')  # Redireciona para a lista de tarefas após a criação
+        else:
+            # Caso o título esteja vazio, pode adicionar lógica para lidar com o erro ou retornar ao formulário
+            return render(request, 'app_cc/aluno/create_todo_list.html', {'error_message': 'Por favor, preencha o título.'})
     else:
-        form = ToDoListForm()
-    return render(request, 'app_cc/aluno/create_todo_list.html', {'form': form})
+        return render(request, 'app_cc/aluno/create_todo_list.html')
+
 
 @login_required
 def add_todo_item(request, list_id):
     todo_list = get_object_or_404(ToDoList, id=list_id, user=request.user)
     if request.method == 'POST':
-        content = request.POST.get('content')
-        ToDoItem.objects.create(todo_list=todo_list, content=content)
-        return redirect('todo_list')
-    return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
+        content = request.POST.get('content').strip()  # Obtém o conteúdo do POST e remove espaços em branco extras
+        if content:
+            ToDoItem.objects.create(todo_list=todo_list, content=content)
+            return redirect('todo_list')  # Redireciona para a lista de tarefas após a criação do item
+        else:
+            # Caso o conteúdo esteja vazio, pode adicionar lógica para lidar com o erro ou retornar ao formulário
+            return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list, 'error_message': 'Por favor, preencha o item.'})
+    else:
+        return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
 
 @login_required
 def delete_todo_list(request, list_id):
@@ -823,6 +829,7 @@ def delete_todo_item(request, item_id):
     item = get_object_or_404(ToDoItem, id=item_id, todo_list__user=request.user)
     item.delete()
     return redirect('todo_list')
+    
     
 @has_role_or_redirect(Aluno)
 def vocorrencias(request):
