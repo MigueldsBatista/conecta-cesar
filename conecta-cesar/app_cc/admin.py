@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from app_cc.models import Post, Review, Disciplina, Nota, Diario, Turma, Nota, Aluno
-from app_cc.models import  Professor, Falta, Evento, Aviso, Relatorio, NotaRelatorio, FaltaRelatorio, ProfessorFile, Atividade, AtividadeFeita
+from app_cc.models import *
 
 # Register your models here.
 admin.site.register(Professor)

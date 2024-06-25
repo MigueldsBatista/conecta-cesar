@@ -50,13 +50,9 @@ urlpatterns = [
     path('professor/slidesp/', views.slidesp, name="slidesp"),
     path('professor/relatoriosp/', views.relatoriop, name="relatoriosp"),
     path('professor/ocorrenciasp/', views.ocorrenciasp, name="ocorrenciasp"),
-     path('professor/cadastrar_atividades_professor/', views.cadastrar_atividades_professor, name="cadastrar_atividades_professor"),
-    path('professor/atividades_professor/', views.atividades_professor, name="atividades_professor")
-
-    path('professor/relatoriosp/', views.relatoriop, name="relatoriosp"),
-    path('professor/ocorrenciasp/', views.ocorrenciasp, name="ocorrenciasp"),
-
     path('professor/cadastrar_atividades_professor/', views.cadastrar_atividades_professor, name="cadastrar_atividades_professor"),
-    path('professor/atividades_professor/', views.atividades_professor, name="atividades_professor")
+    path('professor/atividades_professor/', views.atividades_professor, name="atividades_professor"),
+
+
 
 ]

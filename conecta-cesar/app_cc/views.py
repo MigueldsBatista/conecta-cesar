@@ -831,34 +831,7 @@ def delete_todo_item(request, item_id):
     item.delete()
     return redirect('todo_list')
     
-    
-@has_role_or_redirect(Aluno)
-def vocorrencias(request):
-    user_reviews = Review.objects.filter(aluno__usuario=request.user)
-    return render(request, 'app_cc/aluno/vocorrencias.html', {'user_reviews': user_reviews})
-@has_role_or_redirect(Professor)
-def ocorrenciasp(request):
-    alunos = AlunoModel.objects.all()  # Recupera todos os alunos cadastrados
-    print("nao entra no debug")
-    if request.method == "POST":
-        print("teste")
-        title = request.POST.get('title')
-        print(title)
-        content = request.POST.get('content')
-        print(content)
-        aluno_id = request.POST.get('aluno')
-        print(f"id do aluno: {aluno_id}")
-        data_ocorrencia_str = request.POST.get('data_ocorrencia')  # Captura a data da ocorrência como string
-        data_ocorrencia = parse_date(data_ocorrencia_str)  # Converte a string da data para um objeto date
-        print(f"data da ocorrencia: {data_ocorrencia}")
 
-        if title and content and aluno_id and data_ocorrencia:
-            aluno = AlunoModel.objects.get(id=aluno_id)  # Obtém o objeto Aluno correspondente ao ID
-            Review.objects.create(title=title, content=content, aluno=aluno, data_ocorrencia=data_ocorrencia)
-            messages.success(request, 'Ocorrência enviada com sucesso.')
-            return redirect('ocorrenciasp')  # Redireciona para a página desejada
-    alunos = AlunoModel.objects.all()
-    return render(request, 'app_cc/professor/ocorrenciasp.html', {'alunos': alunos})
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -1082,52 +1055,6 @@ def cadastrar_atividades_professor(request):
     else:
         raise Http404()
 
-@login_required
-def todo_list_view(request):
-    user = request.user
-    todo_lists = ToDoList.objects.filter(user=user)
-    return render(request, 'app_cc/aluno/todo_list.html', {'todo_lists': todo_lists})
-
-@login_required
-def create_todo_list(request):
-    if request.method == 'POST':
-        title = request.POST.get('title').strip()  # Obtém o título do POST e remove espaços em branco extras
-        if title:
-            ToDoList.objects.create(user=request.user, title=title)
-            return redirect('todo_list')  # Redireciona para a lista de tarefas após a criação
-        else:
-            # Caso o título esteja vazio, pode adicionar lógica para lidar com o erro ou retornar ao formulário
-            return render(request, 'app_cc/aluno/create_todo_list.html', {'error_message': 'Por favor, preencha o título.'})
-    else:
-        return render(request, 'app_cc/aluno/create_todo_list.html')
-
-
-@login_required
-def add_todo_item(request, list_id):
-    todo_list = get_object_or_404(ToDoList, id=list_id, user=request.user)
-    if request.method == 'POST':
-        content = request.POST.get('content').strip()  # Obtém o conteúdo do POST e remove espaços em branco extras
-        if content:
-            ToDoItem.objects.create(todo_list=todo_list, content=content)
-            return redirect('todo_list')  # Redireciona para a lista de tarefas após a criação do item
-        else:
-            # Caso o conteúdo esteja vazio, pode adicionar lógica para lidar com o erro ou retornar ao formulário
-            return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list, 'error_message': 'Por favor, preencha o item.'})
-    else:
-        return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
-
-@login_required
-def delete_todo_list(request, list_id):
-    todo_list = get_object_or_404(ToDoList, id=list_id, user=request.user)
-    todo_list.delete()
-    return redirect('todo_list')
-
-@login_required
-def delete_todo_item(request, item_id):
-    item = get_object_or_404(ToDoItem, id=item_id, todo_list__user=request.user)
-    item.delete()
-    return redirect('todo_list')
-    
     
 @has_role_or_redirect(Aluno)
 def vocorrencias(request):
