@@ -23,6 +23,8 @@ urlpatterns = [
     path('todo/<int:list_id>/delete/', views.delete_todo_list, name='delete_todo_list'),
     path('todo/item/<int:item_id>/delete/', views.delete_todo_item, name='delete_todo_item'),
     path('aluno/vocorrencias/', views.vocorrencias, name='vocorrencias'),
+    path('aluno/atividades/', views.aluno_atividades, name='aluno_atividades'),
+    path('aluno/atividade/<int:id>/', views.aluno_atividade, name='aluno_atividade'),
     
 
 
@@ -37,6 +39,8 @@ urlpatterns = [
     path('professor/avisosp/<int:aviso_id>/', views.detalhe_avisop, name='detalhe_avisop'),
     path('professor/slidesp/', views.slidesp, name="slidesp"),
     path('professor/relatoriosp/', views.relatoriop, name="relatoriosp"),
-    path('professor/ocorrenciasp/', views.ocorrenciasp, name="ocorrenciasp")
+    path('professor/ocorrenciasp/', views.ocorrenciasp, name="ocorrenciasp"),
+     path('professor/cadastrar_atividades_professor/', views.cadastrar_atividades_professor, name="cadastrar_atividades_professor"),
+    path('professor/atividades_professor/', views.atividades_professor, name="atividades_professor")
 
 ]
