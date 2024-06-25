@@ -14,16 +14,13 @@ admin.site.register(Evento)
 admin.site.register(Aviso)
 admin.site.register(Review)
 admin.site.register(Post)
-admin.site.register(Review)
-admin.site.register(Post)
 admin.site.register(Relatorio)
 admin.site.register(FaltaRelatorio)
 admin.site.register(NotaRelatorio)
 admin.site.register(ProfessorFile)
 admin.site.register(Atividade)
 admin.site.register(AtividadeFeita)
-admin.site.register(Atividade)
-admin.site.register(AtividadeFeita)
+
 
 
 
