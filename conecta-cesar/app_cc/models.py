@@ -261,3 +261,35 @@ class Like(models.Model):
 
     def __str__(self):
         return f'{self.usuario.username} curtiu {self.post.titulo}'
+
+class Atividade(models.Model):
+    turma = models.ForeignKey(Turma, on_delete=models.CASCADE, verbose_name='Turma')
+    professor = models.ForeignKey(Professor, on_delete=models.CASCADE, verbose_name='professor')
+    disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, verbose_name='Disciplina')
+    arquivo = models.FileField(upload_to="arquivos_atividades/%Y/%m/%d/", verbose_name='Arquivo', null=True, blank=True)
+    texto = models.TextField(default='Essa atividade não possui descrição.', verbose_name='Texto')
+    titulo = models.CharField(max_length=500, default='Essa atividade não possui título', verbose_name='Título')
+
+    class Meta:
+        verbose_name = 'Atividade'
+        verbose_name_plural = 'Atividades'
+
+    def __str__(self):
+        return f'{self.titulo} / {self.turma} / {self.disciplina}'
+    
+
+class AtividadeFeita(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, verbose_name='Aluno')
+    atividade = models.OneToOneField(Atividade, on_delete=models.CASCADE, verbose_name='Atividade')
+    conclusao = models.BooleanField(default=False, verbose_name='A atividade foi feita?')
+    arquivo = models.FileField(upload_to="atividades_alunos/%Y/%m/%d/", verbose_name='Arquivo')
+
+    class Meta:
+        verbose_name = 'Qual atividade foi feita?'
+        verbose_name_plural = 'Quais atividades foram feitas?'
+
+    def __str__(self):
+        if self.conclusao:
+            return f'A atividade: "{self.atividade}" foi realizada!'
+        else:
+            return f'A atividade: "{self.atividade}" NÃO foi realizada!'
