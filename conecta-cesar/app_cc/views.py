@@ -905,3 +905,178 @@ def curtir_post(request, post_id):
         pass
     return redirect('forum')  
 
+
+@login_required
+def aluno_atividades(request):
+    aluno = None
+    atividades = None
+    turma = None
+    if AlunoModel.objects.filter(usuario=request.user).exists():
+        aluno = AlunoModel.objects.get(usuario=request.user)
+        if aluno.turma:
+            turma = aluno.turma
+        atividades = Atividade.objects.filter(turma=aluno.turma)
+        
+        conclusao_atividade = []
+        for atividade in atividades:
+            if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True):
+                conclusao_atividade.append(True)
+            else:
+                conclusao_atividade.append(False)
+
+        _atividades = zip(atividades, conclusao_atividade)
+
+        if request.method != 'POST':
+            return render(request, 'app_cc/aluno/atividades.html', {
+                'zip': _atividades,
+                'aluno': aluno,
+                'turma': turma,
+            })
+        else:
+            filtro = request.POST.get('filtrar')
+            novas_atividades = []
+            conclusao_atividade2 = []
+
+            if filtro == 'T':
+                return redirect('aluno_atividades')
+
+            for atividade in atividades:
+                if filtro == 'S':
+                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True):
+                        novas_atividades.append(atividade)
+                        conclusao_atividade2.append(True)
+                else:
+                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=False) or not AtividadeFeita.objects.filter(atividade=atividade).exists():
+                        novas_atividades.append(atividade)
+                        conclusao_atividade2.append(False)
+
+            atividades_filtradas = list(zip(novas_atividades, conclusao_atividade2))
+            return render(request, 'app_cc/aluno/atividades.html', {
+                'zip': atividades_filtradas,
+                'aluno': aluno,
+                'turma': turma,
+            })
+    else:
+        raise Http404()
+
+@login_required
+def aluno_atividade(request, id):
+    if Atividade.objects.filter(id=id) and AlunoModel.objects.filter(usuario=request.user).exists():
+        atividade = Atividade.objects.get(id=id)
+        aluno = AlunoModel.objects.get(usuario=request.user)
+
+        atividadeFeita = False
+        if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True):
+            atividadeFeita = True
+
+        if request.method != 'POST':
+            return render(request, 'app_cc/aluno/atividade.html', {
+                'atividade': atividade,
+                'aluno': aluno,
+                'atividadeFeita': atividadeFeita,
+            })
+        
+        arquivo = request.FILES.get('arquivo')
+        if not atividadeFeita:
+            if arquivo:
+                obj = AtividadeFeita.objects.create(atividade=atividade, conclusao=True, arquivo=arquivo, aluno=aluno)
+                obj.save()
+            else:
+                messages.error(request, 'Envie o seu arquivo de resposta da atividade. É obrigatório.')
+                return render(request, 'app_cc/aluno/atividade.html', {
+                    'atividade': atividade,
+                    'aluno': aluno,
+                    'atividadeFeita': atividadeFeita,
+                })
+        
+        atividadeFeita = True
+        return render(request, 'app_cc/aluno/atividade.html', {
+            'atividade': atividade,
+            'aluno': aluno,
+            'atividadeFeita': atividadeFeita,
+        })
+
+    else:
+        raise Http404()
+
+
+@has_role_or_redirect(Professor)
+def atividades_professor(request):
+    if ProfessorModel.objects.filter(usuario=request.user).exists():
+        professor = ProfessorModel.objects.get(usuario=request.user)
+        atividades = Atividade.objects.filter(professor=professor)
+
+        _atividade = []
+        realizacao_atividades = []
+        print(atividades)
+        for atividade in atividades:
+            _atividade.append(atividade)
+            print(atividades)
+            x = list(AtividadeFeita.objects.filter(atividade=atividade))
+            if not x:
+                realizacao_atividades.append(False)
+            else:
+                realizacao_atividades.append(x)
+
+        _zip = list(zip(_atividade, realizacao_atividades))
+
+        return render(request, 'app_cc/professor/atividades_professor.html', {
+            'zip': _zip,
+            'professor': professor,
+        })
+    else:
+        raise Http404()
+
+@has_role_or_redirect(Professor)
+def cadastrar_atividades_professor(request):
+    if ProfessorModel.objects.filter(usuario=request.user).exists():
+        professor = ProfessorModel.objects.get(usuario=request.user)
+        turmas = Turma.objects.all()
+        disciplinas = Disciplina.objects.all()
+
+        if request.method != 'POST':
+            return render(request, 'app_cc/professor/cadastrar_atividade.html', {
+                'turmas': turmas,
+                'disciplinas': disciplinas,
+            })
+    
+        arquivo = request.FILES.get('arquivo', None)
+        turma = request.POST.get('turma')
+        disciplina = request.POST.get('disciplina')
+        titulo = request.POST.get('titulo')
+        texto = request.POST.get('texto')
+
+        if not Turma.objects.filter(nome=turma).exists():
+            messages.error(request, 'Essa turma não existe')
+            if request.method != 'POST':
+                return render(request, 'app_cc/professor/cadastrar_atividade.html', {
+                    'turmas': turmas,
+                    'disciplinas': disciplinas,
+                })
+            
+        turma = Turma.objects.get(nome=turma)
+
+        if not Disciplina.objects.filter(nome=disciplina).exists():
+            messages.error(request, 'Essa disciplina não existe')
+            if request.method != 'POST':
+                return render(request, 'app_cc/professor/cadastrar_atividade.html', {
+                    'turmas': turmas,
+                    'disciplinas': disciplinas,
+                })
+            
+        disciplina = Disciplina.objects.get(nome=disciplina)
+
+        atividade = Atividade.objects.create(turma=turma, 
+                                             disciplina=disciplina,
+                                             arquivo=arquivo, 
+                                             titulo=titulo, 
+                                             texto=texto,
+                                             professor=professor,
+                                            )
+        atividade.save()
+
+        messages.success(request, 'Atividade cadastrada com sucesso!')
+        return redirect('atividades_professor')
+
+    else:
+        raise Http404()
