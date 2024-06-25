@@ -1,0 +1,30 @@
+{% extends 'app_cc/aluno/main.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/create_todo_list.css' %}" type="text/css">
+
+<header>
+    <h1 class="text-center white-color">Criar Lista</h1>
+</header>
+
+<form method="post" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <label for="title">Título:</label>
+    <input type="text" id="title" name="title">
+    <button type="submit">Criar</button>
+</form>
+
+<script>
+function validateForm() {
+    var title = document.getElementById('title').value.trim();
+    if (title === '') {
+        alert('Por favor, preencha o título.');
+        return false;  // Impede o envio do formulário
+    }
+    return true;  // Permite o envio do formulário se o título estiver preenchido
+}
+</script>
+
+{% endblock %}

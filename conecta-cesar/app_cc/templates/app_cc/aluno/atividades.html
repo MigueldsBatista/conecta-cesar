@@ -1,0 +1,76 @@
+{% extends "app_cc/aluno/main.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/aviso.css' %}" type="text/css">
+    
+    {% if aluno and turma %}
+        <header>
+            <h1 class="text-center white-color">Turma: <span class="orange-text">{{turma}}</span> - Atividades</h1>
+        </header>
+        <form action="{% url 'aluno_atividades' %}" method="POST" 
+        style="display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: row wrap;
+        gap: 20px;">
+            {% csrf_token %}
+            <h2 class="text-center white-color">
+                Filtrar as atividades:
+            </h2>
+            <label class="white-color">
+                NÃO feitas
+                <input type="radio" name="filtrar" value="N">
+            </label>
+            <label class="white-color">
+                Feitas
+                <input type="radio" name="filtrar" value="S">
+            </label>
+            <label class="white-color">
+                Tudo
+                <input type="radio" name="filtrar" value="T">
+            </label>
+            <input type="submit" value="Filtrar">
+        </form>
+
+        <section class="news-list" style="display: flex; flex-flow: column nowrap; justify-content: center; align-items: center; gap: 20px;">
+        {% for atividade, conclusao in zip %}
+            <div class="news-item" style="padding: 10px;">
+                {% if atividade.arquivo %}
+                    <a class="orange-text" target="_blank" href="{{atividade.arquivo.url}}">
+                        Visualizar arquivo »
+                    </a>
+                {% else %}
+                    <p style="color: white">
+                        Essa atividade não possui arquivo
+                    </p>
+                {% endif%}
+                <h2>
+                    {{atividade.titulo}}
+                </h2>
+                {% if conclusao %}
+                    <p style="color: green">
+                        Atividade concluída
+                    </p>
+                {% else %}
+                    <p style="color: red;">
+                        Atividade NÃO concluída
+                    </p>
+                {% endif %}
+                <a href="{% url 'aluno_atividade' atividade.id %}">
+                    Ver mais
+                </a>
+            </div>
+        {% endfor %}
+            <!-- Adicione mais notícias conforme necessário -->
+        </section>
+    {% else %}
+        <h1 style="color: white; text-align: center; width: 100%;">
+            Aluno não existe OU Aluno não está atrelado a nenhuma turma.
+        </h1>
+    {% endif %}
+
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'app_cc/aluno/main.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/add_todo_item.css' %}" type="text/css">
+
+<header>
+    <h1 class="text-center white-color">Adicionar Item</h1>
+</header>
+
+<form method="post" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <label for="content">Item:</label>
+    <input type="text" id="content" name="content">
+    <button type="submit">Adicionar</button>
+</form>
+
+<script>
+function validateForm() {
+    var content = document.getElementById('content').value.trim();
+    if (content === '') {
+        alert('Por favor, preencha o campo de item.');
+        return false;  // Impede o envio do formulário
+    }
+    return true;  // Permite o envio do formulário se o conteúdo estiver preenchido
+}
+</script>
+
+{% endblock %}

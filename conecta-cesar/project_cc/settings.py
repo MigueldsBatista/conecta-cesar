@@ -158,3 +158,14 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEBUG=True
+
+# Mensagens:
+from django.contrib.messages import constants
+
+MESSAGE_TAGS = {
+    constants.ERROR: 'error',
+    constants.SUCCESS: 'sucesso',
+    constants.INFO: 'info',
+    constants.WARNING: 'warning',
+    constants.DEBUG: 'debug',
+}

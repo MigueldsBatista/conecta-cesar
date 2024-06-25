@@ -1,0 +1,76 @@
+{% extends 'app_cc/professor/mainp.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/ocorrenciasp.css' %}" type="text/css">
+{% if messages %}
+<div>
+    {% for message in messages %}
+        <div class="alert alert-{% if 'success' in message.tags %}success{% elif 'error' in message.tags %}danger{% elif 'warning' in message.tags %}warning{% else %}info{% endif %} fade show" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+<div>
+    <h1 class="text-center"><spam class="white-color">Enviar</spam> <spam class="orange-text">Ocorrência</spam></h1>
+    <br>
+    <div class="caixa text-center">
+        <form method="POST" action="{% url 'ocorrenciasp' %}">
+            {% csrf_token %}
+            <p class="aluno">
+                <label for="aluno">{% trans "Aluno:" %}</label>
+                <select id="aluno" name="aluno" required>
+                    {% for aluno in alunos %}
+                    <option value="{{ aluno.id }}">{{ aluno.usuario.username }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <p class="data-ocorrencia">
+                <label for="data_ocorrencia">{% trans "Data da Ocorrência:" %}</label>
+                <input type="date" id="data_ocorrencia" name="data_ocorrencia" required>
+            </p>
+            <p class="titulo">
+                <label for="title">{% trans "Título:" %}</label>
+                <input type="text" id="title" name="title" required>
+            </p>
+            
+            <p class="conteudo">
+                <label for="content">{% trans "Conteúdo:" %}</label>
+                <textarea id="content" name="content" required></textarea>
+            </p>
+            <div class="d-flex justify-content-center align-items-center flex-column">
+                <button class="send">
+                  <div class="svg-wrapper-1">
+                    <div class="svg-wrapper">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                      >
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path
+                          fill="currentColor"
+                          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                        ></path>
+                      </svg>
+                  </label>
+                    </div>
+                  </div>
+                  <span>{% trans "Enviar" %}</span>
+                </button>
+        </form>
+        <a href="{% url 'avisosp' %}" class="download-button">
+            <div class="svg-wrapper-1">
+                <div class="svg-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </div>
+            </div>
+        </a>
+</div>
+<br>
+{% endblock %}

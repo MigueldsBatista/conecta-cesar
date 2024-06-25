@@ -5,7 +5,10 @@ urlpatterns = [
     # Rotas para Alunos
     path('aluno/avisos/', views.avisos, name='avisos'),
     path('aluno/avisos/<int:aviso_id>/', views.detalhe_aviso, name='detalhe_aviso'),
-
+    path('aluno/forum_novo/', views.create_post, name='create_post'),
+    path('apagar_post/<int:post_id>/', views.apagar_post, name='apagar_post'),
+    path('post/<int:post_id>/curtir/', views.curtir_post, name='curtir_post'),
+    path('aluno/forum/', views.forum_view, name='forum'),
     path('aluno/boletim/', views.boletim, name='boletim'),
     path('aluno/frequencia/', views.frequencia, name='frequencia'),
     path('aluno/perfil/', views.perfil, name='perfil'),
@@ -14,6 +17,16 @@ urlpatterns = [
     path('aluno/variacao_notas/', views.variacao_notas, name='variacao_notas'),
     path('aluno/hora_extra/', views.hora_extra, name='hora_extra'),
     path('aluno/slides/', views.slides, name="slides"),
+    path('todo/', views.todo_list_view, name='todo_list'),
+    path('todo/create/', views.create_todo_list, name='create_todo_list'),
+    path('todo/<int:list_id>/add_item/', views.add_todo_item, name='add_todo_item'),
+    path('todo/<int:list_id>/delete/', views.delete_todo_list, name='delete_todo_list'),
+    path('todo/item/<int:item_id>/delete/', views.delete_todo_item, name='delete_todo_item'),
+    path('aluno/vocorrencias/', views.vocorrencias, name='vocorrencias'),
+
+    path('aluno/atividades/', views.aluno_atividades, name='aluno_atividades'),
+    path('aluno/atividade/<int:id>/', views.aluno_atividade, name='aluno_atividade'),
+
 
 
     # Rotas para Professores
@@ -25,5 +38,10 @@ urlpatterns = [
     path('professor/avisosp/', views.avisosp, name='avisosp'),
     path('professor/avisosp/<int:aviso_id>/', views.detalhe_avisop, name='detalhe_avisop'),
     path('professor/slidesp/', views.slidesp, name="slidesp"),
-    path('professor/relatoriosp/', views.relatoriop, name="relatoriosp")
+    path('professor/relatoriosp/', views.relatoriop, name="relatoriosp"),
+    path('professor/ocorrenciasp/', views.ocorrenciasp, name="ocorrenciasp"),
+
+    path('professor/cadastrar_atividades_professor/', views.cadastrar_atividades_professor, name="cadastrar_atividades_professor"),
+    path('professor/atividades_professor/', views.atividades_professor, name="atividades_professor")
+
 ]

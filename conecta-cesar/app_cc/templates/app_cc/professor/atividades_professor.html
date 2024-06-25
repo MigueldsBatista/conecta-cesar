@@ -1,0 +1,72 @@
+{% extends "app_cc/professor/mainp.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/aviso.css' %}" type="text/css">
+    
+    {% if zip %}
+        <header>
+            <h1 class="text-center white-color">Professor - Atividades</h1>
+        </header>
+
+        <section class="news-list" style="display: flex; flex-flow: column nowrap; justify-content: center; align-items: center; gap: 20px;">
+        {% for atividade, realizacoes in zip %}
+            <div class="news-item" style="padding: 10px;">
+                {% if atividade.arquivo %}
+                    <a class="orange-text" target="_blank" href="{{atividade.arquivo.url}}">
+                        Visualizar arquivo »
+                    </a>
+                {% else %}
+                    <p style="color: white">
+                        Essa atividade não possui arquivo
+                    </p>
+                {% endif%}
+                <h2>
+                    {{atividade.titulo}}
+                </h2>
+                <p style="color: white">
+                    {{atividade.texto}}
+                </p>
+
+                {% if realizacoes %}
+                    {% for realizacao in realizacoes %}
+                        <div style="border: 2px solid orange; padding: 10px; display: flex; flex-flow: column nowrap; gap: 20px; margin-bottom: 20px;">
+                            <p style="color: white">
+                                Aluno: {{realizacao.aluno}}
+                            </p>
+                            {% if realizacao.conclusao %}
+                                <p style="color: white">
+                                    Conclusão: concluiu a atividade
+                                </p>
+                            {% else %}
+                                <p style="color: white">
+                                    Conclusão: NÃO concluiu a atividade
+                                </p>
+                            {% endif %}
+                            <a href="{{realizacao.arquivo}}" style="color: white">
+                                Arquivo
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div style="border: 2px solid orange; padding: 10px; display: flex; flex-flow: column nowrap; gap: 20px; margin-bottom: 20px;">
+                        <p style="color: white">
+                            Ninguém concluiu essa atividade ainda
+                        </p>
+                    </div>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+            <!-- Adicione mais notícias conforme necessário -->
+        </section>
+    {% else %}
+        <h1 style="color: white; text-align: center; width: 100%;">
+            Esse professor não tem nenhuma atividade cadastrada!
+        </h1>
+    {% endif %}
+
+
+{% endblock content %}
