@@ -18,6 +18,8 @@ admin.site.register(Relatorio)
 admin.site.register(FaltaRelatorio)
 admin.site.register(NotaRelatorio)
 admin.site.register(ProfessorFile)
+admin.site.register(Atividade)
+admin.site.register(AtividadeFeita)
 
 
 
