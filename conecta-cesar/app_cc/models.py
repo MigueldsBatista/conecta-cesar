@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import random
 from django.utils import timezone
+from django.utils import timezone
 
 # Modelo para Turmas
 
@@ -261,7 +262,6 @@ class Like(models.Model):
 
     def __str__(self):
         return f'{self.usuario.username} curtiu {self.post.titulo}'
-    
 
 class Atividade(models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE, verbose_name='Turma')
