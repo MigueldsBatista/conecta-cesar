@@ -1,0 +1,44 @@
+{% extends "app_cc/professor/mainp.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/cadastrar_atividade.css' %}" type="text/css">
+    
+    <header>
+        <h1 class="text-center white-color">Cadastrar <span class="orange-text">Atividades</span></h1>
+    </header>
+    <form action="{% url 'cadastrar_atividades_professor' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{ message.tags }}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+
+        <select name="turma">
+            {% for turma in turmas %}
+                <option value="{{turma.nome}}">
+                    {{turma.nome}}
+                </option>
+            {% endfor %}
+        </select>
+        <select name="disciplina">
+            {% for disciplina in disciplinas %}
+                <option value="{{disciplina.nome}}">
+                    {{disciplina.nome}}
+                </option>
+            {% endfor %}
+        </select>
+        <input type="text" name="titulo" placeholder="Título da atividade..." class="white-color" value="{{request.POST.titulo}}">
+        <textarea name="texto" id="" placeholder="Descrição da atividade..." 
+        class="white-color" cols="60" rows="5"  value="{{request.POST.titulo}}"></textarea>
+        <input type="file" name="arquivo" class="white-color">
+        <input type="submit" value="Cadastrar atividade">
+    </form>
+
+{% endblock content %}

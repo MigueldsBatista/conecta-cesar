@@ -21,3 +21,27 @@
     </section>
 </div>
 {% endblock %}
+
+{% extends 'app_cc/aluno/main.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/vocorrencias.css' %}" type="text/css">
+<div>
+    <h1 class="text-center white-color">Ocorrências</h1>
+    <section class="caixa_de_ocorrencias white-color">
+        {% if user_reviews %}
+            {% for review in user_reviews %}
+                <div class="item_de_ocorrencia">
+                    <h2>{{ review.title }}</h2>
+                    <h4>{{ review.content }}</h4>
+                    <p class="date">{{ review.data_ocorrencia }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="vazio">Não tem nenhuma ocorrência.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

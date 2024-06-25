@@ -1,0 +1,24 @@
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+input, select, textarea{
+    border: 2px solid orange;
+    color: white;
+    background: transparent;
+    padding: 10px;
+}
+
+option{
+    color: black;
+}
+
+input::placeholder{
+    color: white;
+}
