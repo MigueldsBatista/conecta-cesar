@@ -1,0 +1,62 @@
+{% extends "app_cc/aluno/main.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/atividade.css' %}" type="text/css">
+    
+    <header>
+        <h1 class="text-center white-color">Atividade: <span class="orange-text">{{atividade.titulo}}</span></h1>
+    </header>
+    <section class="news-list" style="min-height: 90vh; display: flex; justify-content: center; align-items: center;">
+        <div class="news-item" style="padding: 10px;">
+            {% if atividade.arquivo %}
+                <a class="orange-text" target="_blank" href="{{atividade.arquivo.url}}">
+                    Visualizar arquivo »
+                </a>
+            {% else %}
+                <p style="color: white">
+                    Essa atividade não possui arquivo
+                </p>
+            {% endif %}
+            <h2>
+                {{atividade.titulo}}
+            </h2>
+            <p style="color: white">
+                {{atividade.texto}}
+            </p>
+            {% if not atividadeFeita %}
+                <form action="{% url 'aluno_atividade' atividade.id %}" method="POST" enctype="multipart/form-data" 
+                style="color: white; display: flex; flex-flow: column nowrap; gap: 20px;">
+                {% csrf_token %}
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="{{ message.tags }}">
+                            {{ message }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+
+                    <input type="file" name="arquivo">
+                    <input type="submit" value="Enviar atividade" 
+                    style="background: transparent; 
+                    padding: 10px; color: orange; 
+                    border: 2px solid orange; 
+                    border-radius: 20px;">
+                </form>
+            {% else %}
+                <p style="color: green">
+                    Essa atividade já foi realizada
+                </p>
+            {% endif %}
+            <hr style="color: white;">
+            <a href="{% url 'aluno_atividades' %}">
+                Voltar para as outras atividades
+            </a>
+        </div>
+        <!-- Adicione mais notícias conforme necessário -->
+    </section>
+
+{% endblock content %}
