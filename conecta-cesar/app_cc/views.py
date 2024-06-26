@@ -1026,8 +1026,17 @@ def aluno_atividade(request, id):
         arquivo = request.FILES.get('arquivo')
         if not atividadeFeita:
             if arquivo:
-                obj = AtividadeFeita.objects.create(atividade=atividade, conclusao=True, arquivo=arquivo, aluno=aluno)
-                obj.save()
+                #obj = AtividadeFeita.objects.create(atividade=atividade, conclusao=True, arquivo=arquivo, aluno=aluno)
+                #obj.save()
+                try: 
+                    atividade_feita = AtividadeFeita.objects.get(atividade = atividade)
+                    atividade_feita.conclusao = True
+                    atividade_feita.aluno = aluno
+                    atividade_feita.save()
+                except :
+                        obj = AtividadeFeita.objects.create(atividade=atividade, conclusao=True, arquivo=arquivo, aluno=aluno)
+                        obj.save()
+
             else:
                 messages.error(request, 'Envie o seu arquivo de resposta da atividade. É obrigatório.')
                 return render(request, 'app_cc/aluno/atividade.html', {
@@ -1045,7 +1054,6 @@ def aluno_atividade(request, id):
 
     else:
         raise Http404()
-
 
 @has_role_or_redirect(Professor)
 def atividades_professor(request):
