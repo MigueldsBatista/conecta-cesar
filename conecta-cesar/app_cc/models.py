@@ -281,7 +281,7 @@ class Atividade(models.Model):
 
 class AtividadeFeita(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, verbose_name='Aluno')
-    atividade = models.OneToOneField(Atividade, on_delete=models.CASCADE, verbose_name='Atividade')
+    atividade = models.ForeignKey(Atividade, on_delete=models.CASCADE, verbose_name='Atividade')
     conclusao = models.BooleanField(default=False, verbose_name='A atividade foi feita?')
     arquivo = models.FileField(upload_to="atividades_alunos/%Y/%m/%d/", verbose_name='Arquivo')
 
