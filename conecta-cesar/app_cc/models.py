@@ -282,7 +282,7 @@ class Like(models.Model):
 
 class Atividade(models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE, verbose_name='Turma')
-    professor = models.ForeignKey(Professor, on_delete=models.CASCADE, verbose_name='professor')
+    professor = models.OneToOneField(Professor, on_delete=models.CASCADE, verbose_name='professor')
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, verbose_name='Disciplina')
     arquivo = models.FileField(upload_to="arquivos_atividades/%Y/%m/%d/", verbose_name='Arquivo', null=True, blank=True)
     texto = models.TextField(default='Essa atividade não possui descrição.', verbose_name='Texto')
@@ -298,7 +298,7 @@ class Atividade(models.Model):
 
 class AtividadeFeita(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, verbose_name='Aluno')
-    atividade = models.ForeignKey(Atividade, on_delete=models.CASCADE, verbose_name='Atividade')
+    atividade = models.OneToOneField(Atividade, on_delete=models.CASCADE, verbose_name='Atividade')
     conclusao = models.BooleanField(default=False, verbose_name='A atividade foi feita?')
     arquivo = models.FileField(upload_to="atividades_alunos/%Y/%m/%d/", verbose_name='Arquivo')
 
