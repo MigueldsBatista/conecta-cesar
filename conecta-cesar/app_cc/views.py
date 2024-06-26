@@ -1064,10 +1064,11 @@ def atividades_professor(request):
         _atividade = []
         realizacao_atividades = []
         print(atividades)
+        x = []
         for atividade in atividades:
             _atividade.append(atividade)
             print(atividades)
-            x = list(AtividadeFeita.objects.filter(atividade=atividade))
+            x.append(list(AtividadeFeita.objects.filter(atividade=atividade)))
             if not x:
                 realizacao_atividades.append(False)
             else:
