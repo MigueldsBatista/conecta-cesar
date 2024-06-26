@@ -949,7 +949,7 @@ def curtir_post(request, post_id):
         pass
     return redirect('forum')  
 
-
+@login_required
 def aluno_atividades(request):
     aluno = None
     atividades = None
@@ -963,7 +963,7 @@ def aluno_atividades(request):
         
         conclusao_atividade = []
         for atividade in atividades:
-            if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno = aluno):
+            if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno):
                 conclusao_atividade.append(True)
             else:
                 conclusao_atividade.append(False)
@@ -986,11 +986,11 @@ def aluno_atividades(request):
 
             for atividade in atividades:
                 if filtro == 'S':
-                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True):
+                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno):
                         novas_atividades.append(atividade)
                         conclusao_atividade2.append(True)
                 else:
-                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=False) or not AtividadeFeita.objects.filter(atividade=atividade).exists():
+                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=False) or not AtividadeFeita.objects.filter(atividade=atividade, aluno=aluno).exists():
                         novas_atividades.append(atividade)
                         conclusao_atividade2.append(False)
 
@@ -1011,7 +1011,6 @@ def aluno_atividade(request, id):
 
         atividadeFeita = False
         if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno):
-            print("TESTE")
             atividadeFeita = True
 
         if request.method != 'POST':
@@ -1031,10 +1030,8 @@ def aluno_atividade(request, id):
                     atividade_feita.conclusao = True
                     atividade_feita.aluno = aluno
                     atividade_feita.save()
-                except :
-                        obj = AtividadeFeita.objects.create(atividade=atividade, conclusao=True, arquivo=arquivo, aluno=aluno)
-                        obj.save()
-
+                except AtividadeFeita.DoesNotExist:
+                    AtividadeFeita.objects.create(atividade=atividade, conclusao=True, arquivo=arquivo, aluno=aluno)
             else:
                 messages.error(request, 'Envie o seu arquivo de resposta da atividade. É obrigatório.')
                 return render(request, 'app_cc/aluno/atividade.html', {
