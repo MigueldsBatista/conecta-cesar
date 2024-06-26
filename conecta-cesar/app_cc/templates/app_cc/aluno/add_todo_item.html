@@ -9,22 +9,22 @@
     <h1 class="text-center white-color">Adicionar Item</h1>
 </header>
 
-<form method="post" onsubmit="return validateForm()">
+<form method="post" action="{% url 'add_todo_item' todo_list.id %}">
     {% csrf_token %}
-    <label for="content">Item:</label>
-    <input type="text" id="content" name="content">
-    <button type="submit">Adicionar</button>
+    <div class="form-group text-center">
+        <label for="content">Tarefa:</label>
+        <input type="text" id="content" name="content" required>
+    </div>
+    <div class="form-group text-center">
+        <label for="priority">Prioridade:</label>
+        <select id="priority" name="priority" required>
+            <option value="low">Baixa</option>
+            <option value="medium">Média</option>
+            <option value="high">Alta</option>
+        </select>
+    </div>
+    <br>
+    <div class="text-center"><button type="submit">Adicionar</button></div>
 </form>
-
-<script>
-function validateForm() {
-    var content = document.getElementById('content').value.trim();
-    if (content === '') {
-        alert('Por favor, preencha o campo de item.');
-        return false;  // Impede o envio do formulário
-    }
-    return true;  // Permite o envio do formulário se o conteúdo estiver preenchido
-}
-</script>
 
 {% endblock %}

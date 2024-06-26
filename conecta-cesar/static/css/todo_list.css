@@ -15,21 +15,26 @@ h1 {
 .todo-list {
     list-style-type: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Estilização do item da lista principal */
 .todo-list-item {
     margin-bottom: 20px;
     background-color: #3a3b3f;
-    border-radius: 10px;
+    border-radius: 20px; /* Alinhado com o formulário */
     padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 80%; /* Para limitar a largura */
 }
 
 /* Estilização do título da lista */
 .todo-list-item h2 {
     color: #fff;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 /* Estilização dos itens da lista */
@@ -42,26 +47,37 @@ h1 {
 .todo-item {
     margin-bottom: 10px;
     background-color: #2c2e33;
-    border-radius: 8px;
+    border-radius: 20px; /* Alinhado com o formulário */
     padding: 10px;
     color: #fff;
+    text-align: center; /* Centraliza o texto */
 }
 
-/* Estilização dos botões de ação */
+.todo-actions {
+    margin-top: 5px; /* Espaçamento entre prioridade e ações */
+    text-align: center; /* Centraliza as ações */
+}
+
 .todo-action {
-    color: #FFA500;
-    margin-right: 10px;
-    text-decoration: none;
+    display: inline-block; /* Para que fique na mesma linha */
+    margin-right: 10px; /* Espaçamento entre o texto e o link */
+    color: #FFA500; /* Cor do link */
+    text-decoration: none; /* Sublinhado padrão para links */
     transition: color 0.3s;
 }
 
+.todo-action:last-child {
+    margin-right: 0; /* Remove o último margem à direita */
+}
+
 .todo-action:hover {
-    color: #e69500;
+    color: #FF8C00; /* Laranja mais escura ao passar o mouse */
 }
 
 /* Estilização da mensagem quando não há listas */
 .no-lists-msg {
     color: #fff;
+    text-align: center; /* Centraliza a mensagem */
 }
 
 /* Estilização do botão de criar nova lista */
@@ -72,10 +88,39 @@ h1 {
     background-color: #FFA500;
     color: #fff;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 20px; /* Alinhado com o formulário */
     transition: background-color 0.3s;
+    text-align: center; /* Centraliza o texto do botão */
 }
 
 .create-list-btn:hover {
-    background-color: #e69500;
+    background-color: #FF8C00; /* Laranja mais escura ao passar o mouse */
+}
+
+/* Estilização do conteúdo do item */
+.item-content {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+/* Estilização das prioridades */
+.priority-low, .priority-medium, .priority-high {
+    color: black;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px; /* Alinhado com o formulário */
+    text-align: center; /* Centraliza o texto */
+    width: 100%; /* Preenche a largura disponível */
+}
+
+.priority-low {
+    background-color: #ccffcc;
+}
+
+.priority-medium {
+    background-color: #5e39eb;
+}
+
+.priority-high {
+    background-color: #ffcccc;
 }

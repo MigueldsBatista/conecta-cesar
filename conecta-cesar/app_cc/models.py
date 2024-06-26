@@ -204,10 +204,27 @@ class ToDoList(models.Model):
         return self.title
 
 class ToDoItem(models.Model):
+    PRIORITY_CHOICES = [
+        ('low', 'Baixa'),
+        ('medium', 'Média'),
+        ('high', 'Alta'),
+    ]
+
     todo_list = models.ForeignKey(ToDoList, on_delete=models.CASCADE, related_name='items')
     content = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     completed = models.BooleanField(default=False)
+    priority = models.CharField(max_length=6, choices=PRIORITY_CHOICES, default='low')
+    priority_value = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        if self.priority == 'low':
+            self.priority_value = 3
+        elif self.priority == 'medium':
+            self.priority_value = 2
+        elif self.priority == 'high':
+            self.priority_value = 1
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.content

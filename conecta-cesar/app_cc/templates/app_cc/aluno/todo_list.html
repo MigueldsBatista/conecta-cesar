@@ -17,11 +17,22 @@
             <a href="{% url 'add_todo_item' todo_list.id %}" class="todo-action">Adicionar Item</a>
             <a href="{% url 'delete_todo_list' todo_list.id %}" class="todo-action">Deletar Lista</a>
             <ul class="todo-items">
-                {% for item in todo_list.items.all %}
-                <li class="todo-item">
-                    {{ item.content }}
-                    <a href="{% url 'delete_todo_item' item.id %}" class="todo-action">Item Concluído</a>
-                </li>
+                {% for item in todo_list.items.all|dictsort:'priority_value' %}
+                    <li class="todo-item">
+                        <div class="item-content">{{ item.content }}</div>
+                        <div class="priority-{{ item.priority }}">
+                            {% if item.priority == 'low' %}
+                                <span class="priority-low"> Prioridade Baixa </span>
+                            {% elif item.priority == 'medium' %}
+                                <span class="priority-medium"> Prioridade Média </span>
+                            {% elif item.priority == 'high' %}
+                                <span class="priority-high"> Prioridade Alta </span>
+                            {% endif %}
+                        </div>
+                        <div class="todo-actions">
+                            <a href="{% url 'delete_todo_item' item.id %}" class="todo-action">Item Concluído</a>
+                        </div>
+                    </li>
                 {% endfor %}
             </ul>
         </li>

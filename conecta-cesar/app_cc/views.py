@@ -809,15 +809,13 @@ def create_todo_list(request):
 def add_todo_item(request, list_id):
     todo_list = get_object_or_404(ToDoList, id=list_id, user=request.user)
     if request.method == 'POST':
-        content = request.POST.get('content').strip()  # Obtém o conteúdo do POST e remove espaços em branco extras
-        if content:
-            ToDoItem.objects.create(todo_list=todo_list, content=content)
-            return redirect('todo_list')  # Redireciona para a lista de tarefas após a criação do item
-        else:
-            # Caso o conteúdo esteja vazio, pode adicionar lógica para lidar com o erro ou retornar ao formulário
-            return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list, 'error_message': 'Por favor, preencha o item.'})
-    else:
-        return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
+        content = request.POST.get('content')
+        priority = request.POST.get('priority')
+        
+        ToDoItem.objects.create(todo_list=todo_list, content=content, priority=priority)
+        return redirect('todo_list')
+           
+    return render(request, 'app_cc/aluno/add_todo_item.html', {'todo_list': todo_list})
 
 @login_required
 def delete_todo_list(request, list_id):
