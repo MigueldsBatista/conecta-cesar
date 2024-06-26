@@ -1012,8 +1012,7 @@ def aluno_atividade(request, id):
         aluno = AlunoModel.objects.get(usuario=request.user)
 
         atividadeFeita = False
-        if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno):
-            print("TESTE")
+        if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True):
             atividadeFeita = True
 
         if request.method != 'POST':
@@ -1028,13 +1027,6 @@ def aluno_atividade(request, id):
             if arquivo:
                 obj = AtividadeFeita.objects.create(atividade=atividade, conclusao=True, arquivo=arquivo, aluno=aluno)
                 obj.save()
-                atividadeFeita = True
-                return render(request, 'app_cc/aluno/atividade.html', {
-                    'atividade': atividade,
-                    'aluno': aluno,
-                    'atividadeFeita': atividadeFeita,
-                })
-
             else:
                 messages.error(request, 'Envie o seu arquivo de resposta da atividade. É obrigatório.')
                 return render(request, 'app_cc/aluno/atividade.html', {
@@ -1043,7 +1035,12 @@ def aluno_atividade(request, id):
                     'atividadeFeita': atividadeFeita,
                 })
         
-
+        atividadeFeita = True
+        return render(request, 'app_cc/aluno/atividade.html', {
+            'atividade': atividade,
+            'aluno': aluno,
+            'atividadeFeita': atividadeFeita,
+        })
 
     else:
         raise Http404()
