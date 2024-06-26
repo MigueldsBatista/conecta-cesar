@@ -1,61 +1,85 @@
-/* Estilos para a página de adicionar item de to-do */
+/* css/add_todo_item.css */
 
 /* Estilização do título */
 h1 {
     text-align: center;
-    margin-top: 20px; /* Adiciona um espaçamento superior */
+    margin-top: 20px;
 }
 
-/* Estilização do formulário */
+/* Estilização básica do formulário */
 form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #3a3b3f; /* Cor de fundo */
+    background-color: #3a3b3f; /* Cor de fundo do formulário */
     border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
-/* Estilização dos rótulos */
+/* Estilização dos rótulos (labels) */
 form label {
     color: #FFA500; /* Laranja */
     font-weight: bold;
+    margin-top: 10px;
     display: block;
-    margin-bottom: 10px; /* Espaçamento inferior */
 }
 
-/* Estilização dos inputs */
-form input[type="text"] {
+/* Estilização dos inputs e dropdown */
+form input[type="text"],
+form select {
+    width: 100%;
     padding: 10px;
+    margin-top: 5px;
     margin-bottom: 15px;
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid #555;
     background-color: #2c2e33;
     color: #fff;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura */
 }
 
 /* Estilização do botão */
-form button {
+form button[type="submit"] {
     padding: 10px 20px;
     border: none;
-    border-radius: 10px;
-    background-color: #FFA500;
+    border-radius: 20px;
+    background-color: #FFA500; /* Laranja */
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-form button:hover {
-    background-color: #e69500; /* Tom mais escuro do laranja ao passar o mouse */
+form button[type="submit"]:hover {
+    background-color: #FF8C00; /* Laranja mais escura ao passar o mouse */
 }
 
-/* Estilização do formulário em dispositivos menores */
-@media (max-width: 600px) {
-    form {
-        padding: 15px;
-    }
+/* Estilização do dropdown */
+select {
+    -webkit-appearance: none; /* Remove o estilo padrão do dropdown no Safari e Chrome */
+    -moz-appearance: none; /* Remove o estilo padrão do dropdown no Firefox */
+    appearance: none; /* Remove o estilo padrão do dropdown nos browsers compatíveis */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="none" height="24" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
 
-    form button {
-        width: 100%; /* Botão ocupa largura total */
-    }
+select option {
+    color: black;
+}
+
+/* Estilização das opções clicáveis com cores */
+option[value="high"] {
+    background-color: #ffcccc;
+}
+
+option[value="medium"] {
+    background-color: #ccffff;
+}
+
+option[value="low"] {
+    background-color: #ccffcc;
 }
