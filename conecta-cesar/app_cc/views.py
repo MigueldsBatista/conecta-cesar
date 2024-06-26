@@ -1012,7 +1012,8 @@ def aluno_atividade(request, id):
         aluno = AlunoModel.objects.get(usuario=request.user)
 
         atividadeFeita = False
-        if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True):
+        if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno):
+            print("TESTE")
             atividadeFeita = True
 
         if request.method != 'POST':
