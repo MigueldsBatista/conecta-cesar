@@ -955,7 +955,7 @@ def aluno_atividades(request):
     atividades = None
     turma = None
 
-    if AlunoModel.objects.filter(usuario=request.user).exists():
+    if AlunoModel.objects.filter(usuario=request.user).exists(): # sempre vai passar
         aluno = AlunoModel.objects.get(usuario=request.user)
         if aluno.turma:
             turma = aluno.turma
@@ -963,7 +963,7 @@ def aluno_atividades(request):
         
         conclusao_atividade = []
         for atividade in atividades:
-            if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno).exists():
+            if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno):
                 conclusao_atividade.append(True)
             else:
                 conclusao_atividade.append(False)
@@ -986,11 +986,11 @@ def aluno_atividades(request):
 
             for atividade in atividades:
                 if filtro == 'S':
-                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno).exists():
+                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno):
                         novas_atividades.append(atividade)
                         conclusao_atividade2.append(True)
                 else:
-                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=False, aluno=aluno).exists() or not AtividadeFeita.objects.filter(atividade=atividade, aluno=aluno).exists():
+                    if AtividadeFeita.objects.filter(atividade=atividade, conclusao=False) or not AtividadeFeita.objects.filter(atividade=atividade, aluno=aluno).exists():
                         novas_atividades.append(atividade)
                         conclusao_atividade2.append(False)
 
@@ -1005,11 +1005,13 @@ def aluno_atividades(request):
         
 @login_required
 def aluno_atividade(request, id):
-    if Atividade.objects.filter(id=id).exists() and AlunoModel.objects.filter(usuario=request.user).exists():
+    if Atividade.objects.filter(id=id) and AlunoModel.objects.filter(usuario=request.user).exists():
         atividade = Atividade.objects.get(id=id)
         aluno = AlunoModel.objects.get(usuario=request.user)
 
-        atividadeFeita = AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno).exists()
+        atividadeFeita = False
+        if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno=aluno):
+            atividadeFeita = True
 
         if request.method != 'POST':
             return render(request, 'app_cc/aluno/atividade.html', {
@@ -1021,14 +1023,15 @@ def aluno_atividade(request, id):
         arquivo = request.FILES.get('arquivo')
         if not atividadeFeita:
             if arquivo:
+                #obj = AtividadeFeita.objects.create(atividade=atividade, conclusao=True, arquivo=arquivo, aluno=aluno)
+                #obj.save()
                 try: 
-                    atividade_feita = AtividadeFeita.objects.get(atividade=atividade, aluno=aluno)
+                    atividade_feita = AtividadeFeita.objects.get(atividade = atividade)
                     atividade_feita.conclusao = True
-                    atividade_feita.arquivo = arquivo
+                    atividade_feita.aluno = aluno
                     atividade_feita.save()
                 except AtividadeFeita.DoesNotExist:
                     AtividadeFeita.objects.create(atividade=atividade, conclusao=True, arquivo=arquivo, aluno=aluno)
-
             else:
                 messages.error(request, 'Envie o seu arquivo de resposta da atividade. É obrigatório.')
                 return render(request, 'app_cc/aluno/atividade.html', {
@@ -1046,8 +1049,6 @@ def aluno_atividade(request, id):
 
     else:
         raise Http404()
-
-
 @has_role_or_redirect(Professor)
 def atividades_professor(request):
     if ProfessorModel.objects.filter(usuario=request.user).exists():
