@@ -1066,13 +1066,11 @@ def atividades_professor(request):
         print(atividades)
         x = []
         for atividade in atividades:
-            _atividade.append(atividade)
-            print(atividades)
-            x.append(list(AtividadeFeita.objects.filter(atividade=atividade)))
-            if not x:
-                realizacao_atividades.append(False)
+            x = list(AtividadeFeita.objects.filter(atividade=atividade))
+            if x:
+                realizacao_atividades.append(True)
             else:
-                realizacao_atividades.append(x)
+                realizacao_atividades.append(False)
 
         _zip = list(zip(_atividade, realizacao_atividades))
 
