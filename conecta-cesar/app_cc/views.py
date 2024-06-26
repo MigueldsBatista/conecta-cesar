@@ -952,12 +952,12 @@ def curtir_post(request, post_id):
     return redirect('forum')  
 
 
-@login_required
 def aluno_atividades(request):
     aluno = None
     atividades = None
     turma = None
-    if AlunoModel.objects.filter(usuario=request.user).exists():
+
+    if AlunoModel.objects.filter(usuario=request.user).exists(): # sempre vai passar
         aluno = AlunoModel.objects.get(usuario=request.user)
         if aluno.turma:
             turma = aluno.turma
@@ -965,7 +965,7 @@ def aluno_atividades(request):
         
         conclusao_atividade = []
         for atividade in atividades:
-            if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True):
+            if AtividadeFeita.objects.filter(atividade=atividade, conclusao=True, aluno = aluno):
                 conclusao_atividade.append(True)
             else:
                 conclusao_atividade.append(False)
@@ -1004,7 +1004,7 @@ def aluno_atividades(request):
             })
     else:
         raise Http404()
-
+        
 @login_required
 def aluno_atividade(request, id):
     if Atividade.objects.filter(id=id) and AlunoModel.objects.filter(usuario=request.user).exists():
