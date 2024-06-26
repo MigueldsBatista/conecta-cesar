@@ -17,7 +17,7 @@
         flex-flow: row wrap;
         gap: 20px;">
             {% csrf_token %}
-            <h2 class="text-center white-color">
+              <h2 class="text-center white-color">
                 Filtrar as atividades:
             </h2>
             <label class="white-color">
@@ -27,6 +27,10 @@
             <label class="white-color">
                 Feitas
                 <input type="radio" name="filtrar" value="S">
+            </label>
+            <label class="white-color">
+                Tudo
+                <input type="radio" name="filtrar" value="T">
             </label>
             <input type="submit" value="Filtrar">
         </form>
