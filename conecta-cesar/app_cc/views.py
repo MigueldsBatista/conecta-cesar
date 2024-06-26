@@ -17,7 +17,6 @@ from django.utils.dateparse import parse_date
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.http import Http404
-#teste
 
 def gerar_relatorio(disciplinas, professor):
     for disciplina in disciplinas:
